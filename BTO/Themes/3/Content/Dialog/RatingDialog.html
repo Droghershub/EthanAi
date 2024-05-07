@@ -1,0 +1,108 @@
+﻿<div class="modal fade" id="rating-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="text-transform: uppercase;">
+                <h5 class="modal-title" ng-if="$root.ratingData.sectionId == 'saving_rate'">{{"Saving Rates" | translate}}</h5>
+                <h5 class="modal-title" ng-if="$root.ratingData.sectionId == 'retirement_life_style'">{{"Retirement Lifestyle" | translate}}</h5>
+                <h5 class="modal-title" ng-if="$root.ratingData.sectionId == 'investment'">{{"Investments" | translate}}</h5>
+                <h5 class="modal-title" ng-if="$root.ratingData.sectionId == 'illiquid_asset'">{{"Illiquid Assets" | translate}}</h5> 
+            </div>
+            <div class="modal-body">
+                <form name="formrating">
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6" style="text-align:center">
+                            <h6 >{{'YOUR RATING' | translate}}</h6> 
+                            <div class="panel panel-info" style="margin-bottom: 0;">
+                                <div class="panel-body">
+                                    <rating-session id="rating_value" rating-value="$root.ratingData.rating"></rating-session>
+                                </div>
+                            </div> <!-- .panel -->
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="input-field col-sm-10 center">
+                            <textarea type="text" name="feedback" id="feedback" class="materialize-textarea" ng-model="$root.ratingData.feedback" ng-maxlength="4000"></textarea>
+                            <div class="bto-error" ng-if="!formrating.feedback.$valid">
+                                {{"The Maximum Length of a field name can be 4000 character" | translate }}
+                            </div>
+                            <label for="feedback">{{'Tell us more about it.' | translate}}</label>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="input-field col-sm-10">
+                            <div class="checkbox child_status">
+                                <input type="checkbox" id="rating_contact_me" name="rating_contact_me" ng-model="$root.ratingData.contact_me" />
+                                <label for="rating_contact_me">{{"It's OK to contact me about this feedback." | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer center">
+                        <a href="#" class="btn-signup" data-dismiss="modal" ng-click="$root.ratingService.cancelSavingRating()">{{'Cancel' | translate}}</a>
+                        <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="margin-left: 10px;" ng-click="$root.ratingService.savingRating()" ng-disabled="!formrating.feedback.$valid">{{'Submit' | translate}}</button>
+                    </div>
+                    </form>
+</div>
+
+        </div>
+    </div>
+</div>
+<!-- Rating Modal -->
+<div class="modal fade" id="feedback-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"We value your feedback" | translate}}</h5>
+            </div>
+            <div class="modal-body">
+                <form name="formfeedback">
+                    <div class="row" id="feedback-btns">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8" style="text-align:center">
+                            <h6>{{"Let us know what you think about ZYMI." | translate}}</h6>
+                            <a class="btn btn-white waves-effect like" ng-click="$root.ratingService.changeType(0)"><i class="fa fa-smile-o left"></i> {{"I like something" | translate}}</a>
+                            <a class="btn btn-white waves-effect dislike" ng-click="$root.ratingService.changeType(1)"><i class="fa fa-frown-o left"></i> {{"I dislike something" | translate}}</a>
+                            <a class="btn btn-white waves-effect suggest" ng-click="$root.ratingService.changeType(2)"><i class="fa fa-lightbulb-o left"></i> {{"I have a suggestion" | translate}}</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div class="row" id="feedback-more">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <div class="input-field">
+                                <textarea type="text" id="feedbacktext" name="feedbacktext" class="materialize-textarea" ng-model="$root.ratingService.feedbackData.feedback" ng-maxlength="4000"></textarea>
+                                <div class="bto-error"  ng-if="!formfeedback.feedbacktext.$valid">
+                                    {{"The Maximum Length of a field name can be 4000 character" | translate }}
+                                </div>
+                                <label for="feedbacktext">{{"Tell us more about it." | translate}}</label> 
+                            </div>
+                            <div class="input-field" style="margin-top:0;margin-bottom:1em;">
+                                <input type="checkbox" id="feedback-check" ng-model="$root.ratingService.feedbackData.contact_me" />
+                                <label for="feedback-check">
+                                    <small>{{"It's OK to contact me about this feedback." | translate}}</small> 
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="modal-footer center">
+                        <a href="#" class="btn-signup" data-dismiss="modal" ng-click="$root.ratingService.cancelFeedback()">{{"Cancel" | translate}}</a>
+                        <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="margin-left: 10px;" ng-click="$root.ratingService.submitFeedback()" ng-disabled="!formfeedback.feedbacktext.$valid">{{"Submit" | translate}}</button>
+                    </div>
+             </form>
+        </div>
+
+        </div>
+    </div>
+</div> <!-- .modal -->

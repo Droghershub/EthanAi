@@ -1,0 +1,414 @@
+﻿<div class="tools row" ng-if="$root.summaryCardService.selectedCardId=='ainvestments'">
+    <div class="col-md-12">
+        <div class="panel-group" id="investments">
+            <div class="panel panel-default">
+                <a href="#investment">
+                    <div class="panel-heading main investments">
+                        <h4 class="panel-title">{{$root.translateData["Investments"]}}</h4>
+                        <a id="close_card_ainvestments" class="panel-close btn-sm btn-white waves-effect" ng-click="$root.summaryCardService.closeCard('ainvestments');">x</a>
+                    </div>
+                </a>
+                <div class="panel-body row">
+                    <div style="margin-top: 20px;">
+                        <!--<md-slider ng-if="false" id="ironReserveSlideDemo" md-discrete config="$root.investmentCards[2].config"
+                                   model-data="$root.investmentCards[2].config.value" is-show-percent="false" min="$root.investmentCards[2].config.min" max="$root.investmentCards[2].config.max" change-value="$root.investment.onChangeSlider('contingency_household');" end-change-value="$root.investment.onEndChangeSlider('contingency_household');" is-can-not-drag="false" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"
+                                   isnumber="true" fraction-number="0"></md-slider>-->
+                    </div>
+                    <div class="row-sm-height">
+                        <div class="col-sm-4 left-side col-sm-height col-top">
+                            <div style="padding: 0.3em;">
+                                <div id="investmentSwiperCards">
+                                    <ul rncarouselloop rn-carousel-transition="slides" rn-carousel-duration="300" rn-carousel rn-carousel-index="$root.investment.carouselIndex" class="image savingRateSwiper " id="investmentSwiper">
+                                        <li>
+                                            <div class="card blue  lighten-3 swiper-slide" id="card-curentAccount">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Current Account']}}</h6>
+                                                    <input id="curentAccount" class="amount IronReserve input-big-size" ng-currency currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="investmentCards[4].value" min="0" ng-blur="$root.investment.onBlur(investmentCards[4].key);" ng-focus="$root.investment.onFocus(investmentCards[4].key);" my-enter="$root.investment.enterTab(investmentCards[4].key)" my-tab="$root.investment.enterTab()" tabindex="1">
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="card blue  lighten-3 swiper-slide" id="card-totalInvestment">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Total Investments']}}</h6>
+                                                    <div class="input-big-size amount">  {{investmentCards[1].value | currency}}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="card blue lighten-1 swiper-slide" id="card-CPFInvestment" ng-click="$root.investment.showTotalCPF();">
+                                                <div class="card-content white-text">
+                                                    <h6 class="heading">{{$root.translateData['cpf_display']}}</h6>
+                                                    <div class="input-big-size cpf_investment">  {{investmentCards[0].value | currency}}</div>
+
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="card blue  lighten-1 swiper-slide" id="card-IronReserve">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Iron Reserve']}}</h6>
+                                                    <input id="IronReserve" class="amount IronReserve input-big-size" ng-currency currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="investmentCards[2].value" min="0" ng-blur="$root.investment.onBlur(investmentCards[2].key);" ng-focus="$root.investment.onFocus(investmentCards[2].key);" my-enter="$root.investment.enterTab(investmentCards[2].key)" my-tab="$root.investment.enterTab()" tabindex="1">
+
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="card blue lighten-2 swiper-slide" id="card-Brokerage">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Brokerage Account']}}</h6>
+                                                    <input id="Brokerage" class="amount IronReserve input-big-size" ng-currency currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="investmentCards[3].value" min="0" ng-blur="$root.investment.onBlur(investmentCards[3].key);" ng-focus="$root.investment.onFocus(investmentCards[3].key);" my-enter="$root.investment.enterTab(investmentCards[3].key)" my-tab="$root.investment.enterTab()" tabindex="1">
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="card blue  lighten-3 swiper-slide" id="card-curentAccount">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Current Account']}}</h6>
+                                                    <input id="curentAccount" class="amount IronReserve input-big-size" ng-currency currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="investmentCards[4].value" min="0" ng-blur="$root.investment.onBlur(investmentCards[4].key);" ng-focus="$root.investment.onFocus(investmentCards[4].key);" my-enter="$root.investment.enterTab(investmentCards[4].key)" my-tab="$root.investment.enterTab()" tabindex="1">
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <!--<li>
+                                            <div class="card blue lighten-1 swiper-slide" id="card-CPFInvestment" ng-click="$root.investment.showTotalCPF();">
+                                                <div class="card-content white-text">
+                                                    <h6 class="heading">{{$root.translateData['cpf_display']}}</h6>
+                                                    <div class="input-big-size cpf_investment">  {{investmentCards[0].value | currency}}</div>
+
+                                                    <div style="font-size:12px;opacity:0.7;"></div>
+                                                </div>
+                                            </div>
+                                        </li>-->
+                                        <li>
+                                            <div class="card blue  lighten-3 swiper-slide" id="card-totalInvestment">
+                                                <div class="card-content white-text">
+                                                    <h6>{{$root.translateData['Total Investments']}}</h6>
+
+                                                    <div class="input-big-size amount">  {{investmentCards[1].value | currency}}</div>
+
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div rn-carousel-indicators slides="[0,1,2,3,4]" rn-carousel-index="$root.investment.carouselIndex"></div>
+                            </div>
+
+
+                            <div style="padding-top:0;" ng-if="$root.investment.carouselIndex == $root.cardIndex.contingency_household" id="div_dialogIronReserve">
+
+                                <!--<button ng-if="false" type="button" class="btn btn-white btn-sm waves-effect ng-binding" style="margin-right:0" ng-click="$root.investment.showDialogIronReserve()">{{$root.translateData["Change Iron Reserve"]}} : {{ 12*$root.investmentCards[5].value |  number:0 }}</button>-->
+                                <div class="inside">
+                                    <p style="text-align:left;">{{$root.translateData['With how many month of expenses aside in your Iron reserve would you feel comfortable?']}}</p>
+                                    <div class="row ">
+
+                                        <!--<div class="col-xs-6 input-field" ng-if="false">
+                                            <input id="contingency_ratio_box" name="contingency_ratio_box" type="text" ng-currency fraction="0" currency-symbol-at-end="true" currency-symbol="months" ng-model="$root.investmentCards[2].config.value" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.investment.onChangeMonthlyBox('contingency_household')">
+                                        </div>-->
+                                    </div>
+                                    <div style="margin-top: 30px;">
+                                        <md-slider id="ironReserveSlide" md-discrete config="$root.investmentCards[$root.investmentCardsIndex.contingency_household].config"
+                                                   model-data="$root.investmentCards[$root.investmentCardsIndex.contingency_household].config.value" is-show-percent="false" min="$root.investmentCards[$root.investmentCardsIndex.contingency_household].config.min" max="$root.investmentCards[$root.investmentCardsIndex.contingency_household].config.max" change-value="$root.investment.onChangeSlider('contingency_household');" end-change-value="$root.investment.onEndChangeSlider('contingency_household');" is-can-not-drag="false" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"
+                                                   isnumber="true" fraction-number="0"></md-slider>
+                                    </div>
+                                </div>
+                                <div class="nonpopout readonly">
+                                    <div class="panel-group">
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title ng-binding">{{$root.translateData['No. of Months']}} <span class="right">{{$root.investmentCards[$root.investmentCardsIndex.contingency_household].config.value | number:0}}</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nonpopout readonly">
+                                    <div class="panel-group">
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title ng-binding">{{$root.translateData['Amount']}} <span class="right">{{$root.PersonaPlan.currency_code}} {{$root.PersonaPlan.expense_today * $root.investmentCards[$root.investmentCardsIndex.contingency_household].config.value | number:0}} </span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height:3em;"></div>
+                            </div>
+                            <script type="text/ng-template" id="invesment_template.html">
+                                <div class="card  sub-item hoverable" ng-class="{nativeValue : (cashflow.nativeValue == true) }" ng-if="(cashflow.name != 'cpf_ra_main' && cashflow.name != 'cpf_ra_spouse') || (cashflow.name == 'cpf_ra_main' && $root.PersonaPlan.start_age>=55) || (cashflow.name == 'cpf_ra_spouse' && $root.cashFlow.parameter['_c_age_spouse'] >= 55)">
+                                    <div class="card-content">
+                                        <div class="input-field" ng-if="is_expense">
+                                            <input ng-class="{nativeValue : (cashflow.nativeValue == true) }" id="investment_{{cashflow.name}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="cashflow.value" min="0" my-enter="$root.investment.enterKey(cashflow.name)" ng-change="$root.investment.changeParent(cashflow);" ng-blur="$root.investment.onBlur(cashflow.name, cashflow);" ng-focus="$root.investment.onFocus(cashflow.name, cashflow);" ng-disabled="disable_input">
+                                            <div class="card-label" ng-click="$root.investment.selectCpfInvestment(cashflow)">
+                                                {{$root.translateData[cashflow.name].replaceObj($root.ProfileName)}}
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="child in cashflow.children" ng-include="'invesment_template.html'" onload="cashflow = child; is_expense = is_expense; disable_input = disable_input;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </script>
+                            <div style="padding-top:0;" ng-if="$root.investment.carouselIndex == $root.cardIndex.cpf">
+                                <div style="padding-top:0;" ng-if="$root.profile.client.married_status == 1">
+                                    <center>
+                                        <button type="button" ng-if="$root.profile.client.first_name == null || $root.profile.client.first_name == '' " id="investment_type_main" class="btn btn-white btn-sm waves-effect ng-binding investment_type_option" style="margin-right:0" ng-click="$root.investment.selectBoxOptions('_main')">{{$root.translateData["Own"]}} </button>
+                                        <button type="button" ng-if="$root.profile.client.first_name != null && $root.profile.client.first_name != '' " id="investment_type_main" class="btn btn-white btn-sm waves-effect ng-binding investment_type_option" style="margin-right:0" ng-click="$root.investment.selectBoxOptions('_main')">{{$root.profile.client.first_name}} </button>
+                                        <button type="button" ng-if="$root.profile.spouse.first_name == null || $root.profile.spouse.first_name == '' " id="investment_type_spouse" class="btn btn-white btn-sm waves-effect ng-binding investment_type_option" style="margin-right:0" ng-click="$root.investment.selectBoxOptions('_spouse')">{{$root.translateData["Spouse"]}} </button>
+                                        <button type="button" ng-if="$root.profile.spouse.first_name != null && $root.profile.spouse.first_name != '' " id="investment_type_spouse" class="btn btn-white btn-sm waves-effect ng-binding investment_type_option" style="margin-right:0" ng-click="$root.investment.selectBoxOptions('_spouse')">{{$root.profile.spouse.first_name}} </button>
+                                        <button type="button" class="btn btn-white btn-sm waves-effect ng-binding investment_type_option" style="margin-right:0" id="investment_type_household" ng-click="$root.investment.selectBoxOptions('_household')">{{$root.translateData["Household"]}} </button>
+                                    </center>
+                                </div>
+
+
+                                <div class="popout">
+                                    <div class="panel-group accordion" id="accordion_cpf">
+                                        <div class="panel panel-default cpf_panel" id="cpf_panel_{{item.key}}" ng-repeat="item in $root.cpfInvestment" ng-class="{activeheader : ($root.cpfInvestmentChoice == item.index), nativeValue : (item.nativeValue == true) }">
+                                            <a data-toggle="collapse" class="cpf_header" href="#collapse-{{item.key}}" id="investment_header_{{item.key}}" ng-click="$root.investment.expandOrCollapse(item.key);">
+                                                <div class="panel-heading" ng-class="{nativeValue : (item.nativeValue == true) }" ng-click="$root.investment.selectCpfInvestment(item)">
+                                                    <h4 class="panel-title">
+                                                        {{$root.translateData[item.name].replaceObj($root.ProfileName)}}
+                                                        <span class="right">{{$root.PersonaPlan.currency_code}} {{item.value | number:2}}</span>
+                                                    </h4>
+                                                </div>
+                                            </a>
+                                            <div id="collapse-{{item.key}}" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="input-field">
+                                                        <input ng-class="{nativeValue : (item.nativeValue == true) }" id="investment_{{item.key}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="item.value" min="0" ng-change1="$root.savingRate.changeParent(item);" ng-blur="$root.savingRate.onBlur(item.name, item);" ng-focus="$root.savingRate.onFocus(item.name, item);" my-enter="$root.savingRate.enterKey(item.name)" ng-disabled="true">
+                                                        <div class="card-label">
+                                                            {{$root.translateData[item.name].replaceObj($root.ProfileName)}}
+                                                        </div>
+                                                    </div>
+                                                    <div ng-repeat="child in item.children" ng-include="'invesment_template.html'" onload="cashflow = child; is_expense = true; disable_input = (item.nativeValue == true); cpfInvestmentChoice = $root.cpfInvestmentChoice">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="inside" id="div_investmentChoise" ng-hide="$root.isDisabledInvestmentChoice">
+                                <div class="card white  hoverable" ng-class="{disabled: ($root.isDisabledInvestmentChoice == true), active : ($root.investmentChoice == 0 && $root.investment.portfolioData.selectedPortfolio == null)}" ng-click="$root.investment.selectInvestmentChoice(0)">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col-xs-3"><i class="fa fa-university"></i></div>
+                                            <div class="col-xs-9">
+                                                <h5>{{$root.translateData["Asset Preservation"]}}</h5>
+                                                <div class="card-label">{{$root.translateData["Cash accounts, saving accounts."]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card white hoverable" ng-class="{disabled: ($root.isDisabledInvestmentChoice == true), active : ($root.investmentChoice == 1 && $root.investment.portfolioData.selectedPortfolio == null)}" ng-click="$root.investment.selectInvestmentChoice(1)">
+                                    <div class=" card-content">
+                                        <div class="row">
+                                            <div class="col-xs-3"><i class="fa fa-sun-o"></i></div>
+                                            <div class="col-xs-9">
+                                                <h5>{{$root.translateData["Conservative"]}}</h5>
+                                                <div class="card-label">{{$root.translateData["Saving accounts, bonds."]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card white hoverable " ng-class="{disabled: ($root.isDisabledInvestmentChoice == true), active : ($root.investmentChoice == 2 && $root.investment.portfolioData.selectedPortfolio == null)}" ng-click="$root.investment.selectInvestmentChoice(2)">
+                                    <div class=" card-content">
+                                        <div class="row">
+                                            <div class="col-xs-3"><i class="fa fa-balance-scale"></i></div>
+                                            <div class="col-xs-9">
+                                                <h5>{{$root.translateData["Moderate"]}}</h5>
+                                                <div class="card-label">{{$root.translateData["More equities, bonds."]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card white hoverable" ng-class="{disabled: ($root.isDisabledInvestmentChoice == true), active : ($root.investmentChoice == 3 && $root.investment.portfolioData.selectedPortfolio == null)}" ng-click="$root.investment.selectInvestmentChoice(3)">
+                                    <div class=" card-content">
+                                        <div class="row">
+                                            <div class="col-xs-3"><i class="fa fa-bolt"></i></div>
+                                            <div class="col-xs-9">
+                                                <h5>{{$root.translateData["Aggressive"]}}</h5>
+                                                <div class="card-label">{{$root.translateData["Mainly equities, hedge funds."]}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="$root.investment.carouselIndex == 3">
+                                    <div class="card white hoverable" ng-repeat="item in $root.investment.portfolioData.portfolioList" ng-click="$root.investment.selectPortfolio(item)" ng-class="{active : $root.investment.portfolioData.selectedPortfolio != null && item.id == $root.investment.portfolioData.selectedPortfolio.id}">
+                                        <div class=" card-content">
+                                            <div class="row">
+                                                <div class="col-xs-3"><i class="fa fa-signal"></i></div>
+                                                <div class="col-xs-9">
+                                                    <h5>{{item.name}}</h5>
+                                                    <div class="card-label">&nbsp;</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="text-align:center;">
+                                        <button type="button" class="btn btn-primary" ng-click="$root.investment.showImportPortfolioDialog();"><i class="fa fa-signal"></i> &nbsp;&nbsp; {{$root.translateData["Import Portfolio"]}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 right-side col-sm-height col-top">
+                            <div class="inside" ng-show="$root.investment.portfolioData.selectedPortfolio == null;">
+                                <div class="row">
+                                    <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                        <span class="fa-stack fa-lg" ng-if="$root.ModorateDisplay.avatar != null">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa-stack-1x fa-inverse" ng-class="ModorateDisplay.avatar"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-9" ng-if="$root.ModorateDisplay.invesmentChoice != null">
+                                        <h5>{{$root.ModorateDisplay.invesmentChoice | translate}}</h5>
+                                        <p>
+                                            {{$root.ModorateDisplay.fullDescription | translate}}
+                                            <br />
+                                            {{$root.ModorateDisplay.fullDescription1 | translate}}
+                                        </p>
+                                        <ul>
+                                            <li ng-if="$root.ModorateDisplay.Volatility != null">{{ $root.ModorateDisplay.Volatility}}</li>
+                                            <li ng-if="$root.ModorateDisplay.ReturnValue != null">{{ $root.ModorateDisplay.ReturnValue}}</li>
+                                            <li ng-if="$root.ModorateDisplay.LossTolerace != null">{{ $root.ModorateDisplay.LossTolerace}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="separator" style="margin-top:20px"></div>
+                                <div class="row" style="padding-top:3em;">
+                                    <div class="col-xs-12">
+                                        <p style="margin-top:0;margin-bottom:1.3em;">{{$root.translateData["Here's a projected value of your investments over time"]}}:</p>
+                                        <div class="compare-tbl" ng-if="$root.investment.carouselIndex == $root.cardIndex.cpf && $root.isIndividualInvestment ===true">
+                                            <div class="row total">
+                                            </div>
+                                            <div class="row parent">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["AGE"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{$root.ModorateDisplay.yearIndex}}</div>
+                                            </div>
+                                            <div class="row parent" ng-repeat="item in $root.cpfInvestTable">
+                                                <div class="col-xs-7 grey lighten-5"> {{$root.ModorateDisplay.titleDisplay | translate}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{$root.PersonaPlan.currency_code}}   {{ item.value | number : 2}}</div>
+                                            </div>
+                                        </div>
+                                        <center ng-show="$root.investment.carouselIndex != $root.cardIndex.overall_investments">
+                                            <div class="btn-group" style="padding-bottom:10px;">
+                                                <button id="investments-btn1" type="button" class="btn btn-primary btn-sm waves-effect" style="margin-right:0" ng-click="$root.investment.selectIndividualType(true)">{{$root.translateData["INDIVIDUAL INVESTMENT"]}}</button>
+                                                <button id="investments-btn2" type="button" class="btn btn-white btn-sm waves-effect" ng-click="$root.investment.selectIndividualType(false)">{{$root.translateData["TOTAL INVESTMENTS"]}}</button>
+                                            </div>
+                                        </center>
+                                        <div id="chartInvestment" style="width:100%;height:500px;font-size:11px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inside" ng-show="$root.investment.portfolioData.selectedPortfolio != null;">
+                                <div class="row">
+                                    <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa-stack-1x fa-inverse fa fa-signal"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-9" ng-if="$root.ModorateDisplay.invesmentChoice != null">
+                                        <h5>{{$root.investment.portfolioData.selectedPortfolio.name}}</h5>
+                                        <p>&nbsp;</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="separator" style="margin-top:20px"></div>
+                                <div class="row">
+                                    <div class="portfolio_table">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="min-width: 60px;">{{$root.translateData["No."]}}</th>
+                                                    <th style="min-width: 150px;">{{$root.translateData["Stock"]}}</th>
+                                                    <th>{{$root.translateData["Symbol"]}}</th>
+                                                    <th>{{$root.translateData["ISIN"]}}</th>
+                                                    <th>{{$root.translateData["CUSIP"]}}</th>
+                                                    <th>{{$root.translateData["Exch."]}}</th>
+                                                    <th style="min-width: 150px;">{{$root.translateData["Exch. details"]}}</th>
+                                                    <th>{{$root.translateData["Ccy."]}}</th>
+                                                    <th class="p_num">{{$root.translateData["Price"]}}</th>
+                                                    <th class="p_num">{{$root.translateData["Quantity"]}}</th>
+                                                    <th class="p_num" style="min-width: 100px;">{{$root.translateData["Position"]}}</th>
+                                                    <th style="min-width: 100px;">{{$root.translateData["Date/Time"]}}</th>
+                                                    <th style="min-width: 100px;">{{$root.translateData["Asset Class"]}}</th>
+                                                    <th style="min-width: 100px;">{{$root.translateData["Oportfolio strategy"]}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in $root.investment.portfolioData.selectedPortfolio.portfolios">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{item.stock}}</td>
+                                                    <td>{{item.symbol}}</td>
+                                                    <td>{{item.isin}}</td>
+                                                    <td>{{item.cusip}}</td>
+                                                    <td>{{item.exch}}</td>
+                                                    <td>{{item.exch_detail}}</td>
+                                                    <td>{{item.ccy}}</td>
+                                                    <td class="p_num">{{item.price | number : 2}}</td>
+                                                    <td class="p_num">{{item.quantity| number : 0}}</td>
+                                                    <td class="p_num">{{item.position| number : 2}}</td>
+                                                    <td>{{item.date_time}}</td>
+                                                    <td>{{item.asset_class}}</td>
+                                                    <td>{{item.oportfolio_stategy}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10">&nbsp;</td>
+                                                    <td class="p_num">{{$root.investment.sumPostionOfPortfolio() | number : 2}}</td>
+                                                    <td colspan="3">&nbsp;</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <br/><br />
+                                    <p>
+                                        <button type="button" class="btn btn-primary" ng-click="$root.investment.deletePortfolioDialog();">Delete</button>
+                                    </p>
+                                </div>
+                            </div>
+                    </div>
+                </div> <!-- panel-body -->
+            </div> <!-- #investment -->
+            <div class="panel-footer">
+                <h6 ng-if="!$root.profile.client.is_auto_register">{{$root.translateData['Rate this Section']}}</h6>
+                <rating-session ng-if="!$root.profile.client.is_auto_register" id="rating_investment" rating-value="$root.ratingData.data.investment" on-click-star="$root.ratingService.ratingClickStar('investment')" on-rating-select="$root.ratingService.rating('investment');"></rating-session>
+            </div>
+        </div>
+    </div><!-- panel-group -->
+    <div id="importPortfolioDialog" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{$root.translateData["Import Portfolio"]}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="control-label col-sm-6" for="retirement_expense_input">{{$root.translateData["Please select portfolio file"]}} <b>.xls,.xlsx</b></label>
+                        <div class="col-sm-6">
+                            <input type="file" file-model="$root.investment.portfolioData.uploadFile" accept=".xls,.xlsx" id="import_portfolio_file" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer center">
+                    <a href="#" class="btn-signup" data-dismiss="modal">{{$root.translateData["Cancel"]}}</a>
+                    <button type="button" class="btn btn-primary" ng-click="$root.investment.importPorfolio()">{{$root.translateData["Import"]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

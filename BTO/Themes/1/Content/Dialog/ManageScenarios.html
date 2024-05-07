@@ -1,0 +1,67 @@
+﻿<div class="modal fade" id="manageScenario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" ng-controller="ScenarioController">    
+    <div class="modal-dialog" role="document">
+        <treasure-overlay-spinner active='spinner.active'>
+            <div class="modal-content">
+                <div class="modal-header">                    
+                    <h4 class="modal-title" id="myModalLabel">{{"Manage your scenarios" | translate}}</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <table st-table="displayedScenarios" st-safe-src="listScenario" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th st-sort="time_create">{{"Date & Time" | translate}}</th>
+                                <th st-sort="name">{{"Scenario Name" | translate}}</th>
+                                <th st-sort="type">{{"Display As" | translate}}</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <input st-search="time_create" placeholder="{{'Search date time' | translate}}" class="input-sm form-control" type="search" />
+                                </th>
+                                <th>
+                                    <input st-search="name" placeholder="{{'Search name' | translate}}" class="input-sm form-control" type="search" />
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in displayedScenarios">
+                                <td cs-select="row"></td>
+                                <td>{{row.time_create|date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.statusDisplay | translate}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+                <div class="modal-footer" style="text-align:center;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CloseAndLoadScenario()">{{"Close" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewScenario()" ng-if="$root.functionAccess.SAVE_NEW_SCENARIO ==1">{{"New" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="DuplicateScenarios()" ng-if="$root.functionAccess.DUPLICATE_SCENARIO ==1">{{"Duplicate" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="DeleteScenarios()" ng-if="$root.functionAccess.DELETE_SCENARIO ==1">{{"Delete" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="RenameScenario()" ng-if="$root.functionAccess.RENAME_SCENARIO ==1">{{"Rename" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="MakeCurrentScenario()" ng-if="$root.functionAccess.MAKE_CURRENT_SCENARIO ==1">{{"Make Current" | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="MakeNewScenario()" ng-if="$root.functionAccess.MAKE_NEW_SCENARIO ==1">{{"Make New" | translate}}</button>
+                </div>
+                <div id="renameScenario" class="hide">
+                    <div class="col-md-3 col-lg-3 col-sm-5 col-xs-5">{{"Name" | translate}}</div>
+                    <div class="col-md-9 col-lg-9 col-sm-5 col-xs-5"><input id="input_rename_scenario" type="text" class="form-control" value="{{name}}" /></div>
+                </div>
+            </div>
+        </treasure-overlay-spinner>
+    </div>
+    
+</div>

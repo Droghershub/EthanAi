@@ -1,0 +1,192 @@
+﻿<div class="tools row" ng-if="$root.summaryCardService.selectedCardId=='ailliquid'">
+    <div class="col-md-12">
+        <div class="panel-group" id="illiquid">
+            <div class="panel panel-default">
+                <a href="#illiquid">
+                    <div class="panel-heading main illiquid">
+                        <h4 class="panel-title">{{$root.translateData["Illiquid Assets"]}}</h4>
+                        <a id="close_card_ailliquid" class="panel-close btn-sm btn-white waves-effect" ng-click="$root.summaryCardService.closeCard('ailliquid');">x</a>
+                    </div>
+                </a>
+                <div class="panel-body row" ng-init="percent = '%';">
+                    <div class="row-sm-height">
+                        <div class="col-sm-4 left-side col-sm-height col-top">
+                            <div style="padding: 0.3em;margin-top:25px;">
+                                <ul ng-show="$root.SwiperDreams.length == 1" rn-carousel rn-carousel-transition="slide" rn-carousel-duration="300" rn-carousel-index="$root.illiquidAsset.carouselIndex" class="image savingRateSwiper" id="savingRateSwiper">
+                                    <li ng-repeat="item in $root.SwiperDreams">
+                                        <div class="card blue lighten-1 swiper-slide">
+                                            <div class="card-content white-text">
+                                                <h6 class="dreamHeaderId_{{item.id}}">{{item.name}}</h6>
+                                                <div class="input-big-size amount dream_income_{{item.id}}">{{item.total_cost | currency}}</div>
+                                                <!--<div style="font-size:12px;opacity:0.7;background-color: white !important;height:1px;"></div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul ng-show="$root.SwiperDreams.length > 1" rn-carousel rn-carousel-transition="slides" rn-carousel-duration="300" rn-carousel-index="$root.illiquidAsset.carouselIndex" class="image savingRateSwiper" id="savingRateSwiper">
+
+                                    <li ng-repeat="item in $root.SwiperDreams">
+                                        <div class="card blue lighten-1 swiper-slide">
+                                            <div class="card-content white-text">
+                                                <h6 class="dreamHeaderId_{{item.id}}">{{item.name}}</h6>
+                                                <div class="input-big-size amount dream_income_{{item.id}}">{{item.total_cost | currency}}</div>
+                                                <!--<div style="font-size:12px;opacity:0.7;background-color: white !important;height:1px;"></div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+
+                                <div rn-carousel-indicators slides="$root.SwiperDreams" rn-carousel-index="$root.illiquidAsset.carouselIndex"></div>
+                                <div id="swiper-container-illiquid" class="swiper-container swiper-container1" ng-if="false">
+                                    <div id="swiper-pagination-illiquid" class="swiper-wrapper swiper-wrapper1">
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination1"></div>
+                                </div>
+                            </div>
+                            <div id="popout-illiquid asset" ng-if="$root.selectedDreamSwiper != null">
+                                <div class="popout">
+                                    <div class="panel-group accordion" id="accordion4">
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Current Asset Value"]}} <span class="right">{{$root.selectedDreamSwiper.total_cost | currency: $root.PersonaPlan.currency_code + ' ' : 2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class=" panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Current Debt Level"]}} <span class="right">{{$root.selectedDreamSwiper.down_payment | currency: $root.PersonaPlan.currency_code + ' ' : 2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class=" panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Remaining Loan Duration"]}} <span class="right">{{$root.selectedDreamSwiper.payment_duration}} {{"years" | translate}}</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class=" panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Effective Interest Rate"]}} <span class="right">{{$root.selectedDreamSwiper.mortage_interest_rate| number : 2}} %</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class=" panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Annual Income"]}} <span class="right">{{$root.selectedDreamSwiper.rental_net_income | number : 2}} %</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div>
+                                                <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog($root.selectedDreamSwiper.id);">
+                                                    <div class=" panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData["Annual Expense"]}} <span class="right">{{$root.selectedDreamSwiper.yearly_expenses | number : 2}} %</span></h4>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="inside">
+                                    <center><a class="btn-flat waves-effect" ng-click="$root.timelineService.OpenAddExistingAssetDialog();">{{$root.translateData["ADD EXISTING ASSET"]}}</a></center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-sm-height col-top">
+                            <div class="inside">
+                                <div class="row">
+                                    <div class="col-sm-4 blue-text" style="font-size: 55px;text-align:center;" ng-if="false">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-area-chart fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-4 blue-text ">
+                                        <div class="vertical-center illiquid-image" ng-if="$root.selectedDreamSwiper.photo_path == null || $root.selectedDreamSwiper.photo_path == ''">                                            
+                                            <img src="/Themes/4/Content/Images/default-residence.jpg"/>
+                                        </div>
+                                        <div class="vertical-center illiquid-image" ng-if="$root.selectedDreamSwiper.photo_path != null && $root.selectedDreamSwiper.photo_path != ''">
+                                            <img ng-src="{{$root.selectedDreamSwiper.photo_path}}" width="150" />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h5 ng-if="$root.illiquidAssetView.individual">{{$root.translateData["Individual Illiquid Assets"].replaceObj($root.selectedDreamSwiper)}}<strong>&nbsp;{{$root.illiquidAssetView.year}}</strong></h5>
+                                        <h5 ng-if="!$root.illiquidAssetView.individual">{{$root.translateData["Projection of your Total Illiquid Assets at age"].replaceObj($root.selectedDreamSwiper)}}<strong>&nbsp;{{$root.illiquidAssetView.year}}</strong></h5>
+                                        <ul>
+                                            <li><strong>{{$root.translateData['Asset Value']}}</strong> {{$root.illiquidAssetView.asset|number:2}}</li>
+                                            <li><strong>{{$root.translateData['Net Value']}}</strong> {{$root.illiquidAssetView.net|number:2}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="separator" style="margin-top:20px"></div>
+
+                                <div class="row" style="padding-top:2em;">
+                                    <div class="col-xs-12">
+                                        <center><a class="btn-flat waves-effect"></a></center>
+
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p style="margin-top:0;margin-bottom:1.3em;">{{$root.translateData["Here's a projected value of your illiquid assets over time"]}}:</p>
+                                        <center>
+                                            <div class="btn-group" style="padding-bottom:10px;">
+                                                <button id="assets-btn1" type="button" class="btn btn-primary btn-sm waves-effect" style="margin-right:0" ng-click="$root.viewIndividualLiquidAsset()">{{$root.translateData['INDIVIDUAL ASSET'] }}</button>
+                                                <button id="assets-btn2" type="button" class="btn btn-white btn-sm waves-effect" ng-click="$root.viewTotalLiquidAsset()">{{$root.translateData['TOTAL ASSETS'] }}</button>
+                                            </div>
+                                        </center>
+                                        <div id="chartIlliquid" style="width:100%;height:500px;font-size:11px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- panel-body -->
+            </div> <!-- #investment -->
+            <div class="panel-footer">
+                <h6 ng-if="!$root.profile.client.is_auto_register">{{$root.translateData['Rate this Section']}}</h6>
+                <rating-session ng-if="!$root.profile.client.is_auto_register" id="rating_illiquid_asset" rating-value="$root.ratingData.data.illiquid_asset" on-click-star="$root.ratingService.ratingClickStar('illiquid_asset')" on-rating-select="    $root.ratingService.rating('illiquid_asset');"></rating-session>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /* Toggle assets switch */
+        $(document).ready(function () {
+            $('#assets-btn1').click(function (e) {
+                if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+                else {
+                    $(this).removeClass("btn-white").addClass("btn-primary");
+                    $('#assets-btn2').removeClass("btn-primary").addClass("btn-white");
+                }
+            });
+            $('#assets-btn2').click(function (e) {
+                if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+                else {
+                    $(this).removeClass("btn-white").addClass("btn-primary");
+                    $('#assets-btn1').removeClass("btn-primary").addClass("btn-white");
+                }
+            });
+        });
+    </script>
+</div>
+

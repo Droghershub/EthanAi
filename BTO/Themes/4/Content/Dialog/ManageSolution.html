@@ -1,0 +1,110 @@
+﻿    <div class="modal fade" id="manageSolution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="SolutionController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="CloseSolution()">×</button>
+                <h4 class="modal-title" id="myModalLabel">{{$root.translateData["Manage your work"]}}</h4>
+            </div>
+            <treasure-overlay-spinner active='spinner.active'>
+                <div class="modal-body">
+
+                    <form name="manageSolutionForm">
+                        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th st-sort="time_create">{{$root.translateData["Date & Time"]}}</th>
+                                    <th st-sort="name">{{$root.translateData["Solution Name"]}}</th>
+                                    <th st-sort="type">{{$root.translateData["Auto / Manual"]}}</th>
+                                    <th st-sort="version">{{$root.translateData["Version"]}}</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input st-search="time_create" placeholder="{{$root.translateData['Search date time']}}" class="input-sm form-control" type="text" />
+                                    </th>
+                                    <th>
+                                        <input st-search="name" placeholder="{{$root.translateData['Search name']}}" class="input-sm form-control" type="text" />
+                                    </th>
+                                    <th>
+                                        <!--<select class="form-control" ng-model="selectedPredicate" onchange="$('#searchType').triggerHandler($.Event('input'))" ng-options="predicate for predicate in predicates"></select>-->
+
+                                        <material-select id="selectedPredicate" model-data="selectedPredicate" list-data="predicates" change-value="triggerHandler()">
+                                        </material-select>
+
+
+
+                                        <input id="searchType" st-search="type" ng-model="selectedPredicate" dynamic-placeholder="{{$root.translateData["Search type"]}}" class="input-sm form-control hide" type="text" />
+
+
+
+                                    </th>
+                                    <th>
+                                        <input st-search="version" placeholder="{{$root.translateData['Search Version']}}" class="input-sm form-control" type="search" style=" width: 50px;" />
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr st-select-row="row" st-select-mode="single" ng-repeat="row in displayedCollection" ng-dblclick="LoadUnitOfWork()">
+                                    <td>{{row.time_create | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{row.name}}</td>
+                                    <td>{{row.type | translate }}</td>
+                                    <td>{{row.version }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CloseSolution()">{{$root.translateData["Close"]}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="SaveUnitOfWork()" ng-if="$root.functionAccess.SAVE_SOLUTION ==1">{{$root.translateData["Save"]}}</button>
+                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="LoadUnitOfWork()" ng-if="$root.functionAccess.LOAD_SOLUTION ==1">{{$root.translateData["Load"]}}</button>
+                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="RemoveUnitWork()" ng-if="$root.functionAccess.DELETE_SOLUTION ==1">{{$root.translateData["Delete"]}}</button>
+                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="RenameUnitWork()" ng-if="$root.functionAccess.RENAME_SOLUTION ==1">{{$root.translateData["Rename"]}}</button>
+
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+</div>
+
+
+    <div id="renamedialog" class="modal fade" role="dialog" tabindex="-1" style="z-index: 5000"  aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('#CancelRename').trigger('click')">×</button>
+                    <h4 class="modal-title">{{renamedialog.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="dialog_form" novalidate class="form-horizontal" role="form">
+                        <p>{{renamedialog.messenger}}</p>
+                        
+                        <div class="row"> 
+                            <div class="col-md-3 col-lg-3 col-sm-5 col-xs-5">{{$root.translateData["Name"]}}</div>
+                            <div class="col-md-9 col-lg-9 col-sm-5 col-xs-5">
+                                <input id="input_rename_unit_work" type="text" class="form-control" name="rename" ng-model="rename" required />
+                                <div class="bto-error" ng-messages="dialog_form.rename.$error" ng-if="dialog_form.rename.$dirty">
+                                    <div ng-message="required">
+                                        {{$root.translateData["Name is requried"]}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                   
+
+                </div>
+
+                <div class="modal-footer" style="text-align:center;">
+                    <button type="button" class="btn btn-default" id="CancelRename" data-dismiss="modal" style="width: 85px;">{{$root.translateData["Cancel"]}}</button>
+                    <button type="button" ng-disabled="dialog_form.$invalid" class="btn btn-primary" data-dismiss="modal" id="OkRename" style="width:85px;">{{$root.translateData["Save"]}}</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,41 @@
+﻿<div class="form-group" id="rightColumnController" tutorial="trial-top-bottom" config-content-data="{height: 100}" config-data="{left: -50, width: 100}">
+    <div class="row form-group">
+        <div class="col-md-3 col-lg-5 col-sm-12" style="padding-right:2px;padding-left:0px;">
+            {{"Trials" | translate}}
+        </div>
+        <div class="col-md-9 col-lg-7 col-sm-12" style="padding-right:2px;padding-left:10px;">
+            <select id="numberOfTrials" class="form-control" ng-model="PersonaPlan.number_trials" ng-change="$root.actionService.onChangeSelectBox('numberOfTrials')" ng-options="item  for item in $root.configParameter.Trials" ng-disabled="$root.functionAccess.CHANGE_NUMBER_OF_TRIALS != 1"></select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 col-lg-5 col-sm-12" style="padding-right:2px;padding-left:0px;">
+            {{"Top" | translate}}
+        </div>
+        <div class="col-md-9 col-lg-7 col-sm-12" style="padding-right:2px;padding-left:10px;">
+            <select id="top_value" class="form-control" ng-model="convertDataOfPersonalPlan.mc_top_value" ng-change="$root.actionService.onChangeSelectBox('top_value')" ng-options="item for item in $root.configParameter.Mc_Top_Value" ng-disabled="$root.functionAccess.CHANGE_TOP_VALUE != 1"></select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-3 col-lg-5 col-sm-12" style="padding-right:2px;padding-left:0px;">
+            {{"Bottom" | translate}}
+        </div>
+        <div class="col-md-9 col-lg-7 col-sm-12" style="padding-right:2px;padding-left:10px;">
+            <select id="bottom_value" class="form-control" ng-model="convertDataOfPersonalPlan.mc_bottom_value" ng-change="$root.actionService.onChangeSelectBox('bottom_value')" ng-options="item for item in $root.configParameter.Mc_Bottom_value" ng-disabled="$root.functionAccess.CHANGE_BOTTOM_VALUE != 1"></select>
+        </div>
+    </div>
+</div>
+<table width="100">
+    <tr>
+        <td class="rotate" style="width:50%"><div><span>{{'inflaction' | translate}}</span></div></td>
+        <td class="rotate"><div><span>{{'salary evolution' | translate}}</span></div></td>
+    </tr>
+    <tr>
+        <td>
+            <div id="inflaction" range-slider min="0" max="10" filter="number" filter-options="%" model-max="$root.convertDataOfPersonalPlan.inflaction" model-min="0" orientation="vertical" pin-handle="min" attach-handle-values="true" step="0.1" decimal-places="1" on-handle-up="$root.actionService.onUpRangeSlide('inflaction')" bto-disabled-event="$root.functionAccess.CHANGE_INFLATION != 1"></div>
+        </td>
+        <td >
+            <div id="salaryEvolution" range-slider min="0" max="10" filter="number" filter-options="%" model-max="$root.convertDataOfPersonalPlan.salaryEvolution" model-min="0" orientation="vertical" pin-handle="min" attach-handle-values="true" step="0.1" decimal-places="1" on-handle-up="$root.actionService.onUpRangeSlide('salaryEvolution')" bto-disabled-event="$root.functionAccess.CHANGE_SALARY_EVOLUTION != 1"></div>
+        </td>
+    </tr>
+</table>
+    

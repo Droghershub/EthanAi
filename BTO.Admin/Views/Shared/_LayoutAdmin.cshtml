@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <title>@ViewBag.Title</title>
+    
+    <link rel="stylesheet" href="~/Scripts/thirdparty/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Scripts/thirdparty/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="stylesheet" href="~/Content/treasure-overlay-spinner.css">
+    
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required: false)  
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        var hub = $.connection.controllerHub;
+        hub.client.receive = function (message) {
+            console.log(message + " <br />");
+        }
+    </script>
+
+</head>
+<body ng-app="btoApp" ng-cloak>
+    <div class="overlay"></div>
+    <div class="navbar navbar-default">
+        <div class="container" tutorial="top-menu" config-content-data="{height: 450}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bto_navBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("{{'Better Trade Off' | translate}}", "Index", "", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" id="bto_navBar">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+
+

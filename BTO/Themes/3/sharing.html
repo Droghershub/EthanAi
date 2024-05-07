@@ -1,0 +1,11 @@
+﻿<div id="panelSharing" class="panelSharing" style="display: none;">
+    <!-- ngIf: !$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.playBackActionList.length > 0 -->
+    <!-- ngIf: $root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isBackward -->
+    <label> {{'Presenter' | translate}}: </label>
+    <label id="sharing_presenter" ></label>
+    <button type="button" id="sharing_stop" class="btn play-session btn-default btn-xs waves-effect waves-light" title="Stop" ng-click="$root.sharingService.stopSharingAndRefresh();">
+        <span class="fa fa-stop"></span>
+    </button>
+    <!-- ngIf: $root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isForward -->
+    <button type="button" id="sharing_take_over" class="btn play-session btn-default btn-xs waves-effect waves-light" title="Take over" style="padding: 4px 8px;" ng-click="$root.sharingService.requestTakeOver();"><b class="ng-binding">Take over</b></button>
+</div>

@@ -1,0 +1,155 @@
+﻿@using BTO.Models
+@model RegisterViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en" ng-app="btoApp" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{'Register' | translate}}</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design BTO -->
+
+    <link href="~/Content/bto.css" rel="stylesheet" />
+    <!-- Custom CSS for Documentation Only -->
+
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <style type="text/css">
+        #login-panel .hint {
+            font-size: 12px;
+            color: #BDBDBD;
+            text-align: left;
+            width: 99%;
+            margin: 10px auto;
+        }
+
+            #login-panel .hint .active {
+                color: #039be5;
+            }
+
+            #login-panel .hint p {
+                font-size: 13px;
+                margin: 0px;
+            }
+
+                #login-panel .hint p::before {
+                    content: "\f111";
+                    font-family: FontAwesome;
+                    margin-right: 6px;
+                }
+
+                #login-panel .hint p.active::before {
+                    content: "\f058";
+                }
+    </style>
+</head>
+
+<body id="login-page">
+    <div id="login-top">
+        <div class="dropdown">
+            <button class="btn btn-xs btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{$root.selectedLanguage.name| translate}} &nbsp;<span class="caret"></span></button>
+            <ul class="dropdown-menu" ng-if="false">
+                <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="login-panel-wrapper">
+        <div id="login-panel" class="panel-group">
+            <div class="panel panel-default center">
+                <div class="panel-heading"><div class="logo"></div></div>
+                <div class="panel-body">
+                    <span class="light-300" style="font-size:20px">{{'Register using your account' | translate}}</span>
+                    <div class="row">
+                        <div class="social-row">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 11px;border-bottom: 1px solid #ddd;margin: 15px 0;">
+                        <span style="font-size: 10px; background-color: #FFF; padding: 0 10px;color: #aaa;">{{'or' | translate}}</span>
+                    </div>
+                    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", name = "Register", autocomplete = "off" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Partial("ValidationSummary", ViewData.ModelState);
+                        <div class="input-field col-md-12">
+                            @*<input id="email" type="email" class="validate">*@
+                            @Html.TextBoxFor(m => m.Email, new { @class = "validate", required = "", ng_model = "userData.Email", type = "email", name = "Email", id = "email" })
+                            <label for="email" data-error="Invalid">{{'Email' | translate}}</label>
+                        </div>
+                        <div class="input-field col-md-12">
+                            @*<input id="password" type="password" class="validate">*@
+                            @Html.PasswordFor(m => m.Password, new { @class = "validate", required = "", name = "Password", ng_model = "userData.Password", id = "password", ng_minlength = "8", one_uppercase = "true", one_lowercase = "true", one_digit = "true", one_special_character = "true" })
+                            <label for="password">{{'Password' | translate}}</label>
+                            <div class="hint" ng-if="Register.Password.$dirty">
+                                <p ng-class="{'active': !Register.Password.$error.minlength && !Register.Password.$error.required}">{{'At least 8 characters' | translate}}</p>
+                                <p ng-class="{'active': !Register.Password.$error.oneUppercase}">{{'One uppercase character' | translate}}</p>
+                                <p ng-class="{'active': !Register.Password.$error.oneLowercase}">{{'One lowercase character' | translate}}</p>
+                                <p ng-class="{'active': !Register.Password.$error.oneDigit}">{{'One digit' | translate}}</p>
+                                <p ng-class="{'active': !Register.Password.$error.oneSpecialCharacter}">{{'One special character' | translate}}</p>
+                            </div>
+                        </div>
+                        <div class="input-field col-md-12">
+                            @*<input id="password" type="password" class="validate">*@
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "validate", required = "", name = "ConfirmPassword", ng_model = "userData.ConfirmPassword", id = "confirmpassword", match = "Register.Password" })
+                            <label for="confirmpassword">{{'Confirm password' | translate}}</label>
+                        </div>
+                        <div class="col-md-12 right">
+                            <a href="/Account/Login" class="btn-signup text-uppercase">{{'Log in' | translate}}</a>
+                            <input type="submit" ng-disabled="Register.$invalid" value="{{'Sign Up' | translate}}" class="btn btn-primary text-uppercase" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <a href="/Account/ForgotPassword" class="text-white">{{'Forgot your password?' | translate}}</a>
+
+        <div class="copyright-text">&copy; 2016 <strong>ZYMI App</strong>. {{'All Rights Reserved' | translate}}.</div>
+    </div>
+
+    <div id="login-footer"></div>
+
+
+
+    <!-- SCRIPTS ON FOOTER -->
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Material Design Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
+
+    <script src="~/Scripts/bto.js"></script>
+    <script src="~/Scripts/thirdparty/angular-material/gesture.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+    <script src="~/Scripts/bto/directive/directive.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //functions here
+        });
+    </script>
+</body>
+
+</html>

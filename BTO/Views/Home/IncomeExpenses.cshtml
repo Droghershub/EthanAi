@@ -1,0 +1,144 @@
+﻿<div class="row" id="incomeExpeneseChart" ng-controller="IncomeExpeneseController">
+    <div class="col-lg-6 col-sm-12">
+        <div class="panel panel-default" tutorial="in-ex-income" config-data="{height: 15, left: -13}">
+            <div class="panel-heading">{{"Income" | translate}}</div>
+            <treasure-overlay-spinner active='spinner.active'>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 vertical-text ">
+                            {{"Income" | translate}}
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+
+                            <canvas id="income-chart" class="chart chart-base ng-isolate-scope" chart-type="incomeChart.type" data="incomeChart.data" labels="incomeChart.labels" options="incomeChart.options"
+                                    series="incomeChart.series" colours="incomeChart.colours" chart="chart"></canvas>
+
+                            <div class="text-center">{{"Year" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#696969;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Income from investment" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#FFFF00;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Other Income" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#1E90FF;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Exceptional Income" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#FFCC99;"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            {{"Recurring Income" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#0000FF;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Income from social security" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#008000"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Income from salary" | translate}}
+                        </div>
+                    </div>
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6 col-sm-12">
+        <div class="panel panel-default" tutorial="in-ex-expense" config-data="{height: 15, left: -13}">
+            <div class="panel-heading">Expense</div>
+            <treasure-overlay-spinner active='spinner.active'>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 vertical-text ">
+                            {{"Expense" | translate}}
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+
+                            <canvas id="expense-chart" class="chart chart-base" chart-type="expenseChart.type" data="expenseChart.data" labels="expenseChart.labels" options="expenseChart.options"
+                                    series="expenseChart.series" colours="expenseChart.colours"></canvas>
+
+                            <div class="text-center">{{"Year" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#008000;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Savings during active life" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#1E90FF;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Savings during retirement life" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#FF0000;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Exceptional expenses" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#FFCC99;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Recurring expenses" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#0000FF;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Expenses during retirement life" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#808080;"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            {{"Expenses during active life" | translate}}
+                        </div>
+                    </div>
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+
+
+</div>

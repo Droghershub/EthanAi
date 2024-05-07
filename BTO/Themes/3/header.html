@@ -1,0 +1,75 @@
+﻿<nav class="navbar navbar-default z-depth-1">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">{{'Manage Sessions' | translate}}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><div class="logo"></div></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'Manage' | translate}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a ng-click="$root.planService.showManageSolution()" class="waves-effect">{{'Manage Solution' | translate}}</a></li>-->
+                        <!--
+                            <li><a ng-click="$root.planService.showScenarioManagement()" class="waves-effect">{{'Manage Scenarios' | translate}}</a></li>                       
+                        <li><a ng-click="" class="waves-effect">{{'Manage Plans' | translate}}</a></li>
+                            -->
+                        <li><a ng-click="$root.timelineService.ResetPlan()" class="waves-effect">{{'Reset Plan' | translate}}</a></li>  
+                        <li><a ng-click="$root.sharingService.showSharingService()" class="waves-effect">{{'Sharing Session' | translate}}</a></li>               
+                    </ul>
+                </li>
+               
+                <li class="" ng-show="$root.IsAdmin == 'true'">
+                    <a href="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'Administrator' | translate}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Admin">{{'BTO Admin' | translate}}</a></li>
+                        <li><a ng-click="$root.playbackService.initialPlayBack();" ng-if="$root.functionAccess.PLAYBACK == 1" class="waves-effect">{{'Playback Sessions' | translate}}</a></li>
+                        <!--<li><a ng-click="$root.playbackService.initialRating();" class="waves-effect">{{'Rating' | translate}}</a></li>-->
+                    </ul>
+                </li>
+               
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="com_currency" class="dropdown" ng-if="$root.functionAccess.CHANGE_CURRENCY ==1">
+                    <a class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.PersonaPlan.currency_code}}<span class="caret" style="margin-left:5px !important;"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="currency in $root.listCurrency" ng-if="currency.value != $root.PersonaPlan.currency_code" ng-click="$root.actionService.onChangeDropDownMenu(currency.value, 'com_currency')" class=" waves-effect"><a>{{currency.name | translate}}</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.utilService.selectedLanguage.code}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="language in $root.utilService.listLanguage" class=" waves-effect" ng-if="language.code != $root.utilService.selectedLanguage.code" ng-click="$root.utilService.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+                    </ul>
+                </li>
+                <li class="waves-effect waves-light"><a href="#" class=""><i class="fa fa-bell-o"></i><!-- <br><span>Alerts</span> --></a><span class="nav-counter">5</span></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle waves-effect header_email" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="Themes/3/Content/Images/avatar-circle.png" style="width:35px;height: 35px;margin: -9px 10px -10px 0;" ng-if="$root.profile.client.avatar =='' || $root.profile.client.avatar == null ">
+                        
+                        <img ng-src="{{$root.profile.client.avatar}}" style="border-radius:50%; width:35px;height: 35px;margin: -9px 10px -10px 0;" ng-if="$root.profile.client.avatar !=null && $root.profile.client.avatar !='' ">
+                        <span ng-if="$root.profile.client.first_name">{{$root.profile.client.first_name}}</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" >
+                        <li class=" waves-effect"><a ng-click="$root.accountService.showMyAccountDialog()">{{'Manage Account' | translate}}</a></li>
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared"><a ng-click="$root.profileService.showProfileDialog();">{{"Update Proﬁle" | translate}}</a></li>
+                        <li role="separator" class="divider  waves-effect"></li>
+                        <li class=" waves-effect"><a ng-click="$root.accountService.showLogoffSystem();">{{"Log off" | translate}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> 

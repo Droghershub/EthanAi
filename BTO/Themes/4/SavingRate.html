@@ -1,0 +1,474 @@
+﻿<div id="EmergencySavingDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{$root.translateData["Month of recurring expenses"]}}</h5>
+                <a class="panel-close" href="#savings" data-toggle="collapse" aria-expanded="true" aria-controls="savings"  >x</a>
+            </div>
+            <div class="modal-body">
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <md-slider id="contingency_ratio" md-discrete
+                           model-data="$root.convertDataOfPersonalPlan.risk_return" is-show-percent="false" min="0" max="24" is-can-not-drag="false"></md-slider>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{$root.translateData["Cancel"]}}</button>
+                <button type="button" class="btn btn-primary" ng-click="$root.savingRate.saveEmergencySaving();">{{$root.translateData["Save"]}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width: 0px; height:0px;">
+    <input id="hidden_input" value="" type="text" tabindex="0" />
+</div>
+<div class="tools row" ng-if="$root.summaryCardService.selectedCardId=='asavings'">
+    <div class="col-md-12">
+        <div class="panel-group"  id="savings">
+            <div class="panel panel-default">
+                <a>
+                    <div class="panel-heading main savings">
+                        <h4 class="panel-title">{{$root.translateData["Saving Rates"]}}</h4>
+                        <a id="close_card_asavings" class="panel-close btn-sm btn-white waves-effect" ng-click="$root.summaryCardService.closeCard('asavings');">x</a>
+                    </div>
+                </a>
+                <!--<div id="savings" class="panel-collapse collapse in" aria-expanded="true">-->
+                <div class="panel-body row">
+                    <div class="row-sm-height">
+                        <div class="col-sm-4 left-side col-sm-height col-top">
+                            <div class="inside" style="padding-bottom:0">
+                                <p>{{$root.translateData['Set your monthly income, expense, and savings.']}}</p>
+                            </div>
+                            <div style="padding: 0.3em;">
+                                <ul rncarouselloop rn-carousel-transition="slides" rn-carousel-duration="300" rn-carousel rn-carousel-index="$root.savingRate.carouselIndex" class="image savingRateSwiper " id="savingRateSwiper">
+                                    <li>
+                                        <div class="card blue darken-1 swiper-slide" id="card-expense">
+                                            <div class="card-content white-text">
+                                                <h6>{{$root.translateData['MONTHLY EXPENSE']}}</h6>
+                                                <input id="salary_expense_today" class="amount expense_today input-big-size" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.expense_today" min="0" ng-blur="$root.savingRate.onBlur('expense_today');" ng-focus="$root.savingRate.onFocus('expense_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                                                <div style="font-size:12px;opacity:0.7;">{{$root.translateData['Total expense per month.']}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card blue lighten-1 swiper-slide" id="card-income">
+                                            <div class="card-content white-text">
+                                                <h6 class="heading" ng-if="$root.profile.client.married_status == 0">{{$root.translateData['MONTHLY SALARY']}}</h6>
+                                                <h6 class="heading" ng-if="$root.profile.client.married_status == 1">{{$root.translateData['MONTHLY SALARIES']}}</h6>
+                                                <input id="salary_income_today" class="amount income_today input-big-size" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.income_today" min="0" ng-blur="$root.savingRate.onBlur('income_today');" ng-focus="$root.savingRate.onFocus('income_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                                                <div style="font-size:12px;opacity:0.7;">{{$root.translateData['Combined salary of the household.']}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card blue lighten-4 swiper-slide" id="card-savings">
+                                            <div class="card-content white-text">
+                                                <h6>{{$root.translateData['MONTHLY SAVINGS']}}</h6>
+                                                <input id="salary_saving_today" class="amount saving_today input-big-size" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.saving_today" ng-blur="$root.savingRate.onBlur('saving_today');" ng-focus="$root.savingRate.onFocus('saving_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                                                <div style="font-size:12px;opacity:0.7;">{{$root.translateData['Total amount saved per month.']}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card blue darken-1 swiper-slide" id="card-expense">
+                                            <div class="card-content white-text">
+                                                <h6>{{$root.translateData['MONTHLY EXPENSE']}}</h6>
+                                                <input id="salary_expense_today" class="amount expense_today input-big-size" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.expense_today" min="0" ng-blur="$root.savingRate.onBlur('expense_today');" ng-focus="$root.savingRate.onFocus('expense_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                                                <div style="font-size:12px;opacity:0.7;">{{$root.translateData['Total expense per month.']}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card blue lighten-1 swiper-slide" id="card-income">
+                                            <div class="card-content white-text">
+                                                <h6 class="heading" ng-if="$root.profile.client.married_status == 0">{{$root.translateData['MONTHLY SALARY']}}</h6>
+                                                <h6 class="heading" ng-if="$root.profile.client.married_status == 1">{{$root.translateData['MONTHLY SALARIES']}}</h6>
+                                                <input id="salary_income_today" class="amount income_today input-big-size" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.income_today" min="0" ng-blur="$root.savingRate.onBlur('income_today');" ng-focus="$root.savingRate.onFocus('income_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                                                <div style="font-size:12px;opacity:0.7;">{{$root.translateData['Combined salary of the household.']}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div rn-carousel-indicators slides="[0,1,2]" rn-carousel-index="$root.savingRate.carouselIndex"></div>
+
+
+
+                            </div>
+
+                            <div style="padding-top:0;">
+                                <center>
+                                    <button type="button" class="btn btn-white btn-sm waves-effect ng-binding" style="margin-right:0" ng-click="$root.savingRate.showAllDetails()"><i class="fa fa-plus-square left"></i>{{$root.translateData["Expand all"]}} </button>
+                                    <button type="button" class="btn btn-white btn-sm waves-effect ng-binding" style="margin-right:0" ng-click="$root.savingRate.collapseAll()"><i class="fa fa-minus-square left"></i>{{$root.translateData["Collapse all"]}} </button>
+                                </center>
+                            </div>
+
+                            <script type="text/ng-template" id="cashflow_template.html">
+                                <div class="card hoverable sub-item" ng-if="(cashflow.name != 'cpf_ra_main' && cashflow.name != 'cpf_ra_spouse') || (cashflow.name == 'cpf_ra_main' && $root.PersonaPlan.start_age>=55) || (cashflow.name == 'cpf_ra_spouse' && $root.cashFlow.parameter['_c_age_spouse'] >= 55)">
+                                    <div class="card-content">
+                                        <div class="input-field" ng-if="is_expense">
+                                            <input id="income_expense_{{cashflow.name}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="cashflow.value" min="0" my-enter="$root.savingRate.enterKey(cashflow.name)" ng-change1="$root.savingRate.changeParent(cashflow);" ng-blur="$root.savingRate.onBlur(cashflow.name, cashflow);" ng-focus="$root.savingRate.onFocus(cashflow.name, cashflow);" ng-disabled="disable_input">
+                                            <div class="card-label">
+                                                {{$root.translateData[cashflow.name + '_description'].replaceObj($root.ProfileName)}}
+                                            </div>
+                                        </div>
+                                        <div ng-repeat="child in cashflow.children" ng-include="'cashflow_template.html'" onload="cashflow = child; is_expense = is_expense">
+                                        </div>
+                                    </div>
+                                </div>
+                            </script>
+                            <div>
+
+                                <div id="cardSalary" ng-show="$root.savingRate.carouselIndex == 0">
+                                    <div class="popout">
+                                        <div class="panel-group accordion" id="accordion">
+                                            <div class="panel panel-default" ng-repeat="item in $root.cashFlow.income">
+                                                <a data-toggle="collapse" href="#collapse-{{item.name}}" id="income_expense_header_{{item.name}}" ng-click="$root.savingRate.expandOrCollapse(item.name);">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title"> {{$root.translateData[item.name +'_display'].replaceObj($root.ProfileName)}} <span class="right">{{$root.PersonaPlan.currency_code}} {{item.value | number:2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                                <div id="collapse-{{item.name}}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <div class="input-field">
+                                                            <input id="income_expense_{{item.name}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="item.value" min="0" ng-change1="$root.savingRate.changeParent(item);" my-enter="$root.savingRate.enterKey(item.name)" ng-blur="$root.savingRate.onBlur(item.name, item);" ng-focus="$root.savingRate.onFocus(item.name, item);">
+                                                            <div class="card-label">{{$root.translateData[item.name +'_description'].replaceObj($root.ProfileName)}}</div>
+                                                        </div>
+                                                        <div ng-repeat="child in item.children" ng-include="'cashflow_template.html'" onload="cashflow = child;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inside bottom"><h6>{{$root.translateData['TOTAL INCOME']}}</h6> <h5>{{$root.PersonaPlan.currency_code}} {{$root.savingRate.getIncomeFrom(0,'income_from_properties')/12+ $root.PersonaPlan.income_today| number:2 }}</h5></div>
+                                    <div class="nonpopout readonly">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title ng-binding">{{$root.translateData['Income from salary']}} <span class="right">{{$root.PersonaPlan.currency_code}} {{$root.PersonaPlan.income_today| number:2}}</span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nonpopout">
+                                        <div class="panel-group">
+                                            <div class="panel panel-default" ng-if="$root.existingDrForIncomeCash.length > 0">
+
+                                                <div ng-repeat="item in $root.existingDrForIncomeCash">
+                                                    <a data-toggle="collapse" class="not-select-text" ng-click="$root.timelineService.openEditDreamDialog(item.id);">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">{{item.display}}<span class="right">{{$root.PersonaPlan.currency_code}} {{item.income | number:2}}</span></h4>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="cardExpense" ng-show="$root.savingRate.carouselIndex == 2">
+                                    <div class="popout">
+                                        <div class="panel-group accordion" id="accordion2">
+                                            <div class="panel panel-default" ng-repeat="item in $root.cashFlow.expense">
+                                                <a data-toggle="collapse" href="#collapse-{{item.name}}" id="income_expense_header_{{item.name}}" ng-click="$root.savingRate.expandOrCollapse(item.name);">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData[item.name+'_display'].replaceObj($root.ProfileName)}}<span class="right">{{$root.PersonaPlan.currency_code}} {{item.value | number:2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                                <div id="collapse-{{item.name}}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <div class="input-field">
+                                                            <input id="income_expense_{{item.name}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="item.value" min="0" ng-change1="$root.savingRate.changeParent(item);" ng-blur="$root.savingRate.onBlur(item.name, item);" ng-focus="$root.savingRate.onFocus(item.name, item);" my-enter="$root.savingRate.enterKey(item.name)">
+                                                            <div class="card-label">
+                                                                {{$root.translateData[item.name +'_description'].replaceObj($root.ProfileName)}}
+                                                            </div>
+                                                        </div>
+                                                        <div ng-repeat="child in item.children" ng-include="'cashflow_template.html'" onload="cashflow = child; is_expense = true;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inside bottom"><h6>{{$root.translateData['TOTAL EXPENSES']}}</h6> <h5>{{$root.PersonaPlan.currency_code}} {{$root.savingRate.getMortageRepayment(0)/12 + $root.savingRate.getExpensesFromProperty(0)/12+ $root.ExpenseData.tax_total + $root.PersonaPlan.expense_today| number:2 }}</h5></div>
+                                    <div class="nonpopout readonly">
+                                        <div class="panel-group">
+                                            <div class="panel">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title ng-binding">{{$root.translateData['Living expenses']}} <span class="right">{{$root.PersonaPlan.currency_code}} {{$root.PersonaPlan.expense_today| number:2}}</span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nonpopout">
+                                        <div class="panel-group">
+                                            <div class="panel panel-default" ng-if="$root.existingDrForExpenseCash.length >0" ng-repeat="item in $root.existingDrForExpenseCash">
+                                                <a data-toggle="collapse" href="#collapse-{{item.id}}" id="income_expense_header_{{item.id}}" ng-click="$root.savingRate.expandOrCollapse(item.id);">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">{{item.name}}<span class="right">{{$root.PersonaPlan.currency_code}} {{item.expenses + item.repayment | number:2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                                <div id="collapse-{{item.id}}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+
+                                                        <div ng-if="item.repayment !=0" class="property_income_or_epxense" ng-click="$root.timelineService.openEditDreamDialog(item.id);">
+                                                            <h4 class="panel-title">{{item.name + ' payments'}}<span class="right">{{$root.PersonaPlan.currency_code}} {{item.repayment | number:2}}</span><span class="clearfix"></span></h4>
+                                                        </div>
+                                                        <div ng-if="item.expenses !=0" class="property_income_or_epxense" ng-click="$root.timelineService.openEditDreamDialog(item.id);">
+                                                            <h4 class="panel-title">{{item.name + ' expenses'}}<span class="right">{{$root.PersonaPlan.currency_code}} {{item.expenses | number:2}}</span><span class="clearfix"></span></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nonpopout">
+                                        <div class="panel-group">
+                                            <div class="panel panel-default">
+                                                <a data-toggle="collapse" href="#collapse-other_tax" id="income_expense_header_other_tax" ng-click="$root.savingRate.expandOrCollapse('other_tax');">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">{{$root.translateData['Income tax'].replaceObj($root.ProfileName)}}<span class="right">{{$root.PersonaPlan.currency_code}} {{$root.ExpenseData.tax_total | number:2}}</span></h4>
+                                                    </div>
+                                                </a>
+                                                <div id="collapse-other_tax" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <div class="input-field">
+                                                            <input id="tax_total" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="$root.ExpenseData.tax_total" ng-disabled="true">
+                                                            <div class="card-label">
+                                                                {{$root.translateData['Your total Income tax'].replaceObj($root.ProfileName)}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="card hoverable sub-item">
+                                                            <div class="card-content">
+                                                                <div class="input-field">
+                                                                    <input id="tax_main" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="$root.ExpenseData.tax_main" ng-disabled="true">
+                                                                    <div class="card-label">
+                                                                        {{$root.translateData['Income main'].replaceObj($root.ProfileName)}}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="card hoverable sub-item">
+                                                            <div class="card-content">
+                                                                <div class="input-field">
+                                                                    <input id="tax_main" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="$root.ExpenseData.tax_spouse" ng-disabled="true">
+                                                                    <div class="card-label">
+                                                                        {{$root.translateData['Income spouse'].replaceObj($root.ProfileName)}}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="cardSaving" ng-show="$root.savingRate.carouselIndex == 1">
+                                    <div class="popout">
+                                        <div class="panel-group accordion" id="accordion3">
+                                            <div class="panel panel-default" style="margin-bottom:10px;">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">{{$root.translateData['Own savings'].replaceObj($root.ProfileName)}} <span class="right">{{$root.PersonaPlan.currency_code}} {{$root.PersonaPlan.saving_today | number:2}}</span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inside bottom"><h6>{{$root.translateData['TOTAL SAVINGS']}}</h6> <h5>{{$root.PersonaPlan.currency_code}} {{$root.Monthly_net_cpf_contribute + $root.PersonaPlan.saving_today| number:2 }}</h5></div>
+                                        <div class="nonpopout readonly">
+                                            <div class="panel-group">
+                                                <div class="panel">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title ng-binding">{{$root.translateData['Own savings']}} <span class="right">{{$root.PersonaPlan.currency_code}} {{$root.PersonaPlan.saving_today| number:2}}</span></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nonpopout">
+                                            <div class="panel-group">
+                                                <div class="panel panel-default" ng-repeat="item in $root.cashFlow.cpf|filter:{name:'cpf_total_contribution'}">
+                                                    <a data-toggle="collapse" href="#collapse-{{item.name}}" id="income_expense_header_{{item.name}}" ng-click="$root.savingRate.expandOrCollapse(item.name);">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                {{$root.translateData[item.name+'_display'].replaceObj($root.ProfileName)}}
+                                                                <span class="right" ng-show="item.name == 'cpf_total_contribution'">{{$root.PersonaPlan.currency_code}} {{$root.Monthly_net_cpf_contribute | number:2}}</span>
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                    <div id="collapse-{{item.name}}" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="input-field" ng-show="item.name != 'contingency_household'">
+                                                                <input id="income_expense_{{item.name}}" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" select-on-click type="text" ng-model="$root.Monthly_net_cpf_contribute" min="0" ng-change1="$root.savingRate.changeParent(item);" ng-blur="$root.savingRate.onBlur(item.name, item);" ng-focus="$root.savingRate.onFocus(item.name, item);" my-enter="$root.savingRate.enterKey(item.name)" ng-disabled="true">
+                                                                <div class="card-label">
+                                                                    {{$root.translateData[item.name+'_description'].replaceObj($root.ProfileName)}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-field" ng-show="item.name == 'contingency_household'">
+                                                                <button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" ng-click="$root.savingRate.showPopupEmergencySaving();">{{$root.translateData["Emergency savings"]}}</button>
+                                                            </div>
+                                                            <div ng-repeat="child in item.children" ng-include="'cashflow_template.html'" onload="cashflow = child; is_expense = true; disable_input = true;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <center ng-if="false">
+                                    <a class="btn-flat waves-effect">
+                                        {{$root.translateData['ADD A SALARY']}}
+                                    </a>
+                                </center>
+
+                                <center>&nbsp;</center>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 right-side col-sm-height col-top">
+                            <div class="inside" id="div_SavingRate_Right">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div id="savingRateDonut"></div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h5>{{$root.translateData['Your projection at age']}} <strong>{{$root.MonthlyIncome.age}}</strong></h5>
+                                        <ul>
+                                            <li>
+                                                {{$root.translateData["Monthly total income of"] }}
+                                                <strong>{{ $root.Math.floor($root.MonthlyIncome.income/12) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</strong>
+                                            </li>
+                                            <li ng-if="$root.MonthlySaving.own_saving > 0">
+                                                {{$root.translateData["Monthly own savings of"] }}
+                                                <strong>{{ $root.Math.floor($root.MonthlySaving.own_saving/12) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</strong>
+                                            </li>
+                                            <li ng-if="$root.MonthlySaving.net_cpf_contribution >= 0">
+                                                {{$root.translateData["Monthly Net CPF contribution of"] }}
+                                                <strong>{{ $root.Math.floor($root.MonthlySaving.net_cpf_contribution/12) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</strong>
+
+                                            </li>
+                                            <li ng-if="$root.MonthlySaving.net_cpf_contribution < 0">
+                                                {{$root.translateData["Monthly Net CPF withdrawal of"] }}
+                                                <strong>{{ (0 - $root.Math.floor($root.MonthlySaving.net_cpf_contribution/12)) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</strong>
+
+                                            </li>
+                                            <li>
+                                                {{$root.translateData["Monthly total expenses of"] }}
+                                                <strong>{{ $root.Math.round($root.MonthlyExpense.expenses/12) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</strong>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="separator" style="margin-top:20px"></div>
+                                <div id="dev_detailSavingRate" class="row" style="padding-top:2em;" >
+
+                                    <div class="col-xs-12">
+                                        <p style="margin-top:0;margin-bottom:1em;">{{$root.translateData["Here's your projected annual income & expense:"]}}</p>
+                                        <center>
+                                            <div class="btn-group" style="padding-bottom:10px;">
+                                                <button id="savrates-btn1" type="button" ng-class="{'btn-primary': $root.savingRate.inflation_status, 'btn-white': !$root.savingRate.inflation_status}" class="btn btn-sm waves-effect " style="margin-right:0" ng-click="$root.savingRate.changeInflattion(true);">{{$root.translateData["INFLATION ADJUSTED"] }}</button>
+                                                <button id="savrates-btn2" type="button" ng-class="{'btn-primary': !$root.savingRate.inflation_status, 'btn-white': $root.savingRate.inflation_status}" class="btn btn-sm waves-effect " ng-click="$root.savingRate.changeInflattion(false);">{{$root.translateData["NON-INFLATION ADJUSTED" ] }}</button>
+                                            </div>
+                                        </center>
+
+                                        <div class="compare-tbl" >
+                                            <div class="row total" style="border-top:1px solid #fff">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["AGE"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{$root.MonthlyIncome.age}}</div>
+                                            </div>
+                                            <div class="row parent" id="monthly-income" ng-click="$root.savingRate.openRowData('monthly-income')" style="border-top:1px solid #fff">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Yearly Income"]}} <i class="fa fa-caret-down"></i></div>
+                                                <div class="col-xs-5 grey lighten-5"> {{ $root.MonthlyIncome.income | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-income" style="border-top:1px solid #fff">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Income from salary"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlyIncome.income_from_salary | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-income">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Income from properties"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlyIncome.income_from_properties | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-income">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Income from CPF Life"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlyIncome.income_from_social_security | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-income">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Exceptional income"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlyIncome.exceptional_incomes | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-income">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Income from investment"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{$root.translateData['Premium version']}}</div>
+                                            </div>
+                                            <!--<div class="row" parent="monthly-income">
+                                            <div class="col-xs-7 grey lighten-5">{{$root.translateData["Other Income"]}}</div>
+                                            <div class="col-xs-5 grey lighten-5">{{ $root.MonthlyIncome.other_income | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                        </div>-->
+                                            <div class="row parent" id="monthly-expense" ng-click="$root.savingRate.openRowData('monthly-expense')">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Yearly Expenses"]}} <i class="fa fa-caret-down"></i></div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlyExpense.expenses | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-expense">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Living expenses"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlyExpense.recurring_expense | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-expense">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Mortage repayment"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlyExpense.MortageRepayment | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-expense">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Expenses from properties"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlyExpense.expenses_from_properties | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-expense">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Exceptional expense"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlyExpense.exception_expenses | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row parent" id="monthly-saving" ng-click="$root.savingRate.openRowData('monthly-saving')">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Yearly Savings"]}} <i class="fa fa-caret-down"></i></div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlySaving.saving | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-saving" ng-show="$root.MonthlySaving.net_cpf_contribution >= 0">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Net CPF contribution"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlySaving.net_cpf_contribution | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row" parent="monthly-saving" ng-show="$root.MonthlySaving.net_cpf_contribution < 0">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Net CPF withdrawal"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ (0 - $root.MonthlySaving.net_cpf_contribution) | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+
+
+                                            <div class="row" parent="monthly-saving">
+                                                <div class="col-xs-7 grey lighten-5">{{$root.translateData["Own savings"]}}</div>
+                                                <div class="col-xs-5 grey lighten-5">{{ $root.MonthlySaving.own_saving | currency:$root.PersonaPlan.currency_code + ' ': 0 }}</div>
+                                            </div>
+                                            <div class="row parent">
+                                                <div class="col-xs-7 grey lighten-3">{{$root.translateData["Savings Rate"]}}</div>
+                                                <div class="col-xs-5 grey lighten-3">{{ $root.MonthlySaving.monthlyRate | number : 2}} %</div>
+                                            </div>
+                                        </div>
+
+                                        <div id="chartdiv" style="width:100%;height:400px;font-size:11px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- panel-body -->
+            </div> <!-- #salary -->
+            <div class="panel-footer">
+                <h6 ng-if="!$root.profile.client.is_auto_register">{{$root.translateData['Rate this Section']}}</h6>
+                <rating-session ng-if="!$root.profile.client.is_auto_register" id="rating_saving_rate" rating-value="$root.ratingData.data.saving_rate" on-click-star="$root.ratingService.ratingClickStar('saving_rate')" on-rating-select="$root.ratingService.rating('saving_rate');"></rating-session>
+            </div>
+        </div> <!-- panel -->
+    </div>
+    <!-- Initialize Swiper -->
+</div>

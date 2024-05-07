@@ -1,0 +1,85 @@
+﻿<div id="StartAgeDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title"></h4>
+                <h5 class="modal-title">{{"Update Start Age" | translate}}</h5> 
+            </div>
+            <div class="modal-body">
+                <form name="form_start_age" novalidate class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-5 right" style="line-height:3rem;">
+                            {{"Age" | translate}}
+                        </div> 
+                        <div class="col-sm-7">                            
+                            <material-select id="start_age" name="start_age" model-data="$root.form_start_age" list-data="$root.listStartAge" ng-disabled="$root.functionAccess.CHANGE_START_AGE != 1"></material-select>                                                                   
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer"> 
+                <a href="#" class="btn-signup" data-dismiss="modal" id="cancelUpdateStartAge" onclick="$('#OkUpdateStartAge').unbind('click');">{{"No" | translate}}</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkUpdateStartAge" ng-if="$root.functionAccess.CHANGE_START_AGE ==1">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="RetirementAgeDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title"></h4>
+                <h5 class="modal-title">{{"Update Retirement Age" | translate}}</h5>
+            </div>
+            <div class="modal-body">
+                <form name="form_retirement_age" novalidate class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-5 right" style="line-height:3rem;">
+                            {{"Age" | translate}}
+                        </div>
+                        <div class="col-sm-7">
+                            <material-select id="retirement_age" name="retirement_age" model-data="$root.form_retirement_age" list-data="$root.listRetirementAge" ng-disabled="$root.functionAccess.CHANGE_RETIREMENT_AGE != 1"></material-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn-signup" data-dismiss="modal" id="cancelUpdateRetirementAge" onclick="$('#OkUpdateRetirementAge').unbind('click');">{{"No" | translate}}</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkUpdateRetirementAge" ng-if="$root.functionAccess.CHANGE_RETIREMENT_AGE ==1">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="SocialSecurityStartAgeDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title"></h4>
+                <h5 class="modal-title">{{"Update Social Security Age" | translate}}</h5> 
+
+            </div>
+            <div class="modal-body">
+                <form name="form_social_security_age" novalidate class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-5 right" style="line-height:3rem;">
+                            {{"Age" | translate}}
+                        </div> 
+                        <div class="col-sm-7 col-md-7">                            
+                            <material-select id="social_security_age" name="social_security_age" model-data="PersonaPlan.social_security_age" list-data="listSocialAge" ng-disabled="$root.functionAccess.CHANGE_RETIREMENT_AGE != 1"></material-select>                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer"> 
+                <a href="#" class="btn-signup" data-dismiss="modal" id="cancelUpdateSocialSecurityAge" onclick="$('#OkUpdateSocialSecurityAge').unbind('click');">{{"No" | translate}}</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkUpdateSocialSecurityAge" ng-if="$root.functionAccess.CHANGE_RETIREMENT_AGE ==1">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

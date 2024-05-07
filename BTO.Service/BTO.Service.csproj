@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{42BDD50E-A474-46C3-BB19-26AEA529513B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTO.Service</RootNamespace>
+    <AssemblyName>BTO.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.7.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InvitationService.cs" />
+    <Compile Include="IInvitationService.cs" />
+    <Compile Include="NewsManagement\INewsUserService.cs" />
+    <Compile Include="NewsManagement\INewsOrganizationUnitService.cs" />
+    <Compile Include="NewsManagement\INewsService.cs" />
+    <Compile Include="NewsManagement\NewsUserService.cs" />
+    <Compile Include="NewsManagement\NewsOrganizationUnitService.cs" />
+    <Compile Include="NewsManagement\NewsService.cs" />
+    <Compile Include="PersonaService.cs" />
+    <Compile Include="IPersonaService.cs" />
+    <Compile Include="Portfolios\IPortfolioService.cs" />
+    <Compile Include="Portfolios\IPortfolioSheetService.cs" />
+    <Compile Include="Portfolios\PortfolioService.cs" />
+    <Compile Include="Portfolios\PortfolioSheetService.cs" />
+    <Compile Include="Profile\IImageManagementService.cs" />
+    <Compile Include="Profile\ImageManagementService.cs" />
+    <Compile Include="Rating\IUserFeedbackService.cs" />
+    <Compile Include="Payment\IPaymentService.cs" />
+    <Compile Include="Rating\IUserRatingService.cs" />
+    <Compile Include="Rating\UserFeedbackService.cs" />
+    <Compile Include="Payment\PaymentService.cs" />
+    <Compile Include="Rating\UserRatingService.cs" />
+    <Compile Include="Tracking\AddSessionThread.cs" />
+    <Compile Include="UserClaimsService.cs" />
+    <Compile Include="CalculatorService.cs" />
+    <Compile Include="Component\BaseObject.cs" />
+    <Compile Include="Component\ChildrenIndependent.cs" />
+    <Compile Include="Component\Education.cs" />
+    <Compile Include="Component\ExceptionalExpense.cs" />
+    <Compile Include="Component\ExceptionalIncome.cs" />
+    <Compile Include="Component\ExpenseAfterRetirement.cs" />
+    <Compile Include="Component\ExpenseBeforeRetirement.cs" />
+    <Compile Include="Component\IBaseObject.cs" />
+    <Compile Include="Component\MonteCarlo.cs" />
+    <Compile Include="Component\MonteCarloModel.cs" />
+    <Compile Include="Component\PeriodResult.cs" />
+    <Compile Include="Component\PersonaInfo.cs" />
+    <Compile Include="Component\ResidencePurchase.cs" />
+    <Compile Include="Component\ResidenceSale.cs" />
+    <Compile Include="Component\AgeResult.cs" />
+    <Compile Include="Component\Salary.cs" />
+    <Compile Include="Component\SocialSecurity.cs" />
+    <Compile Include="IUserClaimsService.cs" />
+    <Compile Include="IAspNetUserService.cs" />
+    <Compile Include="AspNetUserService.cs" />
+    <Compile Include="Parameters\IListItemService.cs" />
+    <Compile Include="Parameters\IProductVersionService.cs" />
+    <Compile Include="Parameters\IParameterService.cs" />
+    <Compile Include="Parameters\ListItemService.cs" />
+    <Compile Include="Parameters\ProductVersionService.cs" />
+    <Compile Include="Parameters\ParameterService.cs" />
+    <Compile Include="Parameters\TransactionScope.cs" />
+    <Compile Include="Profile\ISessionManagementService.cs" />
+    <Compile Include="Profile\IUserTutorialService.cs" />
+    <Compile Include="Profile\ITutorialService.cs" />
+    <Compile Include="Profile\SessionManagementService.cs" />
+    <Compile Include="Profile\UserTutorialService.cs" />
+    <Compile Include="Profile\TutorialService.cs" />
+    <Compile Include="Sharing\MemberService.cs" />
+    <Compile Include="Sharing\GroupService.cs" />
+    <Compile Include="Sharing\ConnectionService.cs" />
+    <Compile Include="Sharing\IMemberService.cs" />
+    <Compile Include="Sharing\IGroupService.cs" />
+    <Compile Include="Sharing\IConnectionService.cs" />
+    <Compile Include="Tracking\UserSessionService.cs" />
+    <Compile Include="Tracking\IUserSessionService.cs" />
+    <Compile Include="UserManagement\FunctionAccessService.cs" />
+    <Compile Include="UserManagement\IFunctionAccessService.cs" />
+    <Compile Include="UserManagement\IFunctionAccessRoleService.cs" />
+    <Compile Include="UserManagement\IOrganizationUnitUserService.cs" />
+    <Compile Include="UserManagement\IOrganizationUnitRoleService.cs" />
+    <Compile Include="UserManagement\IOrganizationUnitService.cs" />
+    <Compile Include="UserManagement\IRoleService.cs" />
+    <Compile Include="UserManagement\FunctionAccessRoleService.cs" />
+    <Compile Include="UserManagement\OrganizationUnitUserService.cs" />
+    <Compile Include="UserManagement\OrganizationUnitRoleService.cs" />
+    <Compile Include="UserManagement\OrganizationUnitService.cs" />
+    <Compile Include="UserManagement\RoleService.cs" />
+    <Compile Include="UserProfileService.cs" />
+    <Compile Include="ICalculatorService.cs" />
+    <Compile Include="ISolutionService.cs" />
+    <Compile Include="IUserProfileDependentService.cs" />
+    <Compile Include="IUserProfileService.cs" />
+    <Compile Include="LifeEventService.cs" />
+    <Compile Include="DreamTypeConfigService.cs" />
+    <Compile Include="ILifeEventService.cs" />
+    <Compile Include="IDreamTypeConfigService.cs" />
+    <Compile Include="Common\EntityService.cs" />
+    <Compile Include="Common\IEntityService.cs" />
+    <Compile Include="Common\IService.cs" />
+    <Compile Include="DreamService.cs" />
+    <Compile Include="IDreamService.cs" />
+    <Compile Include="IDreamTypeService.cs" />
+    <Compile Include="IPersonaPlanService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DreamTypeService.cs" />
+    <Compile Include="PersonaPlanService.cs" />
+    <Compile Include="SolutionService.cs" />
+    <Compile Include="Tracking\ClientProfileService.cs" />
+    <Compile Include="Tracking\IClientProfileService.cs" />
+    <Compile Include="Tracking\ILogExceptionService.cs" />
+    <Compile Include="Tracking\IPlanTrackingService.cs" />
+    <Compile Include="Tracking\LogExceptionService.cs" />
+    <Compile Include="Tracking\PlanTrackingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BTO.Common\BTO.Common.csproj">
+      <Project>{c7555c03-8de5-4d54-89fe-1d155625ed3a}</Project>
+      <Name>BTO.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Model\BTO.Model.csproj">
+      <Project>{d2bbbd57-660f-4cb2-8643-b2d081e9d658}</Project>
+      <Name>BTO.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Repository\BTO.Repository.csproj">
+      <Project>{524201ff-6982-4783-8743-bca0428c225b}</Project>
+      <Name>BTO.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

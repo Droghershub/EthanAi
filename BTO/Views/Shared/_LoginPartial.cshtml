@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken() 
+        <input  type="hidden" value="@User.Identity.GetUserId()" id="userKeyId"/>
+        <input type="hidden" value="@User.Identity.GetUserName()" id="userNameKeyId" />
+        <input type="hidden" value="@Session["currentlogin"]" id="currentloginId" />
+    if (@HttpContext.Current.User.IsInRole("Admin"))
+    {
+        <input type="hidden" value="1" id="playbackRole" />
+    }
+    else
+    {<input type="hidden" value="0" id="playbackRole" /> }
+
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (Request.IsAuthenticated)
+            {
+                <li id="currencyId" class="dropdown" ng-if="$root.PersonaPlan != null && !$root.isAdmin">
+                    <a id="list_currency_code" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.PersonaPlan.currency_code}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="min-width: 50px;" ng-if="$root.functionAccess.CHANGE_CURRENCY ==1">
+                        <li ng-repeat="currency in $root.listCurrency" ng-if="currency.value != $root.PersonaPlan.currency_code" ng-click="$root.changeCurrency(currency.value)"><a>{{currency.name | translate}}</a></li>
+                    </ul>
+                </li>
+            }
+            <li class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.selectedLanguage.name | translate}}<span class="caret"></span></a>
+                <ul class="dropdown-menu" style="min-width: 100px;" ng-if="$root.functionAccess.CHANGE_LANGUAGE ==1">
+                    <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+                </ul>
+            </li>
+            @if (Request.IsAuthenticated)
+            {
+                <li class="dropdown" ng-if="$root.PersonaPlan != null || $root.isLogined == true">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName() <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a title="{{'Manage Account' | translate}}" ng-click="$root.showManageAccountDialog()">{{'Manage Account' | translate}}</a>
+                        </li>
+                        <li ng-if="false">
+                            <a href="/Manage/ChangePassword" title="{{'Change Password' | translate}}">{{'Change Password' | translate}}</a>
+                        </li>
+                        <li ng-if="false"><a href="/Manage/ManageExternalLoginProviders" title="{{'Setting' | translate}}">{{'Setting' | translate}}</a></li>
+                        <li role="separator" class="divider"></li>
+                        @if (Request.RequestContext.RouteData.Values["controller"].ToString().IndexOf("Admin") < 0)
+                        {
+                            <li> <a onclick="rootScope.showProfileDialog();">{{"Profile" | translate}}</a></li>
+                        }
+                        <li><a onclick="javascript: $.connection.hub.stop();" href="javascript:document.getElementById('logoutForm').submit()">{{"Log off" | translate}}</a></li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    }
+}
+else
+{
+    <div class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.selectedLanguage.name | translate}}<span class="caret"></span></a>
+                <ul class="dropdown-menu" style=" min-width: 100px;">
+                    <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+                </ul>
+            </li>
+            <li>@Html.ActionLink("{{'Register' | translate}}", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("{{'Log in' | translate}}", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    </div>
+}

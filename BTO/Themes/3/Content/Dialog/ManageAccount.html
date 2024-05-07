@@ -1,0 +1,131 @@
+﻿<div id="manageAccountDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog" id="manage-account-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{"Manage Account" | translate}}</h5>
+            </div>
+            <div class="modal-body">
+
+                <form name="form_change_password" novalidate class="form-horizontal" role="form" ng-if="$root.isShowChangePassword" ng-init="$root.initChangePasswordForm(this)">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">{{'Change Password' | translate}}</div>
+                        <div class="panel-body" ng-if="$root.functionAccess.CHANGE_PASSWORD !=1"> &nbsp;{{"You don't have permission for change password" | translate}}</div>
+                        <div class="panel-body" ng-if="$root.functionAccess.CHANGE_PASSWORD ==1">
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="input-field col-sm-8">
+                                    <input id="current-password" name="OldPassword" required="" ng-model="$root.changePasswordData.OldPassword" type="password">
+                                    <label for="current-password">{{'Current password' | translate}}</label>
+                                    <div class="hint" ng-if="form_change_password.OldPassword.$dirty">
+                                        <p ng-class="{'active': !form_change_password.OldPassword.$error.required}">{{"Old password is requried" | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="input-field col-sm-8">
+                                    <input id="new-password" type="password" name="NewPassword" ng-minlength="8" ng-model="$root.changePasswordData.NewPassword" one-digit="true" one-special-character="true" one-lowercase="true" one-uppercase="true" required="" equals="{{$root.changePasswordData.ConfirmPassword}}">
+                                    <label for="new-password" class="">{{'New password' | translate}}</label>
+                                    <div class="hint" ng-if="form_change_password.NewPassword.$dirty">
+                                        <p ng-class="{'active': !form_change_password.NewPassword.$error.minlength && !form_change_password.NewPassword.$error.required}">{{'At least 8 characters' | translate}}</p>
+                                        <p ng-class="{'active': !form_change_password.NewPassword.$error.oneUppercase}">{{'One uppercase character' | translate}}</p>
+                                        <p ng-class="{'active': !form_change_password.NewPassword.$error.oneLowercase}">{{'One lowercase character' | translate}}</p>
+                                        <p ng-class="{'active': !form_change_password.NewPassword.$error.oneDigit}">{{'One digit' | translate}}</p>
+                                        <p ng-class="{'active': !form_change_password.NewPassword.$error.oneSpecialCharacter}">{{'One special character' | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="input-field col-sm-8">
+                                    <input id="confirm-password" type="password" name="ConfirmPassword" equals="{{$root.changePasswordData.NewPassword}}" required ng-model="$root.changePasswordData.ConfirmPassword">
+                                    <label for="confirm-password" class="">{{'Confirm new password' | translate}}</label>
+                                    <div class="hint" ng-if="form_change_password.ConfirmPassword.$dirty">
+                                        <p ng-class="{'active':  !form_change_password.ConfirmPassword.$error.required}">{{"Confirm password is requried" | translate}}</p>
+                                        <p ng-class="{'active': !form_change_password.ConfirmPassword.$error.equals}">{{"Confirm password is not match new password" | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                    <button type="button" ng-disabled="form_change_password.$invalid" ng-click="$root.accountService.submitChangePassword();" class="btn btn-primary btn-sm waves-effect">{{'UPDATE PASSWORD' | translate}}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+                <form name="form_manage_login" novalidate class="form-horizontal" role="form" ng-if="$root.listLogins.length > 0">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">{{'Account Login' | translate}}</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>{{'Linked Accounts' | translate}}</th>
+                                                <th class="center">{{'Action' | translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in $root.listLogins">
+                                                <td>{{item.name | translate}}</td>
+                                                <td class="center">
+                                                    
+                                                    <button ng-if="!item.status" type="button" ng-click="$root.accountService.disableLogin(item);" class="btn btn-danger btn-sm waves-effect">{{"Disable" | translate}}</button>
+                                                    <button ng-if="item.status && item.key == null" type="button" ng-click="$root.accountService.enableLogin(item);" class="btn btn-primary btn-sm waves-effect">{{"Connect" | translate}}</button>
+                                                    <button ng-if="item.status && item.key != null" type="button" ng-click="$root.accountService.enableLogin(item);" class="btn btn-success btn-sm waves-effect">{{"Enable" | translate}}</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" ng-if="false">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{'Manage Login' | translate}}</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>{{'No.' | translate}}</th>
+                                        <th>{{'Login type' | translate}}</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in $root.listLogins">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.name | translate}}</td>
+                                        <td>
+                                            <button ng-if="!item.status" type="button" ng-click="$root.accountService.disableLogin(item);" class="btn btn-danger btn-xs btn_margin_xs">{{"Disable" | translate}}</button>
+                                            <button ng-if="item.status" type="button" ng-click="$root.accountService.enableLogin(item);" class="btn btn-primary btn-xs btn_margin_xs">{{"Enable" | translate}}</button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{"Cancel" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

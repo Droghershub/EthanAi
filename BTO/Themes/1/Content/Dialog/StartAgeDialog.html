@@ -1,0 +1,52 @@
+﻿<div id="StartAgeDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{"Update Start Age" | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form_start_age" novalidate class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="dream_event_type">{{"Age" | translate}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" style="width:20%" name="start_age" ng-model="$root.form_start_age" ng-options="item  for item in $root.utilService.range($root.MinStartAge, $root.MaxStartAge)" ng-disabled="$root.functionAccess.CHANGE_START_AGE != 1"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUpdateStartAge">{{"No" | translate}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkUpdateStartAge" ng-if="$root.functionAccess.CHANGE_START_AGE ==1">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="SocialSecurityStartAgeDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{"Update Social Security Age" | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form_social_security_age" novalidate class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="dream_event_type">{{"Age" | translate}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" style="width:20%" name="start_age" ng-model="PersonaPlan.social_security_age" ng-options="item  for item in $root.utilService.range($root.MinSocialSecurityAge, 70)" ng-disabled="$root.functionAccess.CHANGE_RETIREMENT_AGE != 1"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUpdateSocialSecurityAge">{{"No" | translate}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkUpdateSocialSecurityAge" ng-if="$root.functionAccess.CHANGE_RETIREMENT_AGE ==1">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,21 @@
+﻿<div>
+    <textarea id="mail_share" rows="4" cols="50" ng-disabled="$root.sharingService.checkIsSharing()" />
+    <br />
+    <button class="btn btn-primary" style="width: 120px; height:30px;" id="invite_share" ng-disabled="$root.sharingService.checkDisableInvite()">{{"Invite" | translate}}</button>
+    <button class="btn btn-primary" style="width: 120px; height:30px;" id="begin_share" ng-disabled="$root.viewers.length == 0 || $root.sharingService.checkIsSharing()"> {{"Begin" | translate}}</button>
+</div>
+<table class="table" ng-hide="$root.viewers.length == 0">
+    <thead>
+        <tr>
+            <th>{{"Emails accepted" | translate}}</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="viewer in viewers">
+        <td>{{viewer}}</td>
+    </tr>
+</table>
+<script>
+    $(function () {
+        angular.element(document.body).injector().get('sharingService').initSharingOnTabSharing();
+    });
+</script>

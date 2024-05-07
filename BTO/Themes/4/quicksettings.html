@@ -1,0 +1,92 @@
+﻿
+<div class="inside" style="border-bottom:1px solid #ddd;text-align:center;text-transform: uppercase;"><h6>{{$root.translateData["Quick Settings"]}}</h6></div>
+<a id="side-nav-close" class="side-nav-close btn-sm btn-white waves-effect" ng-click="$root.quickSettingService.shareAction('side-nav-close');">x</a>
+<ul class="collapsible collapsible-accordion">
+    <li>
+        <a id="quick-setting-saving-rate" class="collapsible-header waves-effect" ng-click="$root.quickSettingService.shareAction('quick-setting-saving-rate');">{{$root.translateData["Saving Rates"]}} </a>
+        <a id="side-nav-panels-saving-rate" ng-click="$root.summaryCardService.quickSettingSelectCard('asavings', $event);" class="side-nav-panels-button btn-xs btn-white"><i class="fa fa-ellipsis-h"></i></a>        
+        <div class="collapsible-body qs-savrates" style="display: none;">
+            <p>{{$root.translateData["Enter monthly values (click to edit)"]}}:</p>
+            <div class="row">
+                <div class="col-xs-6"><label for="qs-salary">{{$root.translateData["Salary"]}}</label></div><div class="col-xs-6">
+                    <input id="salary_income_today_quick" class="amount income_today" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.income_today" min="0" ng-blur="$root.savingRate.onBlur('income_today');" ng-focus="$root.savingRate.onFocus('income_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6"><label for="qs-savings">{{$root.translateData["Savings"]}}</label></div><div class="col-xs-6">
+                    <input id="salary_saving_today_quick" class="amount saving_today" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.saving_today" ng-blur="$root.savingRate.onBlur('saving_today');" ng-focus="$root.savingRate.onFocus('saving_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6"><label for="qs-expenses">{{$root.translateData["Expenses"]}}</label></div><div class="col-xs-6">
+                    <input id="salary_expense_today_quick" class="amount expense_today" ng-currency fraction="0" currency-symbol="{{$root.PersonaPlan.currency_code}} " select-on-click type="text" ng-model="PersonaPlan.expense_today" min="0" ng-blur="$root.savingRate.onBlur('expense_today');" ng-focus="$root.savingRate.onFocus('expense_today');" my-enter="$root.savingRate.enterTab(this)" my-tab="$root.savingRate.enterTab()" tabindex="1">
+                </div>
+            </div>
+        </div>
+    </li>
+
+    <li >
+        <a id="quick-setting-retirement-lifestyle" class="collapsible-header waves-effect" ng-click="$root.quickSettingService.shareAction('quick-setting-retirement-lifestyle');">{{$root.translateData["Retirement Lifestyle"]}} </a>
+        <a id="side-nav-panels-retirement-lifestyle" ng-click="$root.summaryCardService.quickSettingSelectCard('aretirement', $event)" class="side-nav-panels-button btn-xs btn-white"><i class="fa fa-ellipsis-h"></i></a>       
+        <div class="collapsible-body" style="display: none;">
+            <p>{{$root.translateData["Choose lifestyle at retirement"]}}:</p>
+
+            <div class="row">
+                <div class="col-xs-4 icon" ng-class="$root.selectedretirementLife.id != 0?'':'active'" ng_click="$root.retirementLifeStyle.ChooseLifeStyle($root.retirementLife[0]);">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="frugal_recurring_expenses">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-bicycle fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-xs-4 icon" ng-class="$root.selectedretirementLife.id != 1?'':'active'" ng_click="$root.retirementLifeStyle.ChooseLifeStyle($root.retirementLife[1]);">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="median_recurring_expenses">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-car fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-xs-4 icon" ng-class="$root.selectedretirementLife.id != 2?'':'active'" ng_click="$root.retirementLifeStyle.ChooseLifeStyle($root.retirementLife[2]);">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="luxury_recurring_expenses">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-plane fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </li>
+    <li >
+        <a id="quick-setting-investments" class="collapsible-header waves-effect" ng-click="$root.quickSettingService.shareAction('quick-setting-investments');">{{$root.translateData["Investments"]}} </a>
+        <a id="side-nav-panels-investments" ng-click="$root.summaryCardService.quickSettingSelectCard('ainvestments', $event)" class="side-nav-panels-button btn-xs btn-white"><i class="fa fa-ellipsis-h"></i></a>
+        <div class="collapsible-body" style="display: none;">
+            <p>{{$root.translateData["Choose investment type"]}}:</p>
+            <div class="row">
+                <div class="col-xs-3 icon" ng-class="{active : ($root.investmentChoice == 0 )}" ng-click=" $root.investment.selectInvestmentChoice(0)">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="Asset Preservation">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-university fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-xs-3 icon" ng-class="{active : ($root.investmentChoice == 1 )}" ng-click="$root.investment.selectInvestmentChoice(1)">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="Conservative">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-sun-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-xs-3 icon" ng-class="{active : ($root.investmentChoice == 2 )}" ng-click="$root.investment.selectInvestmentChoice(2)">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="Moderate">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-balance-scale fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-xs-3 icon" ng-class="{active : ($root.investmentChoice == 3 )}" ng-click="$root.investment.selectInvestmentChoice(3)">
+                    <span class="fa-stack fa-lg qs-btn btn-translate" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="" data-original-title-not-translate="Aggressive">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-bolt fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </li>  
+</ul>
+
+

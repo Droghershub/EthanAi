@@ -1,0 +1,32 @@
+﻿
+    <div class="row">
+        <div class="col-md-8">
+            <h6 class="text-blue">{{"Illiquid Asset" | translate}}</h6>
+            <p class="desc">{{'Hover your pointer on the graph below to view details' | translate}}.</p>
+            <treasure-overlay-spinner active='spinner.active'> 
+                <canvas id="illiquid-chart" class="chart chart-bar" chart-type="illiquidChart.type" data="illiquidChart.data" labels="illiquidChart.labels" options="illiquidChart.options"
+                        series="illiquidChart.series" colours="illiquidChart.colours"
+                        isneedrender="illiquidChart.isneedrender"></canvas>
+                <div class="row">
+                    <div class="col-md-3">&nbsp;</div>
+                    <div class="col-md-6">
+                        <table class="legends">
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#00c851;border-color:#007e33"></div>
+                                    {{"Asset Value" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#33b5e5;border-color:#0099cc"></div>
+                                    {{"Net Equity" | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </treasure-overlay-spinner>
+</div>
+        <div class="col-md-4"></div>
+    </div> <!-- .row -->

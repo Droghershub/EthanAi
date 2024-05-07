@@ -1,0 +1,608 @@
+﻿<div class="container-fluid parameter_page">
+    <script type="text/ng-template" id="param-modal-form">
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="parameter_name">{{"Parameter name" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="parameter_name" placeholder="{{'Parameter format number' | translate}}" class="form-control" name="parameter_name" ng-model="selectedParameter.name" required duplicate-except="{key: 'id', value:selectedParameter.id}" duplicate="name" duplicate-list="listParameter"
+                       ng-disabled="selectedParameter.showType == null || selectedParameter.showType == 1 || (selectedParameter.showType == 2 && selectedParameter.id != null)" />
+                <div class="bto-error" ng-messages="paramModalForm.parameter_name.$error" ng-if="paramModalForm.parameter_name.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Parameter name is duplicated" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="parameter_form.parameter_name.$error" ng-if="parameter_form.parameter_name.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Parameter name is duplicated" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="description">{{"Parameter description" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="description" placeholder="{{'new parameter description' | translate}}" class="form-control" name="description" ng-model="selectedParameter.description" required ng-disabled="selectedParameter.showType == 1" />
+                <div class="bto-error" ng-messages="paramModalForm.description.$error" ng-if="paramModalForm.description.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter description is requried" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="parameter_form.description.$error" ng-if="parameter_form.description.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter description is requried" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row checkbox" ng-if="false">
+            <label class="col-sm-4" for="editable">&nbsp;</label>
+            <div class="col-sm-8" style="padding-left: 3em;">
+                <input id="editable" type="checkbox" name="editable" ng-model="selectedParameter.editable" ng-disabled="selectedParameter.showType == 1" />
+                {{"Parameter can edit" | translate}}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="parameter_type">{{"Parameter type" | translate}}</label>
+            <div class="col-sm-8">
+                <select id="parameter_type" class="form-control" name="parameter_type" ng-model="selectedParameter.type" ng-options="item.id as $root.translate(item.name) for item in listType" required ng-disabled="selectedParameter.showType == 1 || selectedParameter.showType == 2">
+                    <option value="">{{"--Select Type--" | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" ng-if="selectedParameter.type== 2">
+            <label class="control-label col-sm-4" for="parameter_method">{{"Method" | translate}}</label>
+            <div class="col-sm-8">
+                <select id="parameter_method" class="form-control" name="parameter_method" ng-model="selectedParameter.method" required ng-disabled="selectedParameter.showType == 1">
+                    <option value="">{{"--Select method--" | translate}}</option>
+                    <option value="sum">{{"Sum" | translate}}</option>
+                    <option value="average">{{"Average" | translate}}</option>
+                    <option value="median">{{"Median" | translate}}</option>
+                    <option value="min">{{"Min" | translate}}</option>
+                    <option value="max">{{"Max" | translate}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row list_table" ng-if="selectedParameter.type == 1 && selectedParameter.showType != 0">
+            <label class="control-label col-sm-4">{{"List value" | translate}}</label>
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{'No.' | translate}}</th>
+                            <th>{{'Is default?' | translate}}</th>
+                            <th>{{'Value' | translate}}</th>
+                            <th>{{'Name' | translate}}</th>
+                            <th ng-if="selectedParameter != null && selectedParameter.showType == 2">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="item in selectedParameter.listItems">
+                            <td class="td_middle" ng-init="item.order=$index+1;">{{$index + 1}}</td>
+                            <td>
+                                <div class="radio">
+                                    <label><input type="radio" name="default_value" ng-model="selectedParameter.default_value" value="{{item.value}}" ng-disabled="selectedParameter.showType == 1">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="form-control" ng-model="item.value" required ng-disabled="selectedParameter.showType == 1" duplicate-except="{key: 'order', value:$index+1}" duplicate="value" duplicate-list="selectedParameter.listItems" />
+                            </td>
+                            <td>
+                                <input class="form-control" ng-model="item.name" ng-disabled="selectedParameter.showType == 1" required />
+                            </td>
+                            <td ng-if="selectedParameter != null && selectedParameter.showType == 2" class="td_middle">
+                                <a class="btn btn-danger btn-xs" ng-click="removeItemListParameter(item)" ng-disabled="selectedParameter.showType == 1">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot ng-if="selectedParameter != null && selectedParameter.showType == 2">
+                        <tr>
+                            <td colspan="4">
+                                <div class="pull-right">
+                                    <button type="button" class="btn" ng-click="addNewVauleOfListParameter();" ng-disabled="selectedParameter.showType == 1">{{'New value' | translate}}</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        @*<div class="form-group row" ng-if="selectedParameter.type == 0">
+                <label class="control-label col-sm-4" for="parameter_type">{{"Parameter short name" | translate}}</label>
+                <div class="col-sm-8">
+                    <input id="short_name" placeholder="{{'new parameter short name' | translate}}" class="form-control" name="short_name" ng-model="selectedParameter.short_name" required ng-disabled="selectedParameter.showType == 1" />
+                    <div class="bto-error" ng-messages="paramModalForm.short_name.$error" ng-if="paramModalForm.short_name.$dirty">
+                        <div ng-message="required">
+                            {{"Parameter short name is requried" | translate}}
+                        </div>
+                    </div>
+                    <div class="bto-error" ng-messages="parameter_form.short_name.$error" ng-if="parameter_form.short_name.$dirty">
+                        <div ng-message="required">
+                            {{"Parameter short name is requried" | translate}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>*@
+        <div class="form-group row" ng-if="selectedParameter.type == 0">
+            <label class="control-label col-sm-4" for="default_value">{{"Parameter default value" | translate}}</label>
+            <div class="col-sm-8">
+
+                <input id="default_value" type="number" class="form-control" name="default_value" required is-number max-min-value="{min:selectedParameter.min_value, max:selectedParameter.max_value}" ng-model="selectedParameter.default_value" ng-disabled="selectedParameter.showType == 1" />
+                <div class="bto-error" ng-messages="paramModalForm.default_value.$error" ng-if="paramModalForm.default_value.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter default value is required" | translate}}
+                    </div>
+                    <div ng-message="maxMinValue">
+                        {{"Parameter default value is in min and max range" | translate}}
+                    </div>
+                    <div ng-message="isNumber">
+                        {{"Not correct format" | translate}}
+                    </div>
+                </div>
+
+                <div class="bto-error" ng-messages="parameter_form.default_value.$error" ng-if="parameter_form.default_value.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter default value is required" | translate}}
+                    </div>
+                    <div ng-message="maxMinValue">
+                        {{"Parameter default value is in min and max range" | translate}}
+                    </div>
+                    <div ng-message="isNumber">
+                        {{"Not correct format" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="selectedParameter.type == 0">
+            <label class="control-label col-sm-4">{{"Parameter range" | translate}}</label>
+            <div class="col-sm-8 form-inline col-md-8">
+                <div class="row ">
+                    <div class="col-md-offset-1 col-sm-offset-1">
+                        <div class="form-group">
+                            <label for="min">{{'Min' | translate}}</label>
+                            <input type="number" class="form-control max-min-value" name="min_value" is-number-or-empty less-than="selectedParameter.max_value" less-than-other="selectedParameter.default_value" ng-model="selectedParameter.min_value" id="min" ng-disabled="selectedParameter.showType == 1" />
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-md-offset-1 col-sm-offset-1">
+                        <div class="form-group">
+                            <label for="max">{{'Max' | translate}}</label>
+                            <input type="number" class="form-control max-min-value" name="max_value" is-number-or-empty greater-than="selectedParameter.min_value" greater-than-other="selectedParameter.default_value" ng-model="selectedParameter.max_value" id="max" ng-disabled="selectedParameter.showType == 1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="selectedParameter.type == 0" style="padding-top: 7px;">
+            <label class="control-label col-sm-4" for="default_value">{{"Parameter format number" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="format_number" type="text" class="form-control" name="format_number" ng-model="selectedParameter.format_number" ng-disabled="selectedParameter.showType == 1" />
+                <div class="bto-error" ng-messages="paramModalForm.format_number.$error" ng-if="paramModalForm.format_number.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter format number is required" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="parameter_form.format_number.$error" ng-if="parameter_form.format_number.$dirty">
+                    <div ng-message="required">
+                        {{"Parameter format number is required" | translate}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+    <div class="row">
+        <div class="col-sm-5 col-xs-5">
+            <div class="form-group">
+                <label for="environment">{{'Environment' | translate}}</label>
+                <select id="environment" class="form-control" name="environment" ng-model="selectedEnvironment.name" ng-change="onChangeEnvironment();">
+                    <option ng-repeat="item in listEnvironment" label="{{item}}">{{item}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-5 col-xs-5">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="version">{{'Version' | translate}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <select id="version" class="form-control" name="version" ng-model="selectedEnvironment.version" ng-change="onChangeVersion();">
+                            <option ng-repeat="item in listVersion" label="{{item}}">{{item}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" class="btn-default btn btn-primary" value="{{'clone' | translate}}" ng-click="cloneVersionCurrentVersion();" />
+                        <input type="button" class="btn-default btn btn-primary" value="{{'Import' | translate}}" ng-click="importRuleFileToCurrentVersion();" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="selectedEnvironment.version != ''" class="row">
+        <div class="col-sm-5 col-xs-5 parameter_list">
+            <div class="panel panel-default">
+                <div class="panel-heading" style=" margin-left:0px">
+                    <label>{{'List parameter' | translate}}</label>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="input-group">
+                            <input ng-model="searchByName.description" type="text" class="form-control" placeholder="{{'Search by name' | translate }}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">{{'Search' | translate}}</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <ul class="list-group" style="height: 500px; overflow:scroll;">
+                    <li ng-if="item.editable == true" class=" list-group-item parameter-list-item " ng-class="selectedParameter.id == item.id ? 'list-group-item-info': ''" ng-repeat="item in listParameter | filter:searchByName" ng-click="onSelectParameter(item)">
+                        <span class="badge">{{ typeToName(item.type) | translate}}</span>
+                        {{item.description | translate}}
+                    </li>
+                    <li ng-if="item.editable != true" class=" list-group-item parameter-list-item no-editable-class" ng-class="selectedParameter.id == item.id ? 'list-group-item-info': ''" ng-repeat="item in listParameter | filter:searchByName" ng-click="onSelectParameter(item)">
+                        <span class="badge">{{ typeToName(item.type) | translate}}</span>
+                        {{item.description | translate}}
+                    </li>
+                </ul>
+                <div class="panel-heading" style=" margin-left:0px">
+                    <button type="button" class="btn btn-primary" ng-click="addNewParameter();">{{'Add' | translate}}</button>
+                    <iamaboss ng-if="selectedParameter != null && selectedParameter.id != null && selectedParameter.deleteable == true ">
+                        <button type="button" class="btn btn-primary" ng-click="deleteParameter();">{{'Delete' | translate}}</button>
+                    </iamaboss>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-7 col-xs-7" ng-show="selectedParameter != null && selectedParameter.showType != 0">
+            <form name="parameter_form">
+                <treasure-overlay-spinner active='spinner.active'>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label>
+                                {{'Detail of parameter' | translate}}
+                            </label>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-include="'param-modal-form'"></div>
+                            <div class="row" ng-if="selectedParameter.type == 2">
+                                <script type="text/ng-template" id="nodes_renderer.html">
+                                    <div ui-tree-handle class="tree-node tree-node-content" ng-class="node.is_error? 'tree-node-error': ''">
+                                        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggleNode(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
+                                        {{node.description}}<span ng-if="node.method != null && node.method!= ''"> ({{node.method}})</span>
+                                        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-if="node.deleteable && selectedParameter.showType == 2 && this.depth() != 1" ng-click="removeNodeOnTree(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-if="selectedParameter.showType == 2 &&  node.type == 2" ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-if="selectedParameter.showType == 2 && node.level != 0" ng-click="edit(this)"><span class="glyphicon glyphicon-edit"></span></a>
+                                    </div>
+                                    <ol ui-tree-nodes ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                                        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                                        </li>
+                                    </ol>
+                                </script>
+                                <div ui-tree id="tree-root" data-drag-enabled="selectedParameter.showType==2">
+                                    <ol ui-tree-nodes ng-model="selectedParameter.nodes" data-nodrop-enabled="true">
+                                        <li ng-repeat="node in selectedParameter.nodes" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer clearfix" ng-if="selectedParameter != null && selectedParameter.showType == 2">
+                            <div class="pull-right">
+                                <button type="button" class="btn" ng-click="cancelUpdateParameter();" ng-if="selectedParameter.id != null">{{'Cancel' | translate}}</button>
+                                <button type="button" class="btn btn-primary" ng-disabled="parameter_form.$invalid" ng-click="updateParameter();">{{'Save' | translate}}</button>
+                            </div>
+                        </div>
+                        <div class="panel-footer clearfix" ng-if="selectedParameter != null && selectedParameter.editable == true && selectedParameter.showType == 1">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-primary" ng-click="enableEditParameter();">{{'Edit' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </treasure-overlay-spinner>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="parameterModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" ng-if="selectedParameter.id == null">{{'Add new parameter' | translate}}</h4>
+                    <h4 class="modal-title" ng-if="selectedParameter.id != null">{{'Edit parameter' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="paramModalForm">
+                        <div ng-include="'param-modal-form'"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="paramModalForm.$invalid" ng-click="saveNewParameter();"><span ng-if="selectedParameter.type==null || selectedParameter.type ==0">{{'Save' | translate}}</span><span ng-if="selectedParameter.type==1 || selectedParameter.type ==2">{{'OK' | translate}}</span></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="nodeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" ng-if="nodeData.isAdd">{{'Add new Node' | translate}}</h4>
+                    <h4 class="modal-title" ng-if="nodeData.isEdit">{{'Edit node' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="nodeModalForm">
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4" for="node_name">{{"Node name" | translate}}</label>
+                            <div class="col-sm-8">
+                                <input id="node_name" class="form-control" name="node_name" ng-model="nodeData.name" required duplicate-node="selectedParameter" ng-disabled="nodeData.isEdit" />
+                                <div class="bto-error" ng-messages="nodeModalForm.node_name.$error" ng-if="nodeModalForm.node_name.$dirty">
+                                    <div ng-message="required">
+                                        {{"Node name is requried" | translate}}
+                                    </div>
+                                    <div ng-message="duplicateNode">
+                                        {{"Node name is duplicate" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4" for="node_description">{{"Node description" | translate}}</label>
+                            <div class="col-sm-8">
+                                <input id="node_description" class="form-control" name="node_description" ng-model="nodeData.description" required ng-disabled="!nodeData.isEdit && !nodeData.isAdd" />
+                                <div class="bto-error" ng-messages="nodeModalForm.node_description.$error" ng-if="nodeModalForm.node_description.$dirty">
+                                    <div ng-message="required">
+                                        {{"Node description is requried" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row checkbox">
+                            <label class="col-sm-4" for="node_is_leaf">&nbsp;</label>
+                            <div class="col-sm-8" style="padding-left: 3em;">
+                                <input id="node_is_leaf" type="checkbox" name="node_is_leaf" ng-model="nodeData.is_leaf" />
+                                {{"Is Leaf" | translate}}
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-if="!nodeData.is_leaf">
+                            <label class="control-label col-sm-4" for="node_method">{{"Node method" | translate}}</label>
+                            <div class="col-sm-8">
+                                <select id="node_method" class="form-control" name="node_type" ng-model="nodeData.method" required ng-disabled="!nodeData.isEdit && !nodeData.isAdd">
+                                    <option value="">{{"--Select method--" | translate}}</option>
+                                    <option value="sum">{{"Sum" | translate}}</option>
+                                    <option value="average">{{"Average" | translate}}</option>
+                                    <option value="median">{{"Median" | translate}}</option>
+                                    <option value="min">{{"Min" | translate}}</option>
+                                    <option value="max">{{"Max" | translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row checkbox" ng-if="nodeData.is_formula">
+                            <label class="control-label col-sm-4" for="node_is_choose_formula"></label>
+                            <div class="col-sm-8" style="padding-left: 3em;">
+                                <input type="checkbox" id="node_is_choose_formula" name="node_is_choose_formula" ng-model="nodeData.is_choose_formula" />
+                                {{"Get value from engine" | translate}}
+                            </div>
+                        </div>
+                        <div ng-if="!nodeData.is_formula || (nodeData.is_formula && !nodeData.is_choose_formula)">
+                            <div class="form-group row" ng-if="nodeData.is_leaf">
+                                <label class="control-label col-sm-4" for="node_default_value">{{"Node default value" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="node_default_value" type="number" class="form-control" name="node_default_value" max-min-value="{min:nodeData.min_value, max:nodeData.max_value}" ng-model="nodeData.default_value" required ng-disabled="!nodeData.isEdit && !nodeData.isAdd" />
+                                    <div class="bto-error" ng-messages="nodeModalForm.node_default_value.$error" ng-if="nodeModalForm.node_default_value.$dirty">
+                                        <div ng-message="required">
+                                            {{"Node default value is required" | translate}}
+                                        </div>
+                                        <div ng-message="maxMinValue">
+                                            {{"Node default value is in min and max range" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" ng-if="nodeData.is_leaf">
+                                <label class="control-label col-sm-4" for="node_min_value">{{"Node min value" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="node_min_value" type="number" class="form-control" name="node_min_value" less-than="nodeData.max_value" less-than-other="nodeData.default_value" ng-model="nodeData.min_value" ng-disabled="!nodeData.isEdit && !nodeData.isAdd" />
+                                    <div class="bto-error" ng-messages="nodeModalForm.node_min_value.$error" ng-if="nodeModalForm.node_min_value.$dirty">
+                                        <div ng-message="required">
+                                            {{"Node min value is required" | translate}}
+                                        </div>
+                                        <div ng-message="lessThan">
+                                            {{"Node min value is less than max value" | translate}}
+                                        </div>
+                                        <div ng-message="lessThanOther">
+                                            {{"Node min value is less than default value" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" ng-if="nodeData.is_leaf">
+                                <label class="control-label col-sm-4" for="node_max_value">{{"Node max value" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="node_max_value" type="number" class="form-control" name="node_max_value" greater-than="nodeData.min_value" greater-than-other="nodeData.default_value" ng-model="nodeData.max_value" ng-disabled="!nodeData.isEdit && !nodeData.isAdd" />
+                                    <div class="bto-error" ng-messages="nodeModalForm.node_max_value.$error" ng-if="nodeModalForm.node_max_value.$dirty">
+                                        <div ng-message="required">
+                                            {{"Node max value is required" | translate}}
+                                        </div>
+                                        <div ng-message="greaterThan">
+                                            {{"Node max value is greater than min value" | translate}}
+                                        </div>
+                                        <div ng-message="greaterThanOther">
+                                            {{"Node max value is greater than default value" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" ng-if="nodeData.is_leaf">
+                                <label class="control-label col-sm-4" for="node_format_number">{{"Node format number" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="node_format_number" type="text" class="form-control" name="node_format_number" ng-model="nodeData.format_number" ng-disabled="!nodeData.isEdit && !nodeData.isAdd" />
+                                    <div class="bto-error" ng-messages="nodeModalForm.node_format_number.$error" ng-if="nodeModalForm.node_format_number.$dirty">
+                                        <div ng-message="required">
+                                            {{"Node format number is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" ng-if="nodeData.is_leaf">
+                                <label class="control-label col-sm-4" for="node_format_number">{{"Is Summable" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" name="node_is_leaf" ng-model="nodeData.isSummable" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="nodeModalForm.$invalid" ng-if="nodeData.isAdd" ng-click="saveNewNode();">{{'Save' | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="nodeModalForm.$invalid" ng-if="nodeData.isEdit" ng-click="updateNode();">{{'Save' | translate}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="cloneVersionModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{'Clone version' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <treasure-overlay-spinner active='spinner.active'>
+                    <form name="cloneVersionModelForm">
+                        <div class="form-group row" ng-if="errorCloneProductVersion == true">
+
+                            <div class="col-md-10 col-sm-10 col-xs-10 bto-error" style="color:red !important">
+                                {{'Name and version is duplicate!' | translate}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4" for="environment_name">{{"Environment name" | translate}}</label>
+                            <div class="col-sm-8">
+                                <input id="environment_name" placeholder="{{'Parameter format number' | translate}}" class="form-control"
+                                       name="environment_name"
+                                       ng-model="environmentVersion.name" required />
+
+                                <div class="bto-error" ng-messages="cloneVersionModelForm.environment_name.$error" ng-if="cloneVersionModelForm.environment_name.$dirty">
+                                    <div ng-message="required">
+                                        {{"Environment name is requried" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4 " for="version_name">{{"Version Name" | translate}}</label>
+                            <div class=" col-sm-8">
+                                <input id="version_name" placeholder="{{'Version Name' | translate}}" class=" form-control"
+                                       name="version_name"
+                                       ng-model="environmentVersion.version"
+                                       required />
+                                <div class="bto-error" ng-messages="cloneVersionModelForm.version_name.$error" ng-if="cloneVersionModelForm.version_name.$dirty">
+                                    <div ng-message="required">{{"Version name is required" | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </treasure-overlay-spinner>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeCloneFrom" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-disabled="cloneVersionModelForm.$invalid" ng-click="saveCloneNewVersion();">
+                    <span>{{'Save' | translate}}</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="importRuleFile" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{'Import from Rule' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <treasure-overlay-spinner active='spinner.active'>
+                    <form name="importRuleFileForm">
+                        <div class="form-group row" ng-if="errorCloneProductVersion == true">
+
+                            <div class="col-md-10 col-sm-10 col-xs-10 bto-error" style="color:red !important">
+                                {{'Name and version is duplicate!' | translate}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4" for="environment_name">{{"Environment name" | translate}}</label>
+                            <div class="col-sm-8">
+                                <input id="environment_name" placeholder="{{'Parameter format number' | translate}}" class="form-control"
+                                       name="environment_name"
+                                       ng-model="environmentVersion.name" required disabled />
+
+                                <div class="bto-error" ng-messages="cloneVersionModelForm.environment_name.$error" ng-if="cloneVersionModelForm.environment_name.$dirty">
+                                    <div ng-message="required">
+                                        {{"Environment name is requried" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4 " for="version_name">{{"Version Name" | translate}}</label>
+                            <div class=" col-sm-8">
+                                <input id="version_name" placeholder="{{'Version Name' | translate}}" class=" form-control"
+                                       name="version_name"
+                                       ng-model="environmentVersion.version"
+                                       required disabled />
+                                <div class="bto-error" ng-messages="cloneVersionModelForm.version_name.$error" ng-if="cloneVersionModelForm.version_name.$dirty">
+                                    <div ng-message="required">{{"Version name is required" | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </treasure-overlay-spinner>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeImportRuleForm" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-disabled="cloneVersionModelForm.$invalid" ng-click="saveRuleFileToCurrentVersion();">
+                    <span>{{'Import' | translate}}</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

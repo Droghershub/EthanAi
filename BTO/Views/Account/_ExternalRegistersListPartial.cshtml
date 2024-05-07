@@ -1,0 +1,27 @@
+﻿@model BTO.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+           
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <div>
+                    <br/>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" style="margin-bottom:9px;" class="btn btn-block btn-social btn-@p.AuthenticationType.ToString().ToLower()" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="{{'Register with' | translate}} @p.Caption">
+                            <span class="fa fa-@p.AuthenticationType.ToString().ToLower()"></span>{{'Register with' | translate}} @p.AuthenticationType
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    }
+}

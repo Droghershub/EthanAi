@@ -1,0 +1,93 @@
+﻿
+    <div class="row">
+        <div class="col-md-4">
+            <h6 class="text-blue">{{"Current" | translate}}</h6>
+            <p class="desc">{{'Move the sliders below to reflect your current monthly income and expenses.' | translate}}</p>
+            <div>&nbsp;</div>
+            <div>
+                <md-slider id="incomeExpense" md-discrete config="$root.dynamicConponent.incomeExpense.config" is-can-reach-max="true" is-can-change-max="true"
+                           model-data="$root.PersonaPlan.expense_today" is-show-percent="false" min="0" max="$root.PersonaPlan.income_today" change-value="$root.actionService.onChangeSlider('incomeExpense');" end-change-value="$root.actionService.onEndChangeSlider('incomeExpense');"
+                           bto-disabled-event="$root.functionAccess.CHANGE_INCOME_TODAY != 1"></md-slider>
+            </div>
+            <table class="three-cols">
+                <tr>
+                    <td style="width:40%;">{{'Current Income' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td style="width:40%;">
+                        <input type="text" id="com_current_income" ng-currency currency-symbol="" ng-model="PersonaPlan.income_today" ng-disabled="$root.functionAccess.CHANGE_INCOME_TODAY != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_current_income')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'Current Expenses' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td>
+                        <input type="text" id="com_current_expense" ng-currency currency-symbol="" ng-model="PersonaPlan.expense_today" ng-disabled="$root.functionAccess.CHANGE_EXPENSE_TODAY != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_current_expense')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'Current Savings' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td>
+                        <input type="text" id="com_current_saving" ng-currency currency-symbol="" ng-model="PersonaPlan.current_saving" ng-disabled="$root.functionAccess.CHANGE_CURRENT_SAVING != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_current_saving')">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h6 class="text-green">{{'Investments' | translate}}</h6>
+            <p class="desc">{{'Choose the appropriate risk(%) based on your investments using the slider below.' | translate}}</p>
+            <div>&nbsp;</div>
+            <div>
+                <md-slider id="risk" md-discrete config="$root.dynamicConponent.risk.config"
+                           model-data="$root.convertDataOfPersonalPlan.risk" is-show-percent="true" min="$root.dynamicConponent.risk.config.min" max="$root.dynamicConponent.risk.config.max" change-value="$root.actionService.onChangeSlider('risk');" end-change-value="$root.actionService.onEndChangeSlider('risk');" special-values="$root.dynamicConponent.risk.config.specialValues"
+                            bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"></md-slider>
+            </div>
+            <table class="three-cols">
+                <tr>
+                    <td style="width:60%;">{{'Investment Risk' | translate}}</td>
+                    <td class="right">%</td>
+                    <td>
+                        <input id="com_risk" type="text" ng-currency currency-symbol="" ng-model="$root.convertDataOfPersonalPlan.risk" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_risk')">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{'Expected Return' | translate}}</td>
+                    <td class="right">%</td>
+                    <td>
+                        <input id="com_risk_return" type="text" ng-currency currency-symbol="" ng-model="$root.convertDataOfPersonalPlan.risk_return" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_risk_return')">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h6 class="text-red">{{'Retirement' | translate}}</h6>
+            <p class="desc">{{'Move the sliders below to reflect your projected monthly expense after your retirement.' | translate}}</p>
+            <div>&nbsp;</div>
+            <div>
+                <md-slider id="incomeExpenseAtRetirement" md-discrete config="$root.dynamicConponent.incomeExpenseAtRetirement.config" is-can-reach-max="true" is-can-change-max="false" model-data="$root.PersonaPlan.expense_at_retirement" is-show-percent="false" min="0" max="$root.MainResult.social_security" change-value="$root.actionService.onChangeSlider('incomeExpenseAtRetirement');" end-change-value="$root.actionService.onEndChangeSlider('incomeExpenseAtRetirement');"
+                           bto-disabled-event="$root.functionAccess.CHANGE_EXPENSE_AT_RETIREMENT != 1"></md-slider>
+            </div>
+            <table class="three-cols">
+                <tr>
+                    <td style="width:40%;">{{'Projected Expenses' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td style="width:40%;"><input id="com_expense_at_retirement" type="text" ng-currency currency-symbol="" ng-model="$root.PersonaPlan.expense_at_retirement" ng-disabled="$root.functionAccess.CHANGE_EXPENSE_AT_RETIREMENT != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_expense_at_retirement')"></td>
+                </tr>
+                <tr>
+                    <td>{{'Projected Value' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td><input type="text" ng-currency currency-symbol="" ng-model="MainResult.project_value" disabled></td>
+                </tr>
+                <tr>
+                    <td>{{'Projected Value (min)' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td><input type="text" ng-currency currency-symbol="" ng-model="MainResult.saving_at_retirement" disabled></td>
+                </tr>
+                <tr>
+                    <td>{{'Projected Income' | translate}}</td>
+                    <td class="right">{{$root.PersonaPlan.currency_code}}</td>
+                    <td><input type="text" ng-currency currency-symbol="" ng-model="$root.MainResult.social_security" disabled></td>
+                </tr>
+            </table>
+        </div>
+    </div>

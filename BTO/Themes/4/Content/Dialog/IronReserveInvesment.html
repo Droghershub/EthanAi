@@ -1,0 +1,33 @@
+﻿<div id="IronReserveInvesment" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="form_dream" novalidate role="form" ng-init="$root.form_dream = this;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h5 class="modal-title ng-binding">{{$root.translateData["Month of recurring expenses"] }}</h5>
+                </div> 
+                <div class="modal-body"> 
+                    <div class="row portfolio_return">
+                        <div class="col-xs-2 desc portfolio_title" style="text-transform:uppercase;"> </div>
+                        <div class="col-xs-8 portfolio_slider input-field" style="padding-right: 28px;">
+                            <input id="contingency_ratio_box" name="contingency_ratio_box" type="text" ng-currency fraction="0" currency-symbol="" ng-model="$root.investmentCards[2].config.value" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.investment.onChangeMonthlyBox('contingency_household')">
+                            <label for="contingency_ratio_box" class="active">{{$root.translateData["Value"]}}</label>
+                        </div> 
+                    </div>
+                    <div class="row portfolio_return" id="dialog_ironReserve">
+                        <div class="col-xs-2 desc portfolio_title" style="text-transform:uppercase;"></div>
+                        <div class="col-xs-8 portfolio_slider">
+                            <md-slider id="riskReturn" md-discrete config="$root.investmentCards[2].config"
+                                       model-data="$root.investmentCards[2].config.value" is-show-percent="false" min="$root.investmentCards[2].config.min" max="$root.investmentCards[2].config.max" change-value="$root.investment.onChangeSlider('contingency_household');" end-change-value="$root.investment.onEndChangeSlider('contingency_household');" is-can-not-drag="false" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"
+                                       isnumber="true" ></md-slider>
+                        </div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn-signup" data-dismiss="modal" id="CancelSaveIron" >{{$root.translateData["Close"]}}</a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="form_dream.$invalid ||($root.isEditDream && !$root.EditdreamPermission)" id="SaveIronChange">{{$root.translateData["Save changes"]}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

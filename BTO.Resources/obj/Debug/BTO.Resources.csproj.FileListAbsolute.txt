@@ -1,0 +1,11 @@
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\bin\Debug\BTO.Resources.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\bin\Debug\BTO.Resources.pdb
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\bin\Debug\fr\BTO.Resources.resources.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.csproj.AssemblyReference.cache
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.Resource.resources
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.Resource.fr.resources
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.csproj.GenerateResource.cache
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.csproj.CoreCompileInputs.cache
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\fr\BTO.Resources.resources.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Resources\obj\Debug\BTO.Resources.pdb

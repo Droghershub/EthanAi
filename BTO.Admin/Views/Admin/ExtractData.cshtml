@@ -1,0 +1,172 @@
+﻿<div class="container-fluid manage_user_page">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{'Report' | translate}}</div>
+        <div class="panel-body"> 
+            <div class="row">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="panel panel-info"> 
+                        <div class="panel-heading"> 
+                            <h3 class="panel-title">Usage section</h3> 
+                            </div> 
+                        <div class="panel-body"> 
+                            <div class="container">
+                                <div class="row"> 
+                                        <label class="col-sm-2 col-md-2 col-lg-2"> Start Date:</label>
+                                        <div class='col-sm-4 col-md-3 col-lg-3'>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='startDate'>
+                                                    <input type='text' id="txtstartDate" class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <label class="col-sm-2 col-md-2 col-lg-2"> To Date:</label>
+                                    <div class='col-sm-4 col-md-3 col-lg-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='endDate'>
+                                                <input type='text' id="txtendDate" class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </div>
+                                <button type="button" class="btn btn-primary btn-default" aria-label="Extract" title="Extract" ng-click="extractSection();" >
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Extract
+                                </button>
+                                <button ng-if="false" type="button" class="btn btn-primary btn-default" aria-label="Extract" title="Extract" ng-click="extractCsvFileSection();">
+                                    <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download(csv file)
+                                </button>
+                                <h4>{{ LinkDownloadInYourEmail | translate}}</h4>
+                            </div> 
+                            <treasure-overlay-spinner active='spinner.active'> 
+                                <table ng-if="false"  st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th st-sort="UserId">UserId</th>
+                                            <th st-sort="Email">{{"Email" | translate}}</th>
+                                            <th st-sort="IP">IP</th>
+                                            <th st-sort="Name">{{"Name" | translate}}</th>
+                                            <th st-sort="UserAgent">{{"UserAgent" | translate}}</th>
+                                            <th st-sort="DateTime">{{"DateTime" | translate}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th>
+                                                <input st-search="Email" placeholder="{{'Search email' | translate}}" class="input-sm form-control" type="text" />
+                                            </th>
+                                            <th>
+                                                <input st-search="IP" placeholder="{{'Search IP' | translate}}" class="input-sm form-control" type="text" />
+                                            </th>
+                                            <th>
+                                                <input st-search="Name" placeholder="{{'Search name' | translate}}" class="input-sm form-control" type="text" />
+                                            </th>
+                                            <th>
+                                           </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr st-select-row="row" st-select-mode="single" ng-repeat="row in displayedCollection" ng-dblclick="LoadUnitOfWork()">
+
+                                            <td>{{row.UserId}}</td>
+                                            <td>{{row.Email}}</td>
+                                            <td>{{row.IP}}</td>
+                                            <td>{{row.Name }}</td>
+                                            <td>{{row.UserAgent }}</td>
+                                            <td>{{row.DateTime | date:'yyyy-MM-dd HH:mm'}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr> 
+                                            <td colspan="5" class="text-center">
+                                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table> 
+                             
+                                    @*<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CloseSolution()">{{"Close" | translate}}</button>
+                                    <button type="button" class="btn btn-primary" ng-click="SaveUnitOfWork()" ng-if="$root.functionAccess.SAVE_SOLUTION ==1">{{"Save" | translate}}</button>
+                                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="LoadUnitOfWork()" ng-if="$root.functionAccess.LOAD_SOLUTION ==1">{{"Load" | translate}}</button>
+                                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="RemoveUnitWork()" ng-if="$root.functionAccess.DELETE_SOLUTION ==1">{{"Delete" | translate}}</button>
+                                    <button type="button" class="btn btn-primary isDisablebtn" ng-click="RenameUnitWork()" ng-if="$root.functionAccess.RENAME_SOLUTION ==1">{{"Rename" | translate}}</button>*@
+
+                            </treasure-overlay-spinner>
+
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Referal List</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container">
+                                <div class="row">
+                                    <label class="col-sm-2 col-md-2 col-lg-2"> Start Date:</label>
+                                    <div class='col-sm-4 col-md-3 col-lg-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='Referal_startDate'>
+                                                <input type='text' id="txtReferal_startDate" class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-2 col-md-2 col-lg-2"> To Date:</label>
+                                    <div class='col-sm-4 col-md-3 col-lg-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='Referal_endDate'>
+                                                <input type='text' id="txtReferal_endDate" class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <button type="button" class="btn btn-primary btn-default" aria-label="Referal List" title="Referal List" ng-click="extractReferalList();">
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Extract
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#startDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#endDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#Referal_startDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#Referal_endDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+    });
+</script>
+
+
+

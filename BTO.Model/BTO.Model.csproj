@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D2BBBD57-660F-4CB2-8643-B2D081E9D658}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTO.Model</RootNamespace>
+    <AssemblyName>BTO.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseResponse.cs" />
+    <Compile Include="Common\AuditableEntity.cs" />
+    <Compile Include="Common\FunctionPermission.cs" />
+    <Compile Include="Common\Entity.cs" />
+    <Compile Include="Common\IAuditableEntity.cs" />
+    <Compile Include="Common\IEntity.cs" />
+    <Compile Include="Common\IssuingAuthorityKey.cs" />
+    <Compile Include="Common\ScenarioType.cs" />
+    <Compile Include="Common\Tenant.cs" />
+    <Compile Include="Invitation.cs" />
+    <Compile Include="LifeEvent.cs" />
+    <Compile Include="Dream.cs" />
+    <Compile Include="DreamTypeConfig.cs" />
+    <Compile Include="DreamType.cs" />
+    <Compile Include="MainResult.cs" />
+    <Compile Include="NewsManagement\NewsUser.cs" />
+    <Compile Include="NewsManagement\NewsOrganizationUnit.cs" />
+    <Compile Include="NewsManagement\News.cs" />
+    <Compile Include="Persona.cs" />
+    <Compile Include="Portfolio\Portfolio.cs" />
+    <Compile Include="Portfolio\PortfolioSheet.cs" />
+    <Compile Include="Profile\Image.cs" />
+    <Compile Include="Rating\UserFeedback.cs" />
+    <Compile Include="Rating\UserRating.cs" />
+    <Compile Include="UserManagement\AspNetUserDTO.cs" />
+    <Compile Include="UserManagement\FunctionAccessRole.cs" />
+    <Compile Include="UserManagement\OrganizationUnitUser.cs" />
+    <Compile Include="UserManagement\OrganizationUnitRole.cs" />
+    <Compile Include="UserManagement\OrganizationUnit.cs" />
+    <Compile Include="Parameters\ListItems.cs" />
+    <Compile Include="Parameters\Parameter.cs" />
+    <Compile Include="Parameters\ProductVersion.cs" />
+    <Compile Include="Product\ProductFunction.cs" />
+    <Compile Include="Product\ProductPermission.cs" />
+    <Compile Include="Product\ProductPermissionType.cs" />
+    <Compile Include="Product\ProductVersion.cs" />
+    <Compile Include="Profile\UserClaims.cs" />
+    <Compile Include="Profile\AspNetUser.cs" />
+    <Compile Include="Profile\SessionModel.cs" />
+    <Compile Include="Profile\Tutorial.cs" />
+    <Compile Include="Profile\UserProfile.cs" />
+    <Compile Include="Profile\UserProfileDependent.cs" />
+    <Compile Include="Profile\UserTutorial.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BTOContext.cs" />
+    <Compile Include="PersonaPlan.cs" />
+    <Compile Include="Scenario.cs" />
+    <Compile Include="Sharing\Member.cs" />
+    <Compile Include="Sharing\Group.cs" />
+    <Compile Include="Sharing\Connection.cs" />
+    <Compile Include="Solution.cs" />
+    <Compile Include="Tracking\TrackChange.cs" />
+    <Compile Include="Tracking\UserSession.cs" />
+    <Compile Include="Tracking\ClientProfile.cs" />
+    <Compile Include="Tracking\ClientProfileModel.cs" />
+    <Compile Include="Tracking\LogException.cs" />
+    <Compile Include="Tracking\PersonalPlanModel.cs" />
+    <Compile Include="Tracking\PersonalPlanTracking.cs" />
+    <Compile Include="UserManagement\FunctionAccess.cs" />
+    <Compile Include="UserManagement\RoleDTO.cs" />
+    <Compile Include="UserManagement\Role.cs" />
+    <Compile Include="UserManagement\RolePermission.cs" />
+    <Compile Include="Payment.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tracking\Database\CreateTrackingDataBase.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

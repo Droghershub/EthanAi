@@ -1,0 +1,32 @@
+﻿
+    <div class="row">
+        <div class="col-md-12">
+            <h6 class="text-blue">{{"Sharing Session" | translate}}</h6>
+            <p class="desc">{{"Type your message below and start sharing." | translate}}</p>
+            <form class="col-md-8">
+                <div class="row">
+                    <div class="input-field col-md-12">
+                        <textarea id="mail_share" class="materialize-textarea" ng-disabled="$root.sharingService.checkIsSharing()"></textarea>
+                        <label for="sharing">{{"Email" | translate}}</label>
+                        <button id="invite_share" type="button" class="btn btn-primary waves-effect" ng-disabled="$root.sharingService.checkDisableInvite()">{{"Invite" | translate}}</button>
+                        <button id="begin_share" type="button" class="btn btn-primary waves-effect" ng-disabled="$root.viewers.length == 0 || $root.sharingService.checkIsSharing()">{{"Begin" | translate}}</button>
+                        <table class="table" ng-hide="$root.viewers.length == 0">
+                            <thead>
+                                <tr>
+                                    <th>{{"Emails accepted" | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="viewer in viewers">
+                                <td>{{viewer}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<script>
+    $(function () {
+        angular.element(document.body).injector().get('sharingService').initSharingOnTabSharing();       
+    });
+</script>

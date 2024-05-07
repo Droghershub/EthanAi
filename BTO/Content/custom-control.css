@@ -1,0 +1,117 @@
+﻿@media(min-width:768px) {
+}
+/*
+    Income column
+*/
+.custom-control {
+    width: 50px;
+    height: 320px;
+}
+
+
+@media(min-width: 768px) {
+    .income {
+        padding-top: 32px;
+    }
+}
+
+
+.top-content-income {
+    background-color: #5bc0de;
+    border-color: #28a4c9;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-align: center;
+    width: 50px;
+    height: 80px;
+    cursor: row-resize;
+}
+
+.bottom-content-income {
+    background-color: #428bca;
+    border-color: #428bca;
+    background-color: #428bca;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    width: 50px;
+    height: 200px;
+    cursor: row-resize;
+}
+
+    .bottom-content-income p {
+        top: 50%;
+        position: absolute;
+        margin-left: 20%;
+        cursor: row-resize;
+    }
+
+.content-resizer-income {
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    margin-top: -200px;
+    cursor: row-resize;
+}
+
+.text-middle {
+    margin-left: auto;
+    margin-right: auto;
+    cursor: row-resize;
+}
+
+/*
+    Retirement column
+*/
+
+.top-content-retirement {
+    /*background-image: linear-gradient(to bottom,#BFFF00 0,#2aabd2 100%);*/
+    border-color: #b3d54d;
+    background-color: #b3d54d;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-align: center;
+    width: 50px;
+    height: 80px;
+}
+
+.bottom-content-retirement {
+    background-image: linear-gradient(to bottom,#86B404 0,#86B404 100%);
+    border-color: #86B404;
+    background-color: #86B404;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    width: 50px;
+    height: 200px;
+}
+
+    .bottom-content-retirement p {
+        top: 50%;
+        position: absolute;
+        margin-left: 20%;
+    }
+
+.content-resizer-retirement {
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    margin-top: -200px;
+}
+
+.text-middle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-expenseAtRetirement {
+    border-color: #5cb85c;
+    background-color: #5cb85c;
+    border-radius: 6px 6px 6px 6px;
+    text-align: center;
+    width: 50px;
+    height: 280px;
+    cursor: row-resize;
+}

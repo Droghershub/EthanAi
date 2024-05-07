@@ -1,0 +1,431 @@
+﻿<div class="container-fluid manage_organization_unit">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Organization Unit' | translate}}</div>
+                <div class="panel-body manage_organization_unit_tree">
+                    <script type="text/ng-template" id="nodes_renderer.html">
+                        <div ui-tree-handle ng-class="{'selected_tree':ou_selectedOrganizationUnit.id==node.id }">
+                            <a class="btn btn-success btn-xs" data-nodrag ng-click="ou_toggle(this)" ng-if="node.childrens.length > 0">
+                                <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}">
+                                </span>
+                            </a>
+                            {{node.description}}
+                            <a class="pull-right btn btn-danger btn-xs" ng-if="!node.isFirstNode" data-nodrag ng-click="ou_remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="ou_newSubItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="ou_edit(node)"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" ng-if="!node.isFirstNode" data-nodrag ng-click="ou_clickAssignUser(node)"><span class="glyphicon glyphicon-user"></span></a>
+                        </div>
+                        <ol ui-tree-nodes="" ng-model="node.childrens" ng-class="{hidden: collapsed}">
+                            <li ng-repeat="node in node.childrens" ui-tree-node ng-include="'nodes_renderer.html'">
+                            </li>
+                        </ol>
+                    </script>
+                    <div>
+                        <div ui-tree="ou_treeOptions">
+                            <ol ui-tree-nodes="" ng-model="ou_data" id="tree-root">
+                                <li class="ng-scope angular-ui-tree-node" style="margin-bottom: 20px;">
+                                    <div class="ng-scope ng-binding angular-ui-tree-handle" style="border-width: 0px;background: transparent;">
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="ou_addTopNode()"><span class="glyphicon glyphicon-plus"></span></a>
+                                    </div>
+                                </li>
+                                <li ng-repeat="node in ou_data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7" ng-if="op_isShowAssignUser">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Assign user to Organization unit' | translate}}</div>
+                <div class="panel-body manage_organization_unit_body assign_user">
+                    <div>
+                        <div class="row assign-role">
+                            <div class="col-xs-5">
+                                <div class="list-group">
+                                    <div class="list-group-item active">
+                                        <table>
+                                            <tr>
+                                                <td ng-if="ou_availableUserTable.displayed.length > 0">
+                                                    <checkbox ng-model="ou_availableUserTable.isSelectedAllAvailable" ng-change="ou_AssignUserCheckAllAvailableUser()"></checkbox> &nbsp;
+                                                </td>
+                                                <td>
+                                                    {{'Available users' | translate}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div st-pipe="ou_availableUserTable.callServer" st-table="ou_availableUserTable.displayed">
+                                        <div class="list-group-item">
+                                            <input st-search="email" placeholder="{{'Search by email' | translate}}" ng-model="ou_availableUserTable.email" class="input-sm form-control" type="search" />
+                                        </div>
+                                        <div class="ou-role-list">
+                                            <div class="ou-role-item" ng-if="!ou_availableUserTable.isLoading" ng-repeat="userItem in ou_availableUserTable.displayed">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <checkbox ng-model="userItem.selected" class="pull-left"></checkbox>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                {{userItem.Email}}
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div ng-if="ou_availableUserTable.isLoading">
+                                                <div colspan="6" class="text-center">{{'Loading ... ' | translate}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item" ng-if="ou_availableUserTable.numberOfPages > 1">
+                                            <div ng-if="ou_availableUserTable.numberOfPages <= ou_availableUserTable.number">
+                                                <div class="text-center" st-pagination="" st-items-by-page="ou_availableUserTable.number"></div>
+                                            </div>
+                                            <div ng-if="ou_availableUserTable.numberOfPages > ou_availableUserTable.number">
+                                                <div class="text-center" st-items-by-page="ou_availableUserTable.number" st-pagination="" st-template="pagination.custom.html"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-2 v-center">
+                                <button class="btn btn-default center-block add" ng-click="ou_addUserToRole();"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                <div>&nbsp;</div>
+                                <button class="btn btn-default center-block remove" ng-click="ou_removeUserToRole();"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                            </div>
+
+                            <div class="col-xs-5">
+                                <div class="list-group">
+                                    <div class="list-group-item active">
+                                        <table>
+                                            <tr>
+                                                <td ng-if="ou_assignedUserTable.displayed.length > 0">
+                                                    <checkbox ng-model="ou_assignedUserTable.isSelectedAllAvailable" ng-change="ou_AssignUserCheckAssignedUser()"></checkbox> &nbsp;
+                                                </td>
+                                                <td>
+                                                    {{'Assigned users' | translate}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div st-pipe="ou_assignedUserTable.callServer" st-table="ou_assignedUserTable.displayed">
+                                        <div class="list-group-item">
+                                            <input st-search="email" placeholder="{{'Search by email' | translate}}" ng-model="ou_assignedUserTable.email" class="input-sm form-control" type="search" />
+                                        </div>
+
+                                        <div class="ou-role-list">
+                                            <div class="ou-role-item" ng-if="!ou_assignedUserTable.isLoading" ng-repeat="userItem in ou_assignedUserTable.displayed">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <checkbox ng-model="userItem.selected" class="pull-left"></checkbox>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-primary btn-xs" title="{{'Assign role to user' | translate}}" ng-click="ou_showRoleOfUser(userItem);"><i class="glyphicon glyphicon-edit"></i></button>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                &nbsp;{{userItem.Email}}
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div ng-if="ou_assignedUserTable.isLoading">
+                                                <div colspan="6" class="text-center">{{'Loading ... ' | translate}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item" ng-if="ou_assignedUserTable.numberOfPages > 1">
+                                            <div ng-if="ou_assignedUserTable.numberOfPages <= ou_assignedUserTable.number">
+                                                <div class="text-center" st-pagination="" st-items-by-page="ou_assignedUserTable.number"></div>
+                                            </div>
+                                            <div ng-if="ou_assignedUserTable.numberOfPages > ou_assignedUserTable.number">
+                                                <div class="text-center" st-items-by-page="ou_assignedUserTable.number" st-pagination="" st-template="pagination.custom.html"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7" ng-if="op_isShowDetail">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Organization unit detail' | translate}}</div>
+                <div class="panel-body manage_organization_unit_body">
+                    <div>
+                        <form name="editOrganizationUnitForm">
+                            <div ng-include="'ou-form-template'"></div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4">&nbsp;</label>
+                                <div class="col-sm-8">
+                                    <button type="button" class="btn btn-primary" ng-disabled="editOrganizationUnitForm.$invalid" ng-click="ou_updateOrganizationUnit()">
+                                        <span>{{'Save' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row" style="padding: 0.5em;">
+                            <ul class="nav nav-tabs nav-justified">
+                                <li ng-class="{'active':tabIndex==0}"><a ng-click="ou_changeTab(0)">{{'Default role' | translate}}</a></li>
+                                <li ng-class="{'active':tabIndex==1}"><a ng-click="ou_changeTab(1)">{{'Mandatory role' | translate}}</a></li>
+                                <li ng-class="{'active':tabIndex==2}"><a ng-click="ou_changeTab(2)">{{'Allowable role' | translate}}</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div ng-if="tabIndex==0">
+                                    <div ng-include="'ou-role-template'"></div>
+                                    <button type="button" class="btn btn-primary pull-right" ng-click="ou_saveRole()">
+                                        <span>{{'Save default role' | translate}}</span>
+                                    </button>
+                                </div>
+                                <div ng-if="tabIndex==1">
+                                    <div ng-include="'ou-role-template'"></div>
+                                    <button type="button" class="btn btn-primary pull-right" ng-click="ou_saveRole()">
+                                        <span>{{'Save mandatory role' | translate}}</span>
+                                    </button>
+                                </div>
+                                <div ng-if="tabIndex==2">
+                                    <div ng-include="'ou-role-template'"></div>
+
+                                    <button type="button" class="btn btn-primary pull-right" ng-click="ou_saveRole()">
+                                        <span>{{'Save allowable role' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="ou-role-template">
+        <div class="row assign-role">
+            <div class="col-xs-5">
+                <div class="list-group ">
+                    <div class="list-group-item active">
+                        <table>
+                            <tr>
+                                <td ng-if="availableRoles.length > 0">
+                                    <checkbox name="available-role" ng-model="isSelectedAllAvailableRole" ng-change="ou_CheckAllAvailableRole()"></checkbox>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    {{'Available roles' | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ou-role-list">
+                        <div class="ou-role-item" ng-repeat="roleItem in availableRoles">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <checkbox ng-model="roleItem.selected" class="pull-left"></checkbox>
+                                    </td>
+                                    <td nowrap="nowrap">
+                                        <b>
+                                            &nbsp;{{roleItem.description}}
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 v-center">
+                <button class="btn btn-default center-block add" ng-click="ou_addRole();"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                <div>&nbsp;</div>
+                <button class="btn btn-default center-block remove" ng-click="ou_removeRole();"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            </div>
+            <div class="col-xs-5">
+                <div class="list-group">
+                    <div class="list-group-item active">
+                        <table>
+                            <tr>
+                                <td ng-if="roleData.length > 0">
+                                    <checkbox name="selected-role" ng-model="isSelectedAllRole" ng-change="ou_CheckAllRole()"></checkbox>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    {{'Selected roles' | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ou-role-list">
+                        <div class="ou-role-item" ng-repeat="roleItem in roleData">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <checkbox ng-model="roleItem.selected" class="pull-left"></checkbox>
+                                    </td>
+                                    <td nowrap="nowrap">
+                                        <b>
+                                            &nbsp;{{roleItem.description}}
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="ou-form-template">
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="ou_name">{{"Organization unit name" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="ou_name" placeholder="{{'Organization unit name' | translate}}" class="form-control" name="ou_name" ng-model="ou_selectedOrganizationUnit.name" required duplicate-except="{key: 'id', value:ou_selectedOrganizationUnit.id}" duplicate="name" duplicate-list="ou_list" ng-change="changeRoleName();" />
+                <div class="bto-error" ng-messages="addOrganizationUnitForm.ou_name.$error" ng-if="addOrganizationUnitForm.ou_name.$dirty">
+                    <div ng-message="required">
+                        {{"Organization unit name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Organization unit is name duplicated" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="editOrganizationUnitForm.ou_name.$error" ng-if="editOrganizationUnitForm.ou_name.$dirty">
+                    <div ng-message="required">
+                        {{"Organization unit name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Organization unit is name duplicated" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="ou_description">{{"Organization unit description" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="ou_description" placeholder="{{'Organization unit description' | translate}}" class="form-control" name="ou_description" ng-model="ou_selectedOrganizationUnit.description" required ng-change="changeRoleDescription();" />
+                <div class="bto-error" ng-messages="addOrganizationUnitForm.ou_description.$error" ng-if="addOrganizationUnitForm.ou_description.$dirty">
+                    <div ng-message="required">
+                        {{"Organization unit description is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Organization unit description is duplicated" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="editOrganizationUnitForm.ou_description.$error" ng-if="editOrganizationUnitForm.ou_description.$dirty">
+                    <div ng-message="required">
+                        {{"Organization unit description is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Organization unit description is duplicated" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="environment_version">{{"Environment Version" | translate}}</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="environment_version" ng-model="ou_selectedOrganizationUnit.product_version_id" ng-options="item.id as item.name for item in listVersion"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="ui_version">{{"UI Version" | translate}}</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="ui_version" ng-model="ou_selectedOrganizationUnit.ui_version" ng-options="item.id as item.name for item in list_ui_version"></select>
+            </div>
+        </div>
+    </script>
+    <div id="organizationUnit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" ng-if="ou_selectedOrganizationUnit.id == null">{{'Add new organization unit' | translate}}</h4>
+                    <h4 class="modal-title" ng-if="ou_selectedOrganizationUnit.id != null">{{'Edit organization unit' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addOrganizationUnitForm">
+                        <div ng-include="'ou-form-template'"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="addOrganizationUnitForm.$invalid" ng-click="ou_saveNewOrganizationUnit();"><span>{{'Save' | translate}}</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="pagination.custom.html">
+        <nav ng-if="pages.length >= 2">
+            <ul class="pagination">
+                <li>
+                    <a ng-click="selectPage(1)">{{'First' | translate}}</a>
+                </li>
+                <li>
+                    <a ng-click="selectPage(currentPage - 1)">&lt;</a>
+                </li>
+                <li>
+                    <a><page-select></page-select> / {{numPages}}</a>
+                </li>
+                <li>
+                    <a ng-click="selectPage(currentPage + 1)">&gt;</a>
+                </li>
+                <li><a ng-click="selectPage(numPages)">{{'Last' | translate}}</a></li>
+            </ul>
+        </nav>
+    </script>
+    <div id="manageRoleModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{'Manage role of user' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="manageRoleModalForm">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li ng-class="{'active':tabIndex==0}"><a ng-click="ou_changeRoleOfTab(0)">{{'Default role' | translate}}</a></li>
+                            <li ng-class="{'active':tabIndex==2}"><a ng-click="ou_changeRoleOfTab(2)">{{'Allowable role' | translate}}</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div ng-if="tabIndex==0">
+                                <div ng-include="'ou-role-of-user-template'"></div>
+                            </div>
+                            <div ng-if="tabIndex==2">
+                                <div ng-include="'ou-role-of-user-template'"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="ou-role-of-user-template">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:30px;">{{"No." | translate}}</th>
+                        <th>{{"Role" | translate}}</th>
+                        <th class="text-right">{{"Action" | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody style="height: 300px;overflow-y: scroll;">
+                    <tr ng-repeat="roleItem in roleOfUserList">
+                        <td><label class="control-label">{{$index + 1}}</label></td>
+                        <td><label>{{roleItem.description}}</label></td>
+                        <td class="text-right">
+                            <a class="pull-right btn btn-danger btn-xs" ng-if="roleItem.action_type==1" ng-click="ou_removeRoleOfUser(roleItem)"><span class="glyphicon glyphicon-remove"></span>&nbsp;{{'Revoke' | translate}}</a>
+                            <a class="pull-right btn btn-primary btn-xs" ng-if="roleItem.action_type==0" ng-click="ou_addRoleOfUser(roleItem)"><span class="glyphicon glyphicon glyphicon-plus"></span>&nbsp;{{'Assign' | translate}}</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+</div>

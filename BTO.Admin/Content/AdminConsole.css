@@ -1,0 +1,10 @@
+﻿
+.empty{
+    border-style: solid;
+    border-color: rgba(255, 135, 66, 0.75);
+    background-color: rgba(252, 102, 2, 0.54);
+}
+
+.normal{
+    color: black;
+}

@@ -1,0 +1,15 @@
+﻿@model ModelStateDictionary
+
+@if (!Model.IsValid)
+{
+    <hr />
+    <div class="validation-summary-errors text-danger">
+        <ul>
+            @foreach (var modelError in
+                     Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+            {
+                <li>{{"@modelError.ErrorMessage" | translate}}</li>
+            }
+        </ul>
+    </div>
+}

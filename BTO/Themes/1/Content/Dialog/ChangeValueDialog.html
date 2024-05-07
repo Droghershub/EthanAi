@@ -1,0 +1,49 @@
+﻿<div id="changeValueDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">{{"Change expense at retirement" | translate}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">{{"Change current expense" | translate}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">{{"Change current income" | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form_progressbar" novalidate class="form-horizontal" role="form">
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">
+                        <label class="control-label col-sm-4" for="retirement_expense_input">{{"Expense at retirement" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input id="retirement_expense_input" class="form-control" name="retirement_expense" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.retirement_expense.$error">
+                                <div ng-message="required">{{"Expense at retirement is required" | translate}}</div>
+                                <div ng-message="min">{{"Expense must be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">
+                        <label class="control-label col-sm-4" for="current_expense_input">{{"Current expense" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input  id="current_expense_input" class="form-control" name="current_expense" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_expense.$error">
+                                <div ng-message="required">{{"Current expense is required" | translate}}</div>
+                                <div ng-message="min">{{"Current expense must be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">
+                        <label class="control-label col-sm-4" for="current_income_input">{{"Current income" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input  id="current_income_input" class="form-control" name="current_income" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_income.$error">
+                                <div ng-message="required">{{"Current income is required" | translate}}</div>
+                                <div ng-message="min">{{"Current income be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{"Close" | translate}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="$root.actionService.doActionUpdateValueOfPersonalPlanOnPopup();" ng-disabled="form_progressbar.$invalid">{{"Save changes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

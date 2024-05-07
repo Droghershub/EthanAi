@@ -1,0 +1,150 @@
+﻿@{Layout = null;}
+@using System.Text;
+@using Microsoft.Owin.Security
+@{string path = ViewBag.path;}
+<!DOCTYPE html>
+<html ng-app="btoApp" ng-cloak>
+<head>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <title ng-if="$root.scope">{{$root.scope.title | translate}}</title>
+    <title ng-if="!$root.scope">{{$root.translateData['ZYMI App']}}</title>
+    @Styles.Render("~/New/Content/css")
+    @Scripts.Render("~/New/bundles/jquery")
+    @Scripts.Render("~/New/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-touch.min.js"></script>
+
+    @*@Scripts.Render("~/New/bundles/angularjs")*@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/i18n/angular-locale_es-ar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-sortable/1.2.2/ng-sortable.min.js"></script>
+
+    
+    
+    @Scripts.Render("~/New/bundles/thirdparty")
+
+    @Styles.Render("~/New/themes")
+    <script src="~/Scripts/thirdparty/angular-material/gesture.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        var user_id_before_shared = '@ViewBag.user_id_before_shared';
+        var version_id_before_shared = '@ViewBag.version_id_before_shared';
+        var user_name_before_shared = '@ViewBag.user_name_before_shared';
+        var user_id = '@ViewBag.userId';
+        var version_id = '@ViewBag.version';
+        var product_version_id = '@ViewBag.product_version_id';
+        var user_name = '@ViewBag.username';
+        var isSharing = false;
+        var isPresenter = false;
+        var user_name_are_taking_overing = '@ViewBag.user_name_are_taking_overing';
+        var isPlayback = '@ViewBag.isPlayback';
+        var is_auto_register= '@ViewBag.is_auto_register';
+        var defaultCashFlow = null;
+        var cashFlow = @(string.IsNullOrEmpty(ViewBag.CashFlow) ? @Html.Raw("{\"income\":[], \"expense\":[]}") : @Html.Raw(ViewBag.CashFlow));
+        var isCanEditProfile  = '@ViewBag.isCanEditProfile';
+    </script>
+    <script type="text/javascript">
+        setTimeout(function(){
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='@ViewBag.CodeChatOnline';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+            })();
+        }, 15000);
+    </script>
+    <script src="/Scripts/newBto/btoApp.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/btoConfig.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/directive/directiveCommon.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/directive/directiveTable.js?@ViewBag.timestamp"></script>
+    <script src="~/Scripts/newBto/service/serviceManual.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceAccount.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceAction.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceChart.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/servicePersonalPlan.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/servicePlayback.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceProfile.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceRating.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceInvitation.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceUser.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceUtil.js?@ViewBag.timestamp"></script>
+    <script src="/Scripts/newBto/service/serviceStarting.js?@ViewBag.timestamp"></script>
+
+
+    <script src="/Themes/@ViewBag.version/Scripts/services/illiquidAssetService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/investmentService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/retirementLifeStyleService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/savingRateService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/parameterService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/timelineService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/smallTimelineService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/quickSettingService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/timelineFunctions.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/directive.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/script.js?@ViewBag.timestamp"></script>
+    @Scripts.Render("~/themes/4/javascript")
+    <script src="/Themes/@ViewBag.version/Scripts/services/serviceSharing.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/manageAvatarService.js?@ViewBag.timestamp"></script>
+    <script src="/Themes/@ViewBag.version/Scripts/services/summaryCardService.js?@ViewBag.timestamp"></script>
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="/Themes/@ViewBag.version/Content/bto.css?@ViewBag.timestamp" rel="stylesheet">
+    <link href="/Themes/@ViewBag.version/Content/custom.css?@ViewBag.timestamp" rel="stylesheet">
+    <link href="/Themes/@ViewBag.version/Content/timeline.css?@ViewBag.timestamp" rel="stylesheet">
+
+
+    @Styles.Render("~/themes/4/styles")
+</head>
+<body class="{{$root.browserClass}}" ng-init="$root.CashFlowRuleConfig = @ViewBag.CashFlowRuleConfig ; $root.IsAdmin = '@ViewBag.IsAdmin'; $root.user_name = '@ViewBag.username'; $root.user_name_before_shared = '@ViewBag.user_name_before_shared';$root.APIJavaEngine = '@ViewBag.APIJavaEngine';$root.Scheme = '@ViewBag.Scheme' ">
+    <div class="overlay"></div>
+    <input id="user_id" type="hidden" value="" />
+    @{
+        string htmlCode = File.ReadAllText(ViewBag.path);
+        htmlCode = htmlCode.Replace("{{TIMESTAMP}}", ViewBag.timestamp);
+        htmlCode = htmlCode.Replace("+", "%2b");
+    }
+    @Html.Raw(System.Web.HttpUtility.UrlDecode(htmlCode))
+
+    <div style="display:none;">
+        @{
+            var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+            if (loginProviders.Count() == 0)
+            {
+                <div></div>
+            }
+            else
+            {
+                using (Html.BeginForm("ExternalLogin", "Account", new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div id="socialLoginList">
+                        <div>
+                            @foreach (AuthenticationDescription p in loginProviders)
+                            {
+                                <button type="submit" class="icons-sm @p.AuthenticationType.ToString().ToLower()-ic" id="social_login_@p.AuthenticationType.ToString().ToLower()" name="provider" value="@p.AuthenticationType" title="{{$root.translateData['Sign in with']}} @p.Caption">
+                                    <span class="fa fa-@p.AuthenticationType.ToString().ToLower()"></span>
+                                </button>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+    @Scripts.Render("~/themes/4/amchartjs")
+</body>
+
+</html>

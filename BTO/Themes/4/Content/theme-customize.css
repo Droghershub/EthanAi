@@ -1,0 +1,27 @@
+﻿.true{
+    opacity:1;
+}
+.false {
+    opacity: 0.2;
+}
+
+.st-selected{
+    background: #216eff !important;
+    color: darkgray !important;
+}
+
+.modal-footer .btn{
+    margin:0px !important;
+    margin-left :10px !important;
+    margin-right: 5px !important;
+}
+img.timeline_item_pad {      
+    width:17px;
+    height:17px;
+    margin-top:-3px;
+}
+img.timeline_item_pad_small {      
+    width:15px;
+    height:15px;
+    margin-top:3px;
+}

@@ -1,0 +1,154 @@
+﻿
+
+<div class="row">
+    <div class="col-lg-4 col-md-4  max-width-content-column " tutorial="main-current">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading  ">
+                <i class="fa fa-dollar fa-fw"></i>
+                <label>{{"Current" | translate}}</label>
+            </div>
+            <div class="panel-body ">
+                <table border="0">
+                    <tr>
+                        <td rowspan="3">
+                            <bto-progress-bar id="incomeExpenseBar" progress-data="$root.dynamicConponent.incomeExpenseBar.config"
+                                              model-data="$root.PersonaPlan.expense_today"
+                                              max-value="$root.PersonaPlan.income_today"
+                                              is-only-change-model="false"
+                                              change-value="$root.actionService.onDoubleBarChange(data, 'incomeExpenseBar')"
+                                              on-end="$root.actionService.onChangeDoubleBarEnd('incomeExpenseBar')"
+                                              double-click="$root.actionService.onDoubleClickDoubleBar(data, 'incomeExpenseBar')"
+                                              bto-disabled-event="$root.functionAccess.CHANGE_INCOME_TODAY != 1"></bto-progress-bar>
+
+                        </td>
+                        <td rowspan="3" style="width: 30px;">&nbsp;</td>
+                        <td style="vertical-align: bottom;height: 130px;">
+                            <br>
+                            <img class="img-responsive" src="/Themes/1/Content/Images/arrow_lb.jpg">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;height: 20px;">
+                            <center>
+                                <img class="img-responsive" src="/Themes/1/Content/Images/pig_lb.jpg">
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">
+                            <center>
+                                <label>{{"Current Savings" | translate}}</label>
+                                <br /><input class="form-control currency_box" type="text" id="com_current_saving" ng-currency ng-model="PersonaPlan.current_saving" ng-disabled="$root.functionAccess.CHANGE_CURRENT_SAVING != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_current_saving')">
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4  max-width-content-column" tutorial="main-investment">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading">
+                <i class="fa fa-asterisk"></i>
+                <label>{{"Investment" | translate}}</label>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                        <div style="width: 80%;margin:0 auto;">
+                            <bto-gauge-chart id="riskChart" config-data="$root.dynamicConponent.riskChart.config.chart_data" model-data="$root.convertDataOfPersonalPlan.risk" change-value="$root.actionService.onChangeGaugeChart(data, 'riskChart');" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"></bto-gauge-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div style="min-width: 170px;" ng-if="$root.functionAccess.CHANGE_VOLATILITY_EXPERT == 1 || $root.functionAccess.CHANGE_VOLATILITY_EXPERT == 0 ">
+                            <bto-table-chart id="riskTableChart" config-data="$root.dynamicConponent.riskTableChart.config.chart_data" model-data-x="$root.convertDataOfPersonalPlan.risk" model-data-y="$root.convertDataOfPersonalPlan.risk_return" change-value="$root.actionService.onChangeTableChart(data, 'riskTableChart')" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_EXPERT != 1" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                    <div class="col-md-5">
+                        <div style="text-align:center">
+                            <br />
+                            <br />
+                            <label>{{"Expected return" | translate}}</label>
+                            <br />
+                            {{ PersonaPlan.risk_return * 100 | number: 2}} %
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4   max-width-content-column" tutorial="main-retirement">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading">
+                <i class="fa fa-bullseye"></i>
+                <label>{{"Retirement" | translate}}</label>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                            <img class="img-responsive" src="/Themes/1/Content/Images/banking.jpg" />
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  ">
+                            <label>
+                                {{"Projected value" | translate}}
+                            </label>
+                            <br />
+                            <span ng-show="false">
+                                {{MainResult.project_value | currency}}
+                            </span>
+                            {{MainResult.project_value | currency}}
+
+                        </div>
+
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                            <label>
+                                {{"Value if unlucky" | translate}}
+                            </label>
+                            <br />
+                            <span ng-show="false">
+                                {{MainResult.saving_at_retirement | currency}}
+                            </span>
+                            {{MainResult.saving_at_retirement | currency}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 ">
+                    <div class="row ">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <img class="img-responsive " src="/Themes/1/Content/Images/arrow2_lb.jpg" style="margin-left:-9px;" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <center>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <bto-progress-bar id="expenseAtRetirementBar" progress-data="$root.dynamicConponent.expenseAtRetirementBar.config"
+                                                  model-data="$root.PersonaPlan.expense_at_retirement"
+                                                  max-value="$root.MainResult.social_security"
+                                                  is-only-change-model="true" change-value="$root.actionService.onChangeSingleBar(data, 'expenseAtRetirementBar')"
+                                                  on-end="$root.actionService.onChangeSingleBarEnd('expenseAtRetirementBar')"
+                                                  double-click="$root.actionService.onDoubleClickSingleBar(data, 'expenseAtRetirementBar')"
+                                                  bto-disabled-event="$root.functionAccess.CHANGE_EXPENSE_AT_RETIREMENT != 1"></bto-progress-bar>
+
+
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

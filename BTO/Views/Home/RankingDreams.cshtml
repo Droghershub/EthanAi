@@ -1,0 +1,54 @@
+﻿
+<div class="row" id="RankingDreamTab">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="panel panel-default" tutorial="ranking-dream" config-data="{height: 15, left: -13}" config-content-data="{height: 200}" >
+            <div class="panel-heading">{{"Ranking Dreams" | translate}}</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-11 col-xs-11">
+
+                        <div class="col-md-7 col-md-7 col-sm-7 col-xs-7">
+                            <div id="listRanking" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{"List dreams" | translate}}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <ul as-sortable="sortableOptions"  ng-model="listRanking" class="list-group">
+                                            <li ng-repeat="item in listRanking" as-sortable-item class="list-group-item">
+                                                <div as-sortable-item-handle class="as-sortable-item-handle">
+                                                    <span class="glyphicon glyphicon-hand-right"></span>
+                                                    <span ng-class="{'selected': listRanking === item}">{{item.label | translate: item}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-md-5 col-sm-5 col-xs-5">
+                            <div id="listrankingresult" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{"List result" | translate}}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li ng-repeat="item in rankingResults" class="list-group-item">
+                                            <span class="glyphicon glyphicon-arrow-right"></span>{{item.label | translate: item}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                        <button id="simulatedreambutton" class="btn btn-default btn-primary" ng-click="simulate()" >{{"Simulate" | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

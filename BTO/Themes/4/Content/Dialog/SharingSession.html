@@ -1,0 +1,47 @@
+﻿<div class="modal fade" id="manageSharing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">{{$root.translateData["Sharing Session"]}}</h4>
+            </div>
+            <treasure-overlay-spinner active='false'>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6 class="text-blue">{{$root.translateData["Sharing Session"]}}</h6>
+                            <p class="desc">{{$root.translateData["Type your message below and start sharing."]}}</p>
+                            <form class="col-md-8">
+                                <div class="row">
+                                    <div class="input-field col-md-12">
+                                        <textarea id="mail_share" class="materialize-textarea" ng-disabled="$root.sharingService.checkIsSharing()"></textarea>
+                                        <label for="sharing">{{$root.translateData["Email"]}}</label>
+                                        <button id="invite_share" type="button" class="btn btn-primary waves-effect" ng-disabled="$root.sharingService.checkDisableInvite()">{{$root.translateData["Invite"]}}</button>
+                                        <button id="begin_share" type="button" data-dismiss="modal"  class="btn btn-primary waves-effect" ng-disabled="$root.viewers.length == 0 || $root.sharingService.checkIsSharing()">{{$root.translateData["Begin"]}}</button>
+                                        <table class="table" ng-hide="$root.viewers.length == 0">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{$root.translateData["Emails accepted"]}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tr ng-repeat="viewer in viewers">
+                                                <td>{{viewer}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{$root.translateData["Close"]}}</button>                  
+
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+</div>

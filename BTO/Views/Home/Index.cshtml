@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = BTO.Resources.Resource.Home;
+}
+@section scripts {
+
+    <script src="~/Scripts/angular-cookies.js"></script>
+    <script src="~/Scripts/thirdparty/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/thirdparty/angular-messages.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/thirdparty/ng-currency.js"></script>
+    <script src="~/Scripts/thirdparty/input-masks.js"></script>
+    <script src="~/Scripts/thirdparty/i18n/angular-locale_es-ar.js"></script>
+    <script src="~/Scripts/thirdparty/ocanvas-2.7.4.js"></script>
+    <script src="~/Scripts/thirdparty/chart/Chart.js"></script>
+    <script src="~/Scripts/thirdparty/chart/Chart.StackedBar.js"></script>
+    <script src="~/Scripts/thirdparty/chart/angular-chart.js"></script>
+    <script src="~/Scripts/thirdparty/ngStorage.min.js"></script>
+    <script src="~/Scripts/thirdparty/angular-rangeslider/angular.rangeSlider.js"></script>
+    <script src="~/Scripts/thirdparty/notification/bootstrap-notify.js"></script>
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/bto/btoApp.js"></script>
+    <script src="~/Scripts/bto/service/models.js"></script>
+    <script src="~/Scripts/bto/service/personaplan.js"></script>
+    <script src="~/Scripts/bto/service/profileService.js"></script>
+    <script src="~/Scripts/bto/service/zoomService.js"></script>
+    <script src="~/Scripts/bto/service/playbackService.js"></script>
+    <script src="~/Scripts/bto/service/common.js"></script>
+    <script src="~/Scripts/bto/controller/mainController.js"></script>
+    <script src="~/Scripts/bto/utils.js"></script>
+    <script src="~/Scripts/bto/timelineControl.js"></script>
+    <script src="~/Scripts/bto/timelineFunctions.js"></script>
+    <script src="~/Scripts/bto/directive/directive.js"></script>
+    <script src="~/Scripts/bto/directive/progressBarDirective.js"></script>
+    <script src="~/Scripts/bto/directive/timelinedirective.js"></script>
+    <script src="~/Scripts/bto/directive/gaugeDirective.js"></script>
+    <script src="~/Scripts/bto/directive/tableDirective.js"></script>
+    <script src="~/Scripts/thirdparty/treasure-overlay-spinner.js"></script>
+    <link rel="stylesheet" href="~/Content/drop-drap-control.css">
+    <link rel="stylesheet" href="~/Scripts/thirdparty/angular-rangeslider/angular.rangeSlider.css">
+    <script src="~/Scripts/thirdparty/ng-sortable.js"></script>
+    <script src="~/Scripts/bto/controller/RankingDreamController.js"></script>
+    <script src="~/Scripts/bto/controller/SolutionController.js"></script>
+    <script src="~/Scripts/bto/controller/ScenarioController.js"></script>
+    <script src="~/Scripts/bto/service/sharing.js"></script>
+    <script src="~/Scripts/bto/controller/SharingController.js"></script>
+
+    <script src="~/Scripts/thirdparty/smart-table.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#canvaspanel').height($('#canvaspanel').width() * 200 / 1024);
+            var form = document.forms[0]; // your form element selector (can be anything)
+
+            [].slice.call(form.elements).forEach(function (item) {
+                item.readOnly = 'true';
+            });
+        });
+        $(window).resize(function () {
+            $('#canvaspanel').height($('#canvaspanel').width() * 200 / 1024);
+        });
+    </script>
+
+}
+<div>
+    <div class="tutorialBox ng-hide" ng-show="$root.tutorialBox.isShow" ng-style="{'position': 'absolute', 'top':$root.tutorialBox.position.top, 'left': $root.tutorialBox.position.left, 'width':$root.tutorialBox.boxSize.width,height:$root.tutorialBox.boxSize.height}" ng-if="!$root.tutorialBox.isReverse">
+        <div class="tb_title">
+            <span class="tb_edit" ng-click="$root.showEditTutorial();">
+                <span class="glyphicon glyphicon glyphicon glyphicon-edit"></span>
+            </span>
+            {{$root.tutorialContent.title}}
+            <span class="tb_close" ng-click="$root.hideTutorial();">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+            </span>
+        </div>
+        <div class="tb_content" ng-show="$root.tutorialBox.isContentShow" ng-style="{'height': $root.tutorialBox.boxSize.height - 60}">
+            <div ng-bind-html="$root.tutorialContent.content | to_trusted"></div>
+        </div>
+    </div>
+
+    <div class="tutorialBox ng-hide box-reverse" ng-show="$root.tutorialBox.isShow" ng-style="{'position': 'absolute', 'top':$root.tutorialBox.position.top, 'left': $root.tutorialBox.position.left, 'width':$root.tutorialBox.boxSize.width,height:$root.tutorialBox.boxSize.height}" ng-if="$root.tutorialBox.isReverse">
+        <div class="" ng-style="{'height': $root.tutorialBox.boxSize.height - 60}" ng-show="!$root.tutorialBox.isContentShow"></div>
+        <div class="tb_content" ng-show="$root.tutorialBox.isContentShow" ng-style="{'height':$root.tutorialBox.boxSize.height - 60}">
+            <div ng-bind-html="$root.tutorialContent.content | to_trusted"></div>
+        </div>
+        <div class="tb_title">
+            <span class="tb_edit" ng-click="$root.showEditTutorial();">
+                <span class="glyphicon glyphicon glyphicon glyphicon-edit"></span>
+            </span>
+            {{$root.tutorialContent.title}}
+            <span class="tb_close" ng-click="$root.hideTutorial();">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="alert alert-success fade in messages-growl ng-hide" style="margin-top: 60px;" ng-show="$root.successMessage.show">
+        {{$root.successMessage.message | translate}}
+    </div>
+    <div class="alert alert-danger fade in messages-growl ng-hide" ng-show="$root.errorMessage.show">
+        {{$root.errorMessage.message | translate}}
+    </div>
+    <div class="alert alert-warning  fade in messages-growl  ng-hide" ng-show="$root.warningMessage.show">
+        {{$root.warningMessage.message | translate}}
+    </div>
+    <div class="row" tutorial="timeline" config-content-data="{height: 300}">
+        <div class="col-md-12 col-md-offset-0">
+            <input id="timerDelay" type="hidden" ng-model="Settings.timerDelay" ng-init="Settings.timerDelay=1" />
+            <div ng-if="$root.timelineControl.isShowItemOnTimeline">
+                <span for="selectDreamOrEvent">{{'Item on timeline' | translate}}</span>
+                <select id="selectDreamOrEvent" ng-model="$root.timelineControl.selectedItemOnTimelineId" ng-change="$root.selectDreamOrLifeEvent()">
+                    <option value="">{{'Select item on timeline'}}</option>
+                    <option value="{{item.id}}" ng-repeat="item in $root.timelineControl.timelineItemList">{{item.name | translate}}</option>
+                </select>
+            </div>
+            <div id="canvaspanel" ng-show="!spinner_main.active">
+                <canvas id="canvas" class="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="$root.zoomData.isShow">
+        <div class="col-md-10 col-xs-10">
+            <div>
+                <div range-slider prevent-equal-min-max="true" attach-handle-values="true" step="1" min="$root.zoomData.min" max="$root.zoomData.max" model-min="$root.zoomData.minAge" model-max="$root.zoomData.maxAge"></div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("DreamDialog")
+    @Html.Partial("LifeEventDialog")
+    @Html.Partial("ConfirmDialog")
+    @Html.Partial("StartAgeDialog")
+    @Html.Partial("ProfileDialog")
+    @Html.Partial("ManageSolution")
+    @Html.Partial("ManageScenarios")
+    @Html.Partial("PlaybackSession")
+    @Html.Partial("ManageAccount")
+    <div class="row">
+
+        <div class="col-md-12 col-md-offset-0">
+            <ul class="nav nav-pills">
+                <li><a id="tab_main" ui-sref="main">{{'Main' | translate}}</a></li>
+                <li ng-if="$root.functionAccess.VIEW_INCOME_EXPENSE_TAB == 1">
+                    <a ui-sref="income_expenses">{{'Income/Expenses' | translate}}</a>
+                </li>
+                <li ng-if="$root.functionAccess.VIEW_LIQUID_ASSET_TAB == 1"><a ui-sref="liquid_illiquid_asset">{{"Liquid Asset" | translate}}</a></li>
+                <li ng-if="$root.functionAccess.VIEW_ILLIQUID_ASSET_TAB == 1"><a ui-sref="illiquid_asset">{{'Illiquid Asset' | translate}}</a></li>
+                <li ng-if="$root.functionAccess.VIEW_RANKING_DREAM_TAB == 1"><a ui-sref="ranking_dreams">{{"Ranking Dreams" | translate}}</a></li>
+                <li ng-if="$root.functionAccess.VIEW_SHARING_SESSION_TAB == 1"><a id="tab_sharing_session" ui-sref="sharing_session">{{"Sharing Session" | translate}}</a></li>
+                <li ng-if="$root.functionAccess.VIEW_SHARING_SESSION_TAB == 1"><a id="tab_sharing_session_only_view" style="display: none;" ui-sref="sharing_session_only_view">{{"Sharing Session" | translate}}</a></li>
+            </ul>
+            <div class="row">
+                <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+                    <div ui-view></div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
+                    <div>
+                        @Html.Partial("RightColumn")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

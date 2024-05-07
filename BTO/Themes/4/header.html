@@ -1,0 +1,68 @@
+﻿<nav class="navbar navbar-fixed-top scrolling-navbar z-depth-1">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">{{$root.translateData['Manage Sessions']}}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ><div class="logo"></div></a>
+
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.translateData['Manage']}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="$root.timelineService.ResetPlan()" class="waves-effect">{{$root.translateData['Reset Plan']}}</a></li>
+                        <li><a ng-click="$root.sharingService.showSharingService()" class="waves-effect">{{$root.translateData['Sharing Session']}}</a></li>
+                        <li><a ng-click="$root.playbackService.initialPlayBack();" ng-if="$root.IsAdmin == 'true' && $root.functionAccess.PLAYBACK == 1" class="waves-effect">{{$root.translateData['Playback Sessions']}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <span id="navbar-message" ng-if="!$root.utilService.calculateData.isCalculating && !$root.utilService.calculateData.isFinished" class="navbar-message blue-text" ng-class="{ 'm_critical': $root.headerMessageData.type == 1, 'm_benefits': $root.headerMessageData.type == 2, 'm_quick_help': $root.headerMessageData.type == 3, 'm_medium': $root.headerMessageData.type == 4, 'm_news': $root.headerMessageData.type == 5 }">{{$root.headerMessageData.title.message | translate:$root.headerMessageData.title.jsonObj}} 
+                <a id="navbar-message-description" data-toggle="tooltip" ng-if="$root.headerMessageData.description.message != null" data-html="true" data-placement="bottom" title="{{$root.headerMessageData.description.message| translate:$root.headerMessageData.description.jsonObj}}"><i class="fa fa-info-circle"></i></a>
+                <!--<span class="m_quick_help_more" ng-if="$root.headerMessageData.quickHelpId != null" ng-click="$root.quickHelpService.showMoreHelp($root.headerMessageData.quickHelpId)">. {{$root.translateData['I want to know more']}}</span>-->
+            </span>
+            <span id="navbar-message" ng-if="$root.utilService.calculateData.isCalculating && !$root.utilService.calculateData.isFinished" class="navbar-message blue-text"><i class="fa fa-circle-o-notch fa-spin"></i> {{$root.translateData['Calculating your plan...']}}</span>
+            <span id="navbar-message" ng-if="!$root.utilService.calculateData.isCalculating && $root.utilService.calculateData.isFinished" class="navbar-message green-text"><i class="fa fa-check"></i> {{$root.translateData['Success! Your results have been updated.']}}</span>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="com_currency" class="dropdown" ng-if="$root.functionAccess.CHANGE_CURRENCY ==1">
+                    <a class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.PersonaPlan.currency_code}}<span class="caret" style="margin-left:5px !important;"></span></a>
+                    <ul class="dropdown-menu" ng-if="false">
+                        <li ng-repeat="currency in $root.listCurrency" ng-if="currency.value != $root.PersonaPlan.currency_code" ng-click="$root.actionService.onChangeDropDownMenu(currency.value, 'com_currency')" class=" waves-effect"><a>{{currency.name | translate}}</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.utilService.selectedLanguage.code}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" ng-if="false">
+                        <li ng-repeat="language in $root.utilService.listLanguage" class=" waves-effect" ng-if="language.code != $root.utilService.selectedLanguage.code" ng-click="$root.utilService.changeLanguage(language)"><a>{{$root.translateData[language.name]}}</a></li>
+                    </ul>
+                </li>
+                <li class="waves-effect waves-light" ng-if="false"><a class=""><i class="fa fa-bell-o"></i><!-- <br><span>Alerts</span> --></a><span class="nav-counter">5</span></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle waves-effect header_email" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="Themes/4/Content/Images/avatar-circle.png" class="avatar" ng-if="$root.profile.client.avatar =='' || $root.profile.client.avatar == null " />
+                        <img ng-src="{{$root.profile.client.avatar}}" class="avatar" ng-if="$root.profile.client.avatar !=null && $root.profile.client.avatar !='' " />
+                        <span ng-if="$root.profile.client.first_name">{{$root.profile.client.first_name}}</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register == true"><a ng-click="$root.accountService.showUpdateAccountDialog()">{{$root.translateData['Register']}}</a></li>
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register == true"><a href="/Account/BackWebsite">{{$root.translateData['Back to Website']}}</a></li>
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register != true"><a ng-click="$root.accountService.showMyAccountDialog()">{{$root.translateData['Manage Account']}}</a></li>
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register != true"><a ng-click="$root.profileService.showProfileDialog();">{{$root.translateData["Update profile"]}}</a></li>
+                        <li role="separator" class="divider  waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register != true"></li>
+                        <li class=" waves-effect" ng-show="$root.user_name == $root.user_name_before_shared && $root.profile.client.is_auto_register != true"><a ng-click="$root.accountService.showLogoffSystem();">{{$root.translateData["Log off"]}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> 

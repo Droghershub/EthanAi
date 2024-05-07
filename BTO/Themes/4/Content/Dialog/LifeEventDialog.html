@@ -1,0 +1,187 @@
+﻿<div id="lifeeventdialog" class="modal fade" role="dialog">
+    <div class="modal-dialog" ng-if="$root.timelineService.selectedLifeEvent">
+        <div class="modal-content">
+            <form name="form_life_event" novalidate role="form" ng-init="$root.form_life_event = this; $root.timelineService.initFormLifeEvent(this);">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="$root.timelineService.hideLifeEventDialog();">&times;</button>
+                    <h5 class="modal-title green-text">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4" class="fa fa-home fa-stack-1x fa-inverse"></i>
+                                    <i ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5" class="fa fa-child fa-stack-1x fa-inverse"></i>
+                                    <i ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 6" class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="input-field col-xs-10">
+                                <div >
+                                    <input id="modal_title" name="modal_title" type="text" ng-model="$root.timelineService.selectedLifeEvent.name" required duplicate-dream-or-event-name="$root.timelineService.selectedLifeEvent.id" ng-change="$root.timelineService.changeTitleOfDremOrLifeEvent($root.timelineService.selectedLifeEvent)">
+                                    <label for="modal_title" class="active">{{$root.translateData["Title"]}} ({{$root.translateData["click to edit"]}})</label>
+                                    <div class="bto-error" ng-messages="form_life_event.modal_title.$error" ng-if="form_life_event.modal_title.$dirty">
+                                        <div ng-message="required">
+                                            {{$root.translateData["Title is required"]}}
+                                        </div>
+                                        <div ng-message="duplicateDreamOrEventName">
+                                            {{$root.translateData["Title is duplicated"]}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4" style="text-align:center">
+                            <div ng-if="$root.timelineService.selectedLifeEvent.photo_path == null || $root.timelineService.selectedLifeEvent.photo_path == ''">
+                                <img ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4" class="img" id="defaultLifeEventPhoto" src="/Themes/4/Content/Images/default-residence.jpg" />
+                                <img ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5" class="img" id="defaultLifeEventPhoto" src="/Themes/4/Content/Images/default-independent.jpg" />
+                                <img ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 6" class="img" id="defaultLifeEventPhoto" src="/Themes/4/Content/Images/default-income.jpg" />
+                            </div>
+                            <div ng-show="$root.timelineService.selectedLifeEvent.photo_path != null && $root.timelineService.selectedLifeEvent.photo_path != ''">
+                                <img class="img" id="LifeEventPhoto" ng-src="{{$root.timelineService.selectedLifeEvent.photo_path}}">
+                            </div>
+
+                            <button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" ng-click="$root.manageAvatarService.showDialogUpdateProfilePicture(3, $root.timelineService.selectedLifeEvent.dream_type_id);">{{$root.translateData["CHANGE PHOTO"]}}</button>
+                            <input type="file" name="LifeEventFileUpload" id="LifeEventFileUpload" onchange="loadLifeEventFile(event);" class="hidden" accept="image/*" />
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-xs-12 input-field">
+                                    <label for="dream_type" class="active">{{$root.translateData["Type"]}}</label>
+                                    <input id="life_event_type" type="text" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4" name="life_event_type" value="{{$root.translateData['Residence Sale']}}" disabled />
+                                    <input id="life_event_type" type="text" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5" name="life_event_type" value="{{$root.translateData['Children Independent']}}" disabled />
+                                    <input id="life_event_type" type="text" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 6" name="life_event_type" value="{{$root.translateData['Exception Income']}}" disabled />
+                                </div>
+                            </div>
+                            
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5">
+                                <div class="col-xs-12 input-field">
+                                    <label for="child_member" class="active">{{$root.translateData["Child Member"]}}</label>
+                                    <material-select id="child_member_select" name="child_member" model-data="$root.timelineService.selectedLifeEvent.dependent_reference" list-data=" $root.timelineService.selectedLifeEvent.config_data.childMembers" value-id="'id'" label-id="'name'" change-value="$root.timelineService.selectChildMemberInChildIndependent()" required></material-select>
+                                    <div class="bto-error" ng-messages="form_life_event.child_member.$error" ng-if="form_life_event.child_member.$dirty">
+                                        <div ng-message="required">
+                                            {{$root.translateData["Child Member is required"]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4">
+                                <div class="col-xs-12 input-field">
+                                    <label for="selected_residence" class="active">{{$root.translateData['Select residence']}}</label>
+                                    <input type="text" ng-if="$root.playBackPlayerData.isPlaying" value="{{$root.timelineService.selectedLifeEvent.selected_residence | dreamName}}" />
+                                    <material-select ng-if="!$root.playBackPlayerData.isPlaying" id="life_event_selected_residence" model-data="$root.timelineService.selectedLifeEvent.selected_residence" list-data="$root.timelineService.selectedLifeEvent.config_data.resident_purchase_list" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" value-id="'id'" label-id="'label'" name="selected_residence" required></material-select>
+                                    <div class="bto-error" ng-messages="form_life_event.selected_residence.$error" ng-if="form_life_event.selected_residence.$dirty">
+                                        <div ng-message="required">
+                                            {{$root.translateData["Residence is required"]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4">
+                                <div class="col-xs-6 input-field" >
+                                    <label for="starting_age" class="active">{{$root.translateData['Date of sale']}}</label>
+                                    <material-select id="life_event_starting_age" name="starting_age" model-data="$root.timelineService.selectedLifeEvent.starting_age" required list-data="$root.timelineService.selectedLifeEvent.config_data.ageRange" not-select-label="''" change-value="$root.timelineService.changeDateOfSale()" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" style="width:100%;"></material-select>
+                                </div>
+                                <div class="col-xs-6 input-field">
+                                    <label for="value" class="active">{{$root.translateData['Transaction Value']}}</label>
+                                    <input id="life_event_value" type="text" name="value" ng-model="$root.timelineService.selectedLifeEvent.value" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" required style="margin-top:1px;" />
+                                    <div class="bto-error" ng-messages="form_life_event.value.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{$root.translateData["Transaction Value is required"]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id != 4 && $root.timelineService.selectedLifeEvent.dream_type_id != 5">
+                                <div class="col-xs-12 input-field">
+                                    <label for="starting_age" class="active">{{$root.translateData['Starting date']}}</label>
+                                    <material-select id="life_event_starting_age" name="starting_age" model-data="$root.timelineService.selectedLifeEvent.starting_age" required list-data="$root.timelineService.selectedLifeEvent.config_data.ageRange" not-select-label="''" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" style="width:100%;"></material-select>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5">
+                                <div class="col-xs-12 input-field">
+                                    <label for="age_dependent" class="active">{{$root.translateData['Age of independence']}}</label>
+                                    <material-select id="age_dependent_age_dependent" name="age_dependent" model-data="$root.timelineService.selectedLifeEvent.age_dependent" list-data="$root.timelineService.selectedLifeEvent.config_data.ageRange" not-select-label="'Forever'" change-value="$root.timelineService.changeAgeDependent()" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" style="width:100%;"></material-select>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5 && $root.timelineService.selectedLifeEvent.starting_age < 200">
+                                <div class="col-xs-12 input-field">
+                                    <label for="starting_age" class="active">{{$root.translateData['Your age when child is leaving']}}</label>
+                                    <input id="life_event_starting_age" type="text" name="starting_age" ng-model="$root.timelineService.selectedLifeEvent.starting_age" ng-disabled="true" />
+                                </div>
+                            </div>
+
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 6">
+                                <div class="col-xs-12 input-field">
+                                    <label for="value" class="active">{{$root.translateData['Exceptional Income']}}</label>
+                                    <div>
+                                        <input id="life_event_value" type="text" name="value" ng-model="$root.timelineService.selectedLifeEvent.value" ng-disabled="$root.functionAccess.EDIT_LIFE_EVENT != 1" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" required />
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.value.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 6">
+                                            {{$root.translateData["Exceptional Income is required"]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 4">
+                                <div class="col-xs-6 input-field" >
+                                    
+                                    <label for="life_event_transaction_tax" class="active">{{$root.translateData['Transaction tax']}}</label>
+                                    <div class="input-group">
+                                        <currency-or-percent input-name="'transaction_tax'" ng-model="$root.timelineService.selectedLifeEvent.transaction_tax" currency-symbol="{{$root.PersonaPlan.currency_code}}" ng-required="true" fraction="2" base-value="$root.timelineService.selectedLifeEvent.value" is-show-currency="$root.timelineService.selectedLifeEvent.is_absolute_lifeevent_transaction_tax"></currency-or-percent>
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.transaction_tax.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{$root.translateData["Transaction tax is required"]}}
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-xs-6 input-field" >
+                                    
+                                    <label for="life_event_transaction_cost" class="active">{{$root.translateData['Transaction cost']}}</label>
+                                    <div class="input-group">
+                                        
+                                        <currency-or-percent input-name="'transaction_cost'" ng-model="$root.timelineService.selectedLifeEvent.transaction_cost" currency-symbol="{{$root.PersonaPlan.currency_code}}" ng-required="true" fraction="2" base-value="$root.timelineService.selectedLifeEvent.value" is-show-currency="$root.timelineService.selectedLifeEvent.absolute_lifeevent_transaction_cost"></currency-or-percent>
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.transaction_cost.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{$root.translateData["Transaction cost  is required"]}}
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.timelineService.selectedLifeEvent.dream_type_id == 5">
+                                <div class="col-xs-12 input-field">
+                                    <label for="life_event_yearly_cost_reduction" class="active">{{$root.translateData['Yearly cost reduction']}}</label>
+                                    <div>
+                                        <input id="life_event_yearly_cost_reduction" type="text" name="yearly_cost_reduction" ng-model="$root.timelineService.selectedLifeEvent.yearly_cost_reduction" ng-disabled="true" required ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" />                                      
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.yearly_cost_reduction.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 5">
+                                            {{$root.translateData["Yearly cost reduction  is required"]}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn-signup" ng-click="$root.timelineService.hideLifeEventDialog();">{{$root.translateData["Close"]}}</a>
+                    <button type="button" id="btnLifeEvent" class="btn btn-primary" ng-disabled="form_life_event.$invalid" ng-click="$root.timelineService.saveLifeEvent();">
+                        {{$root.translateData["Save changes"]}}</
+                        button>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

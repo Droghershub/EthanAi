@@ -1,0 +1,25 @@
+﻿/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.currency_box {
+    text-align:center;
+}
+
+.btn_margin_xs
+{
+    margin-top:0px !important;
+}
+
+.play_focus {
+    border: solid 1px #ff0000 !important;
+    display: block !important;
+}

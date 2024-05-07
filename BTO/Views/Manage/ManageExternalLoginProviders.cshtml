@@ -1,0 +1,106 @@
+﻿@model BTO.Models.ManageLoginsViewModel
+@using Microsoft.Owin.Security
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = BTO.Resources.Resource.Manage;// "Manage your external logins";
+}
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else
+    {
+        if (Model.CurrentLogins.Count > 0)
+        {
+            <h4>Available login methods</h4>
+            <table class="table">
+                <tbody>
+                    @foreach (var account in Model.CurrentLogins)
+                    {
+                        <tr>
+                            <td>@account.LoginProvider</td>
+                            <td>
+                                @if (ViewBag.ShowRemoveButton)
+                                {
+                                    if (Model.AspNetUser.DisableProviderList != null && Model.AspNetUser.DisableProviderList.Contains("," + account.LoginProvider))
+                                   {
+                                       using (Html.BeginForm("EnableLoginProvider", "Manage"))
+                                       {
+                                        @Html.AntiForgeryToken()
+                                        <div>
+                                            @Html.Hidden("loginProvider", account.LoginProvider)
+                                            @Html.Hidden("providerKey", account.ProviderKey)
+                                            <input type="submit" class="btn btn-default btn-primary" value="Enable" title="Enable this @account.LoginProvider login from your account" />
+                                        </div>
+                                       }
+                                   }
+                                   else
+                                   {
+                                       using (Html.BeginForm("DisableLoginProvider", "Manage"))
+                                       {
+                                            @Html.AntiForgeryToken()
+                                            <div>
+                                                @Html.Hidden("loginProvider", account.LoginProvider)
+                                                @Html.Hidden("providerKey", account.ProviderKey)
+                                                <input type="submit" class="btn btn-default btn-danger" value="Disable" title="Disable this @account.LoginProvider login from your account" />
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    @: &nbsp;
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @*if (Model.OtherLogins.Count > 0)
+        {
+            using (Html.BeginForm("LinkLogin", "Manage"))
+            {
+                @Html.AntiForgeryToken()
+                <div id="socialLoginList">
+                    <p>
+                        @foreach (AuthenticationDescription p in Model.OtherLogins)
+                        {
+                            <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                        }
+                    </p>
+                </div>
+            }
+        }*@
+    }
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/angular-cookies.js"></script>
+    <script src="~/Scripts/thirdparty/ngStorage.min.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+
+}
+<script>
+
+    $(function () {
+        var hub = $.connection.controllerHub;
+        $.connection.hub.start().done(function () {//when the connection is ready, we going to make the shape draggable
+
+            $.connection.hub.stop();
+        });
+    });
+</script>

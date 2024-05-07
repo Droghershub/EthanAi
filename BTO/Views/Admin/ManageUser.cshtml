@@ -1,0 +1,281 @@
+﻿<div class="container-fluid manage_user_page">
+    <div class="row">
+        <div class="col-sm-9 col-xs-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'User list' | translate}}</div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table st-pipe="manageUserTable.callServer" st-table="manageUserTable.displayed" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="first">{{"No." | translate}}</th>
+                                    <th>{{"Email" | translate}}</th>
+                                    <th>{{"Organization Unit" | translate}}</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        <input st-search="email" placeholder="{{'Search by email' | translate}}" ng-model="manageUserTable.email" class="input-sm form-control" type="search" />
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="!manageUserTable.isLoading" ng-repeat="userItem in manageUserTable.displayed" class="">
+                                    <td><label class="control-label">{{$index + 1 + manageUserTable.startIndex}}</label></td>
+                                    <td><label>{{userItem.Email}}</label></td>
+                                    <td><label>{{userItem.OrganizationUnitName}}</label></td>
+                                    <td class="text-right">
+                                        <button type="button" class="btn btn-primary btn-xs" title="{{'Force to reset password' | translate}}" ng-click="forceResetPassword(userItem);">
+                                            <span class="glyphicon glyphicon-flash"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs" title="{{'Active this user' | translate}}" ng-click="activeUser(userItem);" ng-if="!userItem.isActive">
+                                            <span class="glyphicon glyphicon-ok-circle"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" title="{{'Deactive this user' | translate}}" ng-click="deActiveUser(userItem);" ng-if="userItem.isActive">
+                                            <span class="glyphicon glyphicon-ban-circle"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-if="manageUserTable.isLoading">
+                                    <td colspan="6" class="text-center">{{'Loading ... ' | translate}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr ng-if="manageUserTable.numberOfPages <= manageUserTable.number">
+                                    <td colspan="6" class="text-center">
+                                        <div class="text-center" st-pagination="" st-items-by-page="manageUserTable.number"></div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="manageUserTable.numberOfPages > manageUserTable.number">
+                                    <td colspan="6" class="text-center">
+                                        <div st-items-by-page="manageUserTable.number" st-pagination="" st-template="pagination.custom.html"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <script type="text/ng-template" id="pagination.custom.html">
+                        <nav ng-if="pages.length >= 2">
+                            <ul class="pagination">
+                                <li>
+                                    <a ng-click="selectPage(1)">{{'First' | translate}}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="selectPage(currentPage - 1)">&lt;</a>
+                                </li>
+                                <li>
+                                    <a><page-select></page-select> / {{numPages}}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="selectPage(currentPage + 1)">&gt;</a>
+                                </li>
+                                <li><a ng-click="selectPage(numPages)">{{'Last' | translate}}</a></li>
+                            </ul>
+                        </nav>
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3">
+            <div name="modalCreateUser">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">{{'Create User' | translate}}</div>
+                    <div class="panel-body">
+                        <div id="organizationUnit" class="" role="dialog">
+                            <form name="createUserForm">
+                                <div ng-include="'ou-form-template'"></div>
+                            </form>
+
+                            <button type="button" class="btn btn-primary" ng-disabled="createUserForm.$invalid" ng-click="user_createNewUser();"><span>{{'Create' | translate}}</span></button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/ng-template" id="ou-form-template">
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="email">{{"Email" | translate}}</label>
+                    <div class="col-sm-8">
+                        <input id="email" placeholder="{{'Email' | translate}}" class="form-control" name="email" ng-model="user_userData.email" required />
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-4" for="password">{{"Password" | translate}}</label>
+                    <div class="col-sm-8">
+                        <input id="password" placeholder="{{'Password' | translate}}" class="form-control" name="password" ng-model="user_userData.password" required />
+                        <div class="bto-error" ng-messages="createUserForm.password.$error" ng-if="createUserForm.password.$dirty">
+
+                        </div>
+
+                    </div>
+                </div>
+            </script>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Usage section' | translate}}</div>
+                <div class="panel-body">
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4"> Start Date:</label>
+                        <div class='col-sm-8'>
+                            <div class="form-group">
+                                <div class='input-group date' id='startDate'>
+                                    <input type='text' id="txtstartDate" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4"> To Date:</label>
+                        <div class='col-sm-8'>
+                            <div class="form-group">
+                                <div class='input-group date' id='endDate'>
+                                    <input type='text' id="txtendDate" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-default" aria-label="Extract" title="Extract" ng-click="extractSection();">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Extract
+                    </button>
+                    <button ng-if="false" type="button" class="btn btn-primary btn-default" aria-label="Extract" title="Extract" ng-click="extractCsvFileSection();">
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download(csv file)
+                    </button>
+                    <h4>{{ LinkDownloadInYourEmail | translate}}</h4>
+
+                    <treasure-overlay-spinner active='spinner.active'>
+                        <table ng-if="false" st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th st-sort="UserId">UserId</th>
+                                    <th st-sort="Email">{{"Email" | translate}}</th>
+                                    <th st-sort="IP">IP</th>
+                                    <th st-sort="Name">{{"Name" | translate}}</th>
+                                    <th st-sort="UserAgent">{{"UserAgent" | translate}}</th>
+                                    <th st-sort="DateTime">{{"DateTime" | translate}}</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        <input st-search="Email" placeholder="{{'Search email' | translate}}" class="input-sm form-control" type="text" />
+                                    </th>
+                                    <th>
+                                        <input st-search="IP" placeholder="{{'Search IP' | translate}}" class="input-sm form-control" type="text" />
+                                    </th>
+                                    <th>
+                                        <input st-search="Name" placeholder="{{'Search name' | translate}}" class="input-sm form-control" type="text" />
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr st-select-row="row" st-select-mode="single" ng-repeat="row in displayedCollection" ng-dblclick="LoadUnitOfWork()">
+
+                                    <td>{{row.UserId}}</td>
+                                    <td>{{row.Email}}</td>
+                                    <td>{{row.IP}}</td>
+                                    <td>{{row.Name }}</td>
+                                    <td>{{row.UserAgent }}</td>
+                                    <td>{{row.DateTime | date:'yyyy-MM-dd HH:mm'}}</td>
+
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        @*<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CloseSolution()">{{"Close" | translate}}</button>
+                            <button type="button" class="btn btn-primary" ng-click="SaveUnitOfWork()" ng-if="$root.functionAccess.SAVE_SOLUTION ==1">{{"Save" | translate}}</button>
+                            <button type="button" class="btn btn-primary isDisablebtn" ng-click="LoadUnitOfWork()" ng-if="$root.functionAccess.LOAD_SOLUTION ==1">{{"Load" | translate}}</button>
+                            <button type="button" class="btn btn-primary isDisablebtn" ng-click="RemoveUnitWork()" ng-if="$root.functionAccess.DELETE_SOLUTION ==1">{{"Delete" | translate}}</button>
+                            <button type="button" class="btn btn-primary isDisablebtn" ng-click="RenameUnitWork()" ng-if="$root.functionAccess.RENAME_SOLUTION ==1">{{"Rename" | translate}}</button>*@
+
+                    </treasure-overlay-spinner>
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Referal List' | translate}}</div>
+                <div class="panel-body">
+
+
+
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4"> Start Date:</label>
+                        <div class='col-sm-8'>
+                            <div class="form-group">
+                                <div class='input-group date' id='Referal_startDate'>
+                                    <input type='text' id="txtReferal_startDate" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-4"> To Date:</label>
+                        <div class='col-sm-8'>
+                            <div class="form-group">
+                                <div class='input-group date' id='Referal_endDate'>
+                                    <input type='text' id="txtReferal_endDate" class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-default" aria-label="Referal List" title="Referal List" ng-click="extractReferalList();">
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Extract
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#startDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#endDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#Referal_startDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#Referal_endDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+    });
+</script>

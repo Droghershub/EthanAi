@@ -1,0 +1,1191 @@
+﻿<div class="panel-group " ng-show="$root.summaryCardService.selectedCardId=='aaproperty'">
+    <div class="panel panel-default" id="property">
+        <div class="panel-heading main property">
+            <h4 class="panel-title">Property Purchase</h4>
+            <a id="close_card_aproperty" class="panel-close btn-sm btn-white waves-effect" ng-click="$root.summaryCardService.closeCard('aaproperty');">x</a>
+        </div>
+        <div class="panel-body row">
+            <div class="row-sm-height">
+                <div class="col-sm-4 left-side col-sm-height col-top">
+                    <div class="inside">
+                        <p style="margin-bottom:20px">How much can you afford to purchase a property?</p>
+
+
+                        <div class="card white active hoverable buyvsrent">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-random"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Buy vs Rent</h5>
+                                        <div class="card-label">Compare your options</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card white hoverable buy">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-home"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Buy</h5>
+                                        <div class="card-label">$ 560,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card white hoverable median">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-building"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Upgrade</h5>
+                                        <div class="card-label">$ 400,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card white hoverable">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-line-chart"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Invest</h5>
+                                        <div class="card-label">$ 400,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card white hoverable">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-exchange"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Refinance</h5>
+                                        <div class="card-label">$ 400,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .inside -->
+
+                </div> <!-- left side -->
+
+                <div class="col-sm-8 right-side col-sm-height col-top buyvsrent-tools premium-tools">
+                    <div class="inside">
+                        <div class="row">
+                            <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-random fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="col-sm-9">
+                                <h5>Buy vs Rent</h5>
+                                <ul>
+                                    <li>Compare your options by filling in the information below. And then, click on <strong>CALCULATE</strong> to see your results.</li>
+                                    <li>Choose the residence type you would like to buy or rent:</li>
+                                </ul>
+                                <div class="input-field">
+                                    <select>
+                                        <option value="">Average Residence</option>
+                                        <option value="">Average HDB</option>
+                                        <option value="">1 to 2-Room HDB</option>
+                                        <option value="">3-Room HDB</option>
+                                        <option value="" selected>4-Room HDB</option>
+                                        <option value="">5-Room HDB & Executive Condo</option>
+                                        <option value="">Condominium</option>
+                                        <option value="">House & Lot</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="separator" style="margin:1.5em 0"></div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h6>BUYING</h6>
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="buy-value">Total Value</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">SGD</div>
+                                            <input type="text" id="buy-value" value="500,000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="buy-deposit">Down Payment</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group absolute">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="buy-deposit" value="10,000.00">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="buy-mortgage-years">Mortgage Duration</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <input type="text" id="buy-mortgage-years" value="15">
+                                            <div class="input-group-addon">years</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="buy-mortgage">Mortgage Interest Rate</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="buy-mortgage" value="4">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="buy-transaction">Transaction Cost</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="buy-transaction" value="10">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="buy-transaction">Annual Expense</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="buy-transaction" value="2">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6>RENTING</h6>
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="rent-value">Monthly Rent</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">SGD</div>
+                                            <input type="text" id="buy-value" value="1,800" ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="rent-deposit">Rent Deposit</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to months">SGD</a></div>
+                                            <input type="text" id="rent-deposit" value="1">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">Month(s)</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="rent-insurance">Monthly Insurance</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="rent-insurance" value="0">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row advanced">
+                                    <div class="col-xs-6"><label for="rent-broker">Broker's Fee</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group percent">
+                                            <div class="input-group-addon absolute"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to %">SGD</a></div>
+                                            <input type="text" id="rent-broker" value="2">
+                                            <div class="input-group-addon percent"><a onclick="toggleinput()" data-toggle="tooltip" data-placement="bottom" title="Change to SGD">%</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- row -->
+                        <div class="row search-wrapper">
+                            <div class="col-xs-6"><a style="font-size: 14px;font-weight: 300;line-height: 56px;" class="property-advanced">Advanced Options <i class="fa fa-angle-down"></i></a></div>
+                            <div class="col-xs-6 right"><a class="btn-sm btn-primary waves-effect show-result-buyvsrent" style="margin-right:0"><i class="fa fa-check-circle left"></i>CALCULATE</a></div>
+                        </div>
+
+                        <div class="row result-buyvsrent hidden">
+                            <div class="col-xs-12">
+                                <center>
+                                    <div class="btn-group" style="padding-bottom:10px;">
+                                        <button id="property-btn1" type="button" class="btn btn-primary btn-sm waves-effect" style="margin-right:0">INFLATION ADJUSTED</button>
+                                        <button id="property-btn2" type="button" class="btn btn-white btn-sm waves-effect">NON-INFLATION ADJUSTED</button>
+                                    </div>
+                                </center>
+                                <img src="/Themes/4/Content/Images/placeholder-buyvsrent.png" style="width:100%;" />
+                                <ul style="margin-top:20px;">
+                                    <li>If you stay in your home for <strong>4 years</strong>, <strong>buying is the cheaper option</strong>.</li>
+                                    <li>You will save <strong>$ 5,600 per year</strong>, an average of <strong>$ 472 per month</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- buyvsrent -->
+                </div>
+
+                <div class="col-sm-8 right-side col-sm-height col-top buy-tools premium-tools hidden">
+                    <div class="inside">
+                        <div class="row">
+                            <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="col-sm-9">
+                                <h5>Buy a Property</h5>
+                                <ul style="margin-top:20px;">
+                                    <li>The maximum amount you can afford to buy a property is <strong>$ 560,000</strong>. </li>
+                                    <li>This is assuming a mortgage duration of <strong>15 years</strong> at an interest rate of <strong>1.4%</strong>. <i class="fa fa-question-circle"></i></li>
+                                    <li>Choose the <strong>district</strong> and <strong>residence type</strong> you would like to buy:</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="separator" style="margin:1.5em;"></div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="buy-location">Location</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="buy_location">
+                                            <option value="all">All Districts</option>
+                                            <option value="">D01 Boat Quay / Raffles Place / Marina</option>
+                                            <option value="">D02 Chinatown / Tanjong Pagar</option>
+                                            <option value="">D03 Alexandra / Commonwealth</option>
+                                            <option value="">D04 Harbourfront / Telok Blangah</option>
+                                            <option value="">D05 Buona Vista / West Coast / Clementi New Town</option>
+                                            <option value="">D06 City Hall / Clarke Quay</option>
+                                            <option value="">D07 Beach Road / Bugis / Rochor</option>
+                                            <option value="">D08 Farrer Park / Serangoon Rd</option>
+                                            <option value="">D09 Orchard / River Valley</option>
+                                            <option value="">D10 Tanglin / Holland / Bukit Timah</option>
+                                            <option value="">D11 Newton / Novena</option>
+                                            <option value="">D12 Balestier / Toa Payoh</option>
+                                            <option value="">D13 Macpherson / Potong Pasir</option>
+                                            <option value="">D14 Eunos / Geylang / Paya Lebar</option>
+                                            <option value="">D15 East Coast / Marine Parade</option>
+                                            <option value="">D16 Bedok / Upper East Coast</option>
+                                            <option value="">D17 Changi Airport / Changi Village</option>
+                                            <option value="">D18 Pasir Ris / Tampines</option>
+                                            <option value="">D19 Hougang / Punggol / Sengkang</option>
+                                            <option value="">D20 Ang Mo Kio / Bishan / Thomson</option>
+                                            <option value="">D21 Clementi Park / Upper Bukit Timah</option>
+                                            <option value="">D22 Boon Lay / Jurong / Tuas</option>
+                                            <option value="">D23 Dairy Farm / Bukit Panjang / Choa Chu Kang</option>
+                                            <option value="">D24 Lim Chu Kang / Tengah</option>
+                                            <option value="">D25 Admiralty / Woodlands</option>
+                                            <option value="">D26 Mandai / Upper Thomson</option>
+                                            <option value="">D27 Sembawang / Yishun</option>
+                                            <option value="">D28 Seletar / Yio Chu Kang</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- row -->
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="buy-buy_residence_type">Residence Type</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="buy_residence_type">
+                                            <option value="">Average Residence</option>
+                                            <option value="">Average HDB</option>
+                                            <option value="">1 to 2-Room HDB</option>
+                                            <option value="">3-Room HDB</option>
+                                            <option value="" selected>4-Room HDB</option>
+                                            <option value="">5-Room HDB & Executive Condo</option>
+                                            <option value="">Condominium</option>
+                                            <option value="">House & Lot</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- col-sm-6 -->
+                            <div class="col-sm-6 input-field">
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="buy-value" style="margin-top: -10px;">Max Property Price</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">SGD</div>
+                                            <input type="text" id="buy-value" value="560,000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="buy-mortgage" style="margin-top: -7px;">Mortgage Duration</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <input type="text" id="buy-mortgage" value="15">
+                                            <div class="input-group-addon">years</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- col-sm-6 -->
+                        </div> <!-- row -->
+
+
+                        <div class="row advanced" style="padding-top:1em;">
+                            <div class="col-xs-6">
+                                <h6 style="padding-bottom:0">FINANCING DOWNPAYMENT</h6>
+                                <div class="row">
+                                    <div class="input-field col-xs-12">
+                                        <input type="checkbox" id="financing-1" checked>
+                                        <label for="financing-1">$ 45,000 - Use CPF (Main)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col-xs-12">
+                                        <input type="checkbox" id="financing-2" checked>
+                                        <label for="financing-2">$ 35,000 - Use CPF (Jane)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col-xs-12">
+                                        <input type="checkbox" id="financing-3">
+                                        <label for="financing-3">$ 34,000 - Use Iron Reserve</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col-xs-12">
+                                        <input type="checkbox" id="financing-4">
+                                        <label for="financing-4">$ 14,000 - Use Brokerage</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col-xs-12">
+                                        <input type="checkbox" id="financing-5" checked>
+                                        <label for="financing-5">$ 36,000 - Use Cash</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 mortgage">
+                                <h6 style="margin-bottom:15px;padding-bottom:0;">MORTGAGE REPAYMENT</h6>
+                                <div class="row">
+                                    <div class="col-xs-7">Current Rental</i></div>
+                                    <div class="col-xs-5">$ 1,500</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7">Maximum Deposit</i></div>
+                                    <div class="col-xs-5">$ 116,000</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7">Mortgage Interest Rate</i></div>
+                                    <div class="col-xs-5">1.4%</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7">Transaction Cost</i></div>
+                                    <div class="col-xs-5">$ 11,600</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7">Max Monthly Repay</i></div>
+                                    <div class="col-xs-5">$ 4,500</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row search-wrapper">
+                            <div class="col-xs-6"><a style="font-size: 14px;font-weight: 300;line-height: 56px;" class="property-advanced">Advanced Options <i class="fa fa-angle-down"></i></a></div>
+                            <div class="col-xs-6 right"><a class="btn-sm btn-primary waves-effect show-result-buy" style="margin-right:0"><i class="fa fa-check-circle left"></i>SEARCH</a></div>
+                        </div>
+
+                        <div class="result-buy hidden">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tabs-3" id="nav-buy-tabs" role="tablist">
+                                <li class="nav-item active" style="margin-left:0">
+                                    <a class="nav-link active" data-toggle="tab" href="#result-property" role="tab">Properties</a>
+                                </li>
+                                <li class="nav-item" style="margin-left:0">
+                                    <a class="nav-link" data-toggle="tab" href="#result-mortgage" role="tab">Mortgage</a>
+                                </li>
+                                <li class="nav-item" style="margin-left:0">
+                                    <a class="nav-link" data-toggle="tab" href="#result-protection" role="tab">Protection</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active result-property" id="result-property" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <!-- Nav tabs -->
+                                            <ul class="vtabs" id="buy_property-tab" role="tablist">
+                                                <li class="vtab-item active">
+                                                    <a class="vtab-item-link waves-effect" data-toggle="tab" href="#vtab_propguru" role="tab">PropertyGuru (43)</a>
+                                                </li>
+                                                <li class="vtab-item">
+                                                    <a class="vtab-item-link waves-effect" data-toggle="tab" href="#vtab_iprop" role="tab">iProperty (23)</a>
+                                                </li>
+                                                <li class="vtab-item">
+                                                    <a class="vtab-item-link waves-effect" data-toggle="tab" href="#vtab_99co" role="tab">99.co (38)</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-9">
+                                            <div class="tab-content vertical">
+                                                <!--Panel 1-->
+                                                <div class="tab-pane fade in active" id="vtab_propguru" role="tabpanel">
+                                                    <img src="/Themes/4/Content/Images/partner-propertyguru.jpg" style="width:100%;margin-bottom:10px;border-radius:2px;" />
+                                                    <ul class="list-group result-list">
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item selected">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!--/.Panel 1-->
+                                                <!--Panel 2-->
+                                                <div class="tab-pane fade" id="vtab_iprop" role="tabpanel">
+                                                    <ul class="list-group result-list">
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!--/.Panel 2-->
+                                                <!--Panel 3-->
+                                                <div class="tab-pane fade" id="vtab_99co" role="tabpanel">
+                                                    <ul class="list-group result-list">
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                        <li href="#" class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-property.jpg" style="width:100%;" /></div>
+                                                                <div class="col-xs-6 list-group-desc"><strong>NorthWave EC</strong><br>HDB Apartment<br>Woodlands Avenue 12<br>990 sqft &#8226; 4 <i class="fa fa-bed"></i></div>
+                                                                <div class="col-xs-3 list-group-price">$ 540,000<a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!--/.Panel 3-->
+
+                                            </div>
+                                        </div><!-- col-sm-9 -->
+                                    </div><!-- row-->
+                                </div>
+                                <!--/.Properties Result-->
+                                <!-- Mortgage Result -->
+                                <div class="tab-pane fade result-mortgage" id="result-mortgage" role="tabpanel">
+                                    <table class="table table-hover center">
+                                        <thead>
+                                            <tr>
+                                                <th class="center">Duration <span data-toggle="tooltip" data-html="true" data-placement="top" title="This is the maximum loan tenure available for this rate"><i class="fa fa-info-circle"></i></span></th>
+                                                <th class="center">Initial Rate <span data-toggle="tooltip" data-html="true" data-placement="top" title="This is the interest rate used to calculate repayments at the start of the loan."><i class="fa fa-info-circle"></i></span></th>
+                                                <th class="center">Repayment <span data-toggle="tooltip" data-html="true" data-placement="top" title="This is the average monthly repayment over the period"><i class="fa fa-info-circle"></i></span></th>
+                                                <th class="center">Rate Type <span data-toggle="tooltip" data-html="true" data-placement="top" title="A variable rate loan will see your interest rates and repayments pegged to public rates like SIBOR or SOR or a banks internal board rates. A fixed rate loan will give you certainty on your repayments."><i class="fa fa-info-circle"></i></span></th>
+                                                <th class="center">Lock-in <span data-toggle="tooltip" data-html="true" data-placement="top" title="Lock-in packages tend to have better rates, but usually require you to pay a penalty if you make full or partial repayment or refinance the loan during the lock-in period."><i class="fa fa-info-circle"></i></span></th>
+                                                <th class="center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>15 years</td>
+                                                <td>1.08%</td>
+                                                <td>$ 4,816/month</td>
+                                                <td>Floating</td>
+                                                <td>None</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr class="selected z-depth-1" data-toggle="tooltip" data-placement="left" title="This is the best deal for you.">
+                                                <td>15 years</td>
+                                                <td>1.14%</td>
+                                                <td>$ 4,841/month</td>
+                                                <td>Floating</td>
+                                                <td>2 years</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>15 years</td>
+                                                <td>1.28%</td>
+                                                <td>$ 4,887/month</td>
+                                                <td>Fixed</td>
+                                                <td>None</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>17 years</td>
+                                                <td>1.58%</td>
+                                                <td>$ 4,995/month</td>
+                                                <td>Fixed</td>
+                                                <td>3 years</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>20 years</td>
+                                                <td>1.68%</td>
+                                                <td>$ 5,031/month</td>
+                                                <td>Fixed</td>
+                                                <td>1 year</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <center><a class="btn-sm btn-primary waves-effect">LOAD MORE</a></center>
+                                </div>
+                                <!--/.Mortgage Result-->
+                                <!-- Protection Result -->
+                                <div class="tab-pane fade result-protection" id="result-protection" role="tabpanel">
+                                    <table class="table table-hover center">
+                                        <thead>
+                                            <tr>
+                                                <th class="center">Name</th>
+                                                <th class="center">Annual Premium</th>
+                                                <th class="center">Coverage<br><small>(Fixtures & Renovations)</small></th>
+                                                <th class="center">Coverage<br><small>(Contents)</small></th>
+                                                <th class="center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Home (Standard)</td>
+                                                <td>$ 112.32</td>
+                                                <td>$ 50,000</td>
+                                                <td>$ 25,000</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire2-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Home (Classic)</td>
+                                                <td>$ 163.71</td>
+                                                <td>$ 80,000</td>
+                                                <td>$ 35,000</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire2-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr class="selected">
+                                                <td>Home (Deluxe)</td>
+                                                <td>$ 208.65</td>
+                                                <td>$ 100,000</td>
+                                                <td>$ 45,000</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire2-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Home (Superior)</td>
+                                                <td>$ 272.85</td>
+                                                <td>$ 150,000</td>
+                                                <td>$ 55,000</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire2-modal">ENQUIRE</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Home (Ultimate)</td>
+                                                <td>$ 353.10</td>
+                                                <td>$ 200,000</td>
+                                                <td>$ 70,000</td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire2-modal">ENQUIRE</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <center><a class="btn-sm btn-primary waves-effect">LOAD MORE</a></center>
+                                </div>
+                                <!--/.Protection Result-->
+                            </div> <!--/ .tab-content -->
+
+                            <div class="choice-summary">
+                                <h6 class="choice-summary-title">Here's a summary of your choices:</h6>
+                                <div class="choice-summary-content">
+                                    <div class="row">
+                                        <div class="col-sm-4 choice-box">
+                                            <h6 class="choice-box-title">PROPERTY</h6>
+                                            <div class="choice-box-text">
+                                                <strong>$ 540,000</strong><br>
+                                                <strong>NorthWave EC</strong><br>
+                                                HDB Apartment<br>
+                                                Woodlands Avenue 12<br>
+                                                990 sqft &#8226; 4 <i class="fa fa-bed"></i>
+                                            </div> <!-- .choice-box-text -->
+                                        </div>
+                                        <div class="col-sm-4 choice-box">
+                                            <h6 class="choice-box-title">MORTGAGE</h6>
+                                            <div class="choice-box-text">
+                                                15 years Max Duration<br>
+                                                1.14% Initial Rate<br>
+                                                $ 4,841/month Repayment<br>
+                                                Floating Rate<br>
+                                                2 years Lock-in
+                                            </div> <!-- .choice-box-text -->
+                                        </div>
+                                        <div class="col-sm-4 choice-box">
+                                            <h6 class="choice-box-title">PROTECTION</h6>
+                                            <div class="choice-box-text">
+                                                Home (Deluxe)<br>
+                                                $ 208.65 Annual Premium<br>
+                                                $ 100,000 Coverage (Fixtures, Renovations)<br>
+                                                $ 45,000 Coverage (contents)<br>
+                                            </div> <!-- .choice-box-text -->
+                                        </div>
+                                    </div>
+                                </div> <!-- .choice-summary-content -->
+                                <div class="choice-summary-footer"><a class="btn-sm btn-primary waves-effect" style="margin-right:0" data-toggle="modal" data-target="#residence-modal" onclick="OpenAddDreamDialog(1);"><i class=" fa fa-plus-square left"></i>ADD THIS TO MY TIMELINE</a></div>
+                            </div> <!-- .choice-summary -->
+                        </div>
+
+                    </div> <!-- buy-search-results -->
+                </div>
+            </div>
+
+        </div> <!-- panel-body -->
+        <div class="panel-footer savings">
+            <h6>RATE THIS SECTION</h6>
+            <a class="waves-effect" data-toggle="modal" data-target="#rating-modal">
+                <fieldset class="rating waves-effect">
+                    <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="5 stars"></label>
+                    <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="4 stars"></label>
+                    <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="3 stars"></label>
+                    <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="2 stars"></label>
+                    <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="1 star"></label>
+                </fieldset>
+            </a>
+        </div>
+    </div>
+</div><!-- panel-group -->
+
+
+
+<div class="modal fade" id="enquire-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Send an Enquiry</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>Your data privacy is of utmost importance to us.</strong></p>
+                        By selecting <strong>"anonymized,"</strong> only generic data will be sent to our partners.<br>At no point in time will your enquiry be linked to you.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 btn-group">
+                        <center>
+                            <button id="enquire-btn1" type="button" class="btn btn-primary waves-effect" style="margin-right:0">ANONYMIZED</button>
+                            <button id="enquire-btn2" type="button" class="btn btn-white waves-effect" style="margin-left:-4px">DISCLOSED</button>
+                        </center>
+                    </div>
+                </div>
+                <div class="row disclosed hidden">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_name" value="John Doe">
+                        <label for="enquiry_name" class="active">Name*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <input type="email" id="enquiry_email" value="john.doe@gmail.com">
+                        <label for="enquiry_email" class="active">Email*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_number" value="+65 123456789">
+                        <label for="enquiry_number" class="active">Phone Number*</label>
+                    </div>
+                </div>
+                <div class="row disclosed hidden">
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_gender">
+                            <option value="" selected>Male</option>
+                            <option value="">Female</option>
+                        </select>
+                        <label for="enquiry_gender">Gender</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="profile_employment">
+                            <option value="">Not Employed</option>
+                            <option value="" selected>Professional</option>
+                            <option value="">Senior Manager</option>
+                            <option value="">Retired</option>
+                        </select>
+                        <label for="profile_employment">Occupation</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_age" value="35">
+                        <label for="enquiry_age" class="active">Age*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_salary">
+                            <option value="">1,000 - 2,999</option>
+                            <option value="" selected>3,000 - 5,999</option>
+                            <option value="">6,000 - 7,999</option>
+                            <option value="">8,000 - 9,999</option>
+                            <option value="">10,000 - 14,000</option>
+                            <option value="">15,000 above</option>
+                        </select>
+                        <label for="enquiry_salary">Salary Range*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_mstatus">
+                            <option value="">Single</option>
+                            <option value="" selected>Married</option>
+                        </select>
+                        <label for="enquiry_mstatus">Marital Status*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_number" value="$ 400,000">
+                        <label for="enquiry_number" class="active">Mortgage*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_number" value="$ 100,000">
+                        <label for="enquiry_number" class="active">Down Payment*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_date">
+                            <option value="" selected>Today</option>
+                            <option value="">1 Month</option>
+                            <option value="">3 Months</option>
+                            <option value="">6 Months</option>
+                            <option value="">1 Year</option>
+                            <option value="">2 Years</option>
+                            <option value="">3 Years</option>
+                            <option value="">4 Years</option>
+                            <option value="">5 Years</option>
+                            <option value="">6 Years</option>
+                            <option value="">7 Years</option>
+                            <option value="">8 Years</option>
+                            <option value="">9 Years</option>
+                            <option value="">10 Years</option>
+                        </select>
+                        <label for="enquiry_date">Acquisition Date*</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-signup" data-dismiss="modal">CANCEL</a>
+                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="margin-left: 10px;">SEND ENQUIRY</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="enquire2-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Send an Enquiry</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>Your data privacy is of utmost importance to us.</strong></p>
+                        By selecting <strong>"anonymized,"</strong> only generic data will be sent to our partners.<br>At no point in time will your enquiry be linked to you.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 btn-group">
+                        <center>
+                            <button id="enquire2-btn1" type="button" class="btn btn-primary waves-effect" style="margin-right:0">ANONYMIZED</button>
+                            <button id="enquire2-btn2" type="button" class="btn btn-white waves-effect" style="margin-left:-4px">DISCLOSED</button>
+                        </center>
+                    </div>
+                </div>
+                <div class="row disclosed2 hidden">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_name" value="John Doe">
+                        <label for="enquiry_name" class="active">Name*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <input type="email" id="enquiry_email" value="john.doe@gmail.com">
+                        <label for="enquiry_email" class="active">Email*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_number" value="+65 123456789">
+                        <label for="enquiry_number" class="active">Phone Number*</label>
+                    </div>
+                </div>
+                <div class="row disclosed2 hidden">
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_gender">
+                            <option value="" selected>Male</option>
+                            <option value="">Female</option>
+                        </select>
+                        <label for="enquiry_gender">Gender</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="profile_employment">
+                            <option value="">Not Employed</option>
+                            <option value="" selected>Professional</option>
+                            <option value="">Senior Manager</option>
+                            <option value="">Retired</option>
+                        </select>
+                        <label for="profile_employment">Occupation</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_age" value="35">
+                        <label for="enquiry_age" class="active">Age*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_salary">
+                            <option value="">1,000 - 2,999</option>
+                            <option value="" selected>3,000 - 5,999</option>
+                            <option value="">6,000 - 7,999</option>
+                            <option value="">8,000 - 9,999</option>
+                            <option value="">10,000 - 14,000</option>
+                            <option value="">15,000 above</option>
+                        </select>
+                        <label for="enquiry_salary">Salary Range*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_mstatus">
+                            <option value="">Single</option>
+                            <option value="" selected>Married</option>
+                        </select>
+                        <label for="enquiry_mstatus">Marital Status*</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 input-field">
+                        <input type="text" id="enquiry_number" disabled value="Home (Deluxe)">
+                        <label for="enquiry_number" class="active">Protection Name*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_date">
+                            <option value="" selected>Today</option>
+                            <option value="">1 Month</option>
+                            <option value="">3 Months</option>
+                            <option value="">6 Months</option>
+                            <option value="">1 Year</option>
+                            <option value="">2 Years</option>
+                            <option value="">3 Years</option>
+                            <option value="">4 Years</option>
+                            <option value="">5 Years</option>
+                            <option value="">6 Years</option>
+                            <option value="">7 Years</option>
+                            <option value="">8 Years</option>
+                            <option value="">9 Years</option>
+                            <option value="">10 Years</option>
+                        </select>
+                        <label for="enquiry_date">Acquisition Date*</label>
+                    </div>
+                    <div class="col-xs-4 input-field">
+                        <select id="enquiry_duration">
+                            <option value="" selected>1 Year</option>
+                            <option value="">2 Years</option>
+                            <option value="">3 Years</option>
+                            <option value="">4 Years</option>
+                            <option value="">5 Years</option>
+                            <option value="">6 Years</option>
+                            <option value="">7 Years</option>
+                            <option value="">8 Years</option>
+                            <option value="">9 Years</option>
+                            <option value="">10 Years</option>
+                        </select>
+                        <label for="enquiry_duration">Duration</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn-signup" data-dismiss="modal">CANCEL</a>
+                <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="margin-left: 10px;">SEND ENQUIRY</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#property select').material_select();
+        /* Initialize Tooltips */
+        $('[data-toggle="tooltip"]').tooltip();
+
+        /* Initialize Tabs */
+        //$('#buy_property-tab a,#nav-buy-tabs a').click(function (e) {
+        //    e.preventDefault();
+        //    $(this).tab('show')
+        //})
+        /* Initialize Tabs */
+        $('.vtabs a,.nav-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show')
+        })
+
+        /* Initialize Date Picker */
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+
+       
+
+       
+
+        /* Animate Summary Cards */
+        $('.summary-cards a').click(function () {
+            /*
+            var thisCard = $(this);
+            if (thisCard.find('div.selected').length != 0) {
+                $('.panel-group.collapse.in').collapse('hide');
+                $('.summary-card').removeClass('selected').removeClass('unselected');
+            } else {
+                $('.summary-card').removeClass('selected').removeClass('unselected');
+
+                $(thisCard).children().addClass("selected");
+
+                $('.summary-card').not('selected').addClass('unselected');
+
+                $('.panel-group.collapse.in').collapse('hide');
+                setTimeout(function () {
+                    // Initialize Swiper
+                    var swiper = new Swiper('.swiper-container', {
+                        pagination: '.swiper-pagination',
+                        effect: 'coverflow',
+                        grabCursor: true,
+                        centeredSlides: true,
+                        slidesPerView: '1.18',
+                        loop: true,
+                        keyboardControl: true,
+                        coverflow: {
+                            rotate: 40,
+                            stretch: 1,
+                            modifier: 1,
+                            slideShadows: false
+                        }
+                    });
+                }, 1000);
+                $('html, body').animate({ scrollTop: $('.tools').offset().top - 125 }, 1000);
+            }
+            */
+        });
+
+        $('.panel-heading.main .panel-close').click(function () {
+            $('.summary-card').removeClass('unselected').removeClass('selected');
+        });
+
+        ///* Property: Toggle BuyvsRent & Buy */
+        $('.card.buy').click(function () {
+            $('.card.buyvsrent').removeClass("active");
+            $(this).addClass("active");
+            $('.buyvsrent-tools').addClass("hidden");
+            $('.buy-tools').removeClass("hidden");
+        });
+        $('.card.buyvsrent').click(function () {
+            $('.card.buy').removeClass("active");
+            $(this).addClass("active");
+            $('.buy-tools').addClass("hidden");
+            $('.buyvsrent-tools').removeClass("hidden");
+        });
+
+        ///* Property: Advanced Options */
+        $('.property-advanced').click(function () {
+            $thisBtn = $(this);
+            if ($thisBtn.hasClass("active")) {
+                $('#property .advanced').slideUp();
+                $thisBtn.removeClass("active");
+                $('.property-advanced i').removeClass("fa-angle-up").addClass("fa-angle-down");
+
+            } else {
+                $('#property .advanced').slideDown();
+                $thisBtn.addClass("active");
+                $('.property-advanced i').removeClass("fa-angle-down").addClass("fa-angle-up");
+            }
+
+        });
+
+        ///* Property: Show BuyvsRent Result */
+        $('.show-result-buyvsrent').click(function () {
+            $('.result-buyvsrent').fadeIn();
+            $('.result-buyvsrent').removeClass("hidden");
+        });
+
+        ///* Property: Show Buy Result */
+        $('.show-result-buy').click(function () {
+            $('.result-buy').fadeIn();
+            $('.result-buy').removeClass("hidden");
+        });
+
+        $('#property-btn1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#property-btn2').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+        $('#property-btn2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#property-btn1').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+        $('#enquire-btn1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#enquire-btn2').removeClass("btn-primary").addClass("btn-white");
+                $('.disclosed').slideUp().addClass("hidden");
+            }
+        });
+        $('#enquire-btn2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#enquire-btn1').removeClass("btn-primary").addClass("btn-white");
+                $('.disclosed').removeClass("hidden").slideDown();
+            }
+        });
+        /* Toggle saving rates switch */
+        $('#savrates-btn1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#savrates-btn2').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+        $('#savrates-btn2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#savrates-btn1').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+
+
+        $('#residence_existing').change(function () {
+            if (this.checked) {
+                $(".residence-age, .residence-trxcost").hide();
+                $(".residence-value label").html("Current Value");
+                $(".residence-deposit label").html("Remaining Debt");
+                $(".residence-mduration label").html("Remaining Loan Duration");
+                $(".residence-rental label").html("I am renting out this property");
+                $(".residence-value, .residence-deposit").removeClass("col-xs-6").addClass("col-xs-12");
+            } else {
+                $(".residence-age, .residence-trxcost").show();
+                $(".residence-value label").html("Total Value");
+                $(".residence-deposit label").html("Deposit Rate");
+                $(".residence-mduration label").html("Mortgage Duration");
+                $(".residence-rental label").html("I will rent out this property");
+                $(".residence-value, .residence-deposit").removeClass("col-xs-12").addClass("col-xs-6");
+            }
+        });
+
+        /* Toggle percent-absolute values */
+
+        $(".input-group-addon.absolute,.input-group-addon.percent").click(function () {
+            var $this = $(this);
+            if ($this.hasClass("absolute")) {
+                $this.parent().removeClass("absolute").addClass("percent");
+            } else {
+                $this.parent().removeClass("percent").addClass("absolute");
+            }
+        });
+        $('#enquire2-btn1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#enquire2-btn2').removeClass("btn-primary").addClass("btn-white");
+                $('.disclosed2').slideUp().addClass("hidden");
+            }
+        });
+        $('#enquire2-btn2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#enquire2-btn1').removeClass("btn-primary").addClass("btn-white");
+                $('.disclosed2').removeClass("hidden").slideDown();
+            }
+        });
+    });
+</script>

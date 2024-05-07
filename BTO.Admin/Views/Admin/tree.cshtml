@@ -1,0 +1,133 @@
+﻿<script type="text/ng-template" id="tree_item_renderer.html">
+    <div>
+        {{data.name}}         
+    </div>
+    <button ng-click="add(data)">Add node</button>
+    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+        <ul>
+            <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
+        </ul>
+</script>
+
+@*<ul ng-app="Application" ng-controller="TreeController">
+    <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+</ul>*@
+
+
+
+
+<div class="overflow" >
+    <div>
+        <ul ng-app="Application" ng-controller="TreeController" class="tree">
+            <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+        </ul>
+
+        @*<ul class="tree">
+            <li>
+                <div>1</div>
+ 
+                <ul>
+                    <li>
+                        <div>1.1</div>
+                        <ul>
+                            <li>
+                                <div>1.1.1</div>
+                            </li>
+                            <li>
+                                <div>1.1.2</div>
+                            </li>
+                            <li>
+                                <div>1.1.3</div>
+                                <ul>
+                                    <li>
+                                        <div>1.1.3.1</div>
+                                        <ul>
+                                            <li>
+                                                <div>1.1.3.1.1</div>
+                                            </li>
+                                            <li>
+                                                <div>1.1.3.1.2</div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div>1.1.3.1</div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div>1.2</div>
+                        <ul>
+                            <li>
+                                <div>1.2.1</div>
+                            </li>
+                            <li>
+                                <div>1.2.2</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div>1.3</div>
+                        <ul>
+                            <li>
+                                <div>1.3.1</div>
+                            </li>
+                            <li>
+                                <div>1.3.2</div>
+                            </li>
+                            <li>
+                                <div>1.3.3</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div>1.4</div>
+                        <ul>
+                            <li>
+                                <div>1.4.1</div>
+                            </li>
+                            <li>
+                                <div>1.4.2</div>
+                            </li>
+                            <li>
+                                <div>1.4.3</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div>1.5</div>
+                        <ul>
+                            <li>
+                                <div>1.5.1</div>
+                            </li>
+                            <li>
+                                <div>1.5.2</div>
+                            </li>
+                            <li>
+                                <div>1.5.3</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>*@
+    </div>
+</div>
+
+<script>
+        $(document).ready(function () {
+            $('.tree').tree_structure({
+                'add_option': true,
+                'edit_option': true,
+                'delete_option': true,
+                'confirm_before_delete': true,
+                'animate_option': [true, 5],
+                'fullwidth_option': false,
+                'align_option': 'center',
+                'draggable_option': true
+            });
+        });
+</script>
+

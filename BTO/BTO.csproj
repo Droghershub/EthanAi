@@ -1,0 +1,1792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTO</RootNamespace>
+    <AssemblyName>BTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44305</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <ApplicationInsightsResourceId>/subscriptions/826adf31-7a77-4512-a6bc-6060c2f80087/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/BTO</ApplicationInsightsResourceId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.SignalR">
+      <HintPath>..\packages\Autofac.SignalR.3.0.2\lib\net40\Autofac.Integration.SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="LinkedIn.Api.Client.Core">
+      <HintPath>..\packages\LinkedIn.1.3.3\lib\net45\LinkedIn.Api.Client.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LinkedIn.Api.Client.Owin">
+      <HintPath>..\packages\LinkedIn.1.3.3\lib\net45\LinkedIn.Api.Client.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Hammock.ClientProfile">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Redis">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Redis.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin.Security.Providers">
+      <HintPath>..\packages\Owin.Security.Providers.1.7.0\lib\net45\Owin.Security.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName">
+      <HintPath>..\packages\StackExchange.Redis.StrongName.1.0.322\lib\net45\StackExchange.Redis.StrongName.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=__MvcPagesVersion__, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\ImportFileController.cs" />
+    <Compile Include="API\InvitationController.cs" />
+    <Compile Include="API\ImageManagementController.cs" />
+    <Compile Include="API\ManageUserController.cs" />
+    <Compile Include="API\CashFlowController.cs" />
+    <Compile Include="API\NewsController.cs" />
+    <Compile Include="API\NotificationsController.cs" />
+    <Compile Include="API\UserFeedbackController.cs" />
+    <Compile Include="API\UserRatingController.cs" />
+    <Compile Include="API\UserManagementController.cs" />
+    <Compile Include="API\ParameterController.cs" />
+    <Compile Include="API\SharingController.cs" />
+    <Compile Include="API\ClientTrackingController.cs" />
+    <Compile Include="API\TutorialController.cs" />
+    <Compile Include="API\UserProfileController.cs" />
+    <Compile Include="API\DreamController.cs" />
+    <Compile Include="API\CommonController.cs" />
+    <Compile Include="API\PersonaPlanController.cs" />
+    <Compile Include="API\SolutionApiController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\GlobalConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admins\AdminsAreaRegistration.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="Helper\PaypalFunctions.cs" />
+    <Compile Include="Helper\RegisterHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CalculateModel.cs" />
+    <Compile Include="Models\CsvExport.cs" />
+    <Compile Include="Models\ExportTrackingThread.cs" />
+    <Compile Include="Models\Rule.cs" />
+    <Compile Include="Models\Contrainst.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelProviderLogin.cs" />
+    <Compile Include="Models\Ultils.cs" />
+    <Compile Include="Modules\BTOActionDataWebApiFilter.cs" />
+    <Compile Include="Modules\BTOActionFilter.cs" />
+    <Compile Include="Modules\BTOActionWebApiFilter.cs" />
+    <Compile Include="Modules\BTOAPIActionFilter.cs" />
+    <Compile Include="Modules\BTOAPIAdminFilter.cs" />
+    <Compile Include="Modules\BTOAPIAuthorizeAttribute.cs" />
+    <Compile Include="Modules\BTOAPIController.cs" />
+    <Compile Include="Modules\BTOController.cs" />
+    <Compile Include="Modules\EFModule.cs" />
+    <Compile Include="Modules\ExceptionAPIFilterAttribute.cs" />
+    <Compile Include="Modules\RateLimitAttribute.cs" />
+    <Compile Include="Modules\RepositoryModule.cs" />
+    <Compile Include="Modules\ServiceModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShareScreen\ControllerHub.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\excel_files\index.html" />
+    <Content Include="Content\bootstrap-social.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bto.css" />
+    <Content Include="Content\custom-control.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\data\country.js" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\add.png" />
+    <Content Include="Content\images\arrow-down.png" />
+    <Content Include="Content\images\arrow2_lb.jpg" />
+    <Content Include="Content\images\arrow_lb.jpg" />
+    <Content Include="Content\images\avatar.png" />
+    <Content Include="Content\images\banking.jpg" />
+    <Content Include="Content\images\chart-1.png" />
+    <Content Include="Content\images\chart-2.png" />
+    <Content Include="Content\images\chart-illiquid.jpg" />
+    <Content Include="Content\images\chart-income_expenses.jpg" />
+    <Content Include="Content\images\chart-liquid.jpg" />
+    <Content Include="Content\images\chart-retirement.jpg" />
+    <Content Include="Content\images\chart-summary.jpg" />
+    <Content Include="Content\images\children_independent.png" />
+    <Content Include="Content\images\close.png" />
+    <Content Include="Content\images\comparison.jpg" />
+    <Content Include="Content\images\default-education.jpg" />
+    <Content Include="Content\images\default-expenses.jpg" />
+    <Content Include="Content\images\default-income.jpg" />
+    <Content Include="Content\images\default-independent.jpg" />
+    <Content Include="Content\images\default-residence.jpg" />
+    <Content Include="Content\images\Dream.jpg" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\education.png" />
+    <Content Include="Content\images\email_assets\banner1.jpg" />
+    <Content Include="Content\images\email_assets\logo.jpg" />
+    <Content Include="Content\images\email_assets\logo2.jpg" />
+    <Content Include="Content\images\exceptional_expense.png" />
+    <Content Include="Content\images\exception_income.png" />
+    <Content Include="Content\images\grab.png" />
+    <Content Include="Content\images\graph.png" />
+    <Content Include="Content\images\greenpig.png" />
+    <Content Include="Content\images\height-medium-low.jpg" />
+    <Content Include="Content\images\highlight.png" />
+    <Content Include="Content\images\home_dream.png" />
+    <Content Include="Content\images\Life_events.jpg" />
+    <Content Include="Content\images\login-bg.jpg" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\openhand.cur" />
+    <Content Include="Content\images\pig.png" />
+    <Content Include="Content\images\pig_lb.jpg" />
+    <Content Include="Content\images\plus.png" />
+    <Content Include="Content\images\reset_plan.png" />
+    <Content Include="Content\images\residence_sale.png" />
+    <Content Include="Content\images\saving-rate-donut.png" />
+    <Content Include="Content\images\slider-1.png" />
+    <Content Include="Content\images\slider-2.png" />
+    <Content Include="Content\images\slider-3.png" />
+    <Content Include="Content\images\slider-4.png" />
+    <Content Include="Content\images\slider-5.png" />
+    <Content Include="Content\images\slider-6-alt.png" />
+    <Content Include="Content\images\slider-6.png" />
+    <Content Include="Content\images\slider-7.png" />
+    <Content Include="Content\images\slider-8.png" />
+    <Content Include="Content\images\spouse_retire.png" />
+    <Content Include="Content\images\retire.png" />
+    <Content Include="Content\images\saving_deleted.png" />
+    <Content Include="Content\images\start_playback.png" />
+    <Content Include="Content\images\timeline-alt.jpg" />
+    <Content Include="Content\images\timeline-bg.jpg" />
+    <Content Include="Content\images\timeline.jpg" />
+    <Content Include="Content\images\timeline.png" />
+    <Content Include="Content\images\timeline_background.png" />
+    <Content Include="Content\images\trash_lb.jpg" />
+    <Content Include="Content\images\trash_lb_big.jpg" />
+    <Content Include="Content\drop-drap-control.css" />
+    <Content Include="Content\images\zoom.png" />
+    <Content Include="Content\newSite.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\treasure-overlay-spinner.css" />
+    <Content Include="EmailTemplates\ConfirmAccount.html" />
+    <Content Include="EmailTemplates\ReportTracking.html" />
+    <Content Include="EmailTemplates\ResetPassword.html" />
+    <Content Include="EmailTemplates\RegisterAccount.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="LinkedIn_API_ReadMe.txt" />
+    <Content Include="Scripts\ai.1.0.0-build00159.js" />
+    <Content Include="Scripts\ai.1.0.0-build00159.min.js" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-touch.js" />
+    <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bto.js" />
+    <Content Include="Scripts\bto\btoAppNotLogin.js" />
+    <Content Include="Scripts\bto\btoApp.js" />
+    <Content Include="Scripts\bto\controller\IlliquidAssetController.js" />
+    <Content Include="Scripts\bto\data\country.js" />
+    <Content Include="Scripts\bto\service\zoomService.js" />
+    <Content Include="Scripts\bto\timelineFunctions.js" />
+    <Content Include="Scripts\bto\utils.js" />
+    <Content Include="Scripts\bto\controller\IncomeExpeneseController.js" />
+    <Content Include="Scripts\bto\controller\mainController.js" />
+    <Content Include="Scripts\bto\controller\RankingDreamController.js" />
+    <Content Include="Scripts\bto\controller\ScenarioController.js" />
+    <Content Include="Scripts\bto\controller\SharingController.js" />
+    <Content Include="Scripts\bto\controller\SolutionController.js" />
+    <Content Include="Scripts\bto\directive\gaugeDirective.js" />
+    <Content Include="Scripts\bto\directive\progressBarDirective.js" />
+    <Content Include="Scripts\bto\directive\tableDirective.js" />
+    <Content Include="Scripts\bto\directive\timelinedirective.js" />
+    <Content Include="Scripts\bto\directive\directive.js" />
+    <Content Include="Scripts\bto\service\sharing.js" />
+    <Content Include="Scripts\bto\service\models.js" />
+    <Content Include="Scripts\bto\service\common.js" />
+    <Content Include="Scripts\bto\service\personaplan.js" />
+    <Content Include="Scripts\bto\service\playbackService.js" />
+    <Content Include="Scripts\bto\service\profileService.js" />
+    <Content Include="Scripts\bto\timelineControl.js" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\translates\en.json" />
+    <Content Include="Content\translates\fr.json" />
+    <Content Include="Areas\Admins\Views\web.config" />
+    <Content Include="Areas\Admins\Views\Shared\Error.cshtml" />
+    <Content Include="Scripts\jquery-2.2.4.js" />
+    <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Scripts\newBto\btoApp.js" />
+    <Content Include="Scripts\newBto\btoConfig.js" />
+    <Content Include="Scripts\newBto\btoScriptExtentions.js" />
+    <Content Include="Scripts\newBto\controller\btoIlliquidAssetController.js" />
+    <Content Include="Scripts\newBto\controller\btoIncomeExpenseController.js" />
+    <Content Include="Scripts\newBto\controller\btoLiquidAssetController.js" />
+    <Content Include="Scripts\newBto\controller\btoScenarioController.js" />
+    <Content Include="Scripts\newBto\controller\btoSolutionController.js" />
+    <Content Include="Scripts\newBto\controller\btoMainController.js" />
+    <Content Include="Scripts\newBto\controller\btoRankingDreamController.js" />
+    <Content Include="Scripts\newBto\controller\btoSharingSessionController.js" />
+    <Content Include="Scripts\newBto\directive\directiveCommon.js" />
+    <Content Include="Scripts\newBto\directive\directiveGaugeChart.js" />
+    <Content Include="Scripts\newBto\directive\directiveProgressBar.js" />
+    <Content Include="Scripts\newBto\directive\directiveTable.js" />
+    <Content Include="Scripts\newBto\service\serviceAction.js" />
+    <Content Include="Scripts\newBto\service\servicePlayback.js" />
+    <Content Include="Scripts\newBto\service\serviceProfile.js" />
+    <Content Include="Scripts\newBto\service\serviceChart.js" />
+    <Content Include="Scripts\newBto\service\serviceInvitation.js" />
+    <Content Include="Scripts\newBto\service\serviceSharing.js" />
+    <Content Include="Scripts\newBto\service\serviceUser.js" />
+    <Content Include="Scripts\newBto\service\serviceAccount.js" />
+    <Content Include="Scripts\newBto\service\servicePersonalPlan.js" />
+    <Content Include="Scripts\newBto\service\serviceStarting.js" />
+    <Content Include="Scripts\newBto\service\serviceManual.js" />
+    <Content Include="Scripts\newBto\service\serviceRating.js" />
+    <Content Include="Scripts\newBto\service\serviceUtil.js" />
+    <Content Include="Scripts\thirdparty\angular-bootstrap-datepicker\angular-bootstrap-datepicker.css" />
+    <Content Include="Scripts\thirdparty\angular-bootstrap-datepicker\angular-bootstrap-datepicker.js" />
+    <Content Include="Scripts\thirdparty\angular-carousel\angular-carousel.css" />
+    <Content Include="Scripts\thirdparty\angular-carousel\angular-carousel.js" />
+    <Content Include="Scripts\thirdparty\ng-img-crop.js" />
+    <Content Include="Scripts\thirdparty\ngWebSocket.js" />
+    <Content Include="Themes\4\content-bottom.html" />
+    <Content Include="Themes\4\Content\bto.css" />
+    <Content Include="Themes\4\Content\custom.css" />
+    <Content Include="Themes\4\Content\Dialog\ChangeValueDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\ConfirmDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\DreamDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\IronReserveInvesment.html" />
+    <Content Include="Themes\4\Content\Dialog\LifeEventDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\UpdateAccount.html" />
+    <Content Include="Themes\4\Content\Dialog\ManageAccount.html" />
+    <Content Include="Themes\4\Content\Dialog\ManageAvatar.html" />
+    <Content Include="Themes\4\Content\Dialog\ManageRating.html" />
+    <Content Include="Themes\4\Content\Dialog\ManageScenarios.html" />
+    <Content Include="Themes\4\Content\Dialog\ManageSolution.html" />
+    <Content Include="Themes\4\Content\Dialog\PlaybackSession.html" />
+    <Content Include="Themes\4\Content\Dialog\ProfileDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\Invitation.html" />
+    <Content Include="Themes\4\Content\Dialog\RatingDialog.html" />
+    <Content Include="Themes\4\Content\Dialog\RightColumn.html" />
+    <Content Include="Themes\4\Content\Dialog\SharingSession.html" />
+    <Content Include="Themes\4\Content\Dialog\StartAgeDialog.html" />
+    <Content Include="Themes\4\Content\drop-drap-control.css" />
+    <Content Include="Themes\4\Content\ie.css" />
+    <Content Include="Themes\4\Content\Images\avatar-circle.png" />
+    <Content Include="Themes\4\Content\Images\avatar.png" />
+    <Content Include="Themes\4\Content\Images\blue.png" />
+    <Content Include="Themes\4\Content\Images\chart-1.png" />
+    <Content Include="Themes\4\Content\Images\chart-2.png" />
+    <Content Include="Themes\4\Content\Images\chart-retirement-rank.jpg" />
+    <Content Include="Themes\4\Content\Images\default-education.jpg" />
+    <Content Include="Themes\4\Content\Images\default-expenses.jpg" />
+    <Content Include="Themes\4\Content\Images\default-income.jpg" />
+    <Content Include="Themes\4\Content\Images\default-independent.jpg" />
+    <Content Include="Themes\4\Content\Images\default-residence.jpg" />
+    <Content Include="Themes\4\Content\Images\dot-age.png" />
+    <Content Include="Themes\4\Content\Images\dot-dream.png" />
+    <Content Include="Themes\4\Content\Images\dot-lifeevent.png" />
+    <Content Include="Themes\4\Content\Images\grab.png" />
+    <Content Include="Themes\4\Content\Images\graph.png" />
+    <Content Include="Themes\4\Content\Images\green.png" />
+    <Content Include="Themes\4\Content\Images\grid.png" />
+    <Content Include="Themes\4\Content\Images\login-bg.jpg" />
+    <Content Include="Themes\4\Content\Images\logo.jpg" />
+    <Content Include="Themes\4\Content\Images\logo.png" />
+    <Content Include="Themes\4\Content\Images\mock-education-insurance.png" />
+    <Content Include="Themes\4\Content\Images\mock-education-map.png" />
+    <Content Include="Themes\4\Content\Images\mock-property.jpg" />
+    <Content Include="Themes\4\Content\Images\mock-school.jpg" />
+    <Content Include="Themes\4\Content\Images\openhand.cur" />
+    <Content Include="Themes\4\Content\Images\partner-propertyguru.jpg" />
+    <Content Include="Themes\4\Content\Images\placeholder-buyvsrent.png" />
+    <Content Include="Themes\4\Content\Images\red.png" />
+    <Content Include="Themes\4\Content\Images\saving-rate-donut.png" />
+    <Content Include="Themes\4\Content\Images\slider-1.png" />
+    <Content Include="Themes\4\Content\Images\slider-2.png" />
+    <Content Include="Themes\4\Content\Images\slider-3.png" />
+    <Content Include="Themes\4\Content\Images\slider-4.png" />
+    <Content Include="Themes\4\Content\Images\slider-5.png" />
+    <Content Include="Themes\4\Content\Images\timeline-alt.jpg" />
+    <Content Include="Themes\4\Content\Images\timeline.jpg" />
+    <Content Include="Themes\4\Content\Images\timelinev3-bg.jpg" />
+    <Content Include="Themes\4\Content\Images\trash.png" />
+    <Content Include="Themes\4\Content\img\16\delete.png" />
+    <Content Include="Themes\4\Content\img\16\moveleft.png" />
+    <Content Include="Themes\4\Content\img\16\moveright.png" />
+    <Content Include="Themes\4\Content\img\16\new.png" />
+    <Content Include="Themes\4\Content\img\16\zoomin.png" />
+    <Content Include="Themes\4\Content\img\16\zoomout.png" />
+    <Content Include="Themes\4\Content\img\24\delete.png" />
+    <Content Include="Themes\4\Content\img\24\moveleft.png" />
+    <Content Include="Themes\4\Content\img\24\moveright.png" />
+    <Content Include="Themes\4\Content\img\24\new.png" />
+    <Content Include="Themes\4\Content\img\24\zoomin.png" />
+    <Content Include="Themes\4\Content\img\24\zoomout.png" />
+    <Content Include="Themes\4\Content\img\32\delete.png" />
+    <Content Include="Themes\4\Content\img\32\moveleft.png" />
+    <Content Include="Themes\4\Content\img\32\moveright.png" />
+    <Content Include="Themes\4\Content\img\32\new.png" />
+    <Content Include="Themes\4\Content\img\32\zoomin.png" />
+    <Content Include="Themes\4\Content\img\32\zoomout.png" />
+    <Content Include="Themes\4\Content\img\black-10p.png" />
+    <Content Include="Themes\4\Content\img\cluster_bg.png" />
+    <Content Include="Themes\4\Content\img\deleteEvent.png" />
+    <Content Include="Themes\4\Content\img\pin-circle-grey.png" />
+    <Content Include="Themes\4\Content\img\pin-circle.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\buttonbg.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\icon_color_arrow.gif" />
+    <Content Include="Themes\4\Content\img\themeswitcher\menuhoverbg.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_black_matte.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_black_tie.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_blitzer.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_cupertino.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_dark_hive.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_dot_luv.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_eggplant.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_excite_bike.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_flick.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_hot_sneaks.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_humanity.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_le_frog.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_mint_choco.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_overcast.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_pepper_grinder.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_smoothness.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_south_street.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_start_menu.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_sunny.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_swanky_purse.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_trontastic.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_ui_dark.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_ui_light.png" />
+    <Content Include="Themes\4\Content\img\themeswitcher\theme_90_windoze.png" />
+    <Content Include="Themes\4\Content\img\timeline-alt.jpg" />
+    <Content Include="Themes\4\Content\img\timeline-bg.jpg" />
+    <Content Include="Themes\4\Content\img\timelinev2-bg.jpg" />
+    <Content Include="Themes\4\Content\ng-img-crop.css" />
+    <Content Include="Themes\4\Content\style.css" />
+    <Content Include="Themes\4\Content\swiper.css" />
+    <Content Include="Themes\4\Content\swiper.min.css" />
+    <Content Include="Themes\4\Content\theme-customize.css" />
+    <Content Include="Themes\4\Content\timeline.css" />
+    <Content Include="Themes\4\font\fontawesome-webfont.svg" />
+    <Content Include="Themes\4\footer.html" />
+    <Content Include="Themes\4\Education.html" />
+    <Content Include="Themes\4\PropertyPurchase.html" />
+    <Content Include="Themes\4\quicksettings.html" />
+    <Content Include="Themes\4\header.html" />
+    <Content Include="Themes\4\IlliquidAsset.html" />
+    <Content Include="Themes\4\IncomeExpense.html" />
+    <Content Include="Themes\4\Index.html" />
+    <Content Include="Themes\4\Investments.html" />
+    <Content Include="Themes\4\LiquidAsset.html" />
+    <Content Include="Themes\4\Main.html" />
+    <Content Include="Themes\4\playback.html" />
+    <Content Include="Themes\4\RankingDream.html" />
+    <Content Include="Themes\4\RetirementLifeStyle.html" />
+    <Content Include="Themes\4\SavingRate.html" />
+    <Content Include="Themes\4\Scripts\amcharts\amcharts.js" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIcon.gif" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconBlack.gif" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconH.gif" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconHBlack.gif" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBig.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBig.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigBlack.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigBlack.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigBlackH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigBlackH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectBigH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmall.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmall.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallBlack.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallBlack.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallBlackH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallBlackH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRectSmallH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBig.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBig.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigBlack.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigBlack.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigBlackH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigBlackH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundBigH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmall.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmall.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallBlack.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallBlack.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallBlackH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallBlackH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallH.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\dragIconRoundSmallH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\eraserIcon.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\eraserIconH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\export.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\exportWhite.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lens.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lens.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lensWhite.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lensWhite.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lensWhite_old.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\lens_old.png" />
+    <Content Include="Themes\4\Scripts\amcharts\images\pencilIcon.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\pencilIconH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\xIcon.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\images\xIconH.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\light.js" />
+    <Content Include="Themes\4\Scripts\amcharts\pie.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\animate\animate.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\dataloader.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\dataloader.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\lang\en.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\lang\fr.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\lang\lt.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\license.txt" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\export.css" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\export.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\export.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\de.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\en.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\fr.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\lt.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\pl.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\lang\pt.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\blob.js\blob.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\fabric.js\fabric.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\fabric.js\fabric.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\FileSaver.js\FileSaver.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\FileSaver.js\FileSaver.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\jszip\jszip.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\jszip\jszip.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\pdfmake\vfs_fonts.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\1.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\10.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\11.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\12.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\13.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\14.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\15.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\16.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\17.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\18.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\19.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\2.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\20.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\21.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\22.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\23.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\24.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\25.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\26.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\27.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\28.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\29.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\3.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\30.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\31.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\4.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\5.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\6.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\7.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\8.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\shapes\9.svg" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\funnel.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\gantt.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\gauge.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\images\bicycle.png" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\images\car.png" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\images\motorcycle.png" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\index.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\map.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\pie1.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\pie2.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\pie3.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\radar.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\serial1.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\serial2.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\serial3.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\stock.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\examples\xy.html" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\license.txt" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\responsive.js" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\responsive.min.js" />
+    <Content Include="Themes\4\Scripts\amcharts\serial.js" />
+    <Content Include="Themes\4\Scripts\amcharts\themes\black.js" />
+    <Content Include="Themes\4\Scripts\amcharts\themes\chalk.js" />
+    <Content Include="Themes\4\Scripts\amcharts\themes\dark.js" />
+    <Content Include="Themes\4\Scripts\amcharts\themes\light.js" />
+    <Content Include="Themes\4\Scripts\amcharts\themes\patterns.js" />
+    <Content Include="Themes\4\Scripts\bto.js" />
+    <Content Include="Themes\4\Scripts\directive.js" />
+    <Content Include="Themes\4\Scripts\jquery.number.js" />
+    <Content Include="Themes\4\Scripts\ng-img-crop.js" />
+    <Content Include="Themes\4\Scripts\quickHelpService.js" />
+    <Content Include="Themes\4\Scripts\script.js" />
+    <Content Include="Themes\4\Scripts\services\illiquidAssetService.js" />
+    <Content Include="Themes\4\Scripts\services\investmentService.js" />
+    <Content Include="Themes\4\Scripts\services\manageAvatarService.js" />
+    <Content Include="Themes\4\Scripts\services\parameterService.js" />
+    <Content Include="Themes\4\Scripts\services\retirementLifeStyleService.js" />
+    <Content Include="Themes\4\Scripts\services\savingRateService.js" />
+    <Content Include="Themes\4\Scripts\services\serviceSharing.js" />
+    <Content Include="Themes\4\Scripts\services\summaryCardService.js" />
+    <Content Include="Themes\4\Scripts\services\newsService.js" />
+    <Content Include="Themes\4\Scripts\services\taxOptimizationService.js" />
+    <Content Include="Themes\4\Scripts\quickSettingService.js" />
+    <Content Include="Themes\4\Scripts\smallTimelineService.js" />
+    <Content Include="Themes\4\Scripts\swiper.js" />
+    <Content Include="Themes\4\Scripts\swiper.min.js" />
+    <Content Include="Themes\4\Scripts\timeline.js" />
+    <Content Include="Themes\4\Scripts\timelineFunctions.js" />
+    <Content Include="Themes\4\Scripts\timelineService.js" />
+    <Content Include="Themes\4\Scripts\touch.js" />
+    <Content Include="Themes\4\sharing.html" />
+    <Content Include="Themes\4\SummaryCard.html" />
+    <Content Include="Themes\4\TaxOptimization.html" />
+    <Content Include="Themes\3\Content\Dialog\RatingDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\IronReserveInvesment.html" />
+    <Content Include="Themes\3\Content\Dialog\ManageAvatar.html" />
+    <Content Include="Themes\3\Content\Dialog\ManageRating.html" />
+    <Content Include="Themes\3\Content\ie.css" />
+    <Content Include="Themes\3\Content\Images\default-education.jpg" />
+    <Content Include="Themes\3\Content\Images\default-expenses.jpg" />
+    <Content Include="Themes\3\Content\Images\default-income.jpg" />
+    <Content Include="Themes\3\Content\Images\default-independent.jpg" />
+    <Content Include="Themes\3\Content\Images\default-residence.jpg" />
+    <Content Include="Themes\3\Content\img\black-10p.png" />
+    <Content Include="Themes\3\Content\img\pin-circle.png" />
+    <Content Include="Themes\3\Content\img\timelinev2-bg.jpg" />
+    <Content Include="Themes\3\Content\ng-img-crop.css" />
+    <Content Include="Themes\3\Content\swiper.css" />
+    <Content Include="Themes\3\Content\swiper.min.css" />
+    <Content Include="Themes\3\Scripts\amcharts\amcharts.js" />
+    <Content Include="Themes\3\Scripts\amcharts\pie.js" />
+    <Content Include="Themes\3\Scripts\jquery.number.js" />
+    <Content Include="Themes\3\Scripts\ng-img-crop.js" />
+    <Content Include="Themes\3\Scripts\services\manageAvatarService.js" />
+    <Content Include="Themes\3\Scripts\swiper.js" />
+    <Content Include="Themes\3\Scripts\swiper.min.js" />
+    <Content Include="Themes\3\Content\Images\saving-rate-donut.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIcon.gif" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconBlack.gif" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconH.gif" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconHBlack.gif" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBig.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBig.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigBlack.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigBlack.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigBlackH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigBlackH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectBigH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmall.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmall.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallBlack.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallBlack.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallBlackH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallBlackH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRectSmallH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBig.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBig.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigBlack.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigBlack.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigBlackH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigBlackH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundBigH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmall.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmall.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallBlack.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallBlack.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallBlackH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallBlackH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallH.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\dragIconRoundSmallH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\eraserIcon.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\eraserIconH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\export.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\exportWhite.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lens.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lens.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lensWhite.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lensWhite.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lensWhite_old.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\lens_old.png" />
+    <Content Include="Themes\3\Scripts\amcharts\images\pencilIcon.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\pencilIconH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\xIcon.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\images\xIconH.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\light.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\dataloader.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\dataloader.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\lang\en.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\lang\fr.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\lang\lt.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\license.txt" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\export.css" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\export.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\export.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\de.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\en.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\fr.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\lt.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\pl.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\lang\pt.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\blob.js\blob.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\fabric.js\fabric.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\fabric.js\fabric.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\FileSaver.js\FileSaver.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\FileSaver.js\FileSaver.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\jszip\jszip.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\jszip\jszip.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\pdfmake\vfs_fonts.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\1.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\10.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\11.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\12.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\13.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\14.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\15.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\16.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\17.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\18.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\19.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\2.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\20.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\21.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\22.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\23.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\24.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\25.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\26.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\27.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\28.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\29.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\3.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\30.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\31.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\4.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\5.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\6.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\7.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\8.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\shapes\9.svg" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\funnel.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\gantt.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\gauge.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\images\bicycle.png" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\images\car.png" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\images\motorcycle.png" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\index.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\map.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\pie1.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\pie2.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\pie3.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\radar.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\serial1.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\serial2.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\serial3.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\stock.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\examples\xy.html" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\license.txt" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\responsive.js" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\responsive.min.js" />
+    <Content Include="Themes\3\Scripts\amcharts\serial.js" />
+    <Content Include="Scripts\thirdparty\angular-bootstrap-checkbox\angular-bootstrap-checkbox.js" />
+    <Content Include="Scripts\thirdparty\angular-material\gesture.js" />
+    <Content Include="Scripts\thirdparty\angular-pretty-checkable\angular-pretty-checkable.min.js" />
+    <Content Include="Scripts\thirdparty\angular-pretty-checkable\pretty-checkable.css" />
+    <Content Include="Scripts\thirdparty\bootbox.min.js" />
+    <Content Include="Scripts\thirdparty\images\sprites-sfa68604977.png" />
+    <Content Include="Scripts\thirdparty\notification\bootstrap-notify.js" />
+    <Content Include="Scripts\thirdparty\notification\bootstrap-notify.min.js" />
+    <Content Include="Themes\1\sharing.html" />
+    <Content Include="Themes\1\playback.html" />
+    <Content Include="Themes\3\content-bottom.html" />
+    <Content Include="Themes\3\Content\bto.css" />
+    <Content Include="Themes\3\Content\custom.css" />
+    <Content Include="Themes\3\Content\Dialog\ChangeValueDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\ConfirmDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\DreamDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\LifeEventDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\ManageAccount.html" />
+    <Content Include="Themes\3\Content\Dialog\ManageScenarios.html" />
+    <Content Include="Themes\3\Content\Dialog\ManageSolution.html" />
+    <Content Include="Themes\3\Content\Dialog\PlaybackSession.html" />
+    <Content Include="Themes\3\Content\Dialog\ProfileDialog.html" />
+    <Content Include="Themes\3\Content\Dialog\RightColumn.html" />
+    <Content Include="Themes\3\Content\Dialog\StartAgeDialog.html" />
+    <Content Include="Themes\3\Content\drop-drap-control.css" />
+    <Content Include="Themes\3\Content\Images\avatar-circle.png" />
+    <Content Include="Themes\3\Content\Images\avatar.png" />
+    <Content Include="Themes\3\Content\Images\blue.png" />
+    <Content Include="Themes\3\Content\Images\chart-1.png" />
+    <Content Include="Themes\3\Content\Images\chart-2.png" />
+    <Content Include="Themes\3\Content\Images\dot-age.png" />
+    <Content Include="Themes\3\Content\Images\dot-dream.png" />
+    <Content Include="Themes\3\Content\Images\dot-lifeevent.png" />
+    <Content Include="Themes\3\Content\Images\grab.png" />
+    <Content Include="Themes\3\Content\Images\graph.png" />
+    <Content Include="Themes\3\Content\Images\green.png" />
+    <Content Include="Themes\3\Content\Images\grid.png" />
+    <Content Include="Themes\3\Content\Images\login-bg.jpg" />
+    <Content Include="Themes\3\Content\Images\logo.jpg" />
+    <Content Include="Themes\3\Content\Images\logo.png" />
+    <Content Include="Themes\3\Content\Images\openhand.cur" />
+    <Content Include="Themes\3\Content\Images\red.png" />
+    <Content Include="Themes\3\Content\Images\slider-1.png" />
+    <Content Include="Themes\3\Content\Images\slider-2.png" />
+    <Content Include="Themes\3\Content\Images\slider-3.png" />
+    <Content Include="Themes\3\Content\Images\slider-4.png" />
+    <Content Include="Themes\3\Content\Images\slider-5.png" />
+    <Content Include="Themes\3\Content\Images\timeline-alt.jpg" />
+    <Content Include="Themes\3\Content\Images\timeline.jpg" />
+    <Content Include="Themes\3\Content\Images\trash.png" />
+    <Content Include="Themes\3\Content\img\16\delete.png" />
+    <Content Include="Themes\3\Content\img\16\moveleft.png" />
+    <Content Include="Themes\3\Content\img\16\moveright.png" />
+    <Content Include="Themes\3\Content\img\16\new.png" />
+    <Content Include="Themes\3\Content\img\16\zoomin.png" />
+    <Content Include="Themes\3\Content\img\16\zoomout.png" />
+    <Content Include="Themes\3\Content\img\24\delete.png" />
+    <Content Include="Themes\3\Content\img\24\moveleft.png" />
+    <Content Include="Themes\3\Content\img\24\moveright.png" />
+    <Content Include="Themes\3\Content\img\24\new.png" />
+    <Content Include="Themes\3\Content\img\24\zoomin.png" />
+    <Content Include="Themes\3\Content\img\24\zoomout.png" />
+    <Content Include="Themes\3\Content\img\32\delete.png" />
+    <Content Include="Themes\3\Content\img\32\moveleft.png" />
+    <Content Include="Themes\3\Content\img\32\moveright.png" />
+    <Content Include="Themes\3\Content\img\32\new.png" />
+    <Content Include="Themes\3\Content\img\32\zoomin.png" />
+    <Content Include="Themes\3\Content\img\32\zoomout.png" />
+    <Content Include="Themes\3\Content\img\cluster_bg.png" />
+    <Content Include="Themes\3\Content\img\deleteEvent.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\buttonbg.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\icon_color_arrow.gif" />
+    <Content Include="Themes\3\Content\img\themeswitcher\menuhoverbg.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_black_matte.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_black_tie.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_blitzer.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_cupertino.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_dark_hive.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_dot_luv.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_eggplant.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_excite_bike.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_flick.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_hot_sneaks.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_humanity.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_le_frog.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_mint_choco.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_overcast.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_pepper_grinder.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_smoothness.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_south_street.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_start_menu.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_sunny.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_swanky_purse.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_trontastic.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_ui_dark.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_ui_light.png" />
+    <Content Include="Themes\3\Content\img\themeswitcher\theme_90_windoze.png" />
+    <Content Include="Themes\3\Content\img\timeline-alt.jpg" />
+    <Content Include="Themes\3\Content\img\timeline-bg.jpg" />
+    <Content Include="Themes\3\Content\style.css" />
+    <Content Include="Themes\3\Content\theme-customize.css" />
+    <Content Include="Themes\3\Content\timeline.css" />
+    <Content Include="Themes\3\font\fontawesome-webfont.svg" />
+    <Content Include="Themes\3\footer.html" />
+    <Content Include="Themes\3\header.html" />
+    <Content Include="Themes\3\IlliquidAsset.html" />
+    <Content Include="Themes\3\Scripts\amcharts\themes\black.js" />
+    <Content Include="Themes\3\Scripts\amcharts\themes\chalk.js" />
+    <Content Include="Themes\3\Scripts\amcharts\themes\dark.js" />
+    <Content Include="Themes\3\Scripts\amcharts\themes\light.js" />
+    <Content Include="Themes\3\Scripts\amcharts\themes\patterns.js" />
+    <Content Include="Themes\3\Scripts\services\serviceSharing.js" />
+    <Content Include="Themes\3\Scripts\services\taxOptimizationService.js" />
+    <Content Include="Themes\3\Scripts\services\illiquidAssetService.js" />
+    <Content Include="Themes\3\Scripts\services\retirementLifeStyleService.js" />
+    <Content Include="Themes\3\Scripts\services\investmentService.js" />
+    <Content Include="Themes\3\Scripts\services\savingRateService.js" />
+    <Content Include="Themes\3\TaxOptimization.html" />
+    <Content Include="Themes\3\RetirementLifeStyle.html" />
+    <Content Include="Themes\3\Investments.html" />
+    <Content Include="Themes\3\SavingRate.html" />
+    <Content Include="Themes\3\IncomeExpense.html" />
+    <Content Include="Themes\3\Index.html" />
+    <Content Include="Themes\3\LiquidAsset.html" />
+    <Content Include="Themes\3\Main.html" />
+    <Content Include="Themes\3\playback.html" />
+    <Content Include="Themes\3\RankingDream.html" />
+    <Content Include="Themes\3\Scripts\bto.js" />
+    <Content Include="Themes\3\Scripts\directive.js" />
+    <Content Include="Themes\3\Scripts\script.js" />
+    <Content Include="Themes\3\Scripts\timeline.js" />
+    <Content Include="Themes\3\Scripts\timelineFunctions.js" />
+    <Content Include="Themes\3\Scripts\timelineService.js" />
+    <Content Include="Themes\3\Scripts\touch.js" />
+    <Content Include="Themes\3\sharing.html" />
+    <Content Include="Themes\3\Content\Dialog\SharingSession.html" />
+    <Content Include="Themes\2\content-bottom.html" />
+    <Content Include="Themes\2\Content\Dialog\ChangeValueDialog.html" />
+    <Content Include="Themes\2\Content\Dialog\ConfirmDialog.html" />
+    <Content Include="Themes\2\Content\Dialog\DreamDialog.html" />
+    <Content Include="Themes\2\Content\Dialog\LifeEventDialog.html" />
+    <Content Include="Themes\2\Content\Dialog\ManageAccount.html" />
+    <Content Include="Themes\2\Content\Dialog\ManageScenarios.html" />
+    <Content Include="Themes\2\Content\Dialog\ManageSolution.html" />
+    <Content Include="Themes\2\Content\Dialog\PlaybackSession.html" />
+    <Content Include="Themes\2\Content\Dialog\ProfileDialog.html" />
+    <Content Include="Themes\2\Content\Dialog\RightColumn.html" />
+    <Content Include="Themes\2\Content\Dialog\StartAgeDialog.html" />
+    <Content Include="Themes\2\Content\drop-drap-control.css" />
+    <Content Include="Themes\2\Content\Images\avatar-circle.png" />
+    <Content Include="Themes\2\Content\Images\blue.png" />
+    <Content Include="Themes\2\Content\Images\dot-age.png" />
+    <Content Include="Themes\2\Content\Images\dot-dream.png" />
+    <Content Include="Themes\2\Content\Images\dot-lifeevent.png" />
+    <Content Include="Themes\2\Content\Images\avatar.png" />
+    <Content Include="Themes\2\Content\Images\chart-1.png" />
+    <Content Include="Themes\2\Content\Images\chart-2.png" />
+    <Content Include="Themes\2\Content\Images\grab.png" />
+    <Content Include="Themes\2\Content\Images\graph.png" />
+    <Content Include="Themes\2\Content\Images\green.png" />
+    <Content Include="Themes\2\Content\Images\grid.png" />
+    <Content Include="Themes\2\Content\Images\login-bg.jpg" />
+    <Content Include="Themes\2\Content\Images\logo.jpg" />
+    <Content Include="Themes\2\Content\Images\logo.png" />
+    <Content Include="Themes\2\Content\Images\openhand.cur" />
+    <Content Include="Themes\2\Content\Images\red.png" />
+    <Content Include="Themes\2\Content\Images\slider-1.png" />
+    <Content Include="Themes\2\Content\Images\slider-2.png" />
+    <Content Include="Themes\2\Content\Images\slider-3.png" />
+    <Content Include="Themes\2\Content\Images\slider-4.png" />
+    <Content Include="Themes\2\Content\Images\slider-5.png" />
+    <Content Include="Themes\2\Content\Images\timeline-alt.jpg" />
+    <Content Include="Themes\2\Content\Images\timeline.jpg" />
+    <Content Include="Themes\2\Content\bto.css" />
+    <Content Include="Themes\2\Content\Images\trash.png" />
+    <Content Include="Themes\2\Content\img\16\delete.png" />
+    <Content Include="Themes\2\Content\img\16\moveleft.png" />
+    <Content Include="Themes\2\Content\img\16\moveright.png" />
+    <Content Include="Themes\2\Content\img\16\new.png" />
+    <Content Include="Themes\2\Content\img\16\zoomin.png" />
+    <Content Include="Themes\2\Content\img\16\zoomout.png" />
+    <Content Include="Themes\2\Content\img\24\delete.png" />
+    <Content Include="Themes\2\Content\img\24\moveleft.png" />
+    <Content Include="Themes\2\Content\img\24\moveright.png" />
+    <Content Include="Themes\2\Content\img\24\new.png" />
+    <Content Include="Themes\2\Content\img\24\zoomin.png" />
+    <Content Include="Themes\2\Content\img\24\zoomout.png" />
+    <Content Include="Themes\2\Content\img\32\delete.png" />
+    <Content Include="Themes\2\Content\img\32\moveleft.png" />
+    <Content Include="Themes\2\Content\img\32\moveright.png" />
+    <Content Include="Themes\2\Content\img\32\new.png" />
+    <Content Include="Themes\2\Content\img\32\zoomin.png" />
+    <Content Include="Themes\2\Content\img\32\zoomout.png" />
+    <Content Include="Themes\2\Content\img\cluster_bg.png" />
+    <Content Include="Themes\2\Content\img\deleteEvent.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\buttonbg.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\icon_color_arrow.gif" />
+    <Content Include="Themes\2\Content\img\themeswitcher\menuhoverbg.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_black_matte.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_black_tie.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_blitzer.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_cupertino.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_dark_hive.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_dot_luv.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_eggplant.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_excite_bike.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_flick.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_hot_sneaks.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_humanity.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_le_frog.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_mint_choco.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_overcast.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_pepper_grinder.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_smoothness.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_south_street.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_start_menu.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_sunny.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_swanky_purse.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_trontastic.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_ui_dark.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_ui_light.png" />
+    <Content Include="Themes\2\Content\img\themeswitcher\theme_90_windoze.png" />
+    <Content Include="Themes\2\Content\custom.css" />
+    <Content Include="Themes\2\Content\img\timeline-alt.jpg" />
+    <Content Include="Themes\2\Content\style.css" />
+    <Content Include="Themes\2\Content\theme-customize.css" />
+    <Content Include="Themes\2\Content\timeline.css" />
+    <Content Include="Themes\2\footer.html" />
+    <Content Include="Themes\2\header.html" />
+    <Content Include="Themes\2\IlliquidAsset.html" />
+    <Content Include="Themes\2\IncomeExpense.html" />
+    <Content Include="Themes\2\Index.html" />
+    <Content Include="Themes\2\LiquidAsset.html" />
+    <Content Include="Themes\2\Main.html" />
+    <Content Include="Themes\2\sharing.html" />
+    <Content Include="Themes\2\playback.html" />
+    <Content Include="Themes\2\RankingDream.html" />
+    <Content Include="Themes\2\Scripts\bto.js" />
+    <Content Include="Themes\2\Scripts\directive.js" />
+    <Content Include="Themes\2\Scripts\script.js" />
+    <Content Include="Themes\2\Scripts\timeline.js" />
+    <Content Include="Themes\2\Scripts\timelineFunctions.js" />
+    <Content Include="Themes\2\Scripts\timelineService.js" />
+    <Content Include="Themes\2\Scripts\touch.js" />
+    <Content Include="Themes\2\SharingSession.html" />
+    <Content Include="Themes\1\Content\Dialog\ChangeValueDialog.html" />
+    <Content Include="Themes\1\Content\drop-drap-control.css" />
+    <Content Include="Themes\1\Content\Images\add.png" />
+    <Content Include="Themes\1\Content\Images\arrow-down.png" />
+    <Content Include="Themes\1\Content\Images\arrow2_lb.jpg" />
+    <Content Include="Themes\1\Content\Images\arrow_lb.jpg" />
+    <Content Include="Themes\1\Content\Images\banking.jpg" />
+    <Content Include="Themes\1\Content\Images\children_independent.png" />
+    <Content Include="Themes\1\Content\Images\close.png" />
+    <Content Include="Themes\1\Content\Images\Dream.jpg" />
+    <Content Include="Themes\1\Content\Images\edit.png" />
+    <Content Include="Themes\1\Content\Images\education.png" />
+    <Content Include="Themes\1\Content\Images\exceptional_expense.png" />
+    <Content Include="Themes\1\Content\Images\exception_income.png" />
+    <Content Include="Themes\1\Content\Images\greenpig.png" />
+    <Content Include="Themes\1\Content\Images\height-medium-low.jpg" />
+    <Content Include="Themes\1\Content\Images\highlight.png" />
+    <Content Include="Themes\1\Content\Images\home_dream.png" />
+    <Content Include="Themes\1\Content\Images\Life_events.jpg" />
+    <Content Include="Themes\1\Content\Images\pig.png" />
+    <Content Include="Themes\1\Content\Images\pig_lb.jpg" />
+    <Content Include="Themes\1\Content\Images\plus.png" />
+    <Content Include="Themes\1\Content\Images\reset_plan.png" />
+    <Content Include="Themes\1\Content\Images\residence_sale.png" />
+    <Content Include="Themes\1\Content\Images\retire.png" />
+    <Content Include="Themes\1\Content\Images\saving_deleted.png" />
+    <Content Include="Themes\1\Content\Images\spouse_retire.png" />
+    <Content Include="Themes\1\Content\Images\start_playback.png" />
+    <Content Include="Themes\1\Content\Images\timeline_background.png" />
+    <Content Include="Themes\1\Content\Images\trash_lb.jpg" />
+    <Content Include="Themes\1\Content\Images\trash_lb_big.jpg" />
+    <Content Include="Themes\1\Content\Images\zoom.png" />
+    <Content Include="Themes\1\header.html" />
+    <Content Include="Themes\1\Index.html" />
+    <Content Include="Themes\1\IncomeExpense.html" />
+    <Content Include="Themes\1\Scripts\timelineFunctions.js" />
+    <Content Include="Themes\1\Scripts\timelineService.js" />
+    <Content Include="Themes\1\Scripts\zoomService.js" />
+    <Content Include="Themes\1\SharingSession.html" />
+    <Content Include="Themes\1\RankingDream.html" />
+    <Content Include="Themes\1\LiquidAsset.html" />
+    <Content Include="Themes\1\IlliquidAsset.html" />
+    <Content Include="Themes\1\Main.html" />
+    <Content Include="Themes\1\Scripts\script.js" />
+    <Content Include="Themes\1\Content\style.css" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Parameters.cshtml" />
+    <Content Include="Views\Admin\tree.cshtml" />
+    <Content Include="fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="fonts\roboto\Roboto-Light.woff" />
+    <Content Include="fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="fonts\roboto\Roboto-Thin.woff2" />
+    <Content Include="Content\translates\ma.json" />
+    <Content Include="fonts\lato\Lato-Black.eot" />
+    <Content Include="fonts\lato\Lato-Black.ttf" />
+    <Content Include="fonts\lato\Lato-Black.woff" />
+    <Content Include="fonts\lato\Lato-Black.woff2" />
+    <Content Include="fonts\lato\Lato-BlackItalic.eot" />
+    <Content Include="fonts\lato\Lato-BlackItalic.ttf" />
+    <Content Include="fonts\lato\Lato-BlackItalic.woff" />
+    <Content Include="fonts\lato\Lato-BlackItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Bold.eot" />
+    <Content Include="fonts\lato\Lato-Bold.ttf" />
+    <Content Include="fonts\lato\Lato-Bold.woff" />
+    <Content Include="fonts\lato\Lato-Bold.woff2" />
+    <Content Include="fonts\lato\Lato-BoldItalic.eot" />
+    <Content Include="fonts\lato\Lato-BoldItalic.ttf" />
+    <Content Include="fonts\lato\Lato-BoldItalic.woff" />
+    <Content Include="fonts\lato\Lato-BoldItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Hairline.eot" />
+    <Content Include="fonts\lato\Lato-Hairline.ttf" />
+    <Content Include="fonts\lato\Lato-Hairline.woff" />
+    <Content Include="fonts\lato\Lato-Hairline.woff2" />
+    <Content Include="fonts\lato\Lato-HairlineItalic.eot" />
+    <Content Include="fonts\lato\Lato-HairlineItalic.ttf" />
+    <Content Include="fonts\lato\Lato-HairlineItalic.woff" />
+    <Content Include="fonts\lato\Lato-HairlineItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Heavy.eot" />
+    <Content Include="fonts\lato\Lato-Heavy.ttf" />
+    <Content Include="fonts\lato\Lato-Heavy.woff" />
+    <Content Include="fonts\lato\Lato-Heavy.woff2" />
+    <Content Include="fonts\lato\Lato-HeavyItalic.eot" />
+    <Content Include="fonts\lato\Lato-HeavyItalic.ttf" />
+    <Content Include="fonts\lato\Lato-HeavyItalic.woff" />
+    <Content Include="fonts\lato\Lato-HeavyItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Italic.eot" />
+    <Content Include="fonts\lato\Lato-Italic.ttf" />
+    <Content Include="fonts\lato\Lato-Italic.woff" />
+    <Content Include="fonts\lato\Lato-Italic.woff2" />
+    <Content Include="fonts\lato\Lato-Light.eot" />
+    <Content Include="fonts\lato\Lato-Light.ttf" />
+    <Content Include="fonts\lato\Lato-Light.woff" />
+    <Content Include="fonts\lato\Lato-Light.woff2" />
+    <Content Include="fonts\lato\Lato-LightItalic.eot" />
+    <Content Include="fonts\lato\Lato-LightItalic.ttf" />
+    <Content Include="fonts\lato\Lato-LightItalic.woff" />
+    <Content Include="fonts\lato\Lato-LightItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Medium.eot" />
+    <Content Include="fonts\lato\Lato-Medium.ttf" />
+    <Content Include="fonts\lato\Lato-Medium.woff" />
+    <Content Include="fonts\lato\Lato-Medium.woff2" />
+    <Content Include="fonts\lato\Lato-MediumItalic.eot" />
+    <Content Include="fonts\lato\Lato-MediumItalic.ttf" />
+    <Content Include="fonts\lato\Lato-MediumItalic.woff" />
+    <Content Include="fonts\lato\Lato-MediumItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Regular.eot" />
+    <Content Include="fonts\lato\Lato-Regular.ttf" />
+    <Content Include="fonts\lato\Lato-Regular.woff" />
+    <Content Include="fonts\lato\Lato-Regular.woff2" />
+    <Content Include="fonts\lato\Lato-Semibold.eot" />
+    <Content Include="fonts\lato\Lato-Semibold.ttf" />
+    <Content Include="fonts\lato\Lato-Semibold.woff" />
+    <Content Include="fonts\lato\Lato-Semibold.woff2" />
+    <Content Include="fonts\lato\Lato-SemiboldItalic.eot" />
+    <Content Include="fonts\lato\Lato-SemiboldItalic.ttf" />
+    <Content Include="fonts\lato\Lato-SemiboldItalic.woff" />
+    <Content Include="fonts\lato\Lato-SemiboldItalic.woff2" />
+    <Content Include="fonts\lato\Lato-Thin.eot" />
+    <Content Include="fonts\lato\Lato-Thin.ttf" />
+    <Content Include="fonts\lato\Lato-Thin.woff" />
+    <Content Include="fonts\lato\Lato-Thin.woff2" />
+    <Content Include="fonts\lato\Lato-ThinItalic.eot" />
+    <Content Include="fonts\lato\Lato-ThinItalic.ttf" />
+    <Content Include="fonts\lato\Lato-ThinItalic.woff" />
+    <Content Include="fonts\lato\Lato-ThinItalic.woff2" />
+    <Content Include="fonts\proximanova\proximanova-light-webfont.ttf" />
+    <Content Include="fonts\proximanova\proximanova-light-webfont.woff" />
+    <Content Include="fonts\proximanova\proximanova-light-webfont.woff2" />
+    <Content Include="fonts\proximanova\proximanova-regular-webfont.ttf" />
+    <Content Include="fonts\proximanova\proximanova-regular-webfont.woff" />
+    <Content Include="fonts\proximanova\proximanova-regular-webfont.woff2" />
+    <Content Include="fonts\proximanova\proximanova-semibold-webfont.ttf" />
+    <Content Include="fonts\proximanova\proximanova-semibold-webfont.woff" />
+    <Content Include="fonts\proximanova\proximanova-semibold-webfont.woff2" />
+    <Content Include="Scripts\firebase.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\PublishProfiles\bettertradeoff - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\bettertradeoff - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\bettertradeofftest - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\bettertradeofftest - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\zymi1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\zymi1 - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\jquery-2.2.4.min.map" />
+    <Content Include="Scripts\jquery.min.map" />
+    <Content Include="Scripts\thirdparty\angular-messages.js" />
+    <Content Include="Scripts\thirdparty\angular-rangeslider\angular.rangeSlider.css" />
+    <Content Include="Scripts\thirdparty\angular-rangeslider\angular.rangeSlider.js" />
+    <Content Include="Scripts\thirdparty\angular-table.min.js" />
+    <Content Include="Scripts\thirdparty\angular-translate-loader-static-files.js" />
+    <Content Include="Scripts\thirdparty\angular-translate.js" />
+    <Content Include="Scripts\thirdparty\angular-ui-router.min.js" />
+    <Content Include="Scripts\thirdparty\angular-ui-tree\angular-ui-tree.js" />
+    <Content Include="Scripts\thirdparty\angular-ui-tree\angular-ui-tree.min.css" />
+    <Content Include="Scripts\thirdparty\angular-ui-tree\angular-ui-tree.min.js" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\thirdparty\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\thirdparty\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\thirdparty\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\thirdparty\bootstrap\js\npm.js" />
+    <Content Include="Scripts\thirdparty\chart\angular-chart.js" />
+    <Content Include="Scripts\thirdparty\chart\angular-chart.min.js" />
+    <Content Include="Scripts\thirdparty\chart\Chart.js" />
+    <Content Include="Scripts\thirdparty\chart\Chart.min.js" />
+    <Content Include="Scripts\thirdparty\chart\Chart.StackedBar.js" />
+    <Content Include="Scripts\thirdparty\i18n\angular-locale_es-ar.js" />
+    <Content Include="Scripts\thirdparty\input-masks.js" />
+    <Content Include="Scripts\thirdparty\ng-currency.js" />
+    <Content Include="Scripts\thirdparty\ng-sortable.js" />
+    <Content Include="Scripts\thirdparty\ngStorage.min.js" />
+    <Content Include="Scripts\thirdparty\ocanvas-2.7.4.js" />
+    <Content Include="Scripts\thirdparty\smart-table.js" />
+    <Content Include="Scripts\thirdparty\smart-table.min.js" />
+    <Content Include="Scripts\thirdparty\treasure-overlay-spinner.js" />
+    <Content Include="Scripts\thirdparty\tree\jquery-1.8.1.min.js" />
+    <Content Include="Scripts\thirdparty\tree\jquery-ui.js" />
+    <Content Include="Scripts\thirdparty\tree\jquery.tree.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\Country.cshtml" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\thirdparty\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Scripts\thirdparty\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\thirdparty\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\thirdparty\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\thirdparty\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Home\IncomeExpenses.cshtml" />
+    <Content Include="Views\Home\DreamDialog.cshtml" />
+    <Content Include="Views\Home\LifeEventDialog.cshtml" />
+    <Content Include="Views\Home\LiquidIlliquidAsset.cshtml" />
+    <Content Include="Views\Home\ConfirmDialog.cshtml" />
+    <Content Include="Views\Home\IlliquidAsset.cshtml" />
+    <Content Include="Views\Home\RankingDreams.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\StartAgeDialog.cshtml" />
+    <Content Include="Views\Home\RightColumn.cshtml" />
+    <Content Include="Views\Home\ProfileDialog.cshtml" />
+    <Content Include="Views\Home\ManageSolution.cshtml" />
+    <Content Include="Views\Home\ManageScenarios.cshtml" />
+    <Content Include="Views\Home\ShareScreen.cshtml" />
+    <Content Include="Views\Home\Screen.cshtml" />
+    <Content Include="Views\Home\SharingSession.cshtml" />
+    <Content Include="Views\Home\PlaybackSession.cshtml" />
+    <Content Include="Views\Home\SharingSessionOnlyView.cshtml" />
+    <Content Include="Views\Home\KeepAlive.cshtml" />
+    <Content Include="Views\Admin\ManageUser.cshtml" />
+    <Content Include="Views\Admin\OrganizationUnit.cshtml" />
+    <Content Include="Views\Admin\ManageRole.cshtml" />
+    <Content Include="Scripts\thirdparty\angular-pretty-checkable\angular-pretty-checkable.min.js.map" />
+    <Content Include="Views\Account\ValidationSummary.cshtml" />
+    <Content Include="Views\Shared\_LayoutBasic.cshtml" />
+    <Content Include="Views\Account\_ExternalRegistersListPartial.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Manage\ManageExternalLoginProviders.cshtml" />
+    <Content Include="Views\Home\ManageAccount.cshtml" />
+    <Content Include="Views\New\Index.cshtml" />
+    <Content Include="Themes\1\Content\Dialog\ConfirmDialog.html" />
+    <Content Include="Themes\1\Content\Dialog\DreamDialog.html" />
+    <Content Include="Themes\1\Content\Dialog\LifeEventDialog.html" />
+    <Content Include="Themes\1\Content\Dialog\ProfileDialog.html" />
+    <Content Include="Themes\1\Content\Dialog\PlaybackSession.html" />
+    <Content Include="Themes\1\Content\Dialog\ManageSolution.html" />
+    <Content Include="Themes\1\Content\Dialog\ManageScenarios.html" />
+    <Content Include="Themes\1\Content\Dialog\ManageAccount.html" />
+    <Content Include="Themes\1\Content\Dialog\StartAgeDialog.html" />
+    <Content Include="Themes\1\Content\Dialog\RightColumn.html" />
+    <Content Include="Themes\3\font\fontawesome-webfont.eot" />
+    <Content Include="Themes\3\font\fontawesome-webfont.ttf" />
+    <Content Include="Themes\3\font\fontawesome-webfont.woff" />
+    <Content Include="Themes\3\font\FontAwesome.otf" />
+    <Content Include="Themes\3\font\roboto\Roboto-Bold.woff" />
+    <Content Include="Themes\3\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="Themes\3\font\roboto\Roboto-Light.woff" />
+    <Content Include="Themes\3\font\roboto\Roboto-Light.woff2" />
+    <Content Include="Themes\3\font\roboto\Roboto-Medium.woff" />
+    <Content Include="Themes\3\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="Themes\3\font\roboto\Roboto-Regular.woff" />
+    <Content Include="Themes\3\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="Themes\3\font\roboto\Roboto-Thin.woff" />
+    <Content Include="Themes\3\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\dataloader\readme.md" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.js.map" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\xlsx\LICENSE" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.map" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\LICENSE" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\export\README.md" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\readme.md" />
+    <Content Include="Themes\3\Scripts\amcharts\plugins\responsive\responsive.min.js.map" />
+    <Content Include="Themes\3\font\lato\Lato-Black.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Black.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Black.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Black.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-BlackItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-BlackItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-BlackItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-BlackItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Bold.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Bold.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Bold.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Bold.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-BoldItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-BoldItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-BoldItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-BoldItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Hairline.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Hairline.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Hairline.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Hairline.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-HairlineItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-HairlineItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-HairlineItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-HairlineItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Heavy.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Heavy.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Heavy.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Heavy.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-HeavyItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-HeavyItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-HeavyItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-HeavyItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Italic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Italic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Italic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Italic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Light.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Light.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Light.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Light.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-LightItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-LightItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-LightItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-LightItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Medium.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Medium.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Medium.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Medium.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-MediumItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-MediumItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-MediumItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-MediumItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Regular.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Regular.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Regular.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Regular.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Semibold.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Semibold.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Semibold.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Semibold.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-SemiboldItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-SemiboldItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-SemiboldItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-SemiboldItalic.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-Thin.eot" />
+    <Content Include="Themes\3\font\lato\Lato-Thin.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-Thin.woff" />
+    <Content Include="Themes\3\font\lato\Lato-Thin.woff2" />
+    <Content Include="Themes\3\font\lato\Lato-ThinItalic.eot" />
+    <Content Include="Themes\3\font\lato\Lato-ThinItalic.ttf" />
+    <Content Include="Themes\3\font\lato\Lato-ThinItalic.woff" />
+    <Content Include="Themes\3\font\lato\Lato-ThinItalic.woff2" />
+    <Content Include="Themes\3\font\proximanova\proximanova-light-webfont.ttf" />
+    <Content Include="Themes\3\font\proximanova\proximanova-light-webfont.woff" />
+    <Content Include="Themes\3\font\proximanova\proximanova-light-webfont.woff2" />
+    <Content Include="Themes\3\font\proximanova\proximanova-regular-webfont.ttf" />
+    <Content Include="Themes\3\font\proximanova\proximanova-regular-webfont.woff" />
+    <Content Include="Themes\3\font\proximanova\proximanova-regular-webfont.woff2" />
+    <Content Include="Themes\3\font\proximanova\proximanova-semibold-webfont.ttf" />
+    <Content Include="Themes\3\font\proximanova\proximanova-semibold-webfont.woff" />
+    <Content Include="Themes\3\font\proximanova\proximanova-semibold-webfont.woff2" />
+    <Content Include="Scripts\thirdparty\angular-carousel\angular-carousel.css.map" />
+    <Content Include="Scripts\thirdparty\angular-carousel\angular-carousel.scss" />
+    <Content Include="Views\Account\AutoRegister.cshtml" />
+    <Content Include="Themes\4\font\fontawesome-webfont.eot" />
+    <Content Include="Themes\4\font\fontawesome-webfont.ttf" />
+    <Content Include="Themes\4\font\fontawesome-webfont.woff" />
+    <Content Include="Themes\4\font\FontAwesome.otf" />
+    <Content Include="Themes\4\font\lato\Lato-Black.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Black.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Black.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Black.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-BlackItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-BlackItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-BlackItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-BlackItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Bold.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Bold.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Bold.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Bold.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-BoldItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-BoldItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-BoldItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-BoldItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Hairline.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Hairline.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Hairline.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Hairline.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-HairlineItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-HairlineItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-HairlineItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-HairlineItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Heavy.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Heavy.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Heavy.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Heavy.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-HeavyItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-HeavyItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-HeavyItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-HeavyItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Italic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Italic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Italic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Italic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Light.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Light.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Light.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Light.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-LightItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-LightItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-LightItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-LightItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Medium.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Medium.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Medium.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Medium.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-MediumItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-MediumItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-MediumItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-MediumItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Regular.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Regular.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Regular.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Regular.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Semibold.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Semibold.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Semibold.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Semibold.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-SemiboldItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-SemiboldItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-SemiboldItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-SemiboldItalic.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-Thin.eot" />
+    <Content Include="Themes\4\font\lato\Lato-Thin.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-Thin.woff" />
+    <Content Include="Themes\4\font\lato\Lato-Thin.woff2" />
+    <Content Include="Themes\4\font\lato\Lato-ThinItalic.eot" />
+    <Content Include="Themes\4\font\lato\Lato-ThinItalic.ttf" />
+    <Content Include="Themes\4\font\lato\Lato-ThinItalic.woff" />
+    <Content Include="Themes\4\font\lato\Lato-ThinItalic.woff2" />
+    <Content Include="Themes\4\font\proximanova\proximanova-light-webfont.ttf" />
+    <Content Include="Themes\4\font\proximanova\proximanova-light-webfont.woff" />
+    <Content Include="Themes\4\font\proximanova\proximanova-light-webfont.woff2" />
+    <Content Include="Themes\4\font\proximanova\proximanova-regular-webfont.ttf" />
+    <Content Include="Themes\4\font\proximanova\proximanova-regular-webfont.woff" />
+    <Content Include="Themes\4\font\proximanova\proximanova-regular-webfont.woff2" />
+    <Content Include="Themes\4\font\proximanova\proximanova-semibold-webfont.ttf" />
+    <Content Include="Themes\4\font\proximanova\proximanova-semibold.webfont.woff" />
+    <Content Include="Themes\4\font\proximanova\proximanova-semibold.webfont.woff2" />
+    <Content Include="Themes\4\font\roboto\Roboto-Bold.woff" />
+    <Content Include="Themes\4\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="Themes\4\font\roboto\Roboto-Light.woff" />
+    <Content Include="Themes\4\font\roboto\Roboto-Light.woff2" />
+    <Content Include="Themes\4\font\roboto\Roboto-Medium.woff" />
+    <Content Include="Themes\4\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="Themes\4\font\roboto\Roboto-Regular.woff" />
+    <Content Include="Themes\4\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="Themes\4\font\roboto\Roboto-Thin.woff" />
+    <Content Include="Themes\4\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\dataloader\readme.md" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.js.map" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\xlsx\LICENSE" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.map" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\LICENSE" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\export\README.md" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\readme.md" />
+    <Content Include="Themes\4\Scripts\amcharts\plugins\responsive\responsive.min.js.map" />
+    <Content Include="Views\Admin\ExtractData.cshtml" />
+    <Content Include="Views\Admin\ManageNews.cshtml" />
+    <Content Include="Views\Account\InfoConfirmEmail.cshtml" />
+    <Content Include="Views\Home\Paypal.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
+    <Content Include="Views\Home\Cancel.cshtml" />
+    <Content Include="Views\Home\CheckoutReview.cshtml" />
+    <Content Include="Views\Home\Process.cshtml" />
+    <Content Include="Views\Home\CheckOutCancel.cshtml" />
+    <None Include="Web.bettertradeoff - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.bettertradeofftest - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admins\Controllers\" />
+    <Folder Include="Areas\Admins\Models\" />
+    <Folder Include="bin\" />
+    <Folder Include="Views\AdminNotifications\" />
+    <Folder Include="Views\ImageManagement\" />
+    <Folder Include="Views\Report\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BTO.Common\BTO.Common.csproj">
+      <Project>{c7555c03-8de5-4d54-89fe-1d155625ed3a}</Project>
+      <Name>BTO.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Model\BTO.Model.csproj">
+      <Project>{d2bbbd57-660f-4cb2-8643-b2d081e9d658}</Project>
+      <Name>BTO.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Repository\BTO.Repository.csproj">
+      <Project>{524201ff-6982-4783-8743-bca0428c225b}</Project>
+      <Name>BTO.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Resources\BTO.Resources.csproj">
+      <Project>{31c0f6fc-829f-43d9-b716-ab1409c25fde}</Project>
+      <Name>BTO.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Service\BTO.Service.csproj">
+      <Project>{42bdd50e-a474-46c3-bb19-26aea529513b}</Project>
+      <Name>BTO.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BTO.Tests\BTO.Tests.csproj">
+      <Project>{dfad80c8-4c87-4030-9914-741edaf14875}</Project>
+      <Name>BTO.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\bto\controller\LiquidIlliquidAssetController.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11330</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:44305/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

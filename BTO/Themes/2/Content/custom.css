@@ -1,0 +1,316 @@
+﻿/* CSS FOR PROTOTYPE */
+
+/**************
+ GLOBAL
+ **************/
+body {background:#efefef;}
+
+.left {text-align:left}
+.center {text-align:center;}
+.right {text-align:right;}
+
+.text-white {color:#fff;}
+.text-blue {color:#039be5;}
+.text-green {color:#00c851;}
+.text-red {color:#ff4444;}
+.text-orange {color:#ffbb33;}
+
+table {width: 100%;}
+
+.logo {
+	width:115px;
+	height:35px;
+	background:url('/Themes/2/Content/imageslogo.png') no-repeat;
+	background-size:115px 35px;
+}
+
+/**************
+ LOGIN
+ **************/
+#login-page {
+	background:#efefef url('/Themes/2/Content/images/login-bg.jpg') no-repeat;
+	background-size: cover;
+}
+#login-top .dropdown { text-align: right; }
+#login-top .dropdown-menu {
+	top: 30px;
+	right: 10px;
+	left: auto;
+}
+#login-panel-wrapper {
+	width: 400px;
+	z-index: 999;
+	position: relative;
+	margin: 0 auto;
+	padding-top:50px;
+	text-align: center;
+}
+#login-panel .panel-heading, #regsocial-panel .panel-heading {padding:15px;border-bottom:1px solid #ddd;}
+#login-panel .panel-body, #regsocial-panel .panel-body {padding:20px;}
+#login-panel .panel-footer, #regsocial-panel .panel-footer {background:#fff;}
+#login-panel .logo {margin:0 auto;}
+#login-panel .social-row {
+	width: 240px;
+	margin: 15px auto;
+	min-height: 45px;
+}
+#login-panel .icons-sm {
+	padding: 0;
+	border: 2px solid;
+	border-radius: 3px;
+	width: 46px;
+	line-height: 42px;
+	font-size: 20px;
+	float: left;
+	margin: 7px;
+}
+#login-panel [type="checkbox"] + label:before {
+	width:15px;
+	height:15px;
+	margin-top:5px;
+}
+#login-panel [type="checkbox"]:checked + label:before {
+	width: 9px;
+	height: 18px;
+}
+#login-panel [type="checkbox"] + label {padding-left: 25px;}
+#login-panel .btn-signup {margin-right:20px;}
+#login-panel-wrapper .copyright-text {
+	color:#fff;
+	margin: 30px 0 20px;
+	font-size: 12px;
+}
+#login-panel .helper,
+#regsocial-panel .helper {
+	font-size: 13px;
+	margin: 20px 20px 0;
+}
+
+#login-footer {
+	position:fixed;
+	width: 100%;
+	height: 40%;
+	background:#039be5;
+	bottom:0;
+	text-align: center;
+	color: #fff;
+	padding: 20px;
+}
+
+/**************
+ TIMELINE
+ **************/
+.navbar-brand {
+	margin-top: -3px;
+}
+.navbar .navbar-nav > li {border-right:1px solid #ddd;border-left:1px solid #ddd;}
+.navbar .navbar-right > li {border-right:0;border-left:1px solid #ddd;}
+
+.btn-dream, .btn-life-evt {
+	width: 200px;
+	height: 90px;
+	color: #fff;
+	font-size: 1.4em;
+	text-transform: none;
+    margin: 10px;
+    text-align: center;    
+    vertical-align: middle;
+}
+.btn-dream:hover, .btn-life-evt:hover,
+.btn-dream:focus, .btn-life-evt:focus {
+	color:#fff;
+	border:none;
+	cursor: -webkit-grab; cursor:-moz-grab;
+	
+}
+.btn-dream:active, .btn-life-evt:active {
+	cursor: -webkit-grabbing; cursor:-moz-grabbing;
+
+}
+.btn-dream {
+	margin-left: 0;
+	background:rgba(255,68,68,0.85);
+	border:2px solid #ff4444;
+}
+.btn-life-evt {
+	background:rgba(0,200,81,0.85);
+	border:2px solid #00c851;
+}
+
+/**************
+ OPTIONS
+ **************/
+
+.nav-tabs {margin-top:10px;}
+.tabs-6 li {
+	width:16.6%;
+	text-align: center;
+}
+.tabs-6 li > a {
+	color:#676767;
+	line-height: 35px;
+	font-weight: 500;
+}
+.tabs-6 li.active > a {
+	color:#444;
+}
+
+.tabs-6 li > a > i {margin-right: 5px;}
+
+.tab-content {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-bottom: none;
+	padding:20px;
+}
+.tab-content h6 {
+	font-size: 18px;
+	font-weight: 400;
+	margin-bottom: 10px;
+}
+.tab-content .desc {
+	font-size:12px;
+	color: #676767;
+	font-style: italic;
+	font-weight: 300;
+	line-height: 18px
+}
+
+/* Main */
+.tab-content table.two-cols tr td {padding: 8px 0;}
+
+.tab-content input[type="text"] {
+	width: 75%;
+	height: 20px;
+	margin-bottom: 0;
+}
+
+/* Income/Expenses */
+.tab-content table.legends {
+	color:#676767;
+	font-size: 12px;
+}
+.tab-content table.legends tr td {padding: 2px 0;}
+
+.tab-content .legend-box {
+	width: 15px;
+	height: 15px; 
+	border: 1px solid;
+	float: left;
+	margin: 0 10px;
+	border-radius: 2px;
+}
+
+/* Dreams Ranking */
+.tab-content .list-group {
+	margin-bottom: 0;
+}
+
+/* Global Options */
+
+.tab-content-bottom {
+	background: #fff;
+	padding: 0 20px 25px;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-bottom-left-radius: 2px; 
+	border-bottom-right-radius: 2px;
+}
+
+.tab-content-bottom .global-options {
+	padding:25px 20px;
+	background:rgba(3,155,229,0.1);
+	border:1px solid #4285f4;
+	border-radius: 2px;
+}
+
+.tab-content-bottom .global-options .select-wrapper {width:95%;}
+.tab-content-bottom .global-options .select-wrapper input.select-dropdown {margin-bottom:0;}
+
+#footer {
+	margin-top: 40px;
+	width: 100%;
+	padding: 20px;
+	background:#039be5;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+}
+
+/* Moda; */
+.modal .row {margin: 15px 0;}
+.modal input[type="text"] {
+	width: 75%;
+	height: 20px;
+	margin-bottom: 0;
+}
+
+.modal .select-wrapper {width:95%;}
+.modal .select-wrapper input.select-dropdown {margin-bottom:0;line-height: 20px;}
+
+/**************
+ RESPONSIVE
+ **************/
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+    .nav-tabs .tab-title {
+        display:block;
+        line-height: 12px;
+        font-size: 11px;
+    }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+	#regsocial-panel .input-field.col-md-6 {
+		margin-top: 30px;
+	}
+	#regsocial-panel .input-field.col-md-4 {
+		padding-left: 4px;
+		margin-top: -24px;
+	}
+
+    .tab-content .section {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+    }
+    
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	.btn-dream, .btn-life-evt {
+		width: 150px;
+		height: 70px;
+	}
+
+    .nav-tabs .tab-title {
+        display:none;
+    }
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+	#login-panel-wrapper {width: 320px;}
+
+	#login-top {
+		width: 160px;
+		margin: 0 auto;
+	}
+	#login-top .dropdown { text-align: center; }
+	#login-top .dropdown-menu {
+		top: 30px;
+		right: auto;
+		left: 0;
+	}
+	#login-top .dropdown-menu li {text-align: center;}
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+	
+}

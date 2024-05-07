@@ -1,0 +1,22 @@
+/* ng-sortable css file */
+.as-sortable-item,.as-sortable-placeholder{display:block}.as-sortable-item{-ms-touch-action:none;touch-action:none}.as-sortable-item-handle{cursor:move}.as-sortable-drag{position:absolute;pointer-events:none;z-index:9999}.as-sortable-hidden{display:none!important}.as-sortable-un-selectable{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.as-sortable-item,.as-sortable-placeholder{min-height:20px;border-radius:10px}.as-sortable-item{border:solid 1px darkgrey;background-color:#fff}.as-sortable-placeholder{border:1px dashed darkgrey;box-sizing:border-box;background-color:#dbdbdb}.as-sortable-drag{opacity:.8}
+                                                                                                                                                                                                                                                                   .as-sortable-item,
+.as-sortable-placeholder { 
+    border: 1px solid #d9edf7;
+    border-radius: 2px;
+    list-style: none;
+}
+
+.as-sortable-placeholder {
+    border: 1px dotted #0000ff !important;
+}
+
+#sortable-container {
+    display: inline-block;
+}
+
+.column {
+    border: 1px solid #000000;
+    border-radius: 5px;
+}

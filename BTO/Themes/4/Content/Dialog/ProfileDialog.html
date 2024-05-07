@@ -1,0 +1,452 @@
+﻿<div id="ProfileDialog" class="modal fade" role="dialog" style="overflow-y:scroll">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <treasure-overlay-spinner active='spinner.active'>
+                <form name="form_profile" novalidate class="sssss" role="form" ng-init="$root.profileService.initForm(this);" ng-submit="$root.profileService.submitForm(form_profile.$valid);">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" onclick="$('#cancelUpdateProfile').trigger('click');">&times;</button>
+                        <h5 class="modal-title">{{$root.translateData["Update profile"]}}</h5>
+                    </div>
+                    <div class="modal-body" ng-if="$root.isReadyShowProfile">
+
+
+                        <!------------------->
+                        <div class="panel panel-info">
+                            <div class="panel-heading">{{$root.translateData["User Profile"]}}</div>
+                            <div class="panel-body">
+                                <div class="col-sm-4" style="text-align:center">
+                                    <img id="defaultAvatar" class="img" src="Themes/4/Content/Images/avatar.png" ng-show="$root.profile.client.avatar =='' || $root.profile.client.avatar == null ">
+                                    <img id="imgAvatar" class="img" ng-src="{{$root.profile.client.avatar}}" ng-show="$root.profile.client.avatar != null && $root.profile.client.avatar !='' ">
+                                    <!--<button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" onclick="$('#filesToUpload').click();">{{$root.translateData["CHANGE PHOTO"]}}</button>-->
+
+                                    <button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" ng-click="$root.manageAvatarService.showDialogUpdateProfilePicture(0)">{{$root.translateData["Change Photo"]}}</button>
+                                    <input type="file" name="filesToUpload" id="filesToUpload" onchange="encodeImage();" class="hidden" accept="image/*" />
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-xs-6 input-field required  locked">
+                                            <div class="input-group">
+                                                <input id="dialog_profile_client_first_name" type="text" class="form-control" name="client_first_name" ng-model="$root.profileDialogData.client.first_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                <div class="bto-error" ng-messages="form_profile.client_first_name.$error" ng-if="form_profile.client_first_name.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Client firstname is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_fname" class="active">{{$root.translateData["Firstname"]}}</label>
+                                        </div>
+                                        <div class="col-xs-6 input-field required locked">
+                                            <div class="input-group">
+                                                <input id="dialog_profile_client_last_name" type="text" class="form-control" name="client_last_name" ng-model="$root.profileDialogData.client.last_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                <div class="bto-error" ng-messages="form_profile.client_last_name.$error" ng-if="form_profile.client_last_name.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Client lastname is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_lname" class="active">{{$root.translateData["Lastname"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required">
+                                            <div>
+                                                <input id="dialog_profile_client_email" type="text" name="client_email" ng-model="$root.profileDialogData.client.email"
+                                                       required unique-name ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                                <div class="bto-error" ng-messages="form_profile.client_email.$error" ng-if="form_profile.client_email.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Client Email is requried"]}}
+                                                    </div>
+                                                    <div ng-message="email">
+                                                        {{$root.translateData["Client Email is invalid"]}}
+                                                    </div>
+                                                    <div ng-message="uniqueName">
+                                                        {{$root.translateData["Client Email is existed"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_email" class="active">{{$root.translateData["Email"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 input-field required ">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_client_mobile_phone" name="mobile_phone_code" required="" model-data="$root.profileDialogData.client.phone_code" list-data="countries" value-id="'dial_code'" label-id="'name'" not-select-label-1="'--Select Code--'" search="true" change-value="$root.profileService.changePhoneCode(form_profile.$valid)"></material-select>
+
+
+                                                <div class="bto-error" ng-messages="form_profile.mobile_phone_code.$error" ng-if="form_profile.mobile_phone_code.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Country code is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_pcountry">{{$root.translateData["Country Code"]}}</label>
+                                        </div>
+                                        <div class="col-xs-6 input-field required">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">&nbsp;{{$root.profileDialogData.client.phone_code}}&nbsp;</div>
+                                                <input type="text" style="margin-top:1px;height:37px;" ng-pattern="/^[0-9]{2,3}[0-9\-\.]{2,10}?[0-9]{1,3}$/" id="dialog_profile_client_mobile_phone_number" name="mobile_phone_number" ng-model="$root.profileDialogData.client.phone_number" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+
+                                            </div>
+                                            <div class="bto-error" ng-messages="form_profile.mobile_phone_number.$error" ng-if="form_profile.mobile_phone_number.$dirty">
+                                                <div ng-message="required">
+                                                    {{$root.translateData["Phone number is requried"]}}
+                                                </div>
+                                                <div ng-message="pattern">
+                                                    {{$root.translateData["Phone number is not correct"]}}
+                                                </div>
+                                            </div>
+                                            <label for="profile_pnumber" class="active">{{$root.translateData["Mobile phone"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 input-field required locked">
+                                            <div class="select-wrapper">
+
+                                                <material-select id="dialog_profile_client_gender" name="client_gender" required="" model-data="$root.profileDialogData.client.gender" list-data="genderList" value-id="'id'" label-id="'name'" not-select-label-1="'--Select Gender--'" ng-if="!$root.profileDialogData.client.isChanged" translate-label="true"></material-select>
+                                                <input ng-init="gender_model = $root.profileService.getDataFromList($root.genderList,$root.profileDialogData.client.gender)" id="dialog_profile_client_gender" type="text" name="client_gender" ng-model="gender_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+
+
+                                                <div class="bto-error" ng-messages="form_profile.client_gender.$error" ng-if="form_profile.client_gender.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Client Gender is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_gender">{{$root.translateData["Gender"]}}</label>
+                                        </div>
+                                        <div class="col-xs-6 input-field required locked">
+
+                                            <material-select id="dialog_profile_client_age" name="start_age" model-data="$root.profileDialogData.client.age" list-data="$root.listStartAge" to-disabled-event="!$root.profileDialogData.client.isChangedStartAge" ng-if="!$root.profileDialogData.client.isChangedStartAge" change-value="$root.profileService.changeAgeRange();"></material-select>
+                                            <input id="dialog_profile_client_age" type="text" name="client_age" ng-model="$root.profileDialogData.client.age" max="54" min="18"
+                                                   ng-disabled="$root.profileDialogData.client.isChangedStartAge == true" ng-if="$root.profileDialogData.client.isChangedStartAge" />
+                                            <label for="profile_age" class="active">{{$root.translateData["Age"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_client_residency_nationality" name="client_nationality" required="" model-data="$root.profileDialogData.client.nationality" list-data="countries" value-id="'iso_code_3'" label-id="'name'" not-select-label-1="'--Select Nationality--'" search="true" change-value="$root.profileService.changeNationality();" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                <input ng-init="nationality_model = $root.profileService.getDataFromList($root.countries,$root.profileDialogData.client.nationality,'iso_code_3')" id="dialog_profile_client_residency_nationality" type="text" name="client_nationality" ng-model="nationality_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                <div class="bto-error" ng-messages="form_profile.client_nationality.$error" ng-if="form_profile.client_nationality.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Nationality is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_rcountry">{{$root.translateData["Nationality"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_client_residency_status" name="client_residency_status" required="" model-data="$root.profileDialogData.client.residency_status" list-data="residencyStatusList" value-id="'id'" label-id="'name'" not-select-label-1="'--Select Residence status--'" ng-disabled="!$root.profileDialogData.client.isChanged" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                <input ng-init="residency_status_model = $root.profileService.getDataFromList($root.residencyStatusList,$root.profileDialogData.client.residency_status)" id="dialog_profile_client_residency_status" type="text" name="client_residency_status" ng-model="residency_status_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                <div class="bto-error" ng-messages="form_profile.client_residency_status.$error" ng-if="form_profile.client_residency_status.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Client Residence status is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_rstatus">{{$root.translateData["Residency status"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_occupation" name="occupation" required model-data="$root.profileDialogData.client.occupation" list-data="occupationList" value-id="'id'" label-id="'name'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" translate-label="true"></material-select>
+                                                <div class="bto-error" ng-messages="form_profile.occupation.$error" ng-if="form_profile.occupation.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse Occupation is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_mstatus">{{$root.translateData["Occupation"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_client_marital_status" name="client_marital_status" required="" model-data="$root.profileDialogData.client.married_status" list-data="maritalStatusList" value-id="'id'" label-id="'name'" not-select-label-1="'--Select Marital status--'" change-value="$root.profileService.InitShowMaritalStatus();" ng-if="!$root.profileDialogData.client.isChanged" translate-label="true"></material-select>
+                                                <input ng-init="married_status_model = $root.profileService.getDataFromList($root.maritalStatusList,$root.profileDialogData.client.married_status)" id="dialog_profile_client_marital_status" type="text" name="client_marital_status" ng-model="married_status_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+
+
+
+                                                <div class="bto-error" ng-messages="form_profile.client_marital_status.$error" ng-if="form_profile.client_marital_status.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Marital status is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_mstatus">{{$root.translateData["Marital status"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field locked">
+                                            <div class="select-wrapper" ng-init="childNumbers=$root.utilService.range(1, 4)">
+                                                <material-select id="dialog_profile_children_number" name="children_number" model-data="$root.profileDialogData.children.number_of_child" list-data="childNumbers" not-select-label="'0'" change-value="$root.profileService.changeNumberOfChild()" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                <input ng-init="$root.profileDialogData.children.number_of_child = $root.profileDialogData.children.number_of_child == null ? '0' :$root.profileDialogData.children.number_of_child" id=" dialog_profile_children_number" type="text" name="children_number" ng-model="$root.profileDialogData.children.number_of_child"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+
+                                                <div class="bto-error" ng-messages="form_profile.children_number.$error" ng-if="form_profile.children_number.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Number of children is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_children">{{$root.translateData["Number of children"]}}</label>
+                                        </div>
+                                        <div ng-if="false" class="col-xs-6 input-field">
+                                            <div class="select-wrapper" ng-init="dependentNumbers=$root.utilService.range(1, 5)">
+                                                <material-select id="dialog_profile_dependent_number" name="dependent_number" model-data="$root.profileDialogData.dependent.number_of_dependent" list-data="dependentNumbers" not-select-label="'0'" change-value="$root.profileService.changeNumberOfDependent()"></material-select>
+
+                                                <div class="bto-error" ng-messages="form_profile.dependent_number.$error" ng-if="form_profile.dependent_number.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Number of other dependent is requied"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_dependents">{{$root.translateData["Number of other dependent"]}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- .panel -->
+                        <!-------------------->
+
+                        <div class="panel panel-info" ng-if="$root.profileDialogData.client.married_status == 1">
+                            <div class="panel-heading">{{$root.translateData["Spouse Profile"]}}</div>
+                            <div class="panel-body">
+                                <div class="col-sm-4" style="text-align:center">
+                                    <img id="defaultSpouseAvatar" class="img" src="Themes/4/Content/Images/avatar.png" ng-if="$root.profile.client.spouse_avatar =='' || $root.profile.client.spouse_avatar == null ">
+                                    <img id="imgSpouseAvatar" class="img" ng-src="{{$root.profile.client.spouse_avatar}}" ng-show="$root.profile.client.spouse_avatar != null ">
+                                    <button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" ng-click="$root.manageAvatarService.showDialogUpdateProfilePicture(1)">{{$root.translateData["Change Photo"]}}</button>
+                                    <input type="file" name="filesToUploadSpouse" id="filesToUploadSpouse" onchange="encodeImageSpouse();" class="hidden" accept="image/*" />
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-xs-6 input-field required locked">
+                                            <div class="input-group">
+                                                <input id="dialog_profile_spouse_first_name" type="text" class="form-control" name="spouse_first_name" ng-model="$root.profileDialogData.spouse.first_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                <div class="bto-error" ng-messages="form_profile.spouse_first_name.$error" ng-if="form_profile.spouse_first_name.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse firstname is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_fname" class="active">{{$root.translateData["Firstname"]}}</label>
+                                        </div>
+                                        <div class="col-xs-6 input-field required locked">
+                                            <div class="input-group">
+                                                <input id="dialog_profile_spouse_last_name" type="text" class="form-control" name="spouse_last_name" ng-model="$root.profileDialogData.spouse.last_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                <div class="bto-error" ng-messages="form_profile.spouse_last_name.$error" ng-if="form_profile.spouse_last_name.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse lastname is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_lname" class="active">{{$root.translateData["Lastname"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_spouse_gender" name="spouse_gender" required model-data="$root.profileDialogData.spouse.gender" list-data="genderList" value-id="'id'" label-id="'name'" not-select-label-1="'--Select Gender--'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" ng-if="!$root.profileDialogData.client.isChanged" translate-label="true"></material-select>
+                                                <input ng-init="spouse_gender_model = $root.profileService.getDataFromList($root.genderList,$root.profileDialogData.spouse.gender)" id="dialog_profile_spouse_gender" type="text" name="spouse_gender" ng-model="spouse_gender_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                <div class="bto-error" ng-messages="form_profile.spouse_gender.$error" ng-if="form_profile.spouse_gender.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse Gender is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_gender">{{$root.translateData["Gender"]}}</label>
+                                        </div>
+                                        <div class="col-xs-6 input-field required locked" ng-init="spouseAgeRange = $root.utilService.range(18, 75)">
+                                            <material-select id="dialog_profile_spouse_age" name="spouse_age" required model-data="$root.profileDialogData.spouse.age" list-data="spouseAgeRange" not-select-label="'--Select Age--'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" change-value="$root.profileService.changeAgeRange();" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                            <input id="dialog_profile_spouse_age" type="text" name="spouse_age" ng-model="$root.profileDialogData.spouse.age"
+                                                   ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                            <div class="bto-error" ng-messages="form_profile.spouse_age.$error" ng-if="form_profile.spouse_age.$dirty">
+                                                <div ng-message="required">
+                                                    {{$root.translateData["Spouse age is requried"]}}
+                                                </div>
+                                            </div>
+                                            <label for="profile_age" class="active">{{$root.translateData["Age"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_spouse_residency_nationality" name="spouse_nationality" required model-data="$root.profileDialogData.spouse.nationality" list-data="countries" value-id="'iso_code_3'" label-id="'name'" not-select-label-1="'--Select Nationality--'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" search="true" change-value="$root.profileService.changeSpouseNationality();" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                <input ng-init="spouse_residency_nationality = $root.profileService.getDataFromList($root.countries,$root.profileDialogData.spouse.nationality,'iso_code_3')" id="dialog_profile_spouse_residency_nationality" type="text" name="spouse_nationality" ng-model="spouse_residency_nationality.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                <div class="bto-error" ng-messages="form_profile.spouse_nationality.$error" ng-if="form_profile.spouse_nationality.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse Nationality is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_rcountry">{{$root.translateData["Nationality"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_spouse_residency_status" name="spouse_residency_status" required model-data="$root.profileDialogData.spouse.residency_status" list-data="residencyStatusList" value-id="'id'" label-id="'name'" not-select-label-1="'--Select Residence status--'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                <input ng-init="spouse_residency_status_model = $root.profileService.getDataFromList($root.residencyStatusList,$root.profileDialogData.spouse.residency_status)" id="dialog_profile_spouse_residency_status" type="text" name="spouse_residency_status" ng-model="spouse_residency_status_model.name"
+                                                       ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                <div class="bto-error" ng-messages="form_profile.spouse_residency_status.$error" ng-if="form_profile.spouse_residency_status.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse residence is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_rstatus">{{$root.translateData["Residency status"]}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 input-field required locked">
+                                            <div class="select-wrapper">
+                                                <material-select id="dialog_profile_spouse_occupation" name="spouse_occupation" required model-data="$root.profileDialogData.spouse.occupation" list-data="occupationList" value-id="'id'" label-id="'name'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" translate-label="true"></material-select>
+                                                <div class="bto-error" ng-messages="form_profile.spouse_occupation.$error" ng-if="form_profile.spouse_occupation.$dirty">
+                                                    <div ng-message="required">
+                                                        {{$root.translateData["Spouse Occupation is requried"]}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="profile_mstatus">{{$root.translateData["Occupation"]}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- .panel -->
+
+                        <div class="panel panel-info" ng-if="$root.profileDialogData.children.number_of_child > 0">
+                            <div class="panel-heading">{{$root.translateData["Children section"]}}</div>
+                            <div class="panel-body">
+                                <div class="table-responsive_bk">
+                                    <table class="table table-striped child_table">
+                                        <thead>
+                                            <tr>
+                                                <th class="first">{{$root.translateData["Photo"]}}</th>
+                                                <th class="required_label">{{$root.translateData["Name"]}}</th>
+                                                <th class="required_label">{{$root.translateData["Gender"]}}</th>
+                                                <th class="required_label">{{$root.translateData["Age"]}}</th>
+                                                <th>{{$root.translateData["Status"]}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-init="childAgeRange = $root.utilService.range(0, 25)">
+                                            <tr ng-repeat="child in $root.profileDialogData.children.childrens">
+                                                <td>
+                                                    <a href="#" data-toggle="modal" data-target="#photo-modal" ng-click="$root.manageAvatarService.showDialogUpdateProfilePicture(4,$index)">
+                                                        <span id="child_span_{{$index}}" class="fa-stack fa-2x qs-btn" ng-init="$root.profileService.updateChildAvatarTooltip($index);" data-placement="bottom" title="{{$root.translateData['Upload Photo']}}">
+                                                            <!--<i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>-->
+                                                            <img id="defaultChildAvatar{{$index}}" class="img" src="Themes/4/Content/Images/avatar.png" ng-show="child.avatar =='' || child.avatar == null ">
+                                                            <img id="imgChildAvatar" class="img" ng-src="{{child.avatar}}" ng-show="child.avatar != null && child.avatar !='' ">
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <div class="input-field   locked">
+                                                        <input type="text" id="dialog_profile_child_name_{{$index}}" class="form-control " name="child_name_{{$index}}" ng-model="child.name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-field locked">
+                                                        <material-select id="dialog_profile_child_gender_{{$index}}" name="child_gender_{{$index}}" model-data="child.gender" required="" list-data="genderList" value-id="'id'" label-id="'name'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" not-select-label="'--Select Gender--'" ng-if="!$root.profileDialogData.client.isChanged" translate-label="true"></material-select>
+
+                                                        <input id="dialog_profile_child_gender_{{$index}}" type="text" name="child_gender_{{$index}}" ng-model="$root.profileService.getDataFromList($root.genderList,child.gender).name"
+                                                               ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-field locked">
+
+                                                        <material-select id="dialog_profile_child_age_{{$index}}" name="child_age_{{$index}}" required="" model-data="child.age" list-data="$root.childAgeRange[$index]" not-select-label="'--Select Age--'" change-value="$root.profileService.changeAgeRange();" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                        <input id="dialog_profile_child_age_{{$index}}" type="text" name="child_age_{{$index}}" ng-model="child.age"
+                                                               ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                    </div>
+                                                </td>
+                                                <td class="td_child_status">
+                                                    <div class="checkbox child_status">
+                                                        <input type="checkbox" id="dialog_profile_child_handicapped_{{$index}}" name="child_handicapped_{{$index}}" ng-model="child.handicapped" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                                        <label for="dialog_profile_child_handicapped_{{$index}}">{{$root.translateData["Handicapped"]}}</label>
+                                                    </div>
+                                                    <div class="checkbox child_status">
+                                                        <input type="checkbox" id="dialog_profile_child_independent_{{$index}}" name="child_independent_{{$index}}" ng-model="child.independent" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                                        <label for="dialog_profile_child_independent_{{$index}}">{{$root.translateData["Independent"]}}</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info" ng-if="$root.profileDialogData.dependent.number_of_dependent > 10000">
+                            <div class="panel-heading">{{$root.translateData["Other dependent section" ]}}</div>
+                            <div class="panel-body">
+                                <div class="table-responsive_bk">
+                                    <table class="table table-striped dependent_table">
+                                        <thead>
+                                            <tr>
+                                                <th class="first">{{$root.translateData["No."]}}</th>
+                                                <th>{{$root.translateData["Name"]}}</th>
+                                                <th>{{$root.translateData["Gender"]}}</th>
+                                                <th>{{$root.translateData["Age"]}}</th>
+                                                <th>{{$root.translateData["Relationship"]}}</th>
+                                                <th>{{$root.translateData["Status"]}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-init="otherDependentAgeRange = $root.utilService.range(0, 81)">
+                                            <tr ng-repeat="dependent in $root.profileDialogData.dependent.dependents">
+                                                <td><label class="control-label">{{$index + 1}}</label></td>
+                                                <td>
+                                                    <div class="input-field locked">
+                                                        <input type="text" id="dialog_profile_dependent_name_{{$index}}" class="form-control" name="dependent_name_{{$index}}" ng-model="dependent.name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1 || $root.profileDialogData.client.isChanged == true" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-field locked">
+
+                                                        <material-select id="dialog_profile_dependent_gender_{{$index}}" name="dependent_gender_{{$index}}" required="" model-data="dependent.gender" list-data="genderList" value-id="'id'" label-id="'name'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" not-select-label-1="'--Select Gender--'"></material-select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-field locked">
+
+                                                        <material-select id="dialog_profile_dependent_age_{{$index}}" name="dependent_age_{{$index}}" required="" model-data="dependent.age" list-data="otherDependentAgeRange" not-select-label="'--Select Age--'" ng-if="!$root.profileDialogData.client.isChanged"></material-select>
+                                                        <input id="dialog_profile_dependent_age_{{$index}}" type="text" name="dependent_age_{{$index}}" ng-model="dependent.age"
+                                                               ng-disabled="$root.profileDialogData.client.isChanged == true" ng-if="$root.profileDialogData.client.isChanged" />
+                                                    </div>
+                                                </td>
+                                                <td>
+
+                                                    <material-select id="dialog_profile_dependent_relationship_{{$index}}" name="dependent_relationship_{{$index}}" required="" model-data="dependent.relationship" list-data="relationshipList" value-id="'id'" label-id="'name'" bto-disabled-event="$root.functionAccess.MANAGE_PROFILE !=1" not-select-label="'--Select Relationship--'"></material-select>
+                                                </td>
+                                                <td>
+                                                    <div class="checkbox dependent_status">
+                                                        <input type="checkbox" id="dialog_profile_dependent_handicapped_{{$index}}" name="dependent_handicapped_{{$index}}" ng-model="dependent.handicapped" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                                        <label for="dialog_profile_dependent_handicapped_{{$index}}">{{$root.translateData["Handicapped"]}}</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUpdateProfile" ng-click="$root.profileService.cancelUpdateProfile();">{{$root.translateData["Cancel"]}}</button>
+                        <button  type="submit" class="btn btn-primary" id="OkUpdateProfile" ng-if="$root.functionAccess.MANAGE_PROFILE ==1">{{$root.translateData["Save"]}}</button>
+                    </div>
+                </form>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+</div>

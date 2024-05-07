@@ -1,0 +1,214 @@
+﻿<div class="container-fluid manage_organization_unit">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Role Management' | translate}}</div>
+                <div class="panel-body manage_role_tree">
+                    <script type="text/ng-template" id="nodes_renderer.html">
+                        <div ui-tree-handle ng-class="{'selected_tree':ou_selectedOrganizationUnit.id==node.id }">
+                            <a class="btn btn-success btn-xs" data-nodrag ng-click="ou_toggle(this)" ng-if="node.childrens.length > 0">
+                                <span class="glyphicon" ng-class="{
+                          'glyphicon-chevron-right': collapsed,
+                          'glyphicon-chevron-down': !collapsed
+                          }">
+                                </span>
+                            </a>
+                            {{node.description}}
+                            <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="ou_remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="ou_edit(node)"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="ou_newSubItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                        <ol ui-tree-nodes="" ng-model="node.childrens" ng-class="{hidden: collapsed}">
+                            <li ng-repeat="node in node.childrens" ui-tree-node ng-include="'nodes_renderer.html'">
+                            </li>
+                        </ol>
+                    </script>
+                    <div>
+                        <div ui-tree="role_treeOptions">
+                            <ol ui-tree-nodes="" ng-model="roleData" id="tree-root">
+                                <li class="ng-scope angular-ui-tree-node" style="margin-bottom: 20px;">
+                                    <div class="ng-scope ng-binding angular-ui-tree-handle" style="border-width: 0px;background: transparent;">
+                                        <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addTopNode()"><span class="glyphicon glyphicon-plus"></span></a>
+                                    </div>
+                                </li>
+                                <li ng-repeat="node in roleData" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" ng-if="op_isShowDetail">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{'Role detail' | translate}}</div>
+                <div class="panel-body manage_role_body">
+                    <form name="editOrganizationUnitForm">
+                        <div ng-include="'ou-form-template'"></div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4">&nbsp;</label>
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-primary" ng-disabled="editOrganizationUnitForm.$invalid" ng-click="ou_updateOrganizationUnit()">
+                                    <span>{{'Save' | translate}}</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-left: 5px; margin-right:5px;">
+                            <div>
+                                <div ng-include="'function-role-template'"></div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/ng-template" id="function-role-template">
+        <div class="row assign-role">
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="list-group">
+                    <div class="list-group-item active">
+                        <table>
+                            <tr>
+                                <td ng-if="availableRoles.length > 0">
+                                    <checkbox name="available-role" ng-model="isSelectedAllAvailableRole" ng-change="ou_CheckAllAvailableRole()"></checkbox>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    {{'List functions' | translate }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ou-role-list">
+                        <div class="ou-role-item" ng-repeat="roleItem in availableRoles">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <checkbox ng-model="roleItem.selected" class="pull-left"></checkbox>
+                                    </td>
+                                    <td nowrap="nowrap">
+                                        <b>
+                                            &nbsp;{{roleItem.description}}
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 v-center">
+                <button class="btn btn-default center-block add" ng-click="ou_addRole();"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                <div>&nbsp;</div>
+                <button class="btn btn-default center-block remove" ng-click="ou_removeRole();"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            </div>
+            <div class="col-xs-7">
+                <div class="list-group">
+                    <div class="list-group-item active">
+                        <table>
+                            <tr>
+                                <td ng-if="roleFunctionData.length > 0">
+                                    <checkbox name="selected-role" ng-model="isSelectedAllRole" ng-change="ou_CheckAllRole()"></checkbox>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    {{'Selected functions' | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ou-role-list">
+                        <div class="ou-role-item" ng-repeat="roleItem in roleFunctionData">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <checkbox ng-model="roleItem.selected" class="pull-left"></checkbox>
+                                    </td>
+                                    <td>
+                                        <select name="selectListPermission" id="selectListPermission"
+                                                ng-options="option.action as option.name for option in definePermission"
+                                                ng-model="roleItem.action" ng-change="roleStatusChange();"></select>
+                                    </td>
+                                    <td nowrap="nowrap">
+                                        <b>&nbsp;{{roleItem.description}}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12 col-lg-12">
+                <button type="button" ng-click="saveFunctionRoleChanged()" class="btn btn-primary btn-default pull-right">{{'Save' | translate}}</button>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="ou-form-template">
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="ou_name">{{"Role name" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="ou_name" placeholder="{{'Role name' | translate}}" class="form-control" name="ou_name" ng-model="ou_selectedOrganizationUnit.name" required duplicate-except="{key: 'id', value:ou_selectedOrganizationUnit.id}" duplicate="name" duplicate-list="roleList" ng-change="changeRoleName();" />
+                <div class="bto-error" ng-messages="addOrganizationUnitForm.ou_name.$error" ng-if="addOrganizationUnitForm.ou_name.$dirty">
+                    <div ng-message="required">
+                        {{"Role name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Role name is duplicated" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="editOrganizationUnitForm.ou_name.$error" ng-if="editOrganizationUnitForm.ou_name.$dirty">
+                    <div ng-message="required">
+                        {{"Role name is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Role name is duplicated" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="ou_description">{{"Role description" | translate}}</label>
+            <div class="col-sm-8">
+                <input id="ou_description" placeholder="{{'Role description' | translate}}" class="form-control" name="ou_description" ng-model="ou_selectedOrganizationUnit.description" required ng-change="changeRoleDescription();" />
+                <div class="bto-error" ng-messages="addOrganizationUnitForm.ou_description.$error" ng-if="addOrganizationUnitForm.ou_description.$dirty">
+                    <div ng-message="required">
+                        {{"Role description is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Role description is duplicated" | translate}}
+                    </div>
+                </div>
+                <div class="bto-error" ng-messages="editOrganizationUnitForm.ou_description.$error" ng-if="editOrganizationUnitForm.ou_description.$dirty">
+                    <div ng-message="required">
+                        {{"Role description is requried" | translate}}
+                    </div>
+                    <div ng-message="duplicate">
+                        {{"Role description is duplicated" | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <div id="organizationUnit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" ng-if="ou_selectedOrganizationUnit.id == null">{{'Add new role' | translate}}</h4>
+                    <h4 class="modal-title" ng-if="ou_selectedOrganizationUnit.id != null">{{'Edit role' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addOrganizationUnitForm">
+                        <div ng-include="'ou-form-template'"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Cancel' | translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="addOrganizationUnitForm.$invalid" ng-click="ou_saveNewOrganizationUnit();"><span>{{'Save' | translate}}</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

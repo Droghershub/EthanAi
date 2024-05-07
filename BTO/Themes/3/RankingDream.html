@@ -1,0 +1,43 @@
+﻿<div class="row" id="RankingDreamTab" ng-controller="rankingDreamController">
+    <div class="row">
+        <div class="col-md-8">
+            <h6 class="text-blue">{{"Ranking Dreams" | translate}}</h6>
+            <p class="desc">{{"Rank your dreams according to priority, and then click the simulate button on the right" | translate}}.<br /><br /></p>
+        </div>
+        <div class="col-md-4 right" style="padding: 0 25px;">
+            <button type="button" class="btn btn-primary btn-block waves-effect" ng-click="simulate()">{{"Simulate" | translate}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h6>{{'Dream List' | translate}}</h6></div>
+                <div class="panel-body">
+                    <ul as-sortable="sortableOptions" ng-model="listRanking" class="list-group">
+                        <li ng-repeat="item in listRanking" as-sortable-item class="list-group-item">
+                            <div as-sortable-item-handle class="as-sortable-item-handle">
+                                <i class="fa fa-sort"></i>
+                                <span ng-class="{'selected': listRanking === item}">{{item.label | translate: item}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h6>{{'Simulation Result' | translate}}</h6></div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li ng-repeat="item in rankingResults" class="list-group-item"
+                            ng-class="{'list-group-item-success': ('Ok' == item.infor), 'list-group-item-danger': ('Bankrupt' == item.infor)}">
+                            <i class="fa"
+                               ng-class="{'fa-ellipsis-h' : (item.infor =='Not checked'),'fa-thumbs-down' : (item.infor =='Bankrupt'),'fa-thumbs-up' : (item.infor =='Ok')}"></i>
+                            {{item.label | translate: item}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .row -->
+</div>

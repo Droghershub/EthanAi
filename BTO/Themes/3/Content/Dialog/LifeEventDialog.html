@@ -1,0 +1,196 @@
+﻿<div id="lifeeventdialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="form_life_event" novalidate role="form" ng-init="$root.form_life_event = this;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('#SaveLifeEvent').unbind('click'); $('#cancelSaveLifeEvent').unbind('click');">&times;</button>
+                    <h5 class="modal-title green-text">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i ng-if="selectedDreamtype.id == 4" class="fa fa-home fa-stack-1x fa-inverse"></i>
+                                    <i ng-if="selectedDreamtype.id == 5" class="fa fa-child fa-stack-1x fa-inverse"></i>
+                                    <i ng-if="selectedDreamtype.id == 6" class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="input-field col-xs-10">
+                                <div ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{display:true} " visible="{{dreamTypeConfig.display}}" ng-if="dreamTypeConfig.display && dreamTypeConfig.field_name =='name'" ng-switch on="dreamTypeConfig.field_name">
+                                    <input id="modal_title" name="modal_title" type="text" ng-model="dreamTypeConfig.value" required duplicate-dream-or-event-name="$root.selectedDreamOrLifeEvent.id">
+                                    <label for="modal_title" class="active">{{"Title" | translate}} ({{"click to edit" | translate}})</label>
+                                    <div class="bto-error" ng-messages="form_life_event.modal_title.$error">
+                                        <div ng-message="required">
+                                            {{"Title is required" | translate}}
+                                        </div>
+                                        <div ng-message="duplicateDreamOrEventName">
+                                            {{"Title is duplicated" | translate}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4" style="text-align:center">
+                            <div ng-if="$root.selectedLifeEvent.photo_path == null || $root.selectedLifeEvent.photo_path == ''">
+                                <img ng-if="selectedDreamtype.id == 4" class="img" id="defaultLifeEventPhoto" ng-model="selectedLifeEvent.photo_path" src="/Themes/3/Content/Images/default-residence.jpg">
+                                <img ng-if="selectedDreamtype.id == 5" class="img" id="defaultLifeEventPhoto" ng-model="selectedLifeEvent.photo_path" src="/Themes/3/Content/Images/default-independent.jpg">
+                                <img ng-if="selectedDreamtype.id == 6" class="img" id="defaultLifeEventPhoto" ng-model="selectedLifeEvent.photo_path" src="/Themes/3/Content/Images/default-income.jpg">
+                            </div>
+                            <div ng-show="$root.selectedLifeEvent.photo_path != null && $root.selectedLifeEvent.photo_path != ''">
+                                <img class="img" id="LifeEventPhoto" ng-src="{{selectedLifeEvent.photo_path}}">
+                            </div>
+
+                            <button type="button" class="btn btn-xs btn-primary waves-effect waves-light btn-white" ng-click="$root.manageAvatarService.showDialogUpdateProfilePicture(3, $root.selectedDreamtype.id);">{{"CHANGE PHOTO" | translate}}</button>
+                            <input type="file" name="LifeEventFileUpload" id="LifeEventFileUpload" onchange="loadLifeEventFile(event);" class="hidden" accept="image/*" />
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-xs-12 input-field">
+                                    <label for="dream_type" class="active">{{"Type" | translate}}</label>
+                                    <material-select ng-if="!$root.isEditDream" id="life_event_type" name="life_event_type" model-data="$root.selectedDreamtype" list-data="DreamListLifeEvent" value-id="'id'" label-id="'dream_name'" not-select-label="''" change-value="$root.ChangeSelectListDreamType($root.selectedDreamtype,'lifeevent');"></material-select>
+                                    <div style="padding-top:7px;" ng-if="$root.isEditDream">
+                                        {{selectedDreamtype.dream_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="selectedDreamtype.id == 1">
+                                <div class="col-xs-12 input-field" style="margin-bottom:20px;margin-top:0;">
+                                    <input id="dream_existant" type="checkbox" name="existant" ng-model="selectedDream.existant" />
+                                    <label for="dream_existant">{{'This is an existing property' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="selectedDreamtype.id == 5">
+                                <div class="col-xs-12 input-field" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'dependent_reference'} " ng-if="dreamTypeConfig.display">
+                                    <label for="child_member" class="active">{{"Child Member" | translate}}</label>
+                                    <input type="hidden" />
+                                    <material-select id="child_member_select" name="child_member" model-data="dreamTypeConfig.value" list-data=" $root.childMembersFilterNotOtherChild" value-id="'id'" label-id="'description'" not-select-label="'Select child member'" change-value="$root.timelineChangeChildMemember(dreamTypeConfig.value)" required></material-select>
+                                    <div class="bto-error" ng-messages="form_life_event.child_member.$error" ng-if="form_life_event.child_member.$dirty">
+                                        <div ng-message="required">
+                                            {{"Child Member is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'selected_residence'} " ng-if="dreamTypeConfig.display">
+                                <div class="col-xs-12 input-field">
+                                    <label for="selected_residence" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <input type="text" value="{{dreamTypeConfig.value | dreamName}}" ng-if="$root.playBackPlayerData.isPlaying" />
+                                    <material-select ng-if="!$root.playBackPlayerData.isPlaying" id="life_event_{{dreamTypeConfig.field_name}}" model-data="dreamTypeConfig.value" list-data="dreamTypeConfig.selectBoxData" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" value-id="'id'" label-id="'label'"></material-select>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.selectedDreamtype.id ==4">
+                                <div class="col-xs-6 input-field" ng-if="($root.selectedDream.existant==false || $root.selectedDream.existant == null) && dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'starting_age'} ">
+                                    <label for="starting_age" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <input type="hidden" ng-init="startAgeRange = $root.utilService.range(PersonaPlan.start_age, PersonaPlan.death_age)" />
+                                    <material-select id="life_event_{{dreamTypeConfig.field_name}}" name="starting_age" model-data="dreamTypeConfig.value" required list-data="startAgeRange" not-select-label="''" change-value="$root.timelineChangeStartingAge(dreamTypeConfig.value)" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" style="width:100%;" ></material-select>
+                                </div>
+                                <div ng-class="{false:'col-xs-6 input-field',true:'col-xs-12 input-field'}[$root.selectedDream.existant==true]" ng-if="dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'value'} ">
+                                    <label for="value" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <div class="input-group">
+                                        <input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="value" ng-model="dreamTypeConfig.value" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" required />
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.value.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{"Transaction Value is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.selectedDreamtype.id != 5 && $root.selectedDreamtype.id > 4 && ($root.selectedDream.existant==false || $root.selectedDream.existant == null) && dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'starting_age'} ">
+                                <div class="col-xs-12 input-field">
+                                    <label for="starting_age" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <input type="hidden" ng-init="startAgeRange = $root.utilService.range(PersonaPlan.start_age, PersonaPlan.death_age)" />
+                                    <material-select id="life_event_{{dreamTypeConfig.field_name}}" name="starting_age" model-data="dreamTypeConfig.value" required list-data="startAgeRange" not-select-label="''" change-value="$root.timelineChangeStartingAge(dreamTypeConfig.value)" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" style="width:100%;"></material-select>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.selectedDreamtype.id == 5 && ($root.selectedDream.existant==false || $root.selectedDream.existant == null) && dreamTypeConfig.display" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'age_dependent'} ">
+                                <div class="col-xs-12 input-field">
+                                    <label for="age_dependent" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <input type="hidden" ng-init="ageOfDependentRange = $root.utilService.range(16, 25)"  />
+                                    <material-select id="age_dependent_{{dreamTypeConfig.field_name}}" name="age_dependent" model-data="dreamTypeConfig.value" list-data="ageOfDependentRange" not-select-label="'Forever'" change-value="$root.timelineChangeAgeOfDependent(dreamTypeConfig.value)" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" style="width:100%;"></material-select>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$root.selectedDreamtype.id == 5 && ($root.selectedDream.existant==false || $root.selectedDream.existant == null) && dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'starting_age'} ">
+                                <div class="col-xs-12 input-field">
+                                    <label for="starting_age" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="value" ng-model="dreamTypeConfig.value" ng-disabled="true" />
+                                    <input type="hidden" ng-init="startAgeRange = $root.utilService.range(PersonaPlan.start_age, PersonaPlan.death_age)" ng-if="false" />
+                                    <material-select id="life_event_{{dreamTypeConfig.field_name}}" name="starting_age" model-data="dreamTypeConfig.value" required list-data="startAgeRange" not-select-label="'Never Independent'" change-value="$root.timelineChangeStartingAge(dreamTypeConfig.value)" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" style="width:100%;" ng-if="false"></material-select>
+                                </div>
+                            </div>
+
+                            <div class="row" ng-if="$root.selectedDreamtype.id >4 && dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'value'} ">
+                                <div class="col-xs-12 input-field">
+                                    <label for="value" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <div>
+                                        <input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="value" ng-model="dreamTypeConfig.value" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" required />
+                                        </div>
+                                    <div class="bto-error" ng-messages="form_life_event.value.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 6">
+                                            {{"Exceptional Income is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 input-field" ng-if="dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'transaction_tax'} ">
+                                    <label for="transaction_tax" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <div class="input-group">
+                                        <input type="text" id="life_event_{{dreamTypeConfig.field_name}}" name="transaction_tax" ng-model="dreamTypeConfig.value" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" required percentv2 />
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.transaction_tax.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{"Transaction tax is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 input-field" ng-if="dreamTypeConfig.display" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'transaction_cost'} ">
+                                    <label for="transaction_cost" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <div class="input-group">
+                                        <input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="transaction_cost" ng-model="dreamTypeConfig.value" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" required percentv2 />
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.transaction_cost.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 4">
+                                            {{"Transaction cost  is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-init="blank = ''" ng-repeat="dreamTypeConfig in selectedDreamtype.dreamTypeConfig |filter:{field_name:'yearly_cost_reduction'} " ng-if="dreamTypeConfig.display">
+                                <div class="col-xs-12 input-field">
+                                    <label for="yearly_cost_reduction" class="active">{{dreamTypeConfig.description | translate}}</label>
+                                    <div>
+                                        <input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="yearly_cost_reduction" ng-model="dreamTypeConfig.value" ng-disabled="true" required ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" />
+
+                                        <!--<input id="life_event_{{dreamTypeConfig.field_name}}" type="text" name="yearly_cost_reduction" ng-model="dreamTypeConfig.value" ng-disabled="$root.isEditDream && !$root.EditLifeeventPermission" required ng-currency fraction="2" currency-symbol="{{$root.PersonaPlan.currency_code}}" />-->
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_life_event.yearly_cost_reduction.$error">
+                                        <div ng-message="required" ng-if="selectedDreamtype.id == 5">
+                                            {{"Yearly cost reduction  is required" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="#" class="btn-signup" data-dismiss="modal" id="cancelSaveLifeEvent" onclick="$('#SaveLifeEvent').unbind('click');">{{"Close" | translate}}</a>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal" id="cancelSaveLifeEvent" onclick="$('#SaveLifeEvent').unbind('click');">{{"Close" | translate}}</button>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="form_life_event.$invalid || ($root.isEditDream && !$root.EditLifeeventPermission)" id="SaveLifeEvent">
+                        {{"Save changes" | translate}}</
+                        button>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Process</title>
+</head>
+<body>
+    <div> 
+        Your payment is successful!
+        <br /> 
+        Transaction Id : @ViewBag.PaymentConfirmation
+
+
+        @{
+            BTO.Helper.Payment payment = ViewBag.payment as BTO.Helper.Payment;
+            
+        }
+
+        @if (payment != null)
+        {
+            <label>Amount : @payment.Amount</label>
+    <br />
+    <label>Subcription Type: @payment.SubcriptionType</label>
+    <br />
+    <label>UserId: @payment.UserId</label>
+    <br />
+    <label>Payment Date : @payment.PaymentDate</label>
+
+    <br />
+    <label>Currency Code : @payment.CurrencyCode</label>
+            
+            <br />
+            <label>Begin Date : @payment.BeginDate</label>
+            
+        }
+    </div>
+</body>
+</html>

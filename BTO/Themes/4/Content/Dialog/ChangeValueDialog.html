@@ -1,0 +1,50 @@
+﻿<div id="changeValueDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">{{$root.translateData["Change expense at retirement"]}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">{{$root.translateData["Change current expense"]}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">{{$root.translateData["Change current income"]}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form_progressbar" novalidate class="form-horizontal" role="form">
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">
+                        <label class="control-label col-sm-4" for="retirement_expense_input">{{$root.translateData["Expense at retirement"]}}</label>
+                        <div class="col-sm-8">
+                            <input id="retirement_expense_input" class="form-control" name="retirement_expense" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.retirement_expense.$error">
+                                <div ng-message="required">{{$root.translateData["Expense at retirement is required"]}}</div>
+                                <div ng-message="min">{{$root.translateData["Expense must be greater than zero"]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">
+                        <label class="control-label col-sm-4" for="current_expense_input">{{$root.translateData["Current expense"]}}</label>
+                        <div class="col-sm-8">
+                            <input  id="current_expense_input" class="form-control" name="current_expense" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_expense.$error">
+                                <div ng-message="required">{{$root.translateData["Current expense is required"]}}</div>
+                                <div ng-message="min">{{$root.translateData["Current expense must be greater than zero"]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">
+                        <label class="control-label col-sm-4" for="current_income_input">{{$root.translateData["Current income"]}}</label>
+                        <div class="col-sm-8">
+                            <input  id="current_income_input" class="form-control" name="current_income" ng-model="$root.progressBarValue.changeProgressData" ng-currency required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_income.$error">
+                                <div ng-message="required">{{$root.translateData["Current income is required"]}}</div>
+                                <div ng-message="min">{{$root.translateData["Current income be greater than zero"]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{$root.translateData["Close"]}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="$root.actionService.doActionUpdateValueOfPersonalPlanOnPopup();" ng-disabled="form_progressbar.$invalid">{{$root.translateData["Save changes"]}}</button>
+            </div>
+        </div>
+    </div>
+</div>

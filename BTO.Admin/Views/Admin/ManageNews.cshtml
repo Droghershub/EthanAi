@@ -1,0 +1,169 @@
+﻿<div class="container-fluid manage_organization_unit">
+    <script type="text/ng-template" id="nodes_renderer.html">
+        <div ui-tree-handle ng-class="{'selected_tree':ou_selectedOrganizationUnit.id==node.id }">
+            <a class="btn btn-success btn-xs" data-nodrag ng-click="ou_toggle(this)" ng-if="node.childrens.length > 0">
+                <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}">
+                </span>
+            </a>
+            {{node.description}}
+
+            <a class="pull-right btn btn-primary btn-xs" title="{{'Assign' | translate}}" data-nodrag ng-click="ou_asign(node)"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a class="pull-right btn  btn-danger btn-xs" title="{{'Remove' | translate}}" data-nodrag ng-click="ou_remove(node)"><span class="glyphicon glyphicon-minus-sign"></span></a>
+        </div>
+        <ol ui-tree-nodes="" ng-model="node.childrens" ng-class="{hidden: collapsed}">
+            <li ng-repeat="node in node.childrens" ui-tree-node ng-include="'nodes_renderer.html'">
+            </li>
+        </ol>
+    </script>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+
+                    <h3 class="panel-title pull-left">
+                        {{'Manage News' | translate}}
+                    </h3>
+                    <a class="pull-right btn btn-primary btn-xs" title="{{'Add' | translate}}" data-nodrag="" ng-click="selectNewToAdd()"><span class="glyphicon glyphicon-plus"></span></a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body manage_news">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div>
+                                <input type="text" class="form-control" placeholder="{{'Search by name' | translate }}">
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:50px;">{{'No.' | translate}}</th>
+                                <th>{{'Content' | translate}}</th>
+                                <th style="width:70px;">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="item in listNews">
+                                <td>{{$index + 1}}</td>
+                                <td>{{item.news_content}}</td>
+                                <td>
+                                    <a class="pull-right btn btn-danger btn-xs" title="{{'Delete' | translate}}" ng-click="confirmDelete(item)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <a class="pull-right btn btn-primary btn-xs" style="margin-right: 4px;" title="{{'Edit' | translate}}" ng-click="selectNewToEdit(item)"><span class="glyphicon glyphicon-edit"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7" ng-if="selectedNew != null">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{'News Detail' | translate}}</div>
+                <div class="panel-body new-detail-body">
+                    <ul class="nav nav-tabs">
+                        <li ng-class="{'active': selectedTab ==1}" ng-click="selectedTab=1;updateCalendar();"><a>{{'Content' | translate}}</a></li>
+                        <li ng-class="{'active': selectedTab ==2}" ng-if="selectedNew.id != null" ng-click="selectedTab=2"><a>{{'Organization Unit' | translate}}</a></li>
+                        <li ng-class="{'active': selectedTab ==3}" ng-if="selectedNew.id != null" ng-click="selectedTab=3"><a>{{'User' | translate}}</a></li>
+                    </ul>
+                    <div>
+                        <div class="tab-pane ng-hide" ng-show="selectedTab ==1">
+                            <div class="form-group row" style="margin-top: 1em;">
+                                <label class="control-label col-sm-4" >{{"Content" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="news_content" ng-model="selectedNew.news_content" required />
+                                    <div class="bto-error" ng-messages="selectedNew.news_content.$error" ng-if="selectedNew.news_content.$dirty">
+                                        <div ng-message="required">
+                                            {{"Content is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Content (English)" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="ou_name" ng-model="selectedNew.news_content_en" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Content (French)" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="ou_name" ng-model="selectedNew.news_content_fr" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Content (Malay)" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="ou_name" ng-model="selectedNew.news_content_ma" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Prioritization" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="environment_version" ng-model="selectedNew.prioritization" ng-options="item.id as item.name for item in prioritizationList"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" for="ou_name">{{"Sequencing" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="sequencing" placeholder="{{'Sequencing' | translate}}" class="form-control" name="ou_name" ng-model="selectedNew.sequencing" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Starting Date" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="startingDatePicker" type="text" data-ng-datepicker config-options="startingDatePickerOptions" data-ng-model="selectedNew.starting_date">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >{{"Expiration Date" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="startingDatePicker" type="text" data-ng-datepicker config-options="expirationDatePickerOptions" data-ng-model="selectedNew.expiration_date">                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-4" >&nbsp;</label>
+                                <div class="col-sm-8">
+                                    <button ng-if="selectedNew.id == null" type="button" class="btn btn-primary" ng-click="saveNew()">
+                                        <span class="ng-binding">{{'Save' | translate}}</span>
+                                    </button>
+                                    <button ng-if="selectedNew.id != null" type="button" class="btn btn-primary" ng-click="updateNew()">
+                                        <span class="ng-binding">{{'Update' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane ng-hide" ng-show="selectedTab == 2 && selectedNew.id != null">
+                            <h3>Organization Unit</h3>
+                            <div>
+                                <div ui-tree="ou_treeOptions" data-drag-enabled="false">
+                                    <ol ui-tree-nodes="" ng-model="ou_data" id="tree-root">
+                                        <li ng-repeat="node in ou_data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane ng-hide" ng-show="selectedTab == 3 && selectedNew.id != null" >
+                            <h3>User</h3>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#startDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+        $('#endDate').datetimepicker({
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+    });
+</script>
+

@@ -1,0 +1,67 @@
+﻿
+    <div class="row" id="LiquidIlliquidAssetChart" >
+    <div class="col-md-8">
+        <h6 class="text-blue">{{"Liquid Asset" | translate}}</h6>
+        <p class="desc">{{'Hover your pointer on the graph below to view details' | translate}}</p>
+        <treasure-overlay-spinner active='spinner.active'>
+
+            <!--<img src="Themes/2/Content/Images/graph.png" style="width:100%;margin:20px 0" />-->
+            <canvas id="liquid-chart" class="chart chart-line" chart-type="liquidChart.type" data="liquidChart.data" labels="liquidChart.labels" options="liquidChart.options"
+                    series="liquidChart.series" colours="liquidChart.colours"
+                    isneedrender="liquidChart.isneedrender"></canvas>
+            <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6">
+                    <table class="legends">
+                        <tr>
+                            <td>
+                                <div class="legend-box {{listModel.Top}}" ng-click="ShowHideLineChart(listModel.Top,'Top')" style="background:#00c851;border-color:#007e33"></div>
+                                {{"Top equity curve" | translate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="legend-box {{listModel.Median}}" ng-click="ShowHideLineChart(listModel.Median,'Median')" style="background:#33b5e5;border-color:#0099cc"></div>
+                                {{"Median investor curve" | translate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="legend-box {{listModel.Bottom}}" ng-click="ShowHideLineChart(listModel.Bottom,'Bottom')" style="background:#ff4444;border-color:#cc0000"></div>
+                                {{"Bottom equity curve" | translate}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="legend-box {{listModel.Zero}}" ng-click="ShowHideLineChart(listModel.Zero,'Zero')" style="background:#ffbb33;border-color:#ff8800"></div>
+                                {{"Zero return curve" | translate}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </treasure-overlay-spinner>
+    </div>
+    <div class="col-md-4">
+        <h6 class="text-green">{{'Investments' | translate}}</h6>
+        <p class="desc">{{'Choose the appropriate risk(%) based on your investments using the slider below.' | translate}}</p>
+        <div>&nbsp;</div>
+        <div>
+            <md-slider id="risk" md-discrete config="$root.dynamicConponent.risk.config"
+                       model-data="$root.convertDataOfPersonalPlan.risk" is-show-percent="true" min="$root.dynamicConponent.risk.config.min" max="$root.dynamicConponent.risk.config.max" change-value="$root.actionService.onChangeSlider('risk');" end-change-value="$root.actionService.onEndChangeSlider('risk');" special-values="$root.dynamicConponent.risk.config.specialValues"
+                       bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"></md-slider>
+        </div>
+        <table class="three-cols">
+            <tr>
+                <td style="width:60%;">{{'Investment Risk' | translate}}</td>
+                <td class="right">%</td>
+                <td><input id="com_risk" type="text" ng-currency currency-symbol="" ng-model="$root.convertDataOfPersonalPlan.risk" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_risk')"></td>
+            </tr>
+            <tr>
+                <td>{{'Expected Return' | translate}}</td>
+                <td class="right">% </td>
+                <td><input id="com_risk_return" type="text" ng-currency currency-symbol="" ng-model="$root.convertDataOfPersonalPlan.risk_return" ng-disabled="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1" ng-change="$root.actionService.onChangeCurrencyBox('com_risk_return')"></td>
+            </tr>
+        </table>
+    </div>
+</div>

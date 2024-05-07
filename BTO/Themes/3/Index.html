@@ -1,0 +1,257 @@
+﻿<script src="/Themes/3/Scripts/services/illiquidAssetService.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/services/investmentService.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/services/retirementLifeStyleService.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/services/savingRateService.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/services/taxOptimizationService.js?{{TIMESTAMP}}"></script>
+
+<script src="/Themes/3/Scripts/ng-img-crop.js"></script>
+<script src="/Themes/3/Scripts/timelineService.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/timelineFunctions.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/timeline.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/directive.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/bto.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/script.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/touch.js?{{TIMESTAMP}}"></script>
+
+<script src="/Themes/3/Scripts/amcharts/amcharts.js"></script>
+<script src="/Themes/3/Scripts/amcharts/serial.js"></script>
+<script src="/Themes/3/Scripts/amcharts/pie.js"></script>
+<script src="/Themes/3/Scripts/amcharts/themes/light.js"></script>
+<script src="/Themes/3/Scripts/amcharts/plugins/export/export.js"></script>
+<link href="/Themes/3/Scripts/amcharts/plugins/export/export.css" rel="stylesheet" type="text/css">
+<script src="/Themes/3/Scripts/services/serviceSharing.js?{{TIMESTAMP}}"></script>
+<script src="/Themes/3/Scripts/services/manageAvatarService.js?{{TIMESTAMP}}"></script>
+
+<!-- Material Design Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="/Themes/3/Content/bto.css?{{TIMESTAMP}}" rel="stylesheet">
+<link href="/Themes/3/Content/custom.css?{{TIMESTAMP}}" rel="stylesheet">
+<link href="/Themes/3/Content/timeline.css?{{TIMESTAMP}}" rel="stylesheet">
+<link href="/Themes/3/Content/drop-drap-control.css" rel="stylesheet" />
+<link href="/Themes/3/Content/theme-customize.css" rel="stylesheet" />
+<link href="/Themes/3/Content/theme-customize.css" rel="stylesheet" />
+<link rel="stylesheet" href="/Themes/3/Content/style.css?{{TIMESTAMP}}">
+<script src="/Themes/3/Scripts/jquery.number.js"></script>
+<script src="/Themes/3/Scripts/swiper.js"></script>
+<link rel="stylesheet" href="/Themes/3/Content/swiper.min.css">
+<link rel="stylesheet" href="/Themes/3/Content/ie.css" />
+<link href="/Themes/3/Content/ng-img-crop.css" rel="stylesheet" />
+
+
+<div id="main-page">
+
+    <div id="updateDreamPanel" class="timeline-btn-group" style="position: absolute; top:0px;left:0px; z-index:1000;display:none;">
+        <button ng-click="$root.timelineService.closeManual()" class="btn-float btn-trigger btn-close-manual"></button>
+        <div class="btn-list">
+            <a id="dreamUpdateIcon" ng-click="$root.timelineService.dreamupdated()" href="#" class="btn-float green waves-effect" title="{{'Edit' | translate}}"><i class="fa fa-pencil-square-o"></i></a>
+            <a id="dreamDeleteIcon" ng-click="$root.timelineService.dreamdeleted()" href="#" class="btn-float red waves-effect" title="{{'Delete' | translate}}"><i class="fa fa-trash"> </i></a>
+            <a id="dreamDuplicateIcon" ng-click="$root.timelineService.dreamDuplicate()" href="#" class="btn-float yellow waves-effect" title="{{'Duplicate' | translate}}"><i class="fa fa-clone"> </i></a>
+        </div>
+    </div>
+
+    <!--<section class="model-1">
+        <div id="updateDreamPanel"  class="float-btn-group open" style="position: absolute; top:300px;left:200px; z-index:9998;display: none;">
+            <button class="btn-float btn-triger-manual pink" style="z-index:9999;"><i class="icon-bars"></i></button>
+            <div class="btn-list">
+                <a id="dreamDeleteIcon" href="#" class="btn-float yellow"><i class="fa fa-times"></i></a>
+                <a id="dreamUpdateIcon" href="#" class="btn-float yellow"><i class="fa fa-pencil-square-o"> </i></a>
+            </div>
+        </div>
+    </section>-->
+
+    
+
+    <div id="div_Header" ng-include="'/Themes/3/header.html?{{TIMESTAMP}}'"></div>
+    
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-success ng-hide" ng-show="$root.successMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Success' | translate}}</div><div class="toast-message">{{$root.successMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-error ng-hide" ng-show="$root.errorMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Error' | translate}}</div><div class="toast-message">{{$root.errorMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-warning ng-hide" ng-show="$root.warningMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Warning' | translate}}</div><div class="toast-message">{{$root.warningMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-info ng-hide" ng-show="$root.infoMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Info' | translate}}</div><div class="toast-message">{{$root.infoMessage.message | translate}}</div></div></div>
+    
+    <div class="container-fluid" id="timeline">
+        <div class="row" id="div_Timeline">
+            <div id="timeline-canvas">         
+            </div>            
+            <div class="float-existing" ng-show="$root.totalExisting > 0">
+                <a class="btn btn-border-white btn-rounded waves-effect dropdown-button z-depth-0 dropdown-totalexisting" data-activates="dropdown-existing">{{$root.totalExisting}} {{'Existing' | translate}}><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <ul id="dropdown-existing" class="dropdown-content">
+                    <li ng-repeat="item in $root.PersonaPlan.dreams  | filter:{ existant: true }">
+                        <span>
+                            <table>
+                                <tr>
+                                    <td ng-click="$root.timelineService.exisingdreamupdate(item)">
+                                        <a style="padding: 15px 10px 15px 0px;" data-toggle="modal" data-target="#residence-modal">{{item.name}}</a>
+                                    </td>
+                                    <td ng-click="$root.timelineService.exisingdreamdelete(item)">
+                                        <i class="fa fa-trash-o right"></i>
+                                    </td>
+                                </tr>
+                            </table>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="float-existing" style="margin-right: 50px; float:right;" ng-hide="($root.PersonaPlan.lifeEvent | filter:{ age_dependent: null, dream_type_id : 5}).length == 0">
+                <a class="btn btn-border-white btn-rounded waves-effect dropdown-button z-depth-0 dropdown-total-forever_child_independent" data-activates="dropdown-forever_child_independent"><span ng-bind="($root.PersonaPlan.lifeEvent | filter:{ age_dependent: null , dream_type_id : 5 }).length"></span>  {{'Forever child independent' | translate}} <i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <ul id="dropdown-forever_child_independent" class="dropdown-content">
+                    <li ng-repeat="item in $root.PersonaPlan.lifeEvent | filter:{ age_dependent: null , dream_type_id : 5 }">
+                        <span>
+                            <table>
+                                <tr>
+                                    <td ng-click="$root.timelineService.exisingdreamupdate(item)">
+                                        <a style="padding: 15px 10px 15px 0px;" data-toggle="modal" data-target="#residence-modal">{{item.name}}</a>
+                                    </td>
+                                    <td ng-click="$root.timelineService.exisingdreamdelete(item)">
+                                        <i class="fa fa-trash-o right"></i>
+                                    </td>
+                                </tr>
+                            </table>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+
+                       
+            <div id="toolbox-panel" class="float-btn-group">
+                <button class="btn-float btn-triger waves-effect"><i class="icon-bars"></i></button>
+                <div class="btn-list" id="timeline_button_list">
+                    <a id="dream_3" href="#" class="dream-item-class btn-float red lighten-2 waves-effect" title="{{'Exceptional expense' | translate}}" onclick="OpenAddDreamDialog(3);"><i class="fa fa-money"></i></a>
+                    <a id="dream_2" href="#" class="dream-item-class btn-float red lighten-1 waves-effect" title="{{'Education' | translate}}" oncli onclick="OpenAddDreamDialog(2);"><i class="fa fa-graduation-cap"> </i></a>
+                    <a id="dream_4" href="#" class="dream-item-class btn-float red lighten-1 waves-effect" title="{{'Buy a car' | translate}}" ng-click="$root.showPremiumVersionMessage();"><i class="fa fa-car"> </i></a>
+                    <a id="dream_7" href="#" class="dream-item-class btn-float red waves-effect" title="{{'Residence purchase' | translate}}" onclick="OpenAddDreamDialog(1);"><i class="fa fa-home"> </i></a>                   
+                    <a id="lifeevent_4" href="#" class="lifeevent-item-class btn-float green" waves-effect title="{{'Residence Sale' | translate}}" onclick="OpenAddLifeEventDialog(4);"><i class="fa fa-home"> </i></a>
+                    <a id="lifeevent_5" href="#" class="lifeevent-item-class btn-float green lighten-1 waves-effect" title="{{'Children Independent' | translate}}" onclick="OpenAddLifeEventDialog(5);"><i class="fa fa-child"></i></a>
+                    <a id="lifeevent_8" href="#" class="lifeevent-item-class btn-float green lighten-1 waves-effect" title="{{'Sell a car' | translate}}"><i class="fa fa-car" ng-click="$root.showPremiumVersionMessage();"> </i></a>
+                    <a id="lifeevent_6" href="#" class="lifeevent-item-class btn-float green lighten-2 waves-effect" title="{{'Exception Income' | translate}}" onclick="OpenAddLifeEventDialog(6);"><i class="fa fa-sign-in"></i></a>
+                </div>
+            </div>  
+            <div range-slider prevent-equal-min-max="true" attach-handle-values="true" step="1" min="$root.PersonaPlan.start_age" max="$root.PersonaPlan.death_age" model-min="$root.zoomData.minAge" model-max="$root.zoomData.maxAge"></div>
+        </div>
+        <!--<div id="mainliquid" class="row" style="height:500px;">
+            
+        </div>-->
+    </div>      
+    
+    <div class="container" id="options">
+        <div class="row tools">
+            <div class="col-md-12">
+                <div id="div_SavingRate" ng-include="'/Themes/3/SavingRate.html?{{TIMESTAMP}}'"></div>
+                <div id="div_LifeStyle" ng-include="'/Themes/3/RetirementLifeStyle.html?{{TIMESTAMP}}'"></div>
+                <div id="div_Investment" ng-include="'/Themes/3/Investments.html?{{TIMESTAMP}}'"></div>
+                <div id="div_IlliquidAsset" ng-include="'/Themes/3/IlliquidAsset.html?{{TIMESTAMP}}'"></div>                           
+            </div>
+        </div>
+    </div>
+    <a ng-if="!$root.profile.client.is_auto_register" class="waves-effect" id="feedback-module" ng-click="$root.ratingService.showFeedback();">
+        <i class="fa fa-smile-o"></i> &nbsp;{{'Feedback' | translate}}
+    </a>
+    <div ng-include="'/Themes/3/footer.html?{{TIMESTAMP}}'"></div>
+
+    <!-- Dialog -->
+    <div ng-include="'/Themes/3/Content/Dialog/ChangeValueDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/DreamDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/LifeEventDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ConfirmDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/StartAgeDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ProfileDialog.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ManageSolution.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ManageRating.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ManageScenarios.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/PlaybackSession.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ManageAccount.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/SharingSession.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/playback.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/sharing.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/ManageAvatar.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/IronReserveInvesment.html?{{TIMESTAMP}}'"></div>
+    <div ng-include="'/Themes/3/Content/Dialog/RatingDialog.html?{{TIMESTAMP}}'"></div>
+    <script> 
+        /*
+        !function () { var e = document.createElement("script"), t = document.getElementsByTagName("script")[0]; e.async = 1, e.src = "https://inlinemanual.com/embed/player.bf37df9c5d36a88fe3a5ae9cf1467311.js", e.charset = "UTF-8", t.parentNode.insertBefore(e, t) }();
+        */
+    $(window).resize(function () {
+        $('#updateDreamPanel').hide();
+        angular.element(document.body).injector().get('timelineService').renderTimeLine();
+    });
+    $(document).ready(function () {        
+        angular.element(document.body).injector().get('sharingService').initSharing();
+
+        $('.btn-triger').click(function () {
+            $(this).closest('.float-btn-group').toggleClass('open');
+            angular.element(document.body).injector().get('timelineService').openAddGroup();
+        });
+        /*
+        $('.btn-close-manual').click(function () {
+            angular.element(document.body).injector().get('timelineService').cancelHighlight();
+            $('#updateDreamPanel').hide();
+        });
+        
+        $('#dreamDeleteIcon').click(function () {
+            angular.element(document.body).injector().get('timelineService').cancelHighlight();
+            $('#updateDreamPanel').hide();
+            angular.element(document.body).injector().get('timelineService').dreamdeleted();
+        })
+
+        $('#dreamUpdateIcon').click(function () {
+            angular.element(document.body).injector().get('timelineService').cancelHighlight();
+            $('#updateDreamPanel').hide();
+            angular.element(document.body).injector().get('timelineService').dreamupdated();
+        });
+        */
+        $("#dream_rental").change(function () {
+            alert("Handler for .change() called.");
+        });
+        setTimeout(function () { 
+            /* Smooth Scrolling */
+            $('a[href*="#"]:not([href="#"]):not([data-toggle="collapse"]):not(.vtab-item-link)').click(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        switch (this.hash.slice(1)) {
+                            case 'savings': $('html, body').animate({ scrollTop: target.offset().top - 10 }, 1000);
+                                break;
+                            case 'retirement': $('html, body').animate({ scrollTop: target.offset().top - 60 }, 1000);
+                                break;
+                            case 'investment': $('html, body').animate({ scrollTop: target.offset().top - 110 }, 1000);
+                                break;
+                            case 'illiquid': $('html, body').animate({ scrollTop: target.offset().top - 135 }, 1000);
+                                break;
+                            default: $('html, body').animate({ scrollTop: target.offset().top }, 1000); break;
+                        }
+                        return false;
+                    }
+                }
+            });
+        }, 2000)
+
+    });
+    /*
+    function selectRental(ev, isRent) {
+        console.log(isRent);
+        if ($('#dream_rental_value').val() == 'false') {
+            $("#dream_rentalPanel").slideUp();
+            return;
+        } else if ($('#dream_rental_value').val() == 'true') {
+            $("#dream_rentalPanel").slideDown();
+        }
+        return;
+    }
+    */
+    function OpenAddDreamDialog(id) {
+
+        angular.element(document.body).injector().get('timelineService').OpenAddDreamDialog(id);
+    }
+    function OpenAddLifeEventDialog(id) {
+        angular.element(document.body).injector().get('timelineService').OpenAddLifeEventDialog(id);
+    }
+    function OpenAddExistingAssetDialog() {
+        angular.element(document.body).injector().get('timelineService').OpenAddExistingAssetDialog();
+    }
+
+    </script>
+</div>

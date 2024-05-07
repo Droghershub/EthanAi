@@ -1,0 +1,45 @@
+﻿<div class="global-options" ng-if="$root.scope.name != $root.config.TAB.SHARING_SESSION">
+    <form name="contentBottomForm">
+        <div class="row">
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td style="width:50%">{{"Trials" | translate}}</td>
+                        <td style="width:25%">{{"Top" | translate}}</td>
+                        <td style="width:25%">{{"Bottom" | translate}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <material-select id="numberOfTrials" model-data="PersonaPlan.number_trials" list-data="$root.configParameter.Trials" change-value="$root.actionService.onChangeSelectBox('numberOfTrials')" bto-disabled-event="$root.functionAccess.CHANGE_NUMBER_OF_TRIALS != 1">
+                            </material-select>
+                        </td>
+                        <td>
+                            <material-select id="top_value" model-data="convertDataOfPersonalPlan.mc_top_value" change-value="$root.actionService.onChangeSelectBox('top_value')" list-data="$root.configParameter.Mc_Top_Value" bto-disabled-event="$root.functionAccess.CHANGE_TOP_VALUE != 1"></material-select>
+                        </td>
+                        <td>
+                            <material-select id="bottom_value" model-data="convertDataOfPersonalPlan.mc_bottom_value" change-value="$root.actionService.onChangeSelectBox('bottom_value')" list-data="$root.configParameter.Mc_Bottom_value" bto-disabled-event="$root.functionAccess.CHANGE_BOTTOM_VALUE != 1"></material-select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <div>{{'Inflation Rate' | translate}}</div>
+                <div>&nbsp;</div>
+                <div>
+                    <md-slider id="inflaction" md-discrete config="$root.dynamicConponent.inflaction.config"
+                               model-data="$root.convertDataOfPersonalPlan.inflaction" is-show-percent="true" min="$root.dynamicConponent.inflaction.config.min" max="$root.dynamicConponent.inflaction.config.max" change-value="$root.actionService.onChangeSlider('inflaction');" end-change-value="$root.actionService.onEndChangeSlider('inflaction');"
+                               bto-disabled-event="$root.functionAccess.CHANGE_INFLATION != 1"></md-slider>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>{{'Salary Increase Rate' | translate}}</div>
+                <div>&nbsp;</div>
+                <div>
+                    <md-slider id="salaryEvolution" md-discrete config="$root.dynamicConponent.salaryEvolution.config"
+                               model-data="$root.convertDataOfPersonalPlan.salaryEvolution" is-show-percent="true" min="$root.dynamicConponent.salaryEvolution.config.min" max="$root.dynamicConponent.salaryEvolution.config.max" change-value="$root.actionService.onChangeSlider('salaryEvolution');" end-change-value="$root.actionService.onEndChangeSlider('salaryEvolution');"
+                               bto-disabled-event="$root.functionAccess.CHANGE_SALARY_EVOLUTION != 1"></md-slider>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

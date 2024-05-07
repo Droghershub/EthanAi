@@ -1,0 +1,40 @@
+﻿<div id="confirmDeletedialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{"Confirmation" | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <p ng-if="$root.MessageDelete">{{MessageDelete}}</p>
+                <p ng-if="!$root.MessageDelete">{{"Do you want to delete it?" | translate}}</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="CancelDelete">{{"No" | translate}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="OkDelete">{{"Yes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="confirmdialog" class="modal fade" role="dialog" tabindex="-1" style="z-index: 5000"  aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{confirmdialog.title}}</h4>
+            </div>
+            <div class="modal-body">                
+                <div class="row" id="confirmdialogbodyContent">
+                </div>              
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" ng-show="confirmdialog.cancelText !=''" class="btn btn-default" data-dismiss="modal" id="CancelConfirm" style="width: 85px;">{{confirmdialog.cancelText}}</button>
+                <button type="button" ng-show="confirmdialog.OkText !=''" class="btn btn-primary" data-dismiss="modal" id="OkConfirm" style="width:85px;">{{confirmdialog.OkText}}</button>               
+            </div> 
+        </div>
+    </div>
+</div>
+
+

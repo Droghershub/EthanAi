@@ -1,0 +1,121 @@
+﻿
+    <div class="row">
+        <div class="col-md-6">
+            <h6 class="text-blue">{{"Income" | translate}}</h6>
+            <p class="desc">{{'Hover your pointer on the graph below to view details' | translate}}.</p>
+
+            <!--<img src="Themes/2/Content/Images/chart-1.png" style="width:100%;margin:20px 0" />-->
+            <treasure-overlay-spinner active='spinner.active'>
+                <canvas id="income-chart" class="chart chart-base ng-isolate-scope" chart-type="incomeChart.type" data="incomeChart.data" labels="incomeChart.labels" options="incomeChart.options"
+                        series="incomeChart.series" colours="incomeChart.colours" chart="chart"></canvas>
+
+                <div class="row">
+                    <div class="col-md-1">&nbsp;</div>
+                    <div class="col-md-5">
+                        <table class="legends">
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#00c851;border-color:#007e33"></div>
+                                    {{"Income from salary" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ff4444;border-color:#cc0000"></div>
+                                    {{"Income from investment" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ffbb33;border-color:#ff8800"></div>
+                                    {{"Income from social security" | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <table class="legends">
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#33b5e5;border-color:#0099cc"></div>
+                                   {{"Exceptional Income" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ffbb33;border-color:#ff8800"></div>
+                                    {{"Recurring Income" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#b0bec5;border-color:#607d8b"></div>
+                                   {{"Other Income" | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+        <div class="col-md-6">
+            <h6 class="text-red">{{'Expenses' | translate }} </h6>
+            <p class="desc">{{'Hover your pointer on the graph below to view details' | translate}}.</p>
+            <treasure-overlay-spinner active='spinner.active'>
+                <!--<img src="Themes/2/Content/Images/chart-2.png" style="width:100%;margin:20px 0" />-->
+                <canvas id="expense-chart" class="chart chart-base" chart-type="expenseChart.type" data="expenseChart.data" labels="expenseChart.labels" options="expenseChart.options"
+                        series="expenseChart.series" colours="expenseChart.colours"></canvas>
+
+                <div class="row">
+                    <div class="col-md-1">&nbsp;</div>
+                    <div class="col-md-5">
+                        <table class="legends">
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#00c851;border-color:#007e33"></div>
+                                    {{'Savings before retirement' | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ff4444;border-color:#cc0000"></div>
+                                    {{'Expenses before retirement' | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ffbb33;border-color:#ff8800"></div>
+                                    {{'Savings after retirement' | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-5">
+                        <table class="legends">
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#33b5e5;border-color:#0099cc"></div>
+                                    {{"Exceptional expenses" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#ffbb33;border-color:#ff8800"></div>
+                                    {{"Recurring expenses" | translate}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="legend-box" style="background:#b0bec5;border-color:#607d8b"></div>
+                                    {{"Expenses after retirement" | translate}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
+            </treasure-overlay-spinner>
+</div>
+        <div style="clear: both;height:20px;"></div>
+    </div> <!-- .row -->

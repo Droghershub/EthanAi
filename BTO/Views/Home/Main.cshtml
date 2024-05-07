@@ -1,0 +1,196 @@
+﻿
+<div id="changeValueDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">{{"Change expense at retirement" | translate}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">{{"Change current expense" | translate}}</h4>
+                <h4 class="modal-title" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">{{"Change current income" | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form_progressbar" novalidate class="form-horizontal" role="form">
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'retirement_expense'">
+                        <label class="control-label col-sm-4" for="retirement_expense_input">{{"Expense at retirement" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input type="number" id="retirement_expense_input" class="form-control" name="retirement_expense" ng-model="$root.progressBarValue.changeProgressData" required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.retirement_expense.$error">
+                                <div ng-message="required">{{"Expense at retirement is required" | translate}}</div>
+                                <div ng-message="min">{{"Expense must be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_expense'">
+                        <label class="control-label col-sm-4" for="current_expense_input">{{"Current expense" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input type="number" id="current_expense_input" class="form-control" name="current_expense" ng-model="$root.progressBarValue.changeProgressData" required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_expense.$error">
+                                <div ng-message="required">{{"Current expense is required" | translate}}</div>
+                                <div ng-message="min">{{"Current expense must be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="$root.progressBarValue.nameWillChange == 'current_income'">
+                        <label class="control-label col-sm-4" for="current_income_input">{{"Current income" | translate}}</label>
+                        <div class="col-sm-8">
+                            <input type="number" id="current_income_input" class="form-control" name="current_income" ng-model="$root.progressBarValue.changeProgressData" required min="0" />
+                            <div class="bto-error" ng-messages="form_progressbar.current_income.$error">
+                                <div ng-message="required">{{"Current income is required" | translate}}</div>
+                                <div ng-message="min">{{"Current income be greater than zero" | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+           </div>
+            <div class="modal-footer">
+                <button id="cancelChangeValueOfProgressBar"  type="button" class="btn btn-default" data-dismiss="modal">{{"Close" | translate}}</button>
+                <button id="saveValueOfProgressBar" type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="form_progressbar.$invalid">{{"Save changes" | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-4  max-width-content-column " tutorial="main-current">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading  ">
+                <i class="fa fa-dollar fa-fw"></i>
+                <label>{{"Current" | translate}}</label>
+            </div>
+            <div class="panel-body ">
+                <table border="0">
+                    <tr>
+                        <td rowspan="3" ng-init="disabledEvent = true">
+                            <bto-progress-bar id="incomeExpensebar" progress-data="incomeDataProgressBar.btoProgressData" model-data="incomeDataProgressBar.modelData" max-value="incomeDataProgressBar.maxValue" change-value="incomeProgressBarChangeData(data)" on-end="incomeProgressBarEnd()" double-click="incomeDoubleClick(data)" bto-disabled-event="$root.functionAccess.CHANGE_INCOME_TODAY != 1" ></bto-progress-bar>
+                        </td>
+                        <td rowspan="3" style="width: 30px;">&nbsp;</td>
+                        <td style="vertical-align: bottom;height: 130px;">
+                            <br>
+                            <img class="img-responsive" src="/Content/images/arrow_lb.jpg">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;height: 20px;">
+                            <center>
+                                <img class="img-responsive" src="/Content/images/pig_lb.jpg">
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">
+                            <center>
+                                <label>{{"Current Savings" | translate}}</label>
+                                <br /><input class="form-control" type="text" id="txt-currentSaving" ng-currency style="text-align:center" ng-model="PersonaPlan.current_saving" ng-keypress="saveCurrentSaving(false)" ng-blur="saveCurrentSaving(true)" ng-init="oldValue = ''" ng-focus="oldValue =PersonaPlan.current_saving" ng-disabled="$root.functionAccess.CHANGE_CURRENT_SAVING != 1">
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4  max-width-content-column" tutorial="main-investment">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading">
+                <i class="fa fa-asterisk"></i>
+                <label>{{"Investment" | translate}}</label>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                        <div style="width: 80%;margin:0 auto;">
+                            <bto-gauge-chart id="gauge_chart" config-data="rickGaugeChartData" model-data="rickValue" change-value="rickChangeValue(data);" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_SIMPLE != 1"></bto-gauge-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div style="min-width: 170px;" ng-if="$root.functionAccess.CHANGE_VOLATILITY_EXPERT == 1 || $root.functionAccess.CHANGE_VOLATILITY_EXPERT == 0 ">
+                            <bto-table-chart id="table_chart" config-data="rickTableChartData" model-data-x="rickValue" model-data-y="rickReturn" change-value="rickExpectedReturnChangeValue(data)" bto-disabled-event="$root.functionAccess.CHANGE_VOLATILITY_EXPERT != 1" />
+                        </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                    <div class="col-md-5">
+                        <div style="text-align:center">
+                            <br />
+                            <br />
+                            <label>{{"Expected return" | translate}}</label>
+                            <br />
+                            {{ PersonaPlan.risk_return * 100 | number: 2}} %
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4   max-width-content-column" tutorial="main-retirement">
+        <div class="panel panel-primary min-height-panel">
+            <div class="panel-heading">
+                <i class="fa fa-bullseye"></i>
+                <label>{{"Retirement" | translate}}</label>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 ">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                            <img class="img-responsive" src="~/Content/images/banking.jpg" />
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  ">
+                            <label>
+                                {{"Projected value" | translate}}
+                            </label>
+                            <br />
+                            <span ng-show="false">
+                                {{MainResult.project_value | currency}}
+                            </span>
+                            {{MainResult.project_value | currency}}
+                            
+                        </div>
+
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ">
+                            <label>
+                                {{"Value if unlucky" | translate}}
+                            </label>
+                            <br />
+                            <span ng-show="false">
+                                {{MainResult.saving_at_retirement | currency}}
+                            </span>
+                            {{MainResult.saving_at_retirement | currency}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 ">
+                    <div class="row ">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <img class="img-responsive " src="~/Content/images/arrow2_lb.jpg" style="margin-left:-9px;" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <center>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <bto-progress-bar id="expenseAtRetirement" progress-data="retirementDataProgressBar.btoProgressData" model-data="retirementDataProgressBar.modelData" max-value="retirementDataProgressBar.maxValue" class="retiremen-bar"
+                                                  change-value="retirementProgressBarChangeData(data)" on-end="retirementProgressBarEnd()" double-click="retirementDoubleClick(data)" bto-disabled-event="$root.functionAccess.CHANGE_EXPENSE_AT_RETIREMENT != 1"></bto-progress-bar>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    $(function () {
+        var hub = $.connection.controllerHub;        
+        $.connection.hub.start().done(function () {//when the connection is ready, we going to make the shape draggable
+          
+           
+        });
+    });
+</script>

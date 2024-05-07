@@ -1,0 +1,28 @@
+﻿<h2>@ViewBag.Message</h2> 
+<div ng-app="btoApp" ng-cloak>
+    <div class="row-fluid">
+        <div class="span12">
+            <a class="btn btn-link" ng-click="changeToCreateForm()"><i class="icon-plus-sign"></i> Add Student</a>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th class="span2">&nbsp;</th>
+                    <th class="span1">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in students">
+                    <td class="input-append">
+                        <span>
+
+                        </span>
+                    </td>
+                    <td>{{country.Name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

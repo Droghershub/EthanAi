@@ -1,0 +1,112 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO", "BTO\BTO.csproj", "{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Repository", "BTO.Repository\BTO.Repository.csproj", "{524201FF-6982-4783-8743-BCA0428C225B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Service", "BTO.Service\BTO.Service.csproj", "{42BDD50E-A474-46C3-BB19-26AEA529513B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Common", "BTO.Common\BTO.Common.csproj", "{C7555C03-8DE5-4D54-89FE-1D155625ED3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Model", "BTO.Model\BTO.Model.csproj", "{D2BBBD57-660F-4CB2-8643-B2D081E9D658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Tests", "BTO.Tests\BTO.Tests.csproj", "{DFAD80C8-4C87-4030-9914-741EDAF14875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Resources", "BTO.Resources\BTO.Resources.csproj", "{31C0F6FC-829F-43D9-B716-AB1409C25FDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.Admin", "BTO.Admin\BTO.Admin.csproj", "{FC1D9F3A-4503-40B0-8517-45A298EAF6FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.UITest", "BTO.UITest\BTO.UITest.csproj", "{40E84425-03F8-406C-9B24-7996C1B4A9F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTO.UI", "BTO.UI\BTO.UI.csproj", "{BF8A88C1-8840-4D2D-895A-39967A1EF41A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://bettertradeoff.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BTO.Common\\BTO.Common.csproj
+		SccProjectName1 = BTO.Common
+		SccLocalPath1 = BTO.Common
+		SccProjectUniqueName2 = BTO.Model\\BTO.Model.csproj
+		SccProjectName2 = BTO.Model
+		SccLocalPath2 = BTO.Model
+		SccProjectUniqueName3 = BTO.Repository\\BTO.Repository.csproj
+		SccProjectName3 = BTO.Repository
+		SccLocalPath3 = BTO.Repository
+		SccProjectUniqueName4 = BTO.Service\\BTO.Service.csproj
+		SccProjectName4 = BTO.Service
+		SccLocalPath4 = BTO.Service
+		SccProjectUniqueName5 = BTO\\BTO.csproj
+		SccProjectName5 = BTO
+		SccLocalPath5 = BTO
+		SccProjectUniqueName6 = BTO.Tests\\BTO.Tests.csproj
+		SccProjectName6 = BTO.Tests
+		SccLocalPath6 = BTO.Tests
+		SccProjectUniqueName7 = BTO.Resources\\BTO.Resources.csproj
+		SccProjectName7 = BTO.Resources
+		SccLocalPath7 = BTO.Resources
+		SccProjectUniqueName8 = BTO.Admin\\BTO.Admin.csproj
+		SccProjectName8 = BTO.Admin
+		SccLocalPath8 = BTO.Admin
+		SccProjectUniqueName9 = BTO.UITest\\BTO.UITest.csproj
+		SccProjectName9 = BTO.UITest
+		SccLocalPath9 = BTO.UITest
+		SccProjectUniqueName10 = BTO.UI\\BTO.UI.csproj
+		SccProjectName10 = BTO.UI
+		SccLocalPath10 = BTO.UI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E4A2F8-4B65-4FFA-8A78-A43713A347BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{524201FF-6982-4783-8743-BCA0428C225B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{524201FF-6982-4783-8743-BCA0428C225B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{524201FF-6982-4783-8743-BCA0428C225B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{524201FF-6982-4783-8743-BCA0428C225B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42BDD50E-A474-46C3-BB19-26AEA529513B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42BDD50E-A474-46C3-BB19-26AEA529513B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42BDD50E-A474-46C3-BB19-26AEA529513B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42BDD50E-A474-46C3-BB19-26AEA529513B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7555C03-8DE5-4D54-89FE-1D155625ED3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7555C03-8DE5-4D54-89FE-1D155625ED3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7555C03-8DE5-4D54-89FE-1D155625ED3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7555C03-8DE5-4D54-89FE-1D155625ED3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2BBBD57-660F-4CB2-8643-B2D081E9D658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2BBBD57-660F-4CB2-8643-B2D081E9D658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2BBBD57-660F-4CB2-8643-B2D081E9D658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2BBBD57-660F-4CB2-8643-B2D081E9D658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFAD80C8-4C87-4030-9914-741EDAF14875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFAD80C8-4C87-4030-9914-741EDAF14875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFAD80C8-4C87-4030-9914-741EDAF14875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFAD80C8-4C87-4030-9914-741EDAF14875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31C0F6FC-829F-43D9-B716-AB1409C25FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C0F6FC-829F-43D9-B716-AB1409C25FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C0F6FC-829F-43D9-B716-AB1409C25FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C0F6FC-829F-43D9-B716-AB1409C25FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC1D9F3A-4503-40B0-8517-45A298EAF6FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC1D9F3A-4503-40B0-8517-45A298EAF6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC1D9F3A-4503-40B0-8517-45A298EAF6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC1D9F3A-4503-40B0-8517-45A298EAF6FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E84425-03F8-406C-9B24-7996C1B4A9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E84425-03F8-406C-9B24-7996C1B4A9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E84425-03F8-406C-9B24-7996C1B4A9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E84425-03F8-406C-9B24-7996C1B4A9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8A88C1-8840-4D2D-895A-39967A1EF41A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8A88C1-8840-4D2D-895A-39967A1EF41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8A88C1-8840-4D2D-895A-39967A1EF41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8A88C1-8840-4D2D-895A-39967A1EF41A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

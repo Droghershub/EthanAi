@@ -1,0 +1,14 @@
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\BTO.Common.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\BTO.Common.pdb
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\BTO.Model.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\Newtonsoft.Json.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\EntityFramework.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\BTO.Model.pdb
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\BTO.Model.dll.config
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\Newtonsoft.Json.xml
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\bin\Debug\EntityFramework.xml
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\obj\Debug\BTO.Common.csproj.AssemblyReference.cache
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\obj\Debug\BTO.Common.csproj.CoreCompileInputs.cache
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\obj\Debug\BTO.Common.csproj.Up2Date
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\obj\Debug\BTO.Common.dll
+C:\Users\karth\Downloads\Better Trade Off\Better Trade Off\BTO\BTO.Common\obj\Debug\BTO.Common.pdb

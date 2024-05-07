@@ -1,0 +1,507 @@
+﻿<div class="panel-group"  ng-show="$root.summaryCardService.selectedCardId=='aeducation'">
+    <div class="panel panel-default" id="education">
+        <div class="panel-heading main education">
+            <h4 class="panel-title">Education</h4>
+            <a class="panel-close btn-sm btn-white waves-effect" ng-click="$root.summaryCardService.closeCard('aeducation');">x</a>
+        </div>
+        <div class="panel-body row">
+            <div class="row-sm-height">
+                <div class="col-sm-4 left-side col-sm-height col-top">
+                    <div class="inside">
+                        <p style="margin-bottom:20px">Lorem ipsum dolor sit amet.</p>
+                        <div class="card white active hoverable school-finder">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-graduation-cap"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>School Finder</h5>
+                                        <div class="card-label">Compare your options</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card white hoverable education-loan">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-3"><i class="fa fa-usd"></i></div>
+                                    <div class="col-xs-9">
+                                        <h5>Education Loan</h5>
+                                        <div class="card-label">Finance your Education</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .inside -->
+
+                </div> <!-- left side -->
+
+                <div class="col-sm-8 right-side col-sm-height col-top premium-tools school-finder-tools">
+                    <div class="inside">
+                        <div class="row">
+                            <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="col-sm-9">
+                                <h5>School Finder</h5>
+                                <ul style="margin-top:20px;">
+                                    <li>Select the family member to get education:</li>
+                                </ul>
+                                <div class="input-field">
+                                    <select>
+                                        <option value="">John (35 years old)</option>
+                                        <option value="">Jane (33 years old)</option>
+                                        <option value="" selected>Johnnie (12 years old)</option>
+                                        <option value="">Janie 2 (9 years old)</option>
+                                    </select>
+                                </div>
+                                <ul style="margin-top:20px;">
+                                    <li>Here are recommened schools for Johnnie:</li>
+                                </ul>
+                                <ul class="list-group result-ulist" style="margin-bottom:10px;">
+                                    <li href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                            <div class="col-xs-5 list-group-desc"><strong>GEMS World Academy</strong><br>Primary, Secondary<br>2 Yishun Street 42<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                            <div class="col-xs-4 list-group-price">$ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="list-group result-ulist" style="margin-bottom:10px;">
+                                    <li href="#" class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                            <div class="col-xs-5 list-group-desc"><strong>Dover Court Int'l School</strong><br>Primary, Secondary<br>301 Dover Road<br>admissions@dovercourt.edu.sg</div>
+                                            <div class="col-xs-4 list-group-price">$ 26,171<a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="separator" style="margin-top:2em;"></div>
+
+                        <div class="row" style="padding-top:2em">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="buy-buy_residence_type">Education Level</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="buy_residence_type">
+                                            <option value="">Pre-School</option>
+                                            <option value="" selected>Primary</option>
+                                            <option value="">Secondary</option>
+                                            <option value="">Pre-University</option>
+                                            <option value="">Post-Secondary</option>
+                                            <option value="">Post-Graduate</option>
+                                            <option value="">Personal Development</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- .col-xs-6 -->
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="buy-location">Location</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="buy_location">
+                                            <option value="all">All Districts</option>
+                                            <option value="">D01 Boat Quay / Raffles Place / Marina</option>
+                                            <option value="">D02 Chinatown / Tanjong Pagar</option>
+                                            <option value="">D03 Alexandra / Commonwealth</option>
+                                            <option value="">D04 Harbourfront / Telok Blangah</option>
+                                            <option value="">D05 Buona Vista / West Coast / Clementi New Town</option>
+                                            <option value="">D06 City Hall / Clarke Quay</option>
+                                            <option value="">D07 Beach Road / Bugis / Rochor</option>
+                                            <option value="">D08 Farrer Park / Serangoon Rd</option>
+                                            <option value="">D09 Orchard / River Valley</option>
+                                            <option value="">D10 Tanglin / Holland / Bukit Timah</option>
+                                            <option value="">D11 Newton / Novena</option>
+                                            <option value="">D12 Balestier / Toa Payoh</option>
+                                            <option value="">D13 Macpherson / Potong Pasir</option>
+                                            <option value="">D14 Eunos / Geylang / Paya Lebar</option>
+                                            <option value="">D15 East Coast / Marine Parade</option>
+                                            <option value="">D16 Bedok / Upper East Coast</option>
+                                            <option value="">D17 Changi Airport / Changi Village</option>
+                                            <option value="">D18 Pasir Ris / Tampines</option>
+                                            <option value="">D19 Hougang / Punggol / Sengkang</option>
+                                            <option value="">D20 Ang Mo Kio / Bishan / Thomson</option>
+                                            <option value="">D21 Clementi Park / Upper Bukit Timah</option>
+                                            <option value="">D22 Boon Lay / Jurong / Tuas</option>
+                                            <option value="">D23 Dairy Farm / Bukit Panjang / Choa Chu Kang</option>
+                                            <option value="">D24 Lim Chu Kang / Tengah</option>
+                                            <option value="">D25 Admiralty / Woodlands</option>
+                                            <option value="">D26 Mandai / Upper Thomson</option>
+                                            <option value="">D27 Sembawang / Yishun</option>
+                                            <option value="">D28 Seletar / Yio Chu Kang</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- .col-xs-6 -->
+                        </div> <!-- row -->
+                        <div class="row advanced">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="">Type</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="">
+                                            <option value="">All Types</option>
+                                            <option value="">Government</option>
+                                            <option value="">Private</option>
+                                            <option value="">Government-Aided</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> <!-- col-xs-6 -->
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="">Programs</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="">
+                                            <option value="" selected>All Programs</option>
+                                            <option value="">Gifted Education Program</option>
+                                            <option value="">Special Assistance Plan</option>
+                                            <option value="">Children with Special Needs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> <!-- col-xs-6 -->
+                        </div> <!-- row -->
+                        <div class="row advanced">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4"><label for="">Co-Corriculars</label></i></div>
+                                    <div class="col-xs-8">
+                                        <select id="">
+                                            <option value="">All Activities</option>
+                                            <option value="">Physical Sports</option>
+                                            <option value="">Uniformed Groups</option>
+                                            <option value="">Visual & Performing Arts</option>
+                                            <option value="">Clubs & Societies</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> <!-- col-xs-6 -->
+                            <div class="col-xs-6">
+                            </div> <!-- col-xs-6 -->
+                        </div> <!-- row -->
+                        <div class="row search-wrapper">
+                            <div class="col-xs-6"><a style="font-size: 14px;font-weight: 300;line-height: 56px;" class="education-advanced">Advanced Options <i class="fa fa-angle-down"></i></a></div>
+                            <div class="col-xs-6 right"><a class="btn-sm btn-primary waves-effect show-result-education style=" margin-right:0"><i class="fa fa-check-circle left"></i>SEARCH</a></div>
+                        </div>
+
+                        <div class="row result-table result-education hidden">
+                            <div class="col-xs-12">
+
+                                <ul class="nav nav-tabs tabs-3" id="nav-education-tabs" role="tablist">
+                                    <li class="nav-item active" style="margin-left:0">
+                                        <a class="nav-link active" data-toggle="tab" href="#list-education" role="tab">List</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left:0">
+                                        <a class="nav-link" data-toggle="tab" href="#map-education" role="tab">Map</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left:0">
+                                        <a class="nav-link" data-toggle="tab" href="#compare-education" role="tab">Compare</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active result-table" id="list-education" role="tabpanel">
+                                        <ul class="list-group result-ulist">
+                                            <li href="#" class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                                    <div class="col-xs-4 list-group-desc"><strong>GEMS World Academy</strong><br>Preschool, Primary, Secondary<br>2 Yishun Street 42<br>Curriculum:IB PYP, MYP, DP, IGCSE<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                                    <div class="col-xs-5 list-group-price">Primary: $ 27,400 - $ 28,200<br>Secondary: $ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect">COMPARE</a><a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                                </div>
+                                            </li>
+                                            <li href="#" class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                                    <div class="col-xs-4 list-group-desc"><strong>GEMS World Academy</strong><br>Preschool, Primary, Secondary<br>2 Yishun Street 42<br>Curriculum:IB PYP, MYP, DP, IGCSE<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                                    <div class="col-xs-5 list-group-price">Primary: $ 27,400 - $ 28,200<br>Secondary: $ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect">COMPARE</a><a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                                </div>
+                                            </li>
+                                            <li href="#" class="list-group-item selected" data-toggle="tooltip" data-placement="left" title="Recommended for Johnnie">
+                                                <div class="row">
+                                                    <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                                    <div class="col-xs-4 list-group-desc"><strong>GEMS World Academy</strong><br>Preschool, Primary, Secondary<br>2 Yishun Street 42<br>Curriculum:IB PYP, MYP, DP, IGCSE<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                                    <div class="col-xs-5 list-group-price">Primary: $ 27,400 - $ 28,200<br>Secondary: $ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect">COMPARE</a><a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                                </div>
+                                            </li>
+                                            <li href="#" class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                                    <div class="col-xs-4 list-group-desc"><strong>GEMS World Academy</strong><br>Preschool, Primary, Secondary<br>2 Yishun Street 42<br>Curriculum:IB PYP, MYP, DP, IGCSE<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                                    <div class="col-xs-5 list-group-price">Primary: $ 27,400 - $ 28,200<br>Secondary: $ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect">COMPARE</a><a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                                </div>
+                                            </li>
+                                            <li href="#" class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-xs-3 list-group-image"><img src="/Themes/4/Content/Images/mock-school.jpg" style="width:100%;" /></div>
+                                                    <div class="col-xs-4 list-group-desc"><strong>GEMS World Academy</strong><br>Preschool, Primary, Secondary<br>2 Yishun Street 42<br>Curriculum:IB PYP, MYP, DP, IGCSE<br>+65 6808 7300 &#8226; info@gwa.edu.sg</div>
+                                                    <div class="col-xs-5 list-group-price">Primary: $ 27,400 - $ 28,200<br>Secondary: $ 33,000 - $ 34,250<a class="btn-sm btn-white waves-effect">COMPARE</a><a class="btn-sm btn-white waves-effect btn-education-loan">FIND A LOAN</a></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <center><a class="btn-sm btn-primary waves-effect">LOAD MORE</a></center>
+                                    </div> <!-- result-education -->
+                                    <div class="tab-pane fade result-table" id="map-education" role="tabpanel">
+                                        <img src="/Themes/4/Content/Images/mock-education-map.png" width="100%" />
+                                    </div> <!-- map-education  -->
+                                    <div class="tab-pane fade result-table" id="compare-education" role="tabpanel">
+                                        <table class="table center table-hover">
+                                            <tr>
+                                                <th>School</th>
+                                                <th style="width:300;text-align:center">Dover Court International School</th>
+                                                <th style="width:300;text-align:center">GEMS World Academy (Singapore)</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Grades</th>
+                                                <td>Nursery to Year 11</td>
+                                                <td>Pre-K - Grade 12</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Type</th>
+                                                <td>Preschool, Primary, Secondary, Special Education</td>
+                                                <td>Preschool, Primary, Secondary</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Address</th>
+                                                <td>301 Dover Road, 139644</td>
+                                                <td>2 Yishun Street 42, 768039</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Curriculum</th>
+                                                <td>UK</td>
+                                                <td>IB PYP, MYP, DP, IGCSE</td>
+                                            </tr>
+                                            <tr>
+                                                <th>School Hours</th>
+                                                <td>
+                                                    3 years old: 08:00 - 13:00<br>
+                                                    7 years old: 08:00 - 15:00<br>
+                                                    11 years old: 08:00 - 15:00<br>
+                                                    15 years old: 08:00 - 15:00
+                                                </td>
+                                                <td>
+                                                    3 years old: 09:00 - 13:30
+                                                    7 years old: 09:00 - 15:30<br>
+                                                    11 years old: 09:00 - 15:30<br>
+                                                    15 years old & older: 09:00 - 15:30
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Population</th>
+                                                <td>
+                                                    Preschool: 91<br>
+                                                    Primary / Elementary: 413<br>
+                                                    Secondary / High: 108
+                                                </td>
+                                                <td>
+                                                    Pre-school: 130<br>
+                                                    Primary/Elementary: 280<br>
+                                                    Secondary/High: 210
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Language of Instruction</th>
+                                                <td>English</td>
+                                                <td>English, Mandarin, French, Japanese</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Foreign Languages Taught</th>
+                                                <td>English, French, Mandarin</td>
+                                                <td>Danish, Dutch, French, Hindi, Japanese, Korean, Mandarin, Spanish</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Annual Tuition Fee</th>
+                                                <td>
+                                                    Nursery (Half Day 8.30am -11.30am): $12,640.98<br>
+                                                    Nursery (Full Day): $17,256.96<br>
+                                                    Lower Primary (Reception to Year 2): $20,964.51<br>
+                                                    Upper Primary (Year 3 to Year 6): $22,633.71<br>
+                                                    Secondary (Year 7 to Year 8): $25,025.16<br>
+                                                    Secondary (Year 9 to Year 13): $26,171.13<br>
+                                                </td>
+                                                <td>
+                                                    Early Years - $9,000 to $27,400 (Pre-K to K2)<br>
+                                                    Primary Years - $27,400 to $28,200 (Grade 1 to Grade 5)<br>
+                                                    Secondary Years - $33,000 to $34,250 (Grade 6 to 11)<br>
+                                                    <br>
+                                                    (subject to waiver)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Application Fee</th>
+                                                <td>N/A</td>
+                                                <td>$1,500</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Demographic Breakdown</th>
+                                                <td>45% British, 15% Japanese, 6% Australian, 5% American, 5% Indian. Remainder made of over 45 nationalities.</td>
+                                                <td>American, British, Australasian, Indian, French, Japanese, Korean and more than 50 other nationalities. No dominant nationality or ethnic group and the largest nationality only represents 15% of the overall student population.</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Facilities</th>
+                                                <td>Air-Conditioned Classrooms, Swimming Pool, Sports Field, Gymnasium, Running Track, Play Areas/Playground, Sports Courts, Music Room, Art Studio, IT Lab, Science Lab, Library, CafeteriaWith more than 14 acres of school grounds, Dover Court provides the most appealing outdoor environment of any private school in Singapore. Children of all ages benefit from this beautiful green parkland. In addition, we recently had a new Infant playground built and are in the process.</td>
+                                                <td>Air-Conditioned Classrooms with Interactive touch screen board, Olympic Swimming Pool and Indoor Learners pool, All weather Sports Field, 750-seat Auditorium, Play Areas/Playground, Indoor Sports Hall, Gymnasium, Basketball Court, Netball Court, Theatre Facilities, Music Rooms, Art Studio, IT Lab, Science Lab, Main Library and KG Library, Cafeteria, Indoor Climbing Wall, Student Lockers, Sheltered Play-Areas, Learning Pods, STEM Lab, Creative Suite, Personal computers/iPads for students, Guidance Counsellor, 3D Printers, Drama and Dance studios, Parents' cafe</td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                                <td><a class="btn-sm btn-white waves-effect" data-toggle="modal" data-target="#enquire-modal">ENQUIRE</a></td>
+                                            </tr>
+                                        </table>
+                                    </div> <!-- compare-education -->
+                                </div>
+                            </div>
+                        </div> <!-- col-xs-12, row -->
+
+                        <div class="choice-summary result-education hidden">
+                            <h6 class="choice-summary-title">Here's a summary of your choice:</h6>
+                            <div class="choice-summary-content">
+                                <div class="row">
+                                    <div class="col-sm-12 choice-box">
+                                        <h6 class="choice-box-title">JOHNNIE (12 years old)</h6>
+                                        <div class="choice-box-text">
+                                            Secondary School<br>
+                                            GEMS World Academy<br>
+                                            2 Yishun Street 42<br>
+                                            $ 33,000 to $ 34,250 per year
+                                        </div> <!-- .choice-box-text -->
+                                    </div>
+                                </div>
+                            </div> <!-- .choice-summary-content -->
+                            <div class="choice-summary-footer"><a class="btn-sm btn-primary waves-effect" style="margin-right:0" data-toggle="modal" data-target="#education-modal" onclick="OpenAddDreamDialog(2);"><i class="fa fa-plus-square left"></i>ADD THIS TO MY TIMELINE</a></div>
+                        </div> <!-- .choice-summary -->
+
+                    </div> <!-- .inside -->
+                </div> <!-- school finder -->
+                <div class="col-sm-8 right-side col-sm-height col-top premium-tools education-loan-tools hidden">
+                    <div class="inside">
+                        <div class="row">
+                            <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </div>
+                            <div class="col-sm-9">
+                                <h5>Education Loan</h5>
+                                <ul style="margin-top:20px;"></ul>
+                            </div>
+                        </div>
+
+                        <div class="separator" style="margin-top:2em;"></div>
+
+                        <div class="row" style="padding-top:2em">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="buy-value">Loan Amount</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">SGD</div>
+                                            <input type="text" id="buy-value" value="30,000">
+                                        </div>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- .col-xs-6 -->
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-6"><label for="buy-mortgage-years">Loan Duration</label></i></div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <input type="text" id="buy-mortgage-years" value="4">
+                                            <div class="input-group-addon">years</div>
+                                        </div>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- .col-xs-6 -->
+                        </div> <!-- row -->
+                        <div class="row search-wrapper">
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6 right"><a class="btn-sm btn-primary waves-effect show-education-insurance" style="margin-right:0"><i class="fa fa-check-circle left"></i>SEARCH</a></div>
+                        </div>
+                        <div class="row result-table hidden education-insurance">
+                            <div class="col-xs-12">
+                                <img src="/Themes/4/Content/Images/mock-education-insurance.png" width="100%">
+                                <img src="/Themes/4/Content/Images/mock-education-insurance.png" width="100%">
+                            </div>
+                        </div> <!--inside -->
+                    </div>
+                </div>
+            </div>
+                    <!-- education loan --<
+                    </div>
+                    </div> <!-- panel-body -->
+                    <div class="panel-footer education">
+                        <h6>RATE THIS SECTION</h6>
+                        <a class="waves-effect" data-toggle="modal" data-target="#rating-modal">
+                            <fieldset class="rating waves-effect">
+                                <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="4 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="3 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="2 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="1 star"></label>
+                            </fieldset>
+                        </a>
+                    </div>
+                </div><!-- panel-footer -->
+           <!-- panel-group -->
+
+
+        
+    </div> <!-- #options -->
+
+
+</div> <!-- #options -->
+
+<script>
+    $(document).ready(function () {
+        //simple_tooltip("a", "tooltip");
+        /* Toggle School Finder vs Loan */
+        $('.card.school-finder').click(function () {
+            $('.card.education-loan').removeClass("active");
+            $(this).addClass("active");
+            $('.education-loan-tools').addClass("hidden");
+            $('.school-finder-tools').removeClass("hidden");
+        });
+        $('.card.education-loan,.btn-education-loan').click(function () {
+            $('.card.school-finder').removeClass("active");
+            $('.card.education-loan').addClass("active");
+            $('.school-finder-tools').addClass("hidden");
+            $('.education-loan-tools').removeClass("hidden");
+        });
+
+        /* Education: Advanced Options */
+        $('.education-advanced').click(function () {
+            $thisBtn = $(this);
+            if ($thisBtn.hasClass("active")) {
+                $('#education .advanced').slideUp();
+                $thisBtn.removeClass("active");
+                $('.education-advanced i').removeClass("fa-angle-up").addClass("fa-angle-down");
+
+            } else {
+                $('#education .advanced').slideDown();
+                $thisBtn.addClass("active");
+                $('.education-advanced i').removeClass("fa-angle-down").addClass("fa-angle-up");
+            }
+
+        });
+        /* Property: Show Education Result */
+        $('.show-result-education').click(function () {
+            $('.result-education').fadeToggle();
+            $('.result-education').toggleClass("hidden");
+        });
+
+        /* Property: Show Education Insurance Result */
+        $('.show-education-insurance').click(function () {
+            $('.education-insurance').fadeToggle();
+            $('.education-insurance').toggleClass("hidden");
+        });
+        setTimeout(function () {
+            $('#education select').material_select();
+        }, 1000);
+    });
+</script>

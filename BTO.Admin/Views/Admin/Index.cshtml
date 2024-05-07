@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="~/Content/AdminConsole.css" type="text/css"/>
+<link rel="stylesheet" href="~/Content/style.css" type="text/css" />
+<link rel="stylesheet" href="~/Scripts/thirdparty/angular-ui-tree/angular-ui-tree.min.css">
+<link rel="stylesheet" href="~/Scripts/thirdparty/angular-pretty-checkable/pretty-checkable.css">
+<link rel="stylesheet" href="~/Scripts/thirdparty/angular-bootstrap-datepicker/angular-bootstrap-datepicker.css">
+<link href="~/Content/treasure-overlay-spinner.css" rel="stylesheet" />
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval") 
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/thirdparty/angular-ui-tree/angular-ui-tree.js"></script>
+<script src="~/Scripts/thirdparty/angular-pretty-checkable/angular-pretty-checkable.min.js"></script>
+<script src="~/Scripts/thirdparty/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
+<script src="~/Scripts/thirdparty/angular-bootstrap-datepicker/angular-bootstrap-datepicker.js"></script>
+<script src="~/Scripts/angular-cookies.js"></script>
+<script src="~/Scripts/thirdparty/ngStorage.min.js"></script>
+<script src="~/Scripts/thirdparty/angular-ui-router.min.js"></script>
+<script src="~/Scripts/thirdparty/angular-messages.js"></script>
+<script src="~/Scripts/thirdparty/angular-translate.js"></script>
+<script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+<script src="~/Scripts/thirdparty/ng-currency.js"></script>
+<script src="~/Scripts/thirdparty/input-masks.js"></script>
+<script src="~/Scripts/thirdparty/bootbox.min.js"></script>
+<script src="~/Scripts/thirdparty/i18n/angular-locale_es-ar.js"></script>
+<script src="~/Scripts/thirdparty/angular-rangeslider/angular.rangeSlider.js"></script>
+<script src="~/Scripts/angular-animate.min.js"></script>
+<script src="~/Scripts/btoAdmin/btoAppAdmin.js"></script>
+<script src="~/Scripts/btoAdmin/directive/directive.js"></script>
+<script src="~/Scripts/btoAdmin/controller/ParametersController.js"></script>
+<script src="~/Scripts/btoAdmin/controller/ManageNewsController.js"></script>
+<script src="~/Scripts/btoAdmin/controller/ManageUserController.js"></script>
+<script src="~/Scripts/btoAdmin/controller/OrganizationUnitController.js"></script>
+<script src="~/Scripts/btoAdmin/service/parameterService.js"></script>
+<script src="~/Scripts/btoAdmin/service/manageUserService.js"></script>
+<script src="~/Scripts/btoAdmin/service/organizationUnitService.js"></script>
+<script src="~/Scripts/bto/service/common.js"></script>
+<script src="~/Scripts/bto/utils.js"></script> 
+<script src="~/Scripts/thirdparty/treasure-overlay-spinner.js"></script>
+<script src="~/Scripts/btoAdmin/adminUtils.js"></script>
+<script src="~/Scripts/thirdparty/smart-table.js"></script>
+<script src="~/Scripts/btoAdmin/controller/ManageRoleController.js"></script>
+<script src="~/Scripts/btoAdmin/controller/OtherActionController.js"></script>
+<script src="~/Scripts/btoAdmin/service/roleService.js"></script>
+<script src="~/Scripts/btoAdmin/service/manageNewService.js"></script>
+<script src="~/Scripts/btoAdmin/controller/ExtractDataController.js"></script>
+
+    
+<script src="~/Scripts/btoAdmin/service/reportsService.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+}
+
+@if (true)
+{
+    //@if (@HttpContext.Current.User.IsInRole("Admin"))
+
+    <div class="col-md-11 col-md-offset-1">
+        <ul class="nav nav-pills">
+            <li><a ui-sref="manage_parameters">{{'Manage Parameters' | translate}}</a></li>
+            <li><a ui-sref="mamange_users">{{'Manage User' | translate}}</a></li>
+            <li><a ui-sref="organization_unit">{{'Organization Unit' | translate}}</a></li>
+            <li><a ui-sref="manage_role">{{"Role Management" | translate}}</a></li>
+            <li ng-if="false"><a ui-sref="extractData">{{"Report" | translate}}</a></li>
+            <li><a ui-sref="manage_news">{{"Manage News" | translate}}</a></li>
+        </ul>
+       
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+    <div class="row" ng-if="false" >
+        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+            <div ui-view></div>
+        </div>
+    </div>
+    <div id="confirmdialog" class="modal fade" role="dialog" tabindex="-1" style="z-index: 5000" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{confirmdialog.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{confirmdialog.messenger}}</p>
+                    <div class="row" id="confirmdialogbodyContent">
+
+                    </div>
+                    <p>{{confirmdialog.content}}</p>
+                </div>
+
+                <div class="modal-footer" style="text-align:center;">
+                    <button type="button" ng-show="confirmdialog.title !='Error'" class="btn btn-default" data-dismiss="modal" id="CancelConfirm" style="width: 85px;">{{confirmdialog.cancelText}}</button>
+                    <button type="button" ng-show="confirmdialog.title !='Error'" class="btn btn-primary" data-dismiss="modal" id="OkConfirm" style="width:85px;">{{confirmdialog.OkText}}</button>
+                    <button type="button" ng-show="confirmdialog.title =='Error'" class="btn btn-default" data-dismiss="modal" onclick="" id="Okbtndialog">{{"OK" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-success fade in messages-growl ng-hide" style="margin-top: 60px;" ng-show="$root.successMessage.show">
+        {{$root.successMessage.message | translate}}
+    </div>
+    <div class="alert alert-danger fade in messages-growl ng-hide" ng-show="$root.errorMessage.show">
+        {{$root.errorMessage.message | translate}}
+    </div>
+    <div class="alert alert-warning  fade in messages-growl  ng-hide" ng-show="$root.warningMessage.show">
+        {{$root.warningMessage.message | translate}}
+    </div>
+}
+else
+{<h1>Access Denied</h1>}

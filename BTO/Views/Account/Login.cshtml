@@ -1,0 +1,128 @@
+﻿@using BTO.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en" ng-app="btoApp" ng-cloak>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{'Login' | translate}}</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design BTO -->
+
+    <link href="~/Content/bto.css" rel="stylesheet" />
+    <!-- Custom CSS for Documentation Only -->
+
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+
+<body id="login-page">
+    <div id="login-top">
+        <div class="dropdown">
+            <button class="btn btn-xs btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{$root.selectedLanguage.name| translate}} &nbsp;<span class="caret"></span></button>
+            <ul class="dropdown-menu" ng-if="false">
+                <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="login-panel-wrapper">
+        <div id="login-panel" class="panel-group">
+            <div class="panel panel-default center">
+                <div class="panel-heading"><div class="logo"></div></div>
+                <div class="panel-body">
+                    <span class="light-300" style="font-size:20px">{{'Log in using your account' | translate}}</span>
+                    <div class="row">
+                        <div class="social-row">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 11px;border-bottom: 1px solid #ddd;margin: 15px 0;">
+                        <span style="font-size: 10px; background-color: #FFF; padding: 0 10px;color: #aaa; text-transform:uppercase ">{{'or' | translate}}</span>
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", name = "loginForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Partial("ValidationSummary", ViewData.ModelState);
+                        <div class="input-field col-md-12">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "validate", required = "", ng_model = "userData.Email", type = "email", name = "Email", id = "email", autofocus = "0" })
+                            <label for="email" class="" id="emailLabel">{{'Email' | translate}}</label>
+                        </div>
+                        <div class="input-field col-md-12 md-no-float">
+                            @Html.PasswordFor(m => m.Password, new { @class = "validate", required = "", name = "Password", type = "password", ng_model = "userData.Password", id = "password" })
+                            <label id="passwordlabel" for="password">{{'Password' | translate}}</label>
+                        </div>
+                        <div class="col-md-12 left">
+                            <input type="checkbox" id="check" />
+                            <label for="check"><small>{{'Keep me signed in' | translate}}</small></label>
+                        </div>
+                        <div class="col-md-12 right">
+                            <a ng-show="false" href="/Account/Register" class="btn-signup text-uppercase">{{'Sign Up' | translate}}</a>
+                            <input type="submit" value="{{'Log in' | translate}}" class="btn btn-primary text-uppercase" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <a href="/Account/ForgotPassword" class="text-white">{{'Forgot your password?' | translate}}</a>
+
+        <div class="copyright-text">&copy; 2016 <strong>ZYMI App</strong>. {{'All Rights Reserved' | translate}}.</div>
+    </div>
+
+    <div id="login-footer"></div>
+
+    <!-- SCRIPTS ON FOOTER -->
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Material Design Bootstrap -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
+        
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('select').material_select();
+            setTimeout(function () {
+                $('#emailLabel').click();
+                $('#emailLabel').addClass('active');
+            }, 100);
+            setInterval(function () {
+                if (document.querySelectorAll('input:-webkit-autofill') != null) {
+                    var autofilled = document.querySelectorAll('input:-webkit-autofill');
+                    if (autofilled.length > 0 &&  autofilled[1].id == 'password') {
+                        $('#passwordlabel').addClass('active');
+                    }
+                }
+            }, 500);
+        });
+
+    </script>
+    <script src="~/Scripts/bto.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+﻿<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="panel panel-default" tutorial="illiquid-asset" config-data="{height: 15, left: -13}">
+            <div class="panel-heading">{{"Illiquid Asset" | translate}}</div>
+            <treasure-overlay-spinner active='spinner.active'>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ">
+                            <div class="vertical-text">{{"Illiquid Asset" | translate}}</div>
+                        </div>
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+
+                            <canvas id="illiquid-chart" class="chart chart-bar" chart-type="illiquidChart.type" data="illiquidChart.data" labels="illiquidChart.labels" options="illiquidChart.options"
+                                    series="illiquidChart.series" colours="illiquidChart.colours"
+                                    isneedrender="illiquidChart.isneedrender"></canvas>
+
+                            <div class="text-center">{{"Age" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#0000FF;"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            {{"Asset Value" | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                            <div class="size-box-color" style="background-color:#008000;"></div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                            {{"Net Equity" | translate}}
+                        </div>
+                    </div>
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+</div>

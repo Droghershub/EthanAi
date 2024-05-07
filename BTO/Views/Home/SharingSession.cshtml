@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+    <div ng-controller="SharingController">
+        @*<button class="btn btn-primary" style="width: 120px; height:30px;" id="reset_group">{{"Reset Group" | translate}}</button>*@
+
+        <textarea id="mail_share" rows="4" cols="50" />
+        <br />
+        <button class="btn btn-primary" style="width: 120px; height:30px;" id="invite_share" disabled>{{"Invite" | translate}}</button>
+        <button class="btn btn-primary" style="width: 120px; height:30px;" id="begin_share" ng-disabled="viewers.length == 0"> {{"Begin" | translate}}</button>
+    </div>
+    <table class="table" ng-controller="SharingController">
+        <thead>
+            <tr>
+                <th>Emails accepted</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="viewer in viewers">
+            <td>{{viewer}}</td>
+        </tr>
+    </table>
+<script>
+    $(function () {
+        var hub = $.connection.controllerHub,
+        $shape = $("#shape");
+        $("#mail_share").keyup(function () {
+            if ($(this).val()) {
+                $("#invite_share").prop('disabled', false);
+            }
+            else {
+                $("#invite_share").prop('disabled', true);
+            }
+        });
+        $.connection.hub.start().done(function () {//when the connection is ready, we going to make the shape draggable
+            $("#begin_share").click(function () {                
+                //make user use mode sharing
+                localStorage.isSharing = true;
+                rootScope.isBeginShared = true;
+                localStorage.presenter = $('#userNameKeyId').val();
+                $("#sharing_presenter").text($('#userNameKeyId').val());
+                rootScope.resetZoomData();
+                var item = {
+                    currentplan: rootScope.currentPlan,
+                    newplan: rootScope.newPlan,
+                    PersonaPlan: rootScope.PersonaPlan,
+                    result: rootScope.MainResult
+                };
+                rootScope.isTakeOver = true;
+                localStorage.user_id_sharing_owner = rootScope.PersonaPlan.user_id;
+                hub.server.startSharing(item);
+                $("#invite_share").hide();
+                $("#begin_share").hide();
+
+                $('#sharing_stop').show();
+                $('#sharing_take_over').hide();
+                $('#sharing').css({ 'z-index': '10000', 'display': 'block' });                
+                $('#tab_main').click();
+                $('#tab_sharing_session').hide();
+                $('#tab_sharing_session_only_view').show();
+            });
+            $("#stop_share").click(function () {
+                localStorage.isSharing = false;
+                rootScope.viewers = [];
+                rootScope.apply();
+                rootScope.isTakeOver = false;
+                hub.server.endSharing();
+                $("#begin_share").hide();
+                $("#invite_share").show();
+                $("#stop_share").hide();
+            });
+
+            $("#invite_share").click(function () {                
+                hub.server.inviteToEmail($('#userNameKeyId').val(), $("#mail_share").val().replace(/\n/g, ";"), rootScope.selectedLanguage.code).done(function (result) {
+                    var heading = 'Invitation';
+                    var question = rootScope.translate(result);
+                    var cancelButtonTxt = 'Close';
+                    var okButtonTxt = '';
+
+                    var callbackCancel = function () {                        
+                    };
+
+                    var callbackOK = function () {                       
+                    };
+                    confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+                });
+            });
+        });
+    });
+</script>

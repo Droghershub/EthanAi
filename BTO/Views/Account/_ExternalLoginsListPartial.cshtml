@@ -1,0 +1,46 @@
+﻿@model BTO.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <div>                    
+                    @*@foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" style="margin-bottom:9px;" class="icons-sm @p.AuthenticationType.ToString().ToLower()-ic" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="{{'Sign in with' | translate}} @p.Caption">
+                            <span class="fa fa-@p.AuthenticationType.ToString().ToLower()"></span>
+                        </button>
+                    }*@
+
+                    <div id="socialLoginList">
+                        <div>
+                            <button type="submit" style="margin-bottom:9px;" class="icons-sm facebook-ic" id="Facebook" name="provider" value="Facebook" title="Sign in with Facebook">
+                                <span class="fa fa-facebook"></span>
+                            </button>
+                            <button type="submit" style="margin-bottom:9px;" class="icons-sm google-ic" id="Google" name="provider" value="Google" title="Sign in with Google">
+                                <span class="fa fa-google-plus"></span>
+                            </button>
+                            <button type="submit" style="margin-bottom:9px;" class="icons-sm twitter-ic" id="Twitter" name="provider" value="Twitter" title="Sign in with Twitter">
+                                <span class="fa fa-twitter"></span>
+                            </button>                            
+                            <button type="submit" style="margin-bottom:9px;" class="icons-sm linkedin-ic" id="LinkedIn" name="provider" value="LinkedIn" title="Sign in with LinkedIn">
+                                <span class="fa fa-linkedin"></span>
+                            </button>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

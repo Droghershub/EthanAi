@@ -1,0 +1,263 @@
+﻿@model BTO.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="btoApp" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{'Social network confirmation' | translate}}</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design BTO -->
+
+    <link href="~/Content/bto.css" rel="stylesheet" />
+    <!-- Custom CSS for Documentation Only -->
+
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+
+<body id="main-page">
+    <nav class="navbar navbar-default z-depth-1">
+        <div class="container-fluid">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Manage Sessions</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><div class="logo"></div></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                @*<div class="dropdown">
+                        <button class="btn btn-xs btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{$root.selectedLanguage.name| translate}} &nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+                        </ul>
+                    </div>*@
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$root.selectedLanguage.name| translate}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" ng-if="false">
+                            <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="~/Account/Login" class="waves-effect" role="button">{{"Log in" | translate}}</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+
+    <div class="container" id="main">
+
+        <!-- register -->
+        <div class="row" style="padding-top:40px;">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+
+
+                @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", name = "Register", id = "Register" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.providerKey)
+                    @Html.HiddenFor(model => model.loginProvider)
+                    <div class="panel" id="regsocial-panel" ng-init="$root.registerUserData.isAccountExisted =  @(Model.isAccountExisted?"true":"false")">
+                        <div class="panel-heading center"><span class="light-300" style="font-size:20px">{{"Congratulations" | translate}}!</span></div>
+
+                        <div class="panel-body" ng-init="loginDataProvider = {'value': '@ViewBag.LoginProvider'}">
+
+                            @Html.Partial("ValidationSummary", ViewData.ModelState)
+                            <p class="helper" ng-if="!$root.registerUserData.isAccountExisted">
+                                <span translate="{{'You are successfully authenticated with' | translate:loginDataProvider}}"></span>.
+                                {{"Please enter account info for this site below and click the Register button to finish logging in." | translate}}
+                            </p>
+                            <p class="helper" ng-if="$root.registerUserData.isAccountExisted">
+                                <span translate="{{'You are successfully authenticated with' | translate:loginDataProvider}}"></span>.
+                                {{"Please enter account info for this site below and click the Update profile button to finish logging in." | translate}}
+                            </p>
+                            <br />
+
+                            <div class="row" ng-init="$root.registerUserData.avatar = '@Html.DisplayFor(m => m.avatar)'" ng-if="$root.registerUserData.avatar != ''">
+                                <div class="col-md-3"></div>
+                                <div class="input-field col-md-6">
+                                    <img ng-src="{{$root.registerUserData.avatar}}" style="width:100%;padding:5px;border:1px solid #ddd;border-radius:2px;" />
+                                    <p ng-hide="true">
+                                        @Html.TextBoxFor(m => m.avatar)
+                                    </p>
+
+                                    @*<img src="http://i.dailymail.co.uk/i/pix/2015/06/29/06/2A126E5100000578-3142768-This_photo_of-a-26_1435557038265.jpg" style="width:100%;padding:5px;border:1px solid #ddd;border-radius:2px;">*@
+                                    <input type="checkbox" value="true" name="isSelectedAvatar" id="isSelectedAvatar" data-val-required="The isSelectedAvatar field is required." data-val="true">
+                                    <label for="isSelectedAvatar"><small>{{'Save this to profile' | translate}}</small></label>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            @*<div class="row" ng-init="$root.registerUserData.avatar = '@Html.DisplayFor(m => m.avatar)'" ng-if="$root.registerUserData.avatar != ''">
+                                    <div class="col-md-1"></div>
+                                    <div class="input-field col-md-6">
+                                        <img ng-src="{{$root.registerUserData.avatar}}" />
+                                        <p ng-hide="true">
+                                            @Html.TextBoxFor(m => m.avatar)
+                                        </p>
+                                        <label for="lname">{{"avatar"  | translate}}</label>
+                                    </div>
+                                    <div class="input-field col-md-4">
+                                        <input type="checkbox" value="true" name="isSelectedAvatar" id="isSelectedAvatar" data-val-required="The isSelectedAvatar field is required." data-val="true">
+                                        <label for="isSelectedAvatar"><small>{{'Save this to profile' | translate}}</small></label>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>*@
+
+                            @if (Model.loginProvider.Equals("Twitter"))
+                            {
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="input-field col-md-10">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "", ng_model = "$root.registerUserData.Email", type = "email", name = "Email" })
+                                        <div class="bto-error" ng-messages="Register.Email.$error" ng-if="Register.Email.$dirty">
+                                            <div ng-message="required">
+                                                {{"Email is requried" | translate}}
+                                            </div>
+                                            <div ng-message="email">
+                                                {{"Email is not correct" | translate}}
+                                            </div>
+                                        </div>
+                                        <label for="email" data-error="Invalid">{{"Email"  | translate}}</label>
+
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row" ng-init="$root.registerUserData.Email ='@Html.DisplayFor(m => m.Email)' ">
+                                    <div class="col-md-1"></div>
+                                    <div class="input-field col-md-10">
+                                        <input type="email" ng-model="$root.registerUserData.Email" class="validate" id="email" disabled="">
+                                        <label for="email" data-error="Invalid">{{"Email"  | translate}}</label>
+
+                                        <p ng-hide="true">
+                                            @Html.TextBoxFor(m => m.Email)
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            }
+
+                            <div class="row" ng-init="$root.registerUserData.firstName = '@Html.DisplayFor(m => m.firstName)'" ng-if="$root.registerUserData.firstName != ''">
+                                <div class="col-md-1"></div>
+                                <div class="input-field col-md-6">
+                                    <input disabled id="fname" type="text" class="" ng-model="$root.registerUserData.firstName">
+                                    <label for="fname">{{"First name"  | translate}}</label>
+                                    <p ng-hide="true">
+                                        @Html.TextBoxFor(m => m.firstName)
+                                    </p>
+                                </div>
+                                <div class="input-field col-md-4">
+                                    <input type="checkbox" value="true" name="isSelectedFirstName" id="isSelectedFirstName" data-val-required="The isSelectedFirstName field is required." data-val="true">
+                                    <label for="isSelectedFirstName"><small>{{'Save this to profile' | translate}}</small></label>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row" ng-init="$root.registerUserData.lastName = '@Html.DisplayFor(m => m.lastName)'" ng-if="$root.registerUserData.lastName != ''">
+                                <div class="col-md-1"></div>
+                                <div class="input-field col-md-6">
+                                    <input disabled id="lname" type="text" value="{{$root.registerUserData.lastName}}">
+                                    <p ng-hide="true">
+                                        @Html.TextBoxFor(m => m.lastName)
+                                    </p>
+                                    <label for="lname">{{"Lastname"  | translate}}</label>
+                                </div>
+                                <div class="input-field col-md-4">
+                                    <input type="checkbox" value="true" name="isSelectedLastName" id="isSelectedLastName" data-val-required="The isSelectedLastName field is required." data-val="true">
+                                    <label for="isSelectedLastName"><small>{{'Save this to profile' | translate}}</small></label>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row" ng-init="$root.registerUserData.gender = @Html.DisplayFor(m => m.gender)">
+                                <div class="col-md-1"></div>
+                                <div style="margin: 25px auto;" class="input-field col-md-6">
+                                    <h6 style="float:left;">{{"Gender"  | translate}}:</h6>
+                                    <input type="radio" id="male" name="gender" ng-checked="$root.registerUserData.gender==0" disabled="">
+                                    <label style="top:3px;margin-right:10px;" for="male">{{'male' | translate}}</label>
+                                    <input type="radio" id="female" name="gender" disabled="" ng-checked="$root.registerUserData.gender==1">
+                                    <label style="top:3px;" for="female">{{'female' | translate}}</label>
+                                </div>
+
+                                <div class="input-field col-md-4">
+                                    <input type="checkbox" value="true" name="isSelectedGender" id="isSelectedGender" data-val-required="The isSelectedGender field is required." data-val="true">
+                                    <label for="isSelectedGender"><small>{{'Save this to profile' | translate}}</small></label>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="panel-footer center">
+                                <a ng-if="!$root.registerUserData.isAccountExisted" class="btn btn-primary waves-effect waves-light" onclick="$('#btnRegister').click();" ng-disabled="Register.$invalid">{{'Register' | translate}}</a>
+                                <a ng-if="$root.registerUserData.isAccountExisted" class="btn btn-primary waves-effect waves-light" onclick="$('#btnUpdateProfile').click();" ng-disabled="Register.$invalid">{{'Update profile' | translate}}</a>
+
+                                <input id="btnRegister" type="submit" class="hide" value="{{'Register' | translate}}" />
+                                <input id="btnUpdateProfile" ng-if="$root.registerUserData.isAccountExisted" type="submit" class="hide" value="{{'Update profile' | translate}}" />
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+
+
+    <div id="footer">
+        <div class="copyright-text">&copy; 2016 <strong>Better Trade Off</strong>. All Rights Reserved.</div>
+    </div>
+
+
+
+    <!-- SCRIPTS ON FOOTER -->
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Material Design Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
+    
+    <script src="~/Scripts/bto.js"></script>
+    <script src="~/Scripts/thirdparty/angular-material/gesture.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+    <script type="text/javascript">
+        $("#Register").submit(function () {
+            $('input[type=submit]').click(function (event) {
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+
+</html>

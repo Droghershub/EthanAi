@@ -1,0 +1,69 @@
+﻿<div class="modal fade" id="share-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="text-transform: uppercase;">
+                <button type="button" class="close" data-dismiss="modal" ng-click="$root.invitationService.cancelInvitation()">&times;</button>
+                <h5 class="modal-title">{{$root.translateData["Share ZYMI"]}}</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row email">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2 col-xs-2 icon">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="col-sm-8 col-xs-10" data-ng-bind-html="'Thanks for sharing ZYMI to your family, friends, and colleagues. We will send them an e-mail invitation on your behalf.' | translate| htmlSafe">
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+                <form name="form_invitation">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <table class="table nogrid">
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>{{$root.translateData['Email Address']}}</th>
+                                        <th>{{$root.translateData['Name (optional)']}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="invitation in $root.invitationData">
+                                        <td ng-if="$index <= 0"><i class="fa fa-envelope-o"></i></td>
+                                        <td ng-if="$index > 0" class="invitation_remove" ng-click="$root.invitationService.deleteInvitation($index);"><i class="fa fa-times"></i></td>
+                                        <td class="input-field">
+                                            <ng-form name="fieldForm">
+                                                <input type="text" id="share-email-{{$index}}" email-or-empty name="email" class="validate" ng-model="invitation.email" my-enter="$root.invitationService.enterKey($index)">
+                                                <div class="bto-error" ng-messages="fieldForm.email.$error" ng-if="fieldForm.email.$dirty">
+                                                    <div ng-message="emailOrEmpty">
+                                                        {{$root.translateData["Invalid email address format"]}}
+                                                    </div>
+                                                </div>
+                                            </ng-form>
+                                        </td>
+                                        <td class="input-field" style="vertical-align:top;">
+                                            <input type="text" id="share-name-{{$index}}" name="name{{$index}}" ng-model="invitation.name" my-enter="$root.invitationService.enterKey($index)">
+                                        </td>
+                                    </tr>
+                                    <tr id="row-share-3">
+                                        <td colspan="3"><a class="btn-sm btn-white waves-effect share-add" index="3" ng-click="$root.invitationService.addMoreInvitation();"><i class="fa fa-plus-square left"></i>{{$root.translateData['ADD MORE']}}</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                 
+                    <div class="modal-footer center">
+                        <a  href="#" class="btn-signup" data-dismiss="modal" ng-click="$root.invitationService.cancelInvitation()">{{$root.translateData['Cancel']}}</a>
+                        <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="margin-left: 10px;" ng-click="$root.invitationService.savingInvitation()" ng-disabled="!form_invitation.$valid || !($root.invitationData | isHaveEmailInList)">{{$root.translateData['Submit']}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

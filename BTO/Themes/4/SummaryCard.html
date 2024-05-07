@@ -1,0 +1,201 @@
+﻿
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a  id="asavings" ng-click="$root.summaryCardService.selectCard('asavings','div_SavingRate')">
+        <div class="card summary-card waves-effect" data-placement="top" title="{{$root.translateData['Click to Expand']}}" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'asavings'}">
+            <div class="card-block">
+                <h4 class="card-title">{{$root.translateData["Saving Rates"]}}</h4>
+                <div class="btn-floating btn-action">{{ $root.MonthlySaving.monthlyRate | number : 2}}% {{$root.translateData["Total Saved"]}}</div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["AGE"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.savingRate.age}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Annual Income"]}}</i></div>
+                            <div class="col-xs-6">{{ $root.summaryCardService.savingRate.income | currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Annual Expense"]}}</i></div>
+                            <div class="col-xs-6">{{ $root.summaryCardService.savingRate.expense | currency:$root.PersonaPlan.currency_code  + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Yearly Savings"]}}</i></div>
+                            <div class="col-xs-6">{{ $root.summaryCardService.savingRate.saving | currency:$root.PersonaPlan.currency_code  + ' ' : 0 }}</div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a id="aretirement" ng-click="$root.summaryCardService.selectCard('aretirement','div_LifeStyle')">
+        <div class="card summary-card waves-effect" data-placement="top" title="{{$root.translateData['Click to Expand']}}" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'aretirement'}">
+            <div class=" card-block">
+                <h4 class="card-title">{{$root.translateData["Retirement Lifestyle"]}}</h4>
+                <div class="btn-floating btn-action"> <span ng-bind="$root.PersonaPlan.retirement_lifestyle==2?'luxury_recurring_expenses':$root.PersonaPlan.retirement_lifestyle==1?'median_recurring_expenses':$root.PersonaPlan.retirement_lifestyle==0?'frugal_recurring_expenses': $root.selectedretirementLife != null ? $root.selectedretirementLife.name :'' | translate"></span></div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Retirement Age"]}}</i></div>
+                            <div class="col-xs-6">{{$root.PersonaPlan.retirement_age}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Annual Expense"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.retirementLifeStyle.annualexpense | currency:$root.PersonaPlan.currency_code  + ' ' : 0 }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Annual Income"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.retirementLifeStyle.incomesource | currency:$root.PersonaPlan.currency_code + ' ' :0 }}</div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a id="ainvestments" ng-click="$root.summaryCardService.selectCard('ainvestments','div_Investment')">
+        <div class="card summary-card waves-effect" data-placement="top" title="{{$root.translateData['Click to Expand']}}" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'ainvestments'}">
+            <div class="card-block">
+                <h4 class="card-title">{{$root.translateData["Investments"]}}</h4>
+                <div class="btn-floating btn-action">{{$root.translateData[$root.investmentTypes[$root.investmentChoice].name]}} </div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Total Investment empty"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.investment.total | currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["CPF"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.investment.cpf |currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Iron Reserve empty"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.investment.iron_reserve |currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Brokerage empty"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.investment.brokerage |currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">{{$root.translateData["Current Account empty"]}}</i></div>
+                            <div class="col-xs-6">{{$root.summaryCardService.investment.current_account |currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a id="ailliquid" ng-click="$root.summaryCardService.selectCard('ailliquid','div_IlliquidAsset')">
+        <div class="card summary-card waves-effect" data-placement="top" title="{{$root.translateData['Click to Expand']}}" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'ailliquid'}">
+            <div class="card-block">
+                <h4 class="card-title">{{$root.translateData["Illiquid Assets"]}}</h4>
+                <div class="btn-floating btn-action">{{$root.totalExisting }} <span ng-bind="$root.totalExisting>1?'Existing Assets' : 'Existing Asset' | translate"></span></div>
+                <div class="card-text">
+                    <div class="summary-tbl" style="max-height: 100px;overflow:auto;overflow-x: hidden;">
+                        <div class="row" ng-repeat="item in $root.PersonaPlan.dreams  | filter:{ existant: true }">
+                            <div class="col-xs-7">{{item.name}}</i></div>
+                            <div class="col-xs-5">{{item.total_cost | currency:$root.PersonaPlan.currency_code + ' ' : 0 }}</div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a id="aaproperty" ng-click="$root.summaryCardService.selectCard('aaproperty','div_PropertyPurchase')">
+        <div class="card summary-card waves-effect premium-card" data-toggle="tooltip" data-placement="top" title="Click to Expand" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'aaproperty'}">
+            <div class="card-block">
+                <h4 class="card-title">Property Purchase</h4>
+                <div class="btn-floating btn-action"><i class="fa fa-star"></i> Premium</div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-7">Maximum Amount</div>
+                            <div class="col-xs-5">$ 560,000</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">15-year Mortgage</i></div>
+                            <div class="col-xs-5">$ 450,000</div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a id="aeducation" ng-click="$root.summaryCardService.selectCard('aeducation','div_Education')">
+        <div class="card summary-card waves-effect premium-card" data-toggle="tooltip" data-placement="top" title="Click to Expand" ng-class="{'selected': $root.summaryCardService.selectedCardId == 'aeducation'}">
+            <div class="card-block">
+                <h4 class="card-title">Education</h4>                
+                <div class="btn-floating btn-action"><i class="fa fa-star"></i> Premium</div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-7">John (35)</div>
+                            <div class="col-xs-5">-</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">Jane (33)</div>
+                            <div class="col-xs-5">-</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">Johnnie (12)</div>
+                            <div class="col-xs-5">Secondary</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">Janie (9)</div>
+                            <div class="col-xs-5">Primary</div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a href="#car" data-toggle="collapse" aria-expanded="false" aria-controls="car">
+        <div class="card summary-card waves-effect premium-card" data-toggle="tooltip" data-placement="top" title="Click to Expand">
+            <div class="card-block">
+                <h4 class="card-title">Car</h4>
+                <div class="btn-floating btn-action"><i class="fa fa-star"></i> Premium</div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-7"></div>
+                            <div class="col-xs-5"></div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a href="#car" data-toggle="collapse" aria-expanded="false" aria-controls="travel">
+        <div class="card summary-card waves-effect premium-card" data-toggle="tooltip" data-placement="top" title="Click to Expand">
+            <div class="card-block">
+                <h4 class="card-title">Travel</h4>
+                <div class="btn-floating btn-action"><i class="fa fa-star"></i> Premium</div>
+                <div class="card-text">
+                    <div class="summary-tbl">
+                        <div class="row">
+                            <div class="col-xs-7"></div>
+                            <div class="col-xs-5"></div>
+                        </div>
+                    </div>
+                </div> <!-- .card-text -->
+            </div>
+        </div>
+    </a>
+</div>
+<div style="height: 1px; width:1px; font-size:1px;line-height:1px" ng-init="$root.summaryCardService.initCardSummary();">&nbsp;</div>

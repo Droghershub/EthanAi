@@ -1,0 +1,45 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text">
+                @if (User.Identity.AuthenticationType == "Federation" || User.Identity.AuthenticationType == "aad")
+                {
+                    @System.Security.Claims.ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.GivenName).Value  @System.Security.Claims.ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.Surname).Value
+                }
+                else
+                {
+                   @User.Identity.Name
+                }
+                
+            </li>
+            <li>
+                @if (User.Identity.AuthenticationType == "Federation" || User.Identity.AuthenticationType == "aad")
+                {
+                    @Html.ActionLink("Sign out ", "SignOut", "Account")
+                }
+                else
+                {
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
+                }
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @if (System.Web.Configuration.WebConfigurationManager.AppSettings["EnabelActiveDirectory"].ToString() == "true")
+        {
+            <li>
+                <a href="/" id="loginLink">Sign in</a>
+            </li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
+
+    </ul>
+}

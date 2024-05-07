@@ -1,0 +1,385 @@
+﻿<div id="ProfileDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <treasure-overlay-spinner active='spinner.active'>
+                <div class="modal-header">
+                    <h4 class="modal-title">{{"Update profile" | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="form_profile" novalidate class="form-horizontal" role="form">
+                        <fieldset class="border">
+                            <legend class="border">{{"Client Section" | translate}}</legend>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_first_name" >{{"Firstname" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="dialog_profile_client_first_name" class="form-control" name="client_first_name" ng-model="$root.profileDialogData.client.first_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                    <div class="bto-error" ng-messages="form_profile.client_first_name.$error" ng-if="form_profile.client_first_name.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client firstname is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_last_name">{{"Lastname" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="dialog_profile_client_last_name" class="form-control" name="client_last_name" ng-model="$root.profileDialogData.client.last_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                    <div class="bto-error" ng-messages="form_profile.client_last_name.$error" ng-if="form_profile.client_last_name.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client lastname is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_email">{{"Email" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="dialog_profile_client_email" type="email" class="form-control" name="client_email" ng-model="$root.profileDialogData.client.email"
+                                           required unique-name ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                    <div class="bto-error" ng-messages="form_profile.client_email.$error" ng-if="form_profile.client_email.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client Email is requried" | translate}}
+                                        </div>
+                                        <div ng-message="email">
+                                            {{"Client Email is invalid" | translate}}
+                                        </div>
+                                        <div ng-message="uniqueName">
+                                            {{"Client Email is existed" | translate}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_mobile_phone">{{"Mobile phone" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <table>
+                                        <tr>
+                                            <td width="40%">
+                                                <select id="dialog_profile_client_mobile_phone" class="form-control" name="mobile_phone_code" ng-model="$root.profileDialogData.client.phone_code" ng-options="item.dial_code as $root.profileService.textCountryCode(item.dial_code, item.name) for item in countries" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Code--" | translate}}</option>
+                                                </select>
+                                            </td>
+                                            <td>&nbsp;{{$root.profileDialogData.client.phone_code}}&nbsp;</td>
+                                            <td>
+                                                <input ng-pattern="/^[0-9]{2,3}[0-9\-\.]{2,10}?[0-9]{1,3}$/" id="dialog_profile_client_mobile_phone_number" class="form-control" name="mobile_phone_number" ng-model="$root.profileDialogData.client.phone_number" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="bto-error" ng-messages="form_profile.mobile_phone_code.$error" ng-if="form_profile.mobile_phone_code.$dirty">
+                                        <div ng-message="required">
+                                            {{"Country code is requried" | translate}}
+                                        </div>
+                                    </div>
+                                    <div class="bto-error" ng-messages="form_profile.mobile_phone_number.$error" ng-if="form_profile.mobile_phone_number.$dirty">
+                                        <div ng-message="required">
+                                            {{"Phone number is requried" | translate}}
+                                        </div>
+                                        <div ng-message="pattern">
+                                            {{"Phone number is not correct" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_gender">{{"Gender" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_client_gender" class="form-control" name="client_gender" ng-model="$root.profileDialogData.client.gender" ng-options="item.id as item.name for item in genderList" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Gender--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.client_gender.$error" ng-if="form_profile.client_gender.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client Gender is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_age">{{"Age" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_client_age" class="form-control" name="client_age" disabled ng-model="$root.profileDialogData.client.age" required ng-options="item  for item in $root.utilService.range(18, 75)">
+                                        <option value="">{{"--Select Age--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.client_age.$error" ng-if="form_profile.client_age.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client age is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_residency_status">{{"Residency status" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_client_residency_status" class="form-control" name="client_residency_status" ng-options="item.id as item.name for item in residencyStatusList" ng-model="$root.profileDialogData.client.residency_status" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Residence status--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.client_residency_status.$error" ng-if="form_profile.client_residency_status.$dirty">
+                                        <div ng-message="required">
+                                            {{"Client Gender is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_residency_nationality">{{"Nationality" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_client_residency_nationality" class="form-control" name="client_nationality" ng-model="$root.profileDialogData.client.nationality" ng-options="item.iso_code_3 as item.name for item in countries" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Nationality--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.client_nationality.$error" ng-if="form_profile.client_nationality.$dirty">
+                                        <div ng-message="required">
+                                            {{"Nationality is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_client_marital_status">{{"Marital status" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_client_marital_status" class="form-control" name="client_marital_status" ng-options="item.id as item.name for item in maritalStatusList" ng-model="$root.profileDialogData.client.married_status" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Marital status--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.client_marital_status.$error" ng-if="form_profile.client_marital_status.$dirty">
+                                        <div ng-message="required">
+                                            {{"Marital status is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_children_number">{{"Number of children" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_children_number" class="form-control" name="children_number" ng-change="$root.profileService.changeNumberOfChild()" ng-model="$root.profileDialogData.children.number_of_child" ng-options="item for item in $root.utilService.range(1, 5)" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Number of children--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.children_number.$error" ng-if="form_profile.children_number.$dirty">
+                                        <div ng-message="required">
+                                            {{"Number of children is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_dependent_number">{{"Number of other dependent" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_dependent_number" class="form-control" name="dependent_number" ng-change="$root.profileService.changeNumberOfDependent()" ng-model="$root.profileDialogData.dependent.number_of_dependent" ng-options="item for item in $root.utilService.range(1, 5)" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Number of other dependent--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.dependent_number.$error" ng-if="form_profile.dependent_number.$dirty">
+                                        <div ng-message="required">
+                                            {{"Number of other dependent is requied" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset class="border" ng-if="$root.profileDialogData.client.married_status == 1">
+                            <legend class="border">{{"Spouse Section" | translate}}</legend>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_first_name">{{"Firstname" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="dialog_profile_spouse_first_name" class="form-control" name="spouse_first_name" ng-model="$root.profileDialogData.spouse.first_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                    <div class="bto-error" ng-messages="form_profile.spouse_first_name.$error" ng-if="form_profile.spouse_first_name.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse firstname is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_last_name">{{"Lastname" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <input id="dialog_profile_spouse_last_name" class="form-control" name="spouse_last_name" ng-model="$root.profileDialogData.spouse.last_name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                    <div class="bto-error" ng-messages="form_profile.spouse_last_name.$error" ng-if="form_profile.spouse_last_name.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse lastname is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_gender">{{"Gender" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_spouse_gender" class="form-control" name="spouse_gender" ng-options="item.id as item.name for item in genderList" ng-model="$root.profileDialogData.spouse.gender" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Gender--" | translate}}</option>
+
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.spouse_gender.$error" ng-if="form_profile.spouse_gender.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse Gender is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_age">{{"Age" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_spouse_age" class="form-control" name="spouse_age" ng-model="$root.profileDialogData.spouse.age" required ng-options="item  for item in $root.utilService.range(18, 75)" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Age--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.spouse_age.$error" ng-if="form_profile.spouse_age.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse age is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_residency_status">{{"Residency status" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_spouse_residency_status" class="form-control" name="spouse_residency_status" ng-options="item.id as item.name for item in residencyStatusList" ng-model="$root.profileDialogData.spouse.residency_status" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Residence status--" | translate}}</option>
+
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.spouse_residency_status.$error" ng-if="form_profile.spouse_residency_status.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse residence is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_residency_nationality">{{"Nationality" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_spouse_residency_nationality" class="form-control" name="spouse_nationality" ng-model="$root.profileDialogData.spouse.nationality" ng-options="item.iso_code_3 as item.name for item in countries" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Nationality--" | translate}}</option>
+                                    </select>
+
+                                    <div class="bto-error" ng-messages="form_profile.spouse_nationality.$error" ng-if="form_profile.spouse_nationality.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse Nationality is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4" for="dialog_profile_spouse_occupation">{{"Occupation" | translate}}</label>
+                                <div class="col-sm-8">
+                                    <select id="dialog_profile_spouse_occupation" class="form-control" name="spouse_occupation" ng-options="item.id as item.name for item in occupationList" ng-model="$root.profileDialogData.spouse.occupation" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                        <option value="">{{"--Select Occupation status--" | translate}}</option>
+                                    </select>
+                                    <div class="bto-error" ng-messages="form_profile.spouse_occupation.$error" ng-if="form_profile.spouse_occupation.$dirty">
+                                        <div ng-message="required">
+                                            {{"Spouse Occupation is requried" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="border" ng-if="$root.profileDialogData.children.number_of_child > 0">
+                            <legend class="border">{{"Children section"  | translate}}</legend>
+                            <div class="table-responsive">
+                                <table class="table table-striped child_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="first">{{"No." | translate}}</th>
+                                            <th>{{"Name" | translate}}</th>
+                                            <th>{{"Gender" | translate}}</th>
+                                            <th>{{"Age" | translate}}</th>
+                                            <th>{{"Status" | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="child in $root.profileDialogData.children.childrens">
+                                            <td><label class="control-label">{{$index + 1}}</label></td>
+                                            <td>
+                                                <input id="dialog_profile_child_name_{{$index}}" class="form-control" name="child_name_{{$index}}" ng-model="child.name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                            </td>
+                                            <td>
+                                                <select id="dialog_profile_child_gender_{{$index}}" class="form-control gender" name="child_gender_{{$index}}" ng-options="item.id as item.name for item in genderList" ng-model="child.gender" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Gender--" | translate}}</option>
+
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="dialog_profile_child_age_{{$index}}" class="form-control age" name="child_age_{{$index}}" ng-model="child.age" required ng-options="item  for item in $root.utilService.range(0, 25)" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Age--" | translate}}</option>
+                                                </select>
+                                            </td>
+                                            <td class="td_child_status">
+                                                <div class="checkbox child_status">
+                                                    <label><input type="checkbox" id="dialog_profile_child_handicapped_{{$index}}" name="child_handicapped_{{$index}}" ng-model="child.handicapped" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />{{"Handicapped" | translate}}</label>
+                                                </div>
+                                                <div class="checkbox child_status">
+                                                    <label><input type="checkbox" id="dialog_profile_child_independent_{{$index}}" name="child_independent_{{$index}}" ng-model="child.independent" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />{{"Independent" | translate}}</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="border" ng-if="$root.profileDialogData.dependent.number_of_dependent > 0">
+                            <legend class="border">{{"Other dependent section1" | translate}}</legend>
+                            <div class="table-responsive">
+                                <table class="table table-striped dependent_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="first">{{"No." | translate}}</th>
+                                            <th>{{"Name" | translate}}</th>
+                                            <th>{{"Gender" | translate}}</th>
+                                            <th>{{"Age" | translate}}</th>
+                                            <th>{{"Relationship" | translate}}</th>
+                                            <th>{{"Status" | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="dependent in $root.profileDialogData.dependent.dependents">
+                                            <td><label class="control-label">{{$index + 1}}</label></td>
+                                            <td>
+                                                <input id="dialog_profile_dependent_name_{{$index}}" class="form-control" name="dependent_name_{{$index}}" ng-model="dependent.name" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />
+                                            </td>
+                                            <td>
+                                                <select id="dialog_profile_dependent_gender_{{$index}}" class="form-control gender" name="dependent_gender_{{$index}}" ng-options="item.id as item.name for item in genderList" ng-model="dependent.gender" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Gender--" | translate}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="dialog_profile_dependent_age_{{$index}}" class="form-control age" name="dependent_age_{{$index}}" ng-model="dependent.age" required ng-options="item  for item in $root.utilService.range(0, 81)" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Age--" | translate}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="dialog_profile_dependent_relationship_{{$index}}" class="form-control" name="dependent_relationship_{{$index}}" ng-model="dependent.relationship" ng-options="item.id as item.name for item in relationshipList" required ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1">
+                                                    <option value="">{{"--Select Relationship--" | translate}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="checkbox dependent_status">
+                                                    <label><input type="checkbox" id="dialog_profile_dependent_handicapped_{{$index}}" name="dependent_handicapped_{{$index}}" ng-model="dependent.handicapped" ng-disabled="$root.functionAccess.MANAGE_PROFILE !=1" />{{"Handicapped" | translate}}</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUpdateProfile">{{"Cancel" | translate}}</button>
+                    <button ng-disabled="form_profile.$invalid" type="button" class="btn btn-primary" id="OkUpdateProfile" ng-click="$root.profileService.saveProfile();" ng-if="$root.functionAccess.MANAGE_PROFILE ==1">{{"Save" | translate}}</button>
+                </div>
+            </treasure-overlay-spinner>
+        </div>
+    </div>
+</div>

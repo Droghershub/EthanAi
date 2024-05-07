@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Review checkout</title>
+</head>
+<body>
+    <div> 
+        <div >Review payment</div>
+        <br />
+        @*<label  class="col-sm-4 control-label">Total Amount Checkout: @ViewBag.paymentAmountOnCheckout</label>*@
+        <label  class="col-sm-4 control-label">Total Payment :@ViewBag.paymentAmoutFromPayPal</label>
+        
+        <br />
+        <br />
+        <a class="btn btn-primary" href="/home/process">Accept Payment</a>
+    </div>
+</body>
+</html>

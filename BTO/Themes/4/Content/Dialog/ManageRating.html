@@ -1,0 +1,87 @@
+﻿<div id="ratingDialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">{{$root.translateData["Play back session"]}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table st-pipe="$root.playbackSessionTable.callServer" st-table="$root.playbackSessionTable.displayed" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="first">{{$root.translateData["No."]}}</th>
+                                <th>{{$root.translateData["Email"]}}</th>
+                                <th>{{$root.translateData["Start time"]}}</th>
+                                <th>{{$root.translateData["Duration"]}}</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    <input st-search="email" placeholder="{{$root.translateData['Search by email']}}" ng-model="$root.playbackSessionTable.email" type="text" />
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>                    
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!$root.playbackSessionTable.isLoading" ng-repeat="playbackSession in $root.playbackSessionTable.displayed" ng-dblclick="$root.playbackLoadSession(playbackSession)" class="session_row">
+                                <td><label class="control-label">{{$index + 1 + $root.playbackSessionTable.startIndex}}</label></td>
+                                <td><label>{{playbackSession.email}}</label></td>
+                                <td><label>{{playbackSession.time_create | date:'yyyy-MM-dd HH:mm:ss Z'}}</label></td>
+                                <td><label>{{playbackSession.duration}}</label></td>
+                                <td>
+                                    <button type="button" class="btn play-session btn-default btn-xs waves-effect waves-light" title="{{$root.translateData['Play']}}" ng-click="$root.playbackService.playbackLoadSession(playbackSession)">
+                                        <span class="fa fa-play-circle"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr ng-if="$root.playbackSessionTable.isLoading">
+                                <td colspan="6" class="text-center">{{$root.translateData['Loading ... ']}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot >
+                            <tr ng-if="$root.playbackSessionTable.numberOfPages <= $root.playbackSessionTable.number">
+                                <td colspan="6" class="text-center">
+                                    <div class="text-center" st-pagination="" st-items-by-page="$root.playbackSessionTable.number"></div>
+                                </td>
+                            </tr>
+                            <tr ng-if="$root.playbackSessionTable.numberOfPages > $root.playbackSessionTable.number">
+                                <td colspan="6" class="text-center">
+                                    <div st-items-by-page="$root.playbackSessionTable.number" st-pagination="" st-template="pagination.custom.html"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelPlayback">{{$root.translateData["Close"]}}</button>
+            </div>
+       </div>    
+    </div>
+</div>
+<script type="text/ng-template" id="pagination.custom.html">
+    <nav ng-if="pages.length >= 2">
+        <ul class="pagination">
+            <li>
+                <a ng-click="selectPage(1)">{{$root.translateData['First']}}</a>
+            </li>
+            <li>
+                <a ng-click="selectPage(currentPage - 1)">&lt;</a>
+            </li>
+            <li>
+                <a><page-select></page-select> / {{numPages}}</a>
+            </li>
+            <li>
+                <a ng-click="selectPage(currentPage + 1)">&gt;</a>
+            </li>
+            <li><a ng-click="selectPage(numPages)">{{$root.translateData['Last']}}</a></li>
+        </ul>
+    </nav>
+</script>
+
+
+

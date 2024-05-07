@@ -1,0 +1,211 @@
+﻿<script src="/Scripts/bto/controller/IncomeExpeneseController.js"></script>
+<script src="/Scripts/bto/controller/LiquidIlliquidAssetController.js"></script>
+<script src="/Scripts/bto/controller/IlliquidAssetController.js"></script>
+
+<script src="/Themes/2/Scripts/timelineService.js"></script>
+<script src="/Themes/2/Scripts/timelineFunctions.js"></script>
+<script src="/Themes/2/Scripts/timeline.js"></script>
+<script src="/Themes/2/Scripts/directive.js"></script>
+<script src="/Themes/2/Scripts/bto.js"></script>
+<script src="/Themes/2/Scripts/script.js"></script>
+<script src="/Themes/2/Scripts/touch.js"></script>
+<script src="/Scripts/newBto/service/serviceSharing.js"></script>
+
+
+
+
+<!-- Material Design Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="/Themes/2/Content/bto.css" rel="stylesheet">
+<link href="/Themes/2/Content/custom.css" rel="stylesheet">
+<link href="/Themes/2/Content/timeline.css" rel="stylesheet">
+<link href="/Themes/2/Content/drop-drap-control.css" rel="stylesheet" />
+<link href="/Themes/2/Content/theme-customize.css" rel="stylesheet" />
+<link rel="stylesheet" href="/Themes/2/Content/style.css">
+<div ng-include="'/Themes/2/header.html'"></div>
+<div class="container" id="main">
+
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-success ng-hide" ng-show="$root.successMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Success' | translate}}</div><div class="toast-message">{{$root.successMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-error ng-hide" ng-show="$root.errorMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Error' | translate}}</div><div class="toast-message">{{$root.errorMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-warning ng-hide" ng-show="$root.warningMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Warning' | translate}}</div><div class="toast-message">{{$root.warningMessage.message | translate}}</div></div></div>
+    <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast toast-info ng-hide" ng-show="$root.infoMessage.show" style="display: block;"><button type="button" class="toast-close-button" role="button">×</button><div class="toast-title">{{'Info' | translate}}</div><div class="toast-message">{{$root.infoMessage.message | translate}}</div></div></div>
+
+  
+
+
+    <!-- current plan, new plan, reset, save -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group">
+                <button id="plan1" type="button" class="btn btn-primary btn-sm waves-effect" style="margin-right:0" ng-click="$root.timelineService.switchToCurrentPlan()">{{"CURRENT PLAN" | translate}}</button>
+                <button id="plan2" type="button" class="btn btn-white btn-sm waves-effect" ng-click="$root.timelineService.switchToNewPlan()">{{'NEW PLAN' | translate}}</button>
+            </div> 
+            <button type="button" class="btn btn-white btn-sm waves-effect" style="margin: auto 0;" ng-click="$root.timelineService.ResetPlan()"
+                    data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{'Reset' | translate}}">
+                <i class="fa fa-refresh"></i>
+            </button>
+            <button type="button" class="btn btn-white btn-sm waves-effect" ng-click="$root.planService.showScenarioManagement()"
+                    data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{'Manage Scenarios' | translate}}">
+                <i class="fa fa-floppy-o"></i>
+            </button>
+            <button type="button" ng-click="$root.playbackService.initialPlayBack();" class="btn btn-white btn-sm waves-effect" style="margin: auto 0;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{'Playback' | translate}}" ng-if="$root.functionAccess.PLAYBACK == 1"><i class="fa fa-history"></i></button>
+        </div>
+    </div>
+
+    <!-- dream, life-event -->
+    <div class="row">
+        <div class="col-md-12" style="margin-top:10px">
+            <button id="btn-dream" class="btn-dream">{{"Dream" | translate}}</button>
+            <button id="btn-dream-delete" class="trash btn-dream hide"></button>
+            <button id="btn-life-event" class="btn-life-evt">{{"Life Event" | translate}}</button>
+            <button id="btn-life-event-delete" class="trash btn-life-evt hide"></button>
+
+        </div>
+    </div>
+
+    <!-- timeline -->
+    <div class="row" id="div_Timeline">
+        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+            <div id="timeline-addEvent" ondrop="drop(event)" ondragover="allowDrop(event)" class="hide timeline-add-event">
+            </div>
+            <div id="timeline-canvas" style="background-color:white;">
+            </div>
+        </div>
+    </div>
+
+    <!-- options -->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs tabs-6">
+                <li id="tab_{{$root.config.TAB.MAIN}}" ng-class="{'active': $root.scope.name==$root.config.TAB.MAIN}"><a ui-sref="{{$root.config.TAB.MAIN}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-cogs"></i><span class="tab-title">{{'Main' | translate}}</span></a></li>
+                <li id="tab_{{$root.config.TAB.INCOME_EXPENSE}}" ng-class="{'active': $root.scope.name==$root.config.TAB.INCOME_EXPENSE}" ng-if="$root.functionAccess.VIEW_INCOME_EXPENSE_TAB == 1"><a ui-sref="{{$root.config.TAB.INCOME_EXPENSE}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-exchange"></i><span class="tab-title">{{'Income/Expenses' | translate}}</span></a></li>
+                <li id="tab_{{$root.config.TAB.LIQUID_ASSET}}" ng-class="{'active': $root.scope.name==$root.config.TAB.LIQUID_ASSET}" ng-if="$root.functionAccess.VIEW_LIQUID_ASSET_TAB == 1"><a ui-sref="{{$root.config.TAB.LIQUID_ASSET}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-line-chart"></i><span class="tab-title">{{"Liquid Asset" | translate}}</span></a></li>
+                <li id="tab_{{$root.config.TAB.ILLIQUID_ASSET}}" ng-class="{'active': $root.scope.name==$root.config.TAB.ILLIQUID_ASSET}" ng-if="$root.functionAccess.VIEW_ILLIQUID_ASSET_TAB == 1"><a ui-sref="{{$root.config.TAB.ILLIQUID_ASSET}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-home"></i><span class="tab-title">{{'Illiquid Asset' | translate}}</span></a></li>
+                <li id="tab_{{$root.config.TAB.RANKING_DREAM}}" ng-class="{'active': $root.scope.name==$root.config.TAB.RANKING_DREAM}" ng-if="$root.functionAccess.VIEW_RANKING_DREAM_TAB == 1"><a ui-sref="{{$root.config.TAB.RANKING_DREAM}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-tasks"></i><span class="tab-title">{{"Ranking Dreams" | translate}}</span></a></li>
+                <li id="tab_{{$root.config.TAB.SHARING_SESSION}}" ng-class="{'active': $root.scope.name==$root.config.TAB.SHARING_SESSION}" ng-if="$root.functionAccess.VIEW_SHARING_SESSION_TAB == 1"><a ui-sref="{{$root.config.TAB.SHARING_SESSION}}" class="waves-effect" ng-click="$root.StateReload = false"><i class="fa fa-comments"></i><span class="tab-title">{{"Sharing Session" | translate}}</span></a></li>
+            </ul>
+            <div class="tab-content" ng-if="true">
+                <div ui-view class="tab-pane fade in active">
+
+                </div>
+            </div>
+            <div class="tab-content-bottom">
+                <div ng-include="'/Themes/2/content-bottom.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'/Themes/2/footer.html'"></div>
+
+<!-- Dialog -->
+<div ng-include="'/Themes/2/Content/Dialog/ChangeValueDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/DreamDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/LifeEventDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/ConfirmDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/StartAgeDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/ProfileDialog.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/ManageSolution.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/ManageScenarios.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/PlaybackSession.html'"></div>
+<div ng-include="'/Themes/2/Content/Dialog/ManageAccount.html'"></div>
+
+<div ng-include="'/Themes/2/playback.html'"></div>
+<div ng-include="'/Themes/2/sharing.html'"></div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip({ animation: true, delay: { show: 300, hide: 300 } });
+
+        //Initialize select
+        $('select').material_select();
+        angular.element(document.body).injector().get('sharingService').initSharing();
+
+        $('#btn-dream').draggable({ clone: true })
+        $('#btn-life-event').draggable({ clone: true })
+        $('#timeline-addEvent').droppable()
+
+        .droppable().on('droppable:activate', function () {
+            $('#timeline-addEvent').height($('#timeline-canvas').height());
+            $('#timeline-addEvent').width($('#timeline-canvas').width());
+            $('#timeline-addEvent').removeClass('hide');
+            $('#timeline-canvas').addClass('hide');
+        })
+
+
+        .on('droppable:drop', function (e, evtObj) {
+            angular.element(document.body).injector().get('timelineService').dragControl(e, evtObj);
+        })
+
+        .on('droppable:deactivate', function (e, ui) {
+            $('#timeline-addEvent').addClass('hide');
+            $('#timeline-canvas').removeClass('hide');
+        })
+
+        //Toggle plan buttons
+        $('#plan1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#plan2').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+        $('#plan2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#plan1').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+
+        //// Toggle Timeline Holder
+        //$('.btn-dream,.btn-life-evt').mousedown(function () {
+        //    $('#timeline-addEvent').height($('#timeline-canvas').height());
+        //    $('#timeline-addEvent').width($('#timeline-canvas').width());
+        //    $('#timeline-addEvent').removeClass('hide');
+        //    $('#timeline-canvas').addClass('hide');
+        //}).mouseup(function () {
+        //    $('#timeline-addEvent').addClass('hide');
+        //    $('#timeline-canvas').removeClass('hide');
+        //}).on('dragend', function () {
+        //    $('#timeline-addEvent').addClass('hide');
+        //    $('#timeline-canvas').removeClass('hide');
+        //});
+
+        // Toggle Success Notification
+        $("#success-msg").click(function () {
+            var notify_options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "7000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.success("Your dream has been added.", "Congratulations", notify_options);
+        });
+
+    });
+    $(window).resize(function () {
+        angular.element(document.body).injector().get('timelineService').initTimeline();
+    });
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        angular.element(document.body).injector().get('timelineService').dragControl(ev);
+    }
+</script>

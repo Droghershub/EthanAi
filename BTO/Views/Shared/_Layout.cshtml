@@ -1,0 +1,445 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <title>@ViewBag.Title - @BTO.Resources.Resource.BTO</title>
+    <link rel="stylesheet" href="~/Scripts/thirdparty/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Scripts/thirdparty/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="stylesheet" href="~/Content/treasure-overlay-spinner.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-social.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.css">
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/thirdparty/angular-messages.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+</head>
+<body ng-app="btoApp" ng-cloak>
+
+    <div class="overlay"></div>
+    <div class="navbar navbar-default  ng-hide" ng-show="$root.isFirstLoadView">
+        <div class="container" tutorial="top-menu" config-content-data="{height: 450}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bto_navBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("{{'Better Trade Off' | translate}}", "Index", "New", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" id="bto_navBar">
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav" ng-if="$root.PersonaPlan != null || $root.isLogined == true">
+                        <li>
+                            <a class="text-info" onclick="$('#manageSolutionModel').click()" role="button">
+                                {{'Manage Solution' | translate}}
+                            </a>
+                        </li>
+                        <li>
+                            @if (@HttpContext.Current.User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("{{'Administrator' | translate}}", "Index", "Admin", new { area = "" }, new { @class = "text-info" })
+                            }
+                        </li>
+                    </ul>
+                }
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container ng-hide" ng-show="$root.isFirstLoadView">
+        @RenderBody()
+    </div>
+    <div id="playback">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td style="width: 180px;border-top-width:0px;">
+                        <button type="button" id="playback_backward" class="btn btn-default btn-sm button-skip-backward" title="{{'Play back' | translate}}" ng-click="$root.playBack();" ng-if="!$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.playBackActionList.length > 0">
+                            <span class="glyphicon glyphicon-step-backward"></span>
+                        </button>
+                        <button type="button" id="playback_play" class="btn btn-default btn-sm button-pause" title="{{'Pause' | translate}}" ng-click="$root.pausePlayBackward();" ng-if="$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isBackward">
+                            <span class="glyphicon glyphicon-pause"></span>
+                        </button>
+                        <button type="button" id="playback_stop" class="btn btn-default btn-sm button-stop" title="{{'Stop' | translate}}" ng-click="$root.stopPlayback();">
+                            <span class="glyphicon glyphicon-stop"></span>
+                        </button>
+                        <button type="button" id="playback_play" class="btn btn-default btn-sm button-play" title="{{'Play' | translate}}" ng-click="$root.startPlay();" ng-if="!$root.playBackPlayerData.isPlaying">
+                            <span class="glyphicon glyphicon-play"></span>
+                        </button>
+                        <button type="button" id="playback_play" class="btn btn-default btn-sm button-pause" title="{{'Pause' | translate}}" ng-click="$root.pausePlayForward();" ng-if="$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isForward">
+                            <span class="glyphicon glyphicon-pause"></span>
+                        </button>
+                        <button class="btn btn-default" title="{{'Change speed' | translate}}" style="padding: 4px 8px;" ng-click="$root.changeSpeed();"><b>{{$root.playBackPlayerData.forwardSpeed}}x</b></button>
+                    </td>
+                    <td style="border-top-width:0px;">
+                        <div style="text-align:left;">
+                            <div id="playback_progressbar_tooltip" class="tooltip fade top in" role="tooltip" ng-if="$root.playBackPlayerData.tooltipMessage!=''" ng-style="$root.playBackPlayerData.tooltipOptions">
+                                <div class="tooltip-arrow" style="left: 50%;"></div>
+                                <div class="tooltip-inner">{{$root.playBackPlayerData.tooltipMessage | translate}}</div>
+                            </div>
+                            <div id="playback_progressbar" class="progress" style="margin-top: 6px;" ng-mouseout="$root.playbackMouseOutProgressBar($event)" ng-mousemove="$root.playbackHoverProgress($event)">
+                                <div class="progress-bar progress-bar-success" role="progressbar" ng-style="{width:  ($root.playBackPlayerData.actionCurrentTime*100/$root.playBackPlayerData.timeLength)  + '%'}">
+                                    <span style="color: blue;display: block;position: absolute;right: 30px;">{{$root.playBackPlayerData.session.duration}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width:20px">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+    <div id="sharing" style="z-index: 10002;">
+        <div class="col-lg-12" style="padding-right: 0px; z-index: 10002;">
+            <label class="btn btn-default" id="sharing_presenter" title="Take over"><b>presenter</b></label>
+            <button type="button" id="sharing_stop" class="btn btn-default btn-sm button-stop" title="Stop" style="z-index: 10002;">
+                <span class="glyphicon glyphicon-stop"></span>
+            </button>
+            <button class="btn btn-default" id="sharing_take_over" title="Take over" style="z-index: 10002;"><b>Take over</b></button>
+        </div>
+    </div>
+    <div id="disableScreen" class="modal-backdrop fade in" style="display:none;opacity: 0; z-index:10000"></div>
+</body>
+</html>
+<script>
+    function confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK) {
+
+        var cancelContent = '';
+        var okContent = '';
+        if (cancelButtonTxt != '')
+            cancelContent = '<a href="#!" id="cancelButton" class="btn btn-primary">' + rootScope.translate(cancelButtonTxt) + '</a>';
+        if (okButtonTxt != '')
+            okContent = '<a href="#!" id="okButton" class="btn btn-primary">' + rootScope.translate(okButtonTxt) + '</a>';
+
+        var confirmModal =
+          $('<div class="modal fade" style="z-index: 10001;" data-keyboard="false" data-backdrop="static">' +
+              '<div class="modal-dialog">' +
+              '<div class="modal-content">' +
+              '<div class="modal-header">' +               
+                '<h3>' + heading + '</h3>' +
+              '</div>' +
+
+              '<div class="modal-body">' +
+                '<p>' + question + '</p>' +
+              '</div>' +
+
+              '<div class="modal-footer">' + cancelContent + okContent +
+              '</div>' +
+              '</div>' +
+              '</div>' +
+            '</div>');
+
+        if (cancelButtonTxt != '') {
+            confirmModal.find('#cancelButton').click(function (event) {
+                callbackCancel();                
+                confirmModal.modal('hide');
+                event.preventDefault();
+            });
+        }
+        if (okButtonTxt != '') {
+            confirmModal.find('#okButton').click(function (event) {
+                callbackOK();                
+                confirmModal.modal('hide');
+                event.preventDefault();
+            });
+        }
+        confirmModal.modal('show');
+    };
+
+    $(function () {
+
+        var hub = $.connection.controllerHub;
+
+        hub.client.addViewerList = function (mail) { //this instanciate the shapeMoved function receiving x, y
+
+            if (rootScope.viewers.indexOf(mail) == -1) {
+                rootScope.viewers.push(mail);
+                rootScope.apply();
+            }
+        };
+
+        hub.client.deleteViewerList = function (mail) { //this instanciate the shapeMoved function receiving x, y
+            if (typeof rootScope.viewers != 'undefined' && rootScope.viewers != null) {
+                for (var i = rootScope.viewers.length - 1; i >= 0; i--) {
+                    if (rootScope.viewers[i] === mail) {
+                        rootScope.viewers.splice(i, 1);
+                    }
+                }
+                rootScope.apply();
+            }
+        };
+
+        showSharingAtViewer = function () {
+            $('#sharing_stop').show();
+            $('#sharing_take_over').show();
+            $('#sharing').css({ 'z-index': '10002', 'display': 'block' });            
+            $('#disableScreen').show();
+        }
+
+        hideSharingAtViewer = function () {
+            $('#sharing_stop').hide();
+            $('#sharing_take_over').hide();
+            $('#sharing').css({ 'z-index': '10002', 'display': 'none' });            
+            $('#disableScreen').hide();
+            $('.modal-backdrop').hide();
+            $('.modal').hide();
+
+        }
+
+        hub.client.takeOverRequested = function (viewer) {
+            var heading = 'Take over';
+            var question = rootScope.translate('{{name}} wants to take over the sharing session. Do you accept this request?', { name: viewer });
+            var cancelButtonTxt = 'No';
+            var okButtonTxt = 'Yes';
+
+            var callbackCancel = function () {
+                hub.server.acceptRequestTakeOver(viewer, false);
+            };
+
+            var callbackOK = function () {
+                hub.server.acceptRequestTakeOver(viewer, true);
+            };
+
+            confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+        }
+
+        hub.client.takeOverAccepted = function (status, isowner) {
+            if (status) {
+                var heading = 'Take over';
+                var question = '';
+                if (isowner)
+                    question = rootScope.translate('You can control the session now.', { name: localStorage.getItem('presenter') });
+                else
+                    question = rootScope.translate('{{name}} has just accepted your request to take over.', { name: localStorage.getItem('presenter') });
+                var cancelButtonTxt = '';
+                var okButtonTxt = 'OK';
+
+                var callbackCancel = function () {
+                };
+
+                var callbackOK = function () {
+                    rootScope.isTakeOver = true;
+                    $('#disableScreen').hide();
+
+                    rootScope.playBackPlayerData.data = null;
+                    hub.server.takeOverSharing(localStorage.getItem('presenter'));                    
+                    $("#sharing_take_over").hide();
+                    $("#sharing_presenter").text('Presenter: ' + $('#userNameKeyId').val());
+                    
+                };
+
+                confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+            }
+            else {
+                var heading = 'Take over';
+                var question = rootScope.translate('{{name}} does not accept your request to take over.', { name: localStorage.getItem('presenter') });
+                var cancelButtonTxt = 'Close';
+                var okButtonTxt = '';
+
+                var callbackCancel = function () {
+                };
+
+                var callbackOK = function () {
+                };
+
+                confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+            }
+        }
+
+        hub.client.stolenTakeOverBy = function (presenter) {
+            rootScope.isTakeOver = false;
+            showSharingAtViewer();
+            localStorage.presenter = presenter;
+            $("#sharing_presenter").text('Presenter: ' + presenter);
+            var heading = 'Take over';
+            var question = rootScope.translate('{{name}} has just taken over the sharing session', { name: presenter });
+            var cancelButtonTxt = 'Close';
+            var okButtonTxt = '';
+
+            var callbackCancel = function () {
+            };
+
+            var callbackOK = function () {
+            };
+
+            confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+        };
+
+
+        hub.client.pageRefreshed = function (isTakeOver) {
+
+            rootScope.isTakeOver = isTakeOver;
+            if (isTakeOver == false) {
+                showSharingAtViewer();
+            }
+            else if (isTakeOver == true) {
+                $('#sharing_stop').show();
+                $('#sharing_take_over').hide();
+                $('#sharing').css({ 'z-index': '10002', 'display': 'block' });
+            }
+            rootScope.isRefresh = true;
+            LoadCurrentUserData(localStorage.getItem('user_id_sharing_owner'));            
+            $("#sharing_presenter").text('Presenter: '+ localStorage.getItem('presenter'));
+        };
+
+        hub.client.sharingStarted = function (obj, presenter) {
+
+            //make user use mode sharing
+            localStorage.isSharing = true;
+            rootScope.isBeginShared = true;
+            localStorage.presenter = presenter;
+            $("#sharing_presenter").text('Presenter: ' + presenter);
+            localStorage.user_id_sharing_owner = obj.PersonaPlan.user_id;
+            showSharingAtViewer();
+
+            LoadAndFillDataFromShareToView(obj);            
+            $('#tab_main').click();
+            $('#tab_sharing_session').show();
+            $('#tab_sharing_session_only_view').hide();
+        };
+
+        hub.client.sharingEnded = function (presenter) { //this instanciate the shapeMoved function receiving x, y
+
+            //make user use mode normal
+            localStorage.isSharing = false;
+            rootScope.isBeginShared = false;
+            hideSharingAtViewer();
+            LoadCurrentUserData($('#userKeyId').val());            
+            $('#tab_main').click();
+
+            var heading = 'Invitation';
+            var question = rootScope.translate('{{name}} stopped the sharing session.', { name: presenter });
+            var cancelButtonTxt = 'Close';
+            var okButtonTxt = '';
+
+            var callbackCancel = function () {
+            };
+
+            var callbackOK = function () {                
+            };
+
+            confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+        };
+
+        hub.client.invitingRequest = function (_representerId, email) { //this instanciate the shapeMoved function receiving x, y
+            var heading = 'Invitation';
+            var question = rootScope.translate('{{name}} wants to invite you for sharing screen. Do you accept this invitation?', { name: _representerId });
+            var cancelButtonTxt = 'No';
+            var okButtonTxt = 'Yes';
+
+            var callbackCancel = function () {
+            };
+
+            var callbackOK = function () {
+                hub.server.acceptInviting(_representerId);
+                if (typeof rootScope.viewers != 'undefined' && rootScope.viewers != null) {
+                    for (var i = rootScope.viewers.length - 1; i >= 0; i--) {
+                        rootScope.viewers.splice(i, 1);
+                    }                    
+                }
+            };
+
+            confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+        };
+        hub.client.dataTransfered = function (obj) { //this instanciate the shapeMoved function receiving x, y           
+            if (!rootScope.isTakeOver)
+                UpdateControlForShareScreen(obj);
+        };
+
+        hub.client.viewerChanged = function (mail, userManualStop) { //this instanciate the shapeMoved function receiving x, y
+            hub.server.updateConnectionIdsToSharing(mail, userManualStop);
+        };
+
+
+        stopSharing = function () {
+            rootScope.isBeginShared = false;
+            rootScope.isTakeOver = false;
+            hub.server.endSharing();
+
+            localStorage.isSharing = false;
+            rootScope.isFirstLoadCurrentcyForSharing = true;
+            hideSharingAtViewer();
+            //LoadAndFillDataFromShareToView($('#userKeyId').val());
+            LoadCurrentUserData($('#userKeyId').val());            
+            $('#tab_main').click();
+            $('#tab_sharing_session').show();
+            $('#tab_sharing_session_only_view').hide();
+        }
+
+        hub.client.sharingEndedAtPresenter = function () {
+            console.log('call stopSharing');
+            stopSharing();
+
+            var heading = 'Sharing';
+            var question = rootScope.translate('There is nobody in sharing session');
+            var cancelButtonTxt = 'Close';
+            var okButtonTxt = '';
+
+            var callbackCancel = function () {
+            };
+
+            var callbackOK = function () {
+
+            };
+
+            confirm_popup(heading, question, cancelButtonTxt, okButtonTxt, callbackCancel, callbackOK);
+        };
+
+        hub.client.newSession = function () {
+            localStorage.isSharing = false;
+            if (typeof (rootScope) != 'undefined') {
+                rootScope.isBeginShared = false;
+                rootScope.viewers = [];
+            }
+        };
+
+        $.connection.hub.start().done(function () {            
+            var time = Math.abs(localStorage.getItem('time') - (new Date()).getTime())       
+
+            //if (time < 20000) {
+            //    //init new session, similar when user refresh page
+            //    if (typeof (rootScope) != "undefined" && rootScope != null && rootScope.PersonaPlan != null && rootScope.PersonaPlan.user_id != null && localStorage.getItem('isSharing') == 'true') {         
+            //        hub.server.pageRefreshing(rootScope.PersonaPlan.user_id);
+            //    }
+            //    else
+            //        //think that user close page and open new windows
+            //    {
+            //        localStorage.isSharing = false;
+            //        rootScope.isBeginShared = false;
+            //    }
+            //}
+            //else {
+            //    //think that user close page and open new windows
+            //    hub.server.newPageOpening();
+            //}
+
+            hub.connection.stateChanged(function (change) {
+                if (change.newState == $.signalR.connectionState.disconnected) {
+                    localStorage.time = (new Date()).getTime();
+                }
+            });
+
+
+            $("#sharing_stop").click(function () {                
+                stopSharing();
+            });
+
+            $("#sharing_take_over").click(function () {
+                hub.server.requestTakeOver(localStorage.getItem('presenter'));
+            });
+
+        });
+    });
+</script> 

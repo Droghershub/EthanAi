@@ -1,0 +1,40 @@
+﻿<div id="playback" ng-class="{'ng-show': $root.playBackPlayerData.isPlayBack, 'ng-hide': !$root.playBackPlayerData.isPlayBack}" style="z-index: 10000;">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td style="width: 180px;border-top-width:0px;">
+                    <button type="button" id="playback_backward" class="btn btn-default btn-sm button-skip-backward" title="{{'Play back' | translate}}" ng-click="$root.playbackService.playBack();" ng-if="!$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.playBackActionList.length > 0">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </button>
+                    <button type="button" id="playback_play" class="btn btn-default btn-sm button-pause" title="{{'Pause' | translate}}" ng-click="$root.playbackService.pausePlayBackward();" ng-if="$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isBackward">
+                        <span class="glyphicon glyphicon-pause"></span>
+                    </button>
+                    <button type="button" id="playback_stop" class="btn btn-default btn-sm button-stop" title="{{'Stop' | translate}}" ng-click="$root.playbackService.stopPlayback();">
+                        <span class="glyphicon glyphicon-stop"></span>
+                    </button>
+                    <button type="button" id="playback_play" class="btn btn-default btn-sm button-play" title="{{'Play' | translate}}" ng-click="$root.playbackService.startPlay();" ng-if="!$root.playBackPlayerData.isPlaying">
+                        <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                    <button type="button" id="playback_play" class="btn btn-default btn-sm button-pause" title="{{'Pause' | translate}}" ng-click="$root.playbackService.pausePlayForward();" ng-if="$root.playBackPlayerData.isPlaying && $root.playBackPlayerData.isForward">
+                        <span class="glyphicon glyphicon-pause"></span>
+                    </button>
+                    <button class="btn btn-default" title="{{'Change speed' | translate}}" style="padding: 4px 8px;" ng-click="$root.playbackService.changeSpeed();"><b>{{$root.playBackPlayerData.forwardSpeed}}x</b></button>
+                </td>
+                <td style="border-top-width:0px;">
+                    <div style="text-align:left;">
+                        <div id="playback_progressbar_tooltip" class="tooltip fade top in" role="tooltip" ng-if="$root.playBackPlayerData.tooltipMessage!=''" ng-style="$root.playBackPlayerData.tooltipOptions">
+                            <div class="tooltip-arrow" style="left: 50%;"></div>
+                            <div class="tooltip-inner">{{$root.playBackPlayerData.tooltipMessage | translate}}</div>
+                        </div>
+                        <div id="playback_progressbar" class="progress" style="margin-top: 6px;" ng-mouseout-bk="$root.playbackService.playbackMouseOutProgressBar($event)" ng-mousemove-bk="$root.playbackService.playbackHoverProgress($event)">
+                            <div class="progress-bar progress-bar-success" role="progressbar" ng-style="{width:  ($root.playBackPlayerData.actionCurrentTime*100/$root.playBackPlayerData.timeLength)  + '%'}">
+                                <span style="color: blue;display: block;position: absolute;right: 30px;">{{$root.playBackPlayerData.session.duration}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="width:20px">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,134 @@
+﻿<div class="panel-group">
+    <div class="panel panel-default">
+        <a data-toggle1="collapse" href="#retirement" class="" aria-expanded1="true">
+            <div class="panel-heading main retirement" data-spy="affix" data-offset-top="1400">
+                <h4 class="panel-title">{{"Retirement Lifestyle" | translate}}</h4>
+            </div>
+        </a>
+        <div id="retirement" class="panel-collapse collapse in" aria-expanded="true">
+            <div class="panel-body row">
+                <div class="row-sm-height">
+                    <div class="col-sm-4 left-side col-sm-height col-top">
+                        <div class="inside" id="com_expense_at_retirement">
+                            <p style="margin-bottom:20px">{{"What kind of lifestyle would you like at retirement?" | translate}}</p>
+                            <div ng-repeat="item in $root.retirementLife">
+                                <div class="card white hoverable"  ng-class="$root.selectedretirementLife.id != item.id?'':'active'" id="retirement_life_style_{{item.id}}"ng_click="$root.retirementLifeStyle.ChooseLifeStyle(item);">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="col-xs-3"><i class={{item.imageClass}}></i></div>
+                                            <div class="col-xs-9">
+                                                <h5>{{item.name | translate}}</h5>
+                                                <div class="card-label">{{$root.PersonaPlan.currency_code}} {{item.value|number:0}} {{"Monthly Expense" | translate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-sm-height col-top right-side">
+                        <div class="inside">
+                            <div class="row">
+                                <div class="col-sm-3 blue-text" style="font-size: 55px;text-align:center;">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa-stack-1x fa-inverse" ng-class="$root.selectedretirementLife.imageClass"></i>
+                                    </span>
+                                </div>
+                                <div class="col-sm-9" ng-if="$root.PersonaPlan.retirement_lifestyle==-1">
+                                    <h5>{{selectedretirementLife.name | translate}} {{"Lifestyle" | translate}}</h5>
+                                    <ul>
+                                        <li>
+                                            {{"Your monthly expenses are " | translate}}  <strong>{{$root.PersonaPlan.currency_code}}&nbsp;{{PersonaPlan.expense_today|number:0}}</strong>,
+                                            {{"which make you belong to the" | translate}}  <strong>{{selectedretirementLife.name | translate | uppercase}}</strong>.
+                                        </li>
+                                        
+                                    </ul>                                    
+                                </div>
+                                <div class="col-sm-9" ng-if="$root.PersonaPlan.retirement_lifestyle!=-1">
+                                    
+                                    <h5>{{selectedretirementLife.name | translate}} {{"Lifestyle at Retirement" | translate}}</h5>
+                                    <ul>
+                                        <li>
+                                            {{"Your monthly expenses at retirement would be " | translate}}  <strong>{{$root.PersonaPlan.currency_code}}&nbsp;{{$root.retirementLife[$root.PersonaPlan.retirement_lifestyle].value|number:0}}</strong>,
+                                            {{"based on your choice of lifestyle at retirement and expected evolution of expenses over time" | translate}}.
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="separator" style="margin-top:20px"></div>
+                            <div class="row" id="dev_detaillifeStype" style="padding-top:3em;">
+                                <div class="col-xs-12">
+                                    <p style="margin-top:0;margin-bottom:1.3em;">{{"Here's  your projected annual expense and the breakdown of your income after retirement:" | translate}}</p>
+                                    <center>
+                                        <div class="btn-group" style="padding-bottom:10px;">
+                                            <button id="retirerates-btn1" type="button" class="btn btn-sm waves-effect btn-primary" style="margin-right:0" ng-click="$root.retirementLifeStyle.changeInflattion(true);">{{"INFLATION ADJUSTED" | translate }}</button>
+                                            <button id="retirerates-btn2" type="button" class="btn btn-sm waves-effect btn-white" ng-click="$root.retirementLifeStyle.changeInflattion(false);">{{"NON-INFLATION ADJUSTED" | translate }}</button>
+                                        </div>
+                                    </center>
+                                    <div class="compare-tbl">
+                                        <div class="row total" style="border-top:1px solid #fff">
+                                            <div class="col-xs-7 grey lighten-3">{{"AGE" | translate}}</div>
+                                            <div class="col-xs-5 grey lighten-3">{{$root.chartObject.age}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-7 grey lighten-5">{{"Annual Expense" | translate}}</div>
+                                            <div class="col-xs-5 grey lighten-5">{{$root.PersonaPlan.currency_code}} {{ $root.chartObject.annualexpense | number : 2}}</div>
+                                        </div>
+                                        <div class="row parentretire" id="income-source">
+                                            <div class="col-xs-7 grey lighten-3">{{"Income Sources" | translate}} <i class="fa fa-caret-down"></i></div>
+                                            <div class="col-xs-5 grey lighten-3">{{$root.PersonaPlan.currency_code}} {{ $root.chartObject.incomesource | number : 2}}</div>
+                                        </div>
+                                        <div class="row parentretire" parent="income-source">
+                                            <div class="col-xs-7 grey lighten-3">{{"Income from Social Annuities" | translate}}</div>
+                                            <div class="col-xs-5 grey lighten-3">{{$root.PersonaPlan.currency_code}} {{ $root.chartObject.incomefromsocial | number : 2}}</div>
+                                        </div>
+                                        <div class="row parentretire" parent="income-source">
+                                            <div class="col-xs-7 grey lighten-3">{{"Income from Savings" | translate}}</div>
+                                            <div class="col-xs-5 grey lighten-3">{{$root.PersonaPlan.currency_code}} {{ $root.chartObject.incomefromsaving | number : 2}}</div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="chartRetirement" style="width:100%;height:400px;font-size:11px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- panel-body -->
+        </div> <!-- #retirement -->
+        <div class="panel-footer">
+            <h6 ng-if="!$root.profile.client.is_auto_register">{{'Rate this Section' | translate}}</h6>
+            <rating-session ng-if="!$root.profile.client.is_auto_register" id="rating_retirement" rating-value="$root.ratingData.data.retirement_life_style" on-click-star="$root.ratingService.ratingClickStar('retirement_life_style')" on-rating-select="$root.ratingService.rating('retirement_life_style');"></rating-session>
+        </div>
+    </div> <!-- panel -->
+</div>
+<script>
+    $(document).ready(function () {
+        /* Toggle saving rates switch */
+        $('#retirerates-btn1').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#retirerates-btn2').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+        $('#retirerates-btn2').click(function (e) {
+            if ($(this).hasClass("btn-primary")) { e.preventDefault(); }
+            else {
+                $(this).removeClass("btn-white").addClass("btn-primary");
+                $('#retirerates-btn1').removeClass("btn-primary").addClass("btn-white");
+            }
+        });
+    });
+    /* Toggle Parent-Child rows */
+    $(".parentretire").click(function () {
+        var name = $(this).attr("id");
+        // alert(name);
+        $("*[parent='" + name + "']").slideToggle('slow');
+        angular.element(document.body).injector().get('timelineService').SendingScreenSharingDataObject(name, 'retirementLifeStyle', 'clickOnSavingRate', '');
+    });
+</script>

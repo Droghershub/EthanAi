@@ -1,0 +1,91 @@
+﻿<script src="/Scripts/bto/controller/IncomeExpeneseController.js"></script>
+<script src="/Scripts/bto/controller/LiquidIlliquidAssetController.js"></script>
+<script src="/Scripts/bto/controller/IlliquidAssetController.js"></script>
+<link rel="stylesheet" href="/Themes/1/Content/drop-drap-control.css">
+<script src="/Themes/1/Scripts/script.js"></script>
+<script src="/Themes/1/Scripts/timelineService.js"></script>
+<script src="/Themes/1/Scripts/zoomService.js"></script>
+<script src="/Themes/1/Scripts/timelineFunctions.js"></script>
+<script src="/Scripts/newBto/service/serviceSharing.js"></script>
+<link rel="stylesheet" href="/Themes/1/Content/style.css">
+<div class=" theme_1">
+    <div ng-include="'/Themes/1/header.html'"></div>
+    <div class="container">
+        <div class="alert alert-success fade in messages-growl ng-hide" style="margin-top: 60px;" ng-show="$root.successMessage.show">
+            {{$root.successMessage.message | translate}}
+        </div>
+        <div class="alert alert-danger fade in messages-growl ng-hide" ng-show="$root.errorMessage.show">
+            {{$root.errorMessage.message | translate}}
+        </div>
+        <div class="alert alert-warning  fade in messages-growl  ng-hide" ng-show="$root.warningMessage.show">
+            {{$root.warningMessage.message | translate}}
+        </div>
+        <div class="alert alert-info  fade in messages-growl  ng-hide" ng-show="$root.infoMessage.show">
+            {{$root.infoMessage.message | translate}}
+        </div>
+        <div class="row" tutorial="timeline" config-content-data="{height: 300}" id="div_Timeline">
+            <div class="col-md-12 col-md-offset-0">
+                <input id="timerDelay" type="hidden" ng-model="Settings.timerDelay" ng-init="Settings.timerDelay=1" />
+                <div ng-if="$root.timelineControl.isShowItemOnTimeline">
+                    <span for="selectDreamOrEvent">{{'Item on timeline' | translate}}</span>
+                    <select id="selectDreamOrEvent" ng-model="$root.timelineControl.selectedItemOnTimelineId" ng-change="$root.timelineService.selectDreamOrLifeEvent()">
+                        <option value="">{{'Select item on timeline'}}</option>
+                        <option value="{{item.id}}" ng-repeat="item in $root.timelineControl.timelineItemList">{{item.name | translate}}</option>
+                    </select>
+                </div>
+                <div id="canvaspanel" ng-show="!spinner_main.active">
+                    <canvas id="canvas" class="canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="$root.zoomData.isShow">
+            <div class="col-md-10 col-xs-10">
+                <div>
+                    <div range-slider prevent-equal-min-max="true" attach-handle-values="true" step="1" min="$root.zoomData.min" max="$root.zoomData.max" model-min="$root.zoomData.minAge" model-max="$root.zoomData.maxAge"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-centered">
+            <div class="col-md-12 col-centered">
+                <ul class="nav nav-pills">
+                    <li id="tab_{{$root.config.TAB.MAIN}}"><a ui-sref="{{$root.config.TAB.MAIN}}" ng-click="$root.StateReload = false">{{'Main' | translate}}</a></li>
+                    <li id="tab_{{$root.config.TAB.INCOME_EXPENSE}}" ng-if="$root.functionAccess.VIEW_INCOME_EXPENSE_TAB == 1"><a ui-sref="{{$root.config.TAB.INCOME_EXPENSE}}" ng-click="$root.StateReload = false">{{'Income/Expenses' | translate}}</a></li>
+                    <li id="tab_{{$root.config.TAB.LIQUID_ASSET}}" n ng-if="$root.functionAccess.VIEW_LIQUID_ASSET_TAB == 1"><a ui-sref="{{$root.config.TAB.LIQUID_ASSET}}" ng-click="$root.StateReload = false">{{"Liquid Asset" | translate}}</a></li>
+                    <li id="tab_{{$root.config.TAB.ILLIQUID_ASSET}}" ng-if="$root.functionAccess.VIEW_ILLIQUID_ASSET_TAB == 1"><a ui-sref="{{$root.config.TAB.ILLIQUID_ASSET}}" ng-click="$root.StateReload = false">{{'Illiquid Asset' | translate}}</a></li>
+                    <li id="tab_{{$root.config.TAB.RANKING_DREAM}}" ng-if="$root.functionAccess.VIEW_RANKING_DREAM_TAB == 1"><a ui-sref="{{$root.config.TAB.RANKING_DREAM}}" ng-click="$root.StateReload = false">{{"Ranking Dreams" | translate}}</a></li>
+                    <li id="tab_{{$root.config.TAB.SHARING_SESSION}}" ng-if="$root.functionAccess.VIEW_SHARING_SESSION_TAB == 1"><a ui-sref="{{$root.config.TAB.SHARING_SESSION}}" ng-click="$root.StateReload = false">{{"Sharing Session" | translate}}</a></li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10">
+                        <div ui-view></div>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
+                        <div ng-include="'/Themes/1/Content/Dialog/RightColumn.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dialog -->
+<div ng-include="'/Themes/1/Content/Dialog/ChangeValueDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/DreamDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/LifeEventDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/ConfirmDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/StartAgeDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/ProfileDialog.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/ManageSolution.html'" ng-controller="SolutionController"></div>
+<div ng-include="'/Themes/1/Content/Dialog/ManageScenarios.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/PlaybackSession.html'"></div>
+<div ng-include="'/Themes/1/Content/Dialog/ManageAccount.html'"></div>
+
+<div ng-include="'/Themes/1/playback.html'"></div>
+<div ng-include="'/Themes/1/sharing.html'"></div>
+
+<script>
+    $(document).ready(function () {
+        //Initialize select        
+        angular.element(document.body).injector().get('sharingService').initSharing();     
+
+    });
+</script>

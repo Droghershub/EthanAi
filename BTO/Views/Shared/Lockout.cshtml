@@ -1,0 +1,90 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" ng-app="btoApp" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design BTO -->
+
+    <link href="~/Content/bto.css" rel="stylesheet" />
+    <!-- Custom CSS for Documentation Only -->
+
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+
+<body id="login-page">
+    <div id="login-top">
+        <div class="dropdown">
+            <button class="btn btn-xs btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{$root.selectedLanguage.name| translate}} &nbsp;<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="login-panel-wrapper">
+        <div id="login-panel" class="panel-group">
+            <div class="panel panel-default center">
+                <div class="panel-heading"><div class="logo"></div></div>
+                <div class="panel-body" style="padding: 100px 0">
+                    <span class="light-300" style="font-size:20px">{{'Locked out' | translate}}</span>
+                    <br><br>
+                    <p class="helper">
+                        {{
+                    "This account has been locked out, please try again later" | translate}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="/Account/Login" class="text-white">{{'Log in to your account.' | translate}}</a>
+
+        <div class="copyright-text">&copy; 2016 <strong>Better Trade Off</strong>. {{'All Rights Reserved' | translate}}.</div>
+    </div>
+
+    <div id="login-footer"></div>
+
+
+
+    <!-- SCRIPTS ON FOOTER -->
+    <!-- JQuery -->
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Material Design Bootstrap -->
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/thirdparty/angular-messages.js"></script>
+    <script src="~/Scripts/angular-cookies.js"></script>
+    <script src="~/Scripts/thirdparty/ngStorage.min.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+
+        });
+    </script>
+    <script src="~/Scripts/bto.js"></script>
+    <!-- This script will be removed -->
+    <script src="~/Themes/2/Scripts/directive.js"></script>
+    <link href="~/Themes/2/Content/style.css" rel="stylesheet" />
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+﻿@using BTO.Admin.Models
+@model LoginViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en" ng-app="btoApp" ng-cloak>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design BTO -->
+
+    <link href="~/Content/bto.css" rel="stylesheet" />
+    <!-- Custom CSS for Documentation Only -->
+
+    <link href="~/Content/custom.css" rel="stylesheet" />
+</head>
+
+<body id="login-page">
+    <div id="login-top">
+        <div class="dropdown">
+            <button class="btn btn-xs btn-white dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{$root.selectedLanguage.name| translate}} &nbsp;<span class="caret"></span></button>
+            <ul class="dropdown-menu" ng-if="false">
+                <li ng-repeat="language in $root.listLanguage" ng-if="language.code != $root.selectedLanguage.code" ng-click="$root.changeLanguage(language)"><a>{{language.name | translate}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="login-panel-wrapper">
+        <div id="login-panel" class="panel-group">
+            <div class="panel panel-default center">
+                <div class="panel-heading"><div class="logo"></div></div>
+                <div class="panel-body">
+                    <span class="light-300" style="font-size:20px">{{'Log in using your account' | translate}}</span>
+
+
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", name = "loginForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Partial("ValidationSummary", ViewData.ModelState);
+                        <div class="input-field col-md-12">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "validate", required = "", ng_model = "userData.Email", type = "email", name = "Email", id = "email", autofocus = "0" })
+                            <label for="email" class="" id="emailLabel">{{'Email' | translate}}</label>
+                        </div>
+                        <div class="input-field col-md-12 md-no-float">
+                            @Html.PasswordFor(m => m.Password, new { @class = "validate", required = "", name = "Password", type = "password", ng_model = "userData.Password", id = "password" })
+                            <label id="passwordlabel" for="password">{{'Password' | translate}}</label>
+                        </div>
+                        <div class="col-md-12 left">
+                            <input type="checkbox" id="check" />
+                            <label for="check"><small>{{'Keep me signed in' | translate}}</small></label>
+                        </div>
+                        <div class="col-md-12 right">
+                            <a ng-show="false" href="/Account/Register" class="btn-signup text-uppercase">{{'Sign Up' | translate}}</a>
+                            <input type="submit" value="{{'Log in' | translate}}" class="btn btn-primary text-uppercase" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </div>
+
+    <div id="login-footer">
+        <div class="copyright-text" style="margin-top: 3em;">&copy; 2016 <strong>ZYMI App</strong>. {{'All Rights Reserved' | translate}}.</div>
+    </div>
+
+    <!-- SCRIPTS ON FOOTER -->
+    <!-- JQuery -->
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Material Design Bootstrap -->
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/thirdparty/angular-messages.js"></script>
+    <script src="~/Scripts/angular-cookies.js"></script>
+    <script src="~/Scripts/thirdparty/ngStorage.min.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate.js"></script>
+    <script src="~/Scripts/thirdparty/angular-translate-loader-static-files.js"></script>
+    <script src="~/Scripts/bto/btoAppNotLogin.js"></script>
+    <script>
+        $(document).ready(function () {
+
+           
+            setTimeout(function () {
+                $('#emailLabel').click();
+                $('#emailLabel').addClass('active');
+            }, 100);
+            setInterval(function () {
+                if (document.querySelectorAll('input:-webkit-autofill') != null) {
+                    var autofilled = document.querySelectorAll('input:-webkit-autofill');
+                    if (autofilled.length > 0 && autofilled[1].id == 'password') {
+                        $('#passwordlabel').addClass('active');
+                    }
+                }
+            }, 500);
+        });
+
+    </script>
+    <script src="~/Scripts/bto.js"></script>
+
+</body>
+
+</html>
